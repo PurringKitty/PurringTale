@@ -1,0 +1,4 @@
+displayName = PurringTale
+author = Top Hat Cat
+version = 2.1.9
+modReferences = SubworldLibrary

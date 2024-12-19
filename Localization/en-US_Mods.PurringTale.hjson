@@ -1,0 +1,1661 @@
+Items: {
+	DirtHelmet: {
+		SetBonus: Extra Dirty
+		DisplayName: Dirt Helmet
+		Tooltip: Will Fall Apart... Don't Use This...
+	}
+
+	TopiumCap: {
+		SetBonus: Summoner
+		DisplayName: Topium Cap
+		Tooltip: Its Blue Now... But Still Goofy AF!
+	}
+
+	TopiumHat: {
+		SetBonus: Ranged
+		DisplayName: Topium Hat
+		Tooltip: Its Blue Now!
+	}
+
+	TopiumHelmet: {
+		SetBonus: Melee
+		DisplayName: Topium Helmet
+		Tooltip: It's Blue Now!
+	}
+
+	TopiumHood: {
+		SetBonus: Mage
+		DisplayName: Topium Hood
+		Tooltip: Its Blue Now!
+	}
+
+	WeakValhallaCap: {
+		SetBonus: Summoner
+		DisplayName: Valhalla Cap
+		Tooltip: Goofy AF
+	}
+
+	WeakValhallaHat: {
+		SetBonus: Ranged
+		DisplayName: Valhalla Hat
+		Tooltip: A Hat And Bandana For A Gunner!
+	}
+
+	WeakValhallaHelmet: {
+		SetBonus: Melee
+		DisplayName: Valhalla Helmet
+		Tooltip: Sturdy I Guess!
+	}
+
+	WeakValhallaHood: {
+		SetBonus: Mage
+		DisplayName: Valhalla Hood
+		Tooltip: Wavy!
+	}
+
+	WrathHelmet: {
+		SetBonus: Mods.PurringTale.Items.WrathHelmet.SetBonus
+		DisplayName: Wrath Helmet
+		Tooltip: Your ARE Powerful!
+	}
+
+	Debugger: {
+		DisplayName: Debugger
+		Tooltip: You Should NOT Have This Fucking Cheater!
+	}
+
+	BlueFlameWings: {
+		DisplayName: Blue Flame Wings
+		Tooltip:
+			'''
+			A Buring Blue Flame Will Help You Fly!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	BottleOfOJ: {
+		DisplayName: Bottles Of OJ
+		Tooltip:
+			'''
+			Orange Juice Good :)
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	DOLWings: {
+		DisplayName: Innocence
+		Tooltip:
+			'''
+			You Are Innocent In Mind And Body
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	EndSlayerWings: {
+		DisplayName: Cubiq Wings
+		Tooltip:
+			'''
+			Somehow These Are Wings!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	ForgedWings: {
+		DisplayName: Forged Wings
+		Tooltip: The Lava Makes Them Really Hot!
+	}
+
+	GasterBlasterW: {
+		DisplayName: Gaster Blaster
+		Tooltip: Beams... Death...
+	}
+
+	MauriceWings: {
+		DisplayName: V1 Wing Bits
+		Tooltip:
+			'''
+			Parts Of V1 Wings Made For Minos!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	MothWings: {
+		DisplayName: Moth Wings
+		Tooltip:
+			'''
+			Big Ol Moth Wings!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	MungusBackpack: {
+		DisplayName: Sus Backpack
+		Tooltip: Baka!
+	}
+
+	NatashaWings: {
+		DisplayName: Natasha's Book of Magic
+		Tooltip:
+			'''
+			Volume 1, page 579, a page about flight
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	PastaNeckless: {
+		DisplayName: Pasta Neckless
+		Tooltip:
+			'''
+			Great... Wet Pasta To Go Around Your Neck...
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	PastaWings: {
+		DisplayName: Pasta Wings
+		Tooltip:
+			'''
+			Somehow The Old Pasta Can Make You Fly!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	THCWings: {
+		DisplayName: THG Wings
+		Tooltip:
+			'''
+			Wings Of The God Of Top Hats!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	TheCubeGeneric: {
+		DisplayName: The Cube
+		Tooltip: I Heard An Alien Race Was Looking For This?
+	}
+
+	TreadBoots: {
+		DisplayName: Tread Boots
+		Tooltip: A Lil Extra Speed For You...
+	}
+
+	WolfCape: {
+		DisplayName: Wolf Cape
+		Tooltip:
+			'''
+			A Cape Fashioned From A Wolf!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	DirtBreastplate: {
+		DisplayName: Dirt Breastplate
+		Tooltip: C'mon...
+	}
+
+	DirtLeggings: {
+		DisplayName: Dirt Leggings
+		Tooltip: Really...
+	}
+
+	EnvyBreastplate: {
+		DisplayName: Envy Breastplate
+		Tooltip: Also Has A Big Eye!
+	}
+
+	EnvyHelmet: {
+		DisplayName: Envy Helmet
+		Tooltip: A Bit Eye In the Middle!
+	}
+
+	EnvyLeggings: {
+		DisplayName: Envy Leggings
+		Tooltip: No Eyes On It...
+	}
+
+	Envy: {
+		DisplayName: Envy
+		Tooltip: I NEED What THEY Have!
+	}
+
+	GluttonyBreastplate: {
+		DisplayName: Gluttony Breastplate
+		Tooltip: Onion Man But Green!
+	}
+
+	GluttonyHelmet: {
+		DisplayName: Gluttony Helmet
+		Tooltip: Protection!
+	}
+
+	GluttonyLeggings: {
+		DisplayName: Gluttony Leggings
+		Tooltip: Pretty Small NGL
+	}
+
+	Gluttony: {
+		DisplayName: Gluttony
+		Tooltip: Food... Must Eat All!
+	}
+
+	GodSlayerBreastplate: {
+		DisplayName: Forged Breastplate
+		Tooltip: The Lava Flows...
+	}
+
+	GodSlayerHelmet: {
+		DisplayName: Forged Helmet
+		Tooltip: Powered With LAVA!
+	}
+
+	GodSlayerLeggings: {
+		DisplayName: Forged Leggings
+		Tooltip: Hot To The Touch!
+	}
+
+	GreedBreastplate: {
+		DisplayName: Greed Breastplate
+		Tooltip: A Big Amulet Is With It... The Urge...
+	}
+
+	GreedHelmet: {
+		DisplayName: Greed Helmet
+		Tooltip: Has Gems Embeded In It...
+	}
+
+	GreedLeggings: {
+		DisplayName: Greed Leggings
+		Tooltip: Solid Gold... Might Fetch A Good Price...
+	}
+
+	Greed: {
+		DisplayName: Greed
+		Tooltip: $$$$$$$
+	}
+
+	LustBreastplate: {
+		DisplayName: Lust Top
+		Tooltip: Showing Off!
+	}
+
+	LustHelmet: {
+		DisplayName: Lust Hat
+		Tooltip: Not The Gag...
+	}
+
+	LustLeggings: {
+		DisplayName: Lust Leggings
+		Tooltip: Skin Tight!
+	}
+
+	Lust: {
+		DisplayName: Lust
+		Tooltip: Go To Horny Jail!
+	}
+
+	OldGodSlayerBreastplate: {
+		DisplayName: Old Forged Breastplate
+		Tooltip: Dead...
+	}
+
+	OldGodSlayerHelmet: {
+		DisplayName: Old Forged Helmet
+		Tooltip: Lost It's Glow...
+	}
+
+	OldGodSlayerLeggings: {
+		DisplayName: Old Forged Leggings
+		Tooltip: Dirty AF
+	}
+
+	OverlordBoots: {
+		DisplayName: Overlord Boots
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	OverlordChestplate: {
+		DisplayName: Overlord Chestplate
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	OverlordVisage: {
+		DisplayName: Overlord Visage
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	PastasHood: {
+		DisplayName: Pastas Hood
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	PastasHoodie: {
+		DisplayName: Pastas Hoodie
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	PastasLeggings: {
+		DisplayName: Pastas Leggings
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	PrideBreastplate: {
+		DisplayName: Pride Breastplate
+		Tooltip: You Feel You Can Take On the World!
+	}
+
+	PrideHelmet: {
+		DisplayName: Pride Helmet
+		Tooltip: Nobody Can See Your Grinning Face!
+	}
+
+	PrideLeggings: {
+		DisplayName: Pride Leggings
+		Tooltip: You Feel Like You Can Run Forever In These!
+	}
+
+	Pride: {
+		DisplayName: Pride
+		Tooltip: Confidence, Boastfulness
+	}
+
+	SlothBreastplate: {
+		DisplayName: Sloth Breastplate
+		Tooltip: Button Up Shirt... Soft Fabric!
+	}
+
+	SlothHelmet: {
+		DisplayName: Sloth Helmet
+		Tooltip: Sleep Mask??? HELL YEA!!!
+	}
+
+	SlothLeggings: {
+		DisplayName: Sloth Leggings
+		Tooltip: So Warm... Kinda Feel Like Sleeping...
+	}
+
+	Sloth: {
+		DisplayName: Sloth
+		Tooltip: Sleep, Lazyness
+	}
+
+	TopiumBreastplate: {
+		DisplayName: Topium Breastplate
+		Tooltip: Really Durable!
+	}
+
+	TopiumLeggings: {
+		DisplayName: Topium Leggings
+		Tooltip: Blue Legs!
+	}
+
+	WeakValhallaBreastplate: {
+		DisplayName: Valhalla Breastplate
+		Tooltip: Decent Protection!
+	}
+
+	WeakValhallaLeggings: {
+		DisplayName: Valhalla Leggings
+		Tooltip: Sturdy Enough To Use!
+	}
+
+	WolfBoots: {
+		DisplayName: Wolf Boots
+		Tooltip: Steel Clad WoW Boots!
+	}
+
+	WolfGear: {
+		DisplayName: Wolf Gear
+		Tooltip: The UFO Wolfs Mom
+	}
+
+	WolfHelm: {
+		DisplayName: Wolf Helm
+		Tooltip: WoW Helmet...
+	}
+
+	WrathBreastplate: {
+		DisplayName: Wrath Breastplate
+		Tooltip: Spikey Shoulder Pads!
+	}
+
+	WrathLeggings: {
+		DisplayName: Wrath Leggings
+		Tooltip: Sharp Toes!
+	}
+
+	Wrath: {
+		DisplayName: Wrath
+		Tooltip: Anger, Rage, Hatred
+	}
+
+	TopHatSlimeBanner: {
+		DisplayName: Top Hat Slime Banner
+		Tooltip: Banner For A Slime
+	}
+
+	EldritchBlaster: {
+		DisplayName: Eldritch Blaster
+		Tooltip: A Gun For The Hellish Eldritch Beings!
+	}
+
+	HeartOfSlime: {
+		DisplayName: Heart Of Slime
+		Tooltip: The Heart Of A Slime...
+	}
+
+	MoonlightGreatSword: {
+		DisplayName: Holy Moonlight Sword
+		Tooltip:
+			'''
+			Aah, you were at my side, all along...
+			My true mentor...
+			My guiding moonlight...
+			'''
+	}
+
+	OldBook1: {
+		DisplayName: Old Book 1
+		Tooltip: Lore Soon
+	}
+
+	OldBook2: {
+		DisplayName: Old Book 2
+		Tooltip: Lore Soon
+	}
+
+	OldBook3: {
+		DisplayName: Old Book 3
+		Tooltip: Lore Soon
+	}
+
+	OldBook4: {
+		DisplayName: Old Book 4
+		Tooltip: Lore Soon
+	}
+
+	RedCrystalStaff: {
+		DisplayName: Slime Crystal Staff
+		Tooltip: Shooting Red Crystals Is Fun!
+	}
+
+	SlimeK47: {
+		DisplayName: Slime K47
+		Tooltip: Slime Gun! What Could Go Wrong!
+	}
+
+	SlimySword: {
+		DisplayName: Slimy Sword
+		Tooltip: The Slime Recoils In your Face Quite A Bit... lol
+	}
+
+	SlimyWhip: {
+		DisplayName: Slimy Whip
+		Tooltip: Sticks To the Wall Sometimes... Rather Annoying...
+	}
+
+	TopHatDemonEye: {
+		DisplayName: Top Hat Demon Eye
+		Tooltip: the Eye Of A Top hat Demon
+	}
+
+	TopHatDemonPendent: {
+		DisplayName: Top Hat Demon Pendent
+		Tooltip: The Heart Of A Top Hat Demon!
+	}
+
+	BowlOfEnvy: {
+		DisplayName: Eye Effigy
+		Tooltip: Summons The Sin Of Envy
+	}
+
+	BowlOfGluttony: {
+		DisplayName: Statue Of Gluttony
+		Tooltip: Summons The Sin Of Gluttony
+	}
+
+	BowlOfGreed: {
+		DisplayName: Chocolate Coin
+		Tooltip: Summons The Sin Of Greed
+	}
+
+	BowlOfLust: {
+		DisplayName: Pecular Object
+		Tooltip: Summons The Sin Of Lust
+	}
+
+	BowlOfPride: {
+		DisplayName: Purple Medel
+		Tooltip: Summons The Sin Of Pride
+	}
+
+	BowlOfSloth: {
+		DisplayName: Comfortable Pillow
+		Tooltip: Summons The Sin Of Sloth
+	}
+
+	BowlOfWrath: {
+		DisplayName: Chalice Of Fire
+		Tooltip: Summons The Sin Of Wrath
+	}
+
+	BoxOfStuff: {
+		DisplayName: Box Of Stuff
+		Tooltip:
+			'''
+			Starting Stuff!
+			Right Click To Open!
+			'''
+	}
+
+	ClumpOfTopiumOre: {
+		DisplayName: Clump Of Topium Ore
+		Tooltip: Summons Top Hat God(NPC)
+	}
+
+	CrystalOfValhalla: {
+		DisplayName: Crystal Of Valhalla
+		Tooltip: Raises Max MP By 50 (4 Uses)
+	}
+
+	EyeOfEnvyBossBag: {
+		DisplayName: Eye Of Envy Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfGluttonyBossBag: {
+		DisplayName: Eye Of Gluttony Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfGreedBossBag: {
+		DisplayName: Eye Of Greed Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfLustBossBag: {
+		DisplayName: Eye Of Lust Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfPrideBossBag: {
+		DisplayName: Eye Of Pride Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfSlothBossBag: {
+		DisplayName: Eye Of Sloth Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	EyeOfWrathBossBag: {
+		DisplayName: Eye Of Wrath Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	FruitOfValhalla: {
+		DisplayName: Fruit Of Valhalla
+		Tooltip: Raises Max HP By 50 (4 Uses)
+	}
+
+	GelBullet: {
+		DisplayName: Gel Bullet
+		Tooltip: Squishy Bullet!
+	}
+
+	StackOfTopiumBars: {
+		DisplayName: Stack Of Topium Bars
+		Tooltip: Summons Top Hat God (Boss)
+	}
+
+	THGBossBag: {
+		DisplayName: THG Boss Bag
+		Tooltip: Right Click To Open
+	}
+
+	CoreOfEnvy: {
+		DisplayName: Core Of Envy
+		Tooltip: ""
+	}
+
+	CoreOfGluttony: {
+		DisplayName: Core Of Gluttony
+		Tooltip: ""
+	}
+
+	CoreOfGreed: {
+		DisplayName: Core Of Greed
+		Tooltip: ""
+	}
+
+	CoreOfLust: {
+		DisplayName: Core Of Lust
+		Tooltip: ""
+	}
+
+	CoreOfPride: {
+		DisplayName: Core Of Pride
+		Tooltip: ""
+	}
+
+	CoreOfSloth: {
+		DisplayName: Core Of Sloth
+		Tooltip: ""
+	}
+
+	CoreOfValhalla: {
+		DisplayName: Core Of Valhalla
+		Tooltip: ""
+	}
+
+	CoreOfWrath: {
+		DisplayName: Core Of Wrath
+		Tooltip: ""
+	}
+
+	EnvyousBar: {
+		DisplayName: Envyous Bar
+		Tooltip: Its Lookint At Your Soul!
+	}
+
+	EnvyousOre: {
+		DisplayName: Envyous Ore
+		Tooltip: Its Looking At Your Face...
+	}
+
+	PinkMungus: {
+		DisplayName: Pink Mungus
+		Tooltip: Not So Sus!
+	}
+
+	SansPainting: {
+		DisplayName: Sans Painting
+		Tooltip: EHEHEHEHHEHEHEHE
+	}
+
+	SinsBossRelic: {
+		DisplayName: Sins Boss Relic
+		Tooltip: You Beat Them All!
+	}
+
+	SinsBossTrophy: {
+		DisplayName: Sins Boss Trophy
+		Tooltip: Represents The Seven Sins!
+	}
+
+	THGBossRelic: {
+		DisplayName: THG Boss Relic
+		Tooltip: Proving You Beat Him On The Hardest Difficulty!
+	}
+
+	THGBossTrophy: {
+		DisplayName: THG Boss Trophy
+		Tooltip: Stole His Hat And Put It On Display!
+	}
+
+	ValhallaWorkbench: {
+		DisplayName: Valhalla Workbench
+		Tooltip: Workbench Of The Gods!
+	}
+
+	GluttonusBar: {
+		DisplayName: Gluttonus Bar
+		Tooltip: Really Heavy...
+	}
+
+	GluttonusOre: {
+		DisplayName: Gluttonus Ore
+		Tooltip: A Little Heavy...
+	}
+
+	GreedyBar: {
+		DisplayName: Greedy Bar
+		Tooltip: This One Wants Your Life!
+	}
+
+	GreedyOre: {
+		DisplayName: Greedy Ore
+		Tooltip: This One Wants Your Wallet!
+	}
+
+	LusterBar: {
+		DisplayName: Luster Bar
+		Tooltip: Way Too Lustful!
+	}
+
+	LusterOre: {
+		DisplayName: Lustful Ore
+		Tooltip: You Can Feel The Lust Seeping From This!
+	}
+
+	PridefulBar: {
+		DisplayName: Prideful Bar
+		Tooltip: Too Prideful!
+	}
+
+	PridefulOre: {
+		DisplayName: Prideful Ore
+		Tooltip: You Can Feel The Pridefulness!
+	}
+
+	SlothyBar: {
+		DisplayName: Slothy Bar
+		Tooltip: Extra Lazy!
+	}
+
+	SlothyOre: {
+		DisplayName: Slothful Ore
+		Tooltip: You Can Feel The Lazyness!
+	}
+
+	SnowblindMusicBox: {
+		DisplayName: Music Box (Snowblind)
+		Tooltip: ""
+	}
+
+	THCMusicBox: {
+		DisplayName: Music Box (Top Hat God)
+		Tooltip: ""
+	}
+
+	TopiumBar: {
+		DisplayName: Topium Bar
+		Tooltip: Now It Tastes Like Dirt...
+	}
+
+	TopiumOre: {
+		DisplayName: Topium Ore
+		Tooltip:
+			'''
+			For Some Reason... Is Tastes Like Chocolate???
+			It Can Even Be Eaten!
+			'''
+	}
+
+	WeakValhallaBar: {
+		DisplayName: Valhalla Bar
+		Tooltip: A Pretty Soft Bar!
+	}
+
+	WeakValhallaOre: {
+		DisplayName: Valhalla Ore
+		Tooltip: Pretty Soft How Nice!
+	}
+
+	WrathiorBar: {
+		DisplayName: Wrathior Bar
+		Tooltip: Even More Angry Than the Ore!
+	}
+
+	WrathiorOre: {
+		DisplayName: Wrathful Ore
+		Tooltip: You Can Feel Its Anger!
+	}
+
+	AxeOfPride: {
+		DisplayName: Axe Of Pride
+		Tooltip: Is Friends With The Divine Axe Rhitta!
+	}
+
+	DirtAxe: {
+		DisplayName: Dirt Axe
+		Tooltip: Really???
+	}
+
+	DirtPickaxe: {
+		DisplayName: Dirt Pickaxe
+		Tooltip: Bro...
+	}
+
+	TopiumHamaxe: {
+		DisplayName: Topium Hamaxe
+		Tooltip: Chops Trees And Destroys Walls At great Speed!!
+	}
+
+	TopiumPickaxe: {
+		DisplayName: Topium Pickaxe
+		Tooltip: Good And Fast!
+	}
+
+	WeakValhallaAxe: {
+		DisplayName: Valhalla Axe
+		Tooltip: Chop Chop!!
+	}
+
+	WeakValhallaPick: {
+		DisplayName: Valhalla Pickaxe
+		Tooltip: Good Enough Right?
+	}
+
+	DOLBreastplate: {
+		DisplayName: Balance
+		Tooltip:
+			'''
+			You Are Balenced Between Good And Evil
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	DOLHelmet: {
+		DisplayName: Purity
+		Tooltip:
+			'''
+			You Are Pure Of Heart
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	DOLLeggings: {
+		DisplayName: Patience
+		Tooltip:
+			'''
+			You Are Always Patient With Yourself And Other
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	EndSlayerBreastplate: {
+		DisplayName: Cubiq Breastplate
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	EndSlayerHead: {
+		DisplayName: Cubiq Head
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	EndSlayerLeggings: {
+		DisplayName: Cubiq Leggings
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MauriceBody: {
+		DisplayName: Prime Body
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MauriceHead: {
+		DisplayName: Prime Head
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MauriceLegs: {
+		DisplayName: Prime Legs
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MonoHead: {
+		DisplayName: Honey Bear Head
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MonoHoodie: {
+		DisplayName: Honey Bear Hoodie
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MonoLegs: {
+		DisplayName: Honey Bear Pants
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MothBody: {
+		DisplayName: Moth Body
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MothHead: {
+		DisplayName: Moth Head
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MothLegs: {
+		DisplayName: Moth Legs
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	MungusBody: {
+		DisplayName: Sus Body
+		Tooltip: Duper
+	}
+
+	MungusHead: {
+		DisplayName: Sus Head
+		Tooltip: Super
+	}
+
+	MungusLegs: {
+		DisplayName: Sus Legs
+		Tooltip: Sussy
+	}
+
+	NatashaHead: {
+		DisplayName: Dark Hood
+		Tooltip:
+			'''
+			Red Eyes!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	NatashaLeggings: {
+		DisplayName: Dark Leggings
+		Tooltip:
+			'''
+			Pretty Comfortable!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	NatashaTop: {
+		DisplayName: Dark Top
+		Tooltip:
+			'''
+			Neato!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	SansBody: {
+		DisplayName: Sans Body
+		Tooltip: Blue Sweater!
+	}
+
+	SansHead: {
+		DisplayName: Sans Head
+		Tooltip: Smiley Trashbag!
+	}
+
+	SansLeggings: {
+		DisplayName: Sans Leggings
+		Tooltip: Fun Pink Slippers!
+	}
+
+	THCTail: {
+		DisplayName: THG's Suit Pants
+		Tooltip:
+			'''
+			Slick Suit Pants Don't Ruin Them!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	THCTie: {
+		DisplayName: THG's Suit Top
+		Tooltip:
+			'''
+			Has A Nice Tie Take Care Of It!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	THCTopHat: {
+		DisplayName: THG's Top Hat
+		Tooltip:
+			'''
+			A Nice Top Hat To Compliment The Black Tie!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	BrokenDestroyerLaserCannon: {
+		DisplayName: Broken Destroyer Laser Cannon
+		Tooltip: Who Broke This?!!??
+	}
+
+	BrokenSerratedGreatsword: {
+		DisplayName: Broken Serrated Greatsword
+		Tooltip: Broke In Half Kinda Ass
+	}
+
+	BrokenStarShootingStaff: {
+		DisplayName: Broken Star Shooting Staff
+		Tooltip: Its Broken But Hey The Stars Are Homing!
+	}
+
+	DancersWhip: {
+		DisplayName: Dancers Whip
+		Tooltip: The Whip Of A Dancer Of Old!
+	}
+
+	DestroyerLaserCannon: {
+		DisplayName: Destroyer Laser Cannon
+		Tooltip: Goes Brrrr... Uses Gel Bullets!
+	}
+
+	DirtSword: {
+		DisplayName: Dirt Sword
+		Tooltip: Why... Would You Use This?
+	}
+
+	GodSlayerSummoningBook: {
+		DisplayName: The Fella Book
+		Tooltip: Neat... Summons Stronger Fellas!
+	}
+
+	GoldOnAStick: {
+		DisplayName: Gold On A Stick
+		Tooltip: Just A Piece of Gold On A Stick...
+	}
+
+	ImposterTongue: {
+		DisplayName: Imposter's Tongue
+		Tooltip: Ripped From The Mouth!
+	}
+
+	LastAeigis: {
+		DisplayName: Valhalla's Might
+		Tooltip: Like The Last Prism But Better!
+	}
+
+	RuinedGodSlayerSummoningBook: {
+		DisplayName: Old Book
+		Tooltip: Huh So Old... Summons Fellas!
+	}
+
+	RustedDancersWhip: {
+		DisplayName: Old Whip
+		Tooltip: A Old Whip? Wonder Who It Belonged To!
+	}
+
+	SerratedGreatsword: {
+		DisplayName: Serrated Greatsword
+		Tooltip: Hurts!
+	}
+
+	SinsBane: {
+		DisplayName: Sins Bane
+		Tooltip: The Bane Of The Seven Sins!
+	}
+
+	SpearOfSloth: {
+		DisplayName: Spear Of Sloth
+		Tooltip: A Spear... But Magic!
+	}
+
+	StarShootingStaff: {
+		DisplayName: Star Shooting Staff
+		Tooltip: Shoots Out Stars At Fast Speeds!
+	}
+
+	TheEnvyousEye: {
+		DisplayName: The Envyous Eye
+		Tooltip: It's Looking Into Your Soul!
+	}
+
+	TheGluttonsGun: {
+		DisplayName: The Gluttons Gun
+		Tooltip: Big Gun For A Big Person!
+	}
+
+	TheLamp: {
+		DisplayName: The Lamp
+		Tooltip: Summon Moths To Aid You!
+	}
+
+	TopiumCutter: {
+		DisplayName: Topium Cutter
+		Tooltip: Fun Sword
+	}
+
+	WeakValhallaStabber: {
+		DisplayName: Valhalla Stabber
+		Tooltip: A Sword Made From Valhalla Bars
+	}
+
+	WhipOfLust: {
+		DisplayName: Whip Of Lust
+		Tooltip: ~Naughty~
+	}
+
+	BootsPetItem: {
+		DisplayName: Ball Of Pink Yarn
+		Tooltip: The Favorite Toy Of A Long Gone Friend...
+	}
+
+	UFOWolfPetItem: {
+		DisplayName: Wolf Treat
+		Tooltip: A Wolf's Late Night Snack!
+	}
+
+	VanityVoucher: {
+		DisplayName: Vanity Voucher
+		Tooltip: Use At A Valhalla Workbench To Make Some Vanity!
+	}
+
+	OviaHead: {
+		DisplayName: Ovia's Head
+		Tooltip: OC Of One Of The Devs!
+	}
+
+	OviaSweater: {
+		DisplayName: Ovia's Sweater
+		Tooltip: A Nice Black Sweater Def Wear During The Summer Time!
+	}
+
+	OviaLeggings: {
+		DisplayName: Ovia's Leggings
+		Tooltip: Blueish Leggings With Some Boots!
+	}
+
+	BrainStem: {
+		DisplayName: Brain Stem
+		Tooltip: Piece Of The Brains Stem Turned Into A Sword!
+	}
+
+	EyeDrop: {
+		DisplayName: Eye Drop
+		Tooltip: Shaped Like An Eye Drop Tip!
+	}
+
+	OviaWings: {
+		DisplayName: Ovia's Hair
+		Tooltip: The Rest Of The Hair!
+	}
+
+	EnvyMusicBox: {
+		DisplayName: Music Box (Envy)
+		Tooltip: ""
+	}
+
+	SlothMusicBox: {
+		DisplayName: Music Box (Sloth)
+		Tooltip: ""
+	}
+
+	MenuThemeMusicBox: {
+		DisplayName: Music Box (Menu Theme)
+		Tooltip: ""
+	}
+
+	GrubbbWings: {
+		DisplayName: Grub Wings
+		Tooltip:
+			'''
+			Pink Wings!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	GrubbbBody: {
+		DisplayName: Grub Body
+		Tooltip:
+			'''
+			So Many Colors!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	GrubbbHead: {
+		DisplayName: Grub Head
+		Tooltip:
+			'''
+			Simple Dreams Of Making Great Music!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	GrubbbLegs: {
+		DisplayName: Grub Legs
+		Tooltip:
+			'''
+			Black And White!
+			*Great For Impersonating Devs!*
+			'''
+	}
+
+	BoneWand: {
+		DisplayName: Bone Wand
+		Tooltip: Shoots 4 Sided Bones At Enemies!
+	}
+
+	BrainWand: {
+		DisplayName: Brain Wand
+		Tooltip: Shoots Out Brain Matter... Ew...
+	}
+
+	EyeWand: {
+		DisplayName: Eye Wand
+		Tooltip: Shoots Out Bits Of The Eye... Gross...
+	}
+
+	FleshWand: {
+		DisplayName: Flesh Wand
+		Tooltip: Don't Get Me Started On What This Shoots...
+	}
+
+	GolemWand: {
+		DisplayName: Golem Wand
+		Tooltip: Shoots Out Rocks!
+	}
+
+	BoneSpear: {
+		DisplayName: Bone Spear
+		Tooltip: Boney Spear!
+	}
+
+	EaterSword: {
+		DisplayName: Eater Sword
+		Tooltip: It Likes To Eat Stuff...
+	}
+
+	FleshSword: {
+		DisplayName: Flesh Sword
+		Tooltip: It's Got Tendons On The Hand Gaurd... Yay...
+	}
+
+	GolemSpear: {
+		DisplayName: Golem Spear
+		Tooltip: A Rock Like Spear!
+	}
+
+	BoneBow: {
+		DisplayName: Bone Bow
+		Tooltip: Not The Most Sturdy Thing...
+	}
+
+	BrainString: {
+		DisplayName: Brain String
+		Tooltip: Got A Brain Nerve As The String!
+	}
+
+	EyeShot: {
+		DisplayName: Eye Shot
+		Tooltip: Eye Tendon Ver Fun...
+	}
+
+	FleshBow: {
+		DisplayName: Flesh Bow
+		Tooltip: Why Make A Bow Out Of Flesh?
+	}
+
+	EaterBlaster: {
+		DisplayName: Cursed Blaster
+		Tooltip: Uses A Special Bullet! Green Blasts!
+	}
+
+	GolemBlaster: {
+		DisplayName: Golem Blaster
+		Tooltip: A Simple Rock Laser Blaster!
+	}
+
+	CursedFireBullet: {
+		DisplayName: Cursed Fire Bullet
+		Tooltip: Used For The Cursed Blaster!
+	}
+
+	EaterWand: {
+		DisplayName: Eater Wand
+		Tooltip: Shoots Out Cursed Flames!
+	}
+
+	EyeStaff: {
+		DisplayName: Eye Staff
+		Tooltip: Summons A Little Eye Guy!
+	}
+
+	BoneStaff: {
+		DisplayName: Bone Staff
+		Tooltip: A Spookey Ghost Will Help You!
+	}
+
+	BrainStaff: {
+		DisplayName: Brain Staff
+		Tooltip: Summons A Brain Squid As A Helper!
+	}
+
+	FleshStaff: {
+		DisplayName: Flesh Staff
+		Tooltip: Summons A Bigger Eye Guy!
+	}
+
+	BeeWhip: {
+		DisplayName: Bee Whip
+		Tooltip: Its Gonna Hurt To Get Stung By This!
+	}
+
+	BrainWhip: {
+		DisplayName: Brain Whip
+		Tooltip: Heh Thats The Speech Center... Huh...
+	}
+
+	EaterWhip: {
+		DisplayName: Eater Whip
+		Tooltip: Got EOW Teeth On The End!
+	}
+
+	EyeWhip: {
+		DisplayName: Eye Whip
+		Tooltip: A Servent Of Cuthulu Turned Into A Whip... Poor Bastard...
+	}
+
+	GolemWhip: {
+		DisplayName: Golem Whip
+		Tooltip: A Rock Whip... Will Hurt A Lot!
+	}
+
+	BeeBlasterBullet: {
+		DisplayName: Bee Buster Bullet
+		Tooltip: A Giant Stinger For The Bee Buster!
+	}
+
+	BeeBlaster: {
+		DisplayName: Bee Buster
+		Tooltip: Uses A Special Bullet!
+	}
+
+	BeeStaff: {
+		DisplayName: Bee Staff
+		Tooltip: Summons Little Bee Minions! (1 Minion Slot = 10 Bee's)
+	}
+
+	FedoraCatPetItem: {
+		DisplayName: Ball Of Light
+		Tooltip: A Great Sitting Place
+	}
+
+	GluttonyMusicBox: {
+		DisplayName: Gluttony Music Box
+		Tooltip: ""
+	}
+
+	GreedMusicBox: {
+		DisplayName: Greed Music Box
+		Tooltip: ""
+	}
+
+	LustMusicBox: {
+		DisplayName: Lust Music Box
+		Tooltip: ""
+	}
+
+	PrideMusicBox: {
+		DisplayName: Pride Music Box
+		Tooltip: ""
+	}
+
+	WrathMusicBox: {
+		DisplayName: Wrath Music Box
+		Tooltip: ""
+	}
+
+	BlobticWings: {
+		DisplayName: Blobtic Wings
+		Tooltip: ""
+	}
+
+	BlobticBody: {
+		DisplayName: Blobtic Body
+		Tooltip: ""
+	}
+
+	BlobticHead: {
+		DisplayName: Blobtic Head
+		Tooltip: ""
+	}
+
+	BlobticLegs: {
+		DisplayName: Blobtic Legs
+		Tooltip: ""
+	}
+}
+
+Tiles: {
+	SnowblindMusicBoxTile.MapEntry: Music Box
+	THCMusicBoxTile.MapEntry: Music Box
+	EnvyMusicBoxTile.MapEntry: Music Box
+	SlothMusicBoxTile.MapEntry: Music Box
+	MenuThemeMusicBoxTile.MapEntry: Music Box
+	GluttonyMusicBoxTile.MapEntry: Gluttony Music Box Tile
+	GreedMusicBoxTile.MapEntry: Greed Music Box Tile
+	LustMusicBoxTile.MapEntry: Lust Music Box Tile
+	PrideMusicBoxTile.MapEntry: Pride Music Box Tile
+	WrathMusicBoxTile.MapEntry: Wrath Music Box Tile
+}
+
+WorldGen: {
+	TopiumOrePassMessage: Topium Fulling The Mines...
+	WeakValhallaOrePassMessage: The Stuff Of Gods...
+}
+
+NPCs: {
+	TopHatCatBoss.DisplayName: Rukuka, God Of Top Hats
+	TopHatCat.DisplayName: Top Hat God
+	EyeOfEnvyBody.DisplayName: Invidia, The Sin Of Envy
+	EyeOfGluttonyBody.DisplayName: Gula, The Sin Of Gluttony
+	EyeOfGreedBody.DisplayName: Avaritia, The Sin Of Greed
+	EyeOfLustBody.DisplayName: Luxuria, The Sin Of Lust
+	EyeOfPrideBody.DisplayName: Suberia, The Sin Of Pride
+	EyeOfSlothBody.DisplayName: Acedia, The Sin of Sloth
+	EyeOfWrathBody.DisplayName: Ira, The Sin Of Wrath
+	TopHatSlime.DisplayName: Top Hat Slime
+	ValHarpy.DisplayName: Valhalla Harpy
+
+	EnvyNPC: {
+		DisplayName: The Sin Of Envy
+
+		TownNPCMood: {
+			Content: I Am Fine...
+			NoHome: Can You Make Me A Home...
+			FarFromHome: I Am A Bit Far From Home...
+			LoveSpace: A Good Amount Of Space!
+			DislikeCrowded: A Bit To Crowded For My Liking...
+			HateCrowded: WAY TO CROWDED!
+			LoveBiome: I Really Like The {BiomeName} Biome... It's So Nice...
+			LikeBiome: I Like The {BiomeName} Biome It's Alright in My Book...
+			DislikeBiome: I Am Not A Big Fan Of The {BiomeName}...
+			HateBiome: I Am Envyous Of Any NPC NOT IN THIS BIOME!
+			LoveNPC: I Guess {NPCName} Is A Chill Person...
+			LikeNPC: I Like how Nice {NPCName} Is To Me...
+			DislikeNPC: I Don't Really Get Along With {NPCName}...
+			HateNPC: I REALLY Do Not Like {NPCName}... Please Have Me Live Somewhere Else...
+			DislikeNPC_Princess: Eh {NPCName} Is Too High And Mighty...
+			Princess_LikesNPC: I Think {NPCName} Does Not Like Me.
+			LikeNPC_Princess: I like {NPCName}.
+			LoveNPC_TopHatSlimeGood: That Slime With The Top Hat... Is Nice To Me...
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Conditions unknown
+	}
+
+	TopHatSlimeGood: {
+		DisplayName: Top Hat Slime
+
+		TownNPCMood: {
+			Content: It's Alright I Guess.
+			NoHome: Make Me Home Human Scum!
+			FarFromHome: Get Me Home.
+			LoveSpace: So Much Space To Do Stuff!
+			DislikeCrowded: Too Many Other People...
+			HateCrowded: The Amount Of People Here Is Really Stupid!
+			LoveBiome: I Do Rather Love The {BiomeName}!
+			LikeBiome: Eh {BiomeName} Is Good I Guess.
+			DislikeBiome: I Don't Like The {BiomeName} All That Much...
+			HateBiome: Bro {BiomeName} Sucks @$$!
+			LoveNPC: I Really Like {NPCName}!
+			LikeNPC: I Like {NPCName} I Don't Hate Them!
+			DislikeNPC: I Do Not Like {NPCName}
+			HateNPC: I Know {NPCName} Has Tried To Kill Me!
+			LikeNPC_Princess: I Think {NPCName} Is Hot!
+			LoveNPC_EnvyNPC: the Sin Of Envy Is Pretty Awesome!
+			Princess_LovesNPC: Heh {NPCName} The Slime Is So Cute!
+		}
+
+		Census.SpawnCondition: Conditions unknown
+	}
+
+	GluttonyNPC: {
+		DisplayName: Gluttony N P C
+
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
+			HateCrowded: I hate how crowded I am.
+			LoveBiome: I love {BiomeName}.
+			DislikeBiome: I dislike {BiomeName}.
+			HateBiome: I hate {BiomeName}.
+			LoveNPC: I love {NPCName}.
+			LikeNPC: I like {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			HateNPC: I hate {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+	}
+}
+
+Buffs: {
+	Consumed: {
+		DisplayName: Consumed
+		Description: Gone
+	}
+
+	EnvyBuff: {
+		DisplayName: Envy
+		Description: Envyous Arn't Ya?
+	}
+
+	GluttonyBuff: {
+		DisplayName: Gluttony
+		Description: You Seem A Little Hungry There!
+	}
+
+	GodSlayerMinionBuff: {
+		DisplayName: Fella
+		Description: He Is Just A Fella!
+	}
+
+	GreedBuff: {
+		DisplayName: Greed
+		Description: I Can Tell You Want All The Money!
+	}
+
+	LustBuff: {
+		DisplayName: Lust
+		Description: Getting A Little FrEaKy In Here!
+	}
+
+	MothMinionBuff: {
+		DisplayName: Moth Friends
+		Description: Little Friends!
+	}
+
+	PrideBuff: {
+		DisplayName: Pride
+		Description: Not So High And Mighty Now Huh?
+	}
+
+	SlothBuff: {
+		DisplayName: Sloth
+		Description: Man I Am A Little Tired... Can We Do This Later?
+	}
+
+	WrathBuff: {
+		DisplayName: Wrath
+		Description: I AM ALWAYS MAD!
+	}
+
+	BootsPetBuff: {
+		DisplayName: Boot's
+		Description: A Long Gone Friend... Riding A Hoverboard???
+	}
+
+	UFOWolfPetBuff: {
+		DisplayName: Lost Wolf Pup
+		Description: Just A Wolf On A Floating Platform ... Do Not Ask Why...
+	}
+
+	BrainMinionBuff: {
+		DisplayName: Brain Squid
+		Description: A Guy From The Brain!
+	}
+
+	EyeMinionBuff: {
+		DisplayName: Eye Minion
+		Description: Always Looking Up... Poor Guy...
+	}
+
+	FleshMinionBuff: {
+		DisplayName: Flesh Minion
+		Description: Older Eye Minion... Still Looks Up To The Skys...
+	}
+
+	BoneMinionBuff: {
+		DisplayName: Little Ghost
+		Description: A Dead Child From The Dungeon... So Sad...
+	}
+
+	ExampleWhipAdvancedDebuff: {
+		DisplayName: Example Whip Advanced Debuff
+		Description: Mods.PurringTale.Buffs.ExampleWhipAdvancedDebuff.Description
+	}
+
+	ExampleWhipDebuff: {
+		DisplayName: Example Whip Debuff
+		Description: Mods.PurringTale.Buffs.ExampleWhipDebuff.Description
+	}
+
+	BeeMinionBuff: {
+		DisplayName: BEES!!!
+		Description: ARGHHHHHHHHHHHH!!!!!!
+	}
+
+	FedoraCatPetBuff: {
+		DisplayName: Fedora Cat
+		Description: A Gato Wearing A Nice White Fedora!
+	}
+}
+
+Projectiles: {
+	Bolt.DisplayName: Bolt
+	BossBullet.DisplayName: Cat Bullet
+	BossClone.DisplayName: Cat Clone
+	BossLaser.DisplayName: Cat Laser
+	BossRocket.DisplayName: Cat Rocket
+	DynamicRope.DisplayName: Dynamic Rope
+	gss.DisplayName: gss
+	Slash.DisplayName: Slash
+	BootsPetProjectile.DisplayName: Boots
+	UFOWolfPetProjectile.DisplayName: UFO Wolf
+	CrystalSlimeProj.DisplayName: Crystal Slime Gem
+	EnvyEyeProj.DisplayName: Envy Eye Proj
+	GelBulletProjectile.DisplayName: Gel Bullet Projectile
+	GodSlayerMinionProjectile.DisplayName: God Slayer Minion Projectile
+	GodSlayerWhipProjectile.DisplayName: God Slayer Whip Projectile
+	LastAeigisBeam.DisplayName: Last Aeigis Beam
+	LastAeigisHoldout.DisplayName: Last Aeigis Holdout
+	LustWhipProjectile.DisplayName: Lust Whip Projectile
+	MoonlightBlade.DisplayName: Moonlight Blade
+	MothMinionProjectile.DisplayName: Moth Minion Projectile
+	OldGodSlayerWhipProjectile.DisplayName: Old God Slayer Whip Projectile
+	SlimyWhipProjectile.DisplayName: Slimy Whip Projectile
+	SlothSpearProj.DisplayName: Sloth Spear Proj
+	EaterMinionProj.DisplayName: Eater Minion Proj
+	EaterMinionProj1.DisplayName: Eater Minion Proj1
+	EaterMinionProj2.DisplayName: Eater Minion Proj2
+	EaterMinionProj3.DisplayName: Eater Minion Proj3
+	EaterMinionProj4.DisplayName: Eater Minion Proj4
+	BoneMagicProj.DisplayName: Bone Magic Proj
+	BrainMagicProj.DisplayName: Brain Magic Proj
+	EyeMagicProj.DisplayName: Eye Magic Proj
+	MoonlightBlade2.DisplayName: Moonlight Blade2
+	GolemMagicProj.DisplayName: Golem Magic Proj
+	BoneSpearProj.DisplayName: Bone Spear Proj
+	GolemSpearProj.DisplayName: Golem Spear Proj
+	EaterBlasterProj.DisplayName: Eater Blaster Proj
+	BrainMinionProj.DisplayName: Brain Minion Proj
+	EyeMinionProj.DisplayName: Eye Minion Proj
+	FleshMinionProj.DisplayName: Flesh Minion Proj
+	BoneMinionProj.DisplayName: Bone Minion Proj
+	BeeWhipProj.DisplayName: Bee Whip Proj
+	BrainWhipProj.DisplayName: Brain Whip Proj
+	EaterWhipProj.DisplayName: Eater Whip Proj
+	EyeWhipProj.DisplayName: Eye Whip Proj
+	GolemWhipProj.DisplayName: Golem Whip Proj
+	BeeBlasterProj.DisplayName: Bee Blaster Proj
+	BeeMinionProj.DisplayName: Bee Minion Proj
+	FedoraCatPetProjectile.DisplayName: Fedora Cat Pet Projectile
+}
