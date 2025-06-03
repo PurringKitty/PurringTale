@@ -17,8 +17,9 @@ namespace PurringTale.Content.Items.Weapons
 
 		public override void SetDefaults()
 		{
-			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<BeeWhipProj>(), 40, 2, 10);
+			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<BeeWhipProj>(), 40, 2, 4);
 			Item.rare = ItemRarityID.Master;
+			Item.shootSpeed = 4;
             Item.value = Item.sellPrice(silver: 50);
             Item.channel = true;
 			Item.autoReuse = true;

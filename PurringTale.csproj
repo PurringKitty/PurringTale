@@ -10,6 +10,7 @@
 	<ItemGroup>
 	  <None Remove="Content\Buffs\ExampleWhipAdvancedDebuff.png" />
 	  <None Remove="Content\Buffs\ExampleWhipDebuff.png" />
+	  <None Remove="Content\NPCs\BossNPCs\ZeRock\ZeRock_Head_Boss.png" />
 	  <None Remove="Content\Projectiles\BeeBlasterProj.png" />
 	  <None Remove="Content\Projectiles\EaterMinionProjBody.png" />
 	  <None Remove="Content\Projectiles\SlothSpearProj.png" />
@@ -24,6 +25,14 @@
 	  <Folder Include="Common\Configs\" />
 	  <Folder Include="Content\Biomes\" />
 	  <Folder Include="Content\Sounds\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="StructureHelper">
+	    <HintPath>..\MountainsAndMoleHills\StructureHelper.dll</HintPath>
+	  </Reference>
+	  <Reference Include="SubworldLibrary">
+	    <HintPath>SubworldLibrary.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<!-- References -->

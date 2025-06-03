@@ -285,7 +285,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
     
     public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{
-			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Gluttony>()));
+			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Envy>()));
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue) => true;

@@ -83,62 +83,75 @@ namespace PurringTale.Common.Systems
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshWand>(), 8));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshBow>(), 7));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshStaff>(), 6));
-            }
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
+            } 
             if (npc.type == NPCID.QueenSlimeBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.Spazmatism)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.Retinazer)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.TheDestroyer)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.SkeletronPrime)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.Plantera)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.Golem)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.CultistBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.DukeFishron)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.HallowBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.MoonLordCore)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
                 //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
+
         }
     }
 }

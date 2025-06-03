@@ -21,6 +21,7 @@ namespace PurringTale.Common.Systems
         public static bool downedPride = false;
         public static bool downedSloth = false;
         public static bool downedWrath = false;
+        public static bool downedRock = false;
 
         public override void ClearWorld()
         {
@@ -32,6 +33,7 @@ namespace PurringTale.Common.Systems
             downedPride = false;
             downedSloth = false;
             downedWrath = false;
+            downedRock = false;
         }
         public override void SaveWorldData(TagCompound tag)
         {
@@ -67,6 +69,10 @@ namespace PurringTale.Common.Systems
             {
                 tag["downedWrath"] = true;
             }
+            if (downedRock)
+            {
+                tag["downedRock"] = true;
+            }
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -79,6 +85,7 @@ namespace PurringTale.Common.Systems
             downedPride = tag.ContainsKey("downedPride");
             downedSloth = tag.ContainsKey("downedSloth");
             downedWrath = tag.ContainsKey("downedWrath");
+            downedRock = tag.ContainsKey("downedRock");
         }
 
         public override void NetSend(BinaryWriter writer)
@@ -92,6 +99,7 @@ namespace PurringTale.Common.Systems
             flags[6] = downedPride;
             flags[7] = downedSloth;
             flags[8] = downedWrath;
+            flags[9] = downedRock;
             writer.Write(flags);
         }
 
@@ -106,6 +114,7 @@ namespace PurringTale.Common.Systems
             downedPride = flags[6];
             downedSloth = flags[7];
             downedWrath = flags[8];
+            downedRock = flags[9];
         }
     }
 }

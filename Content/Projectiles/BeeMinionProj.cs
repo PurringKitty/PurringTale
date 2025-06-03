@@ -5,65 +5,48 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using PurringTale.Content.Items.Weapons;
 using PurringTale.Content.Buffs;
+using Microsoft.Xna.Framework.Input;
 
 namespace PurringTale.Content.Projectiles
 {
     public class BeeMinionProj : ModProjectile
     {
         private const float V = 15f;
-
-        // Movement variables - Use these to customize your minion's movement
-        //------------------------------------------------------------------------------------------------------------------------
-        float speed = 50f;          // Speed multiplier of the minion
-        readonly float farSpeed = 40;       // Temporary speed value used in distance calculations (So we don't change our original speed)
-        float inertia = 13f;        // Determines how long an object will move after having velocity applied
-        readonly float farInertia = 24f;     // Temporary intertia used in distance calculations (So we don't change our original interia)
-        readonly float attackSight = 400f;   // How far away an enemy must be for the minion to "see" it
-        readonly float idleRange = 0f;      // The range in which the minion will idle over the player
-        readonly float deadzoneRange = 40f;  // The deadzone range in which the minion will not latch onto an enemy
-                                             //------------------------------------------------------------------------------------------------------------------------
+        float speed = 50f;     
+        readonly float farSpeed = 40;  
+        float inertia = 13f;        
+        readonly float farInertia = 24f;
+        readonly float attackSight = 400f;
+        readonly float idleRange = 0f; 
+        readonly float deadzoneRange = 40f;
 
         public override void SetStaticDefaults()
         {
-            // Sets the amount of frames this minion has on its spritesheet
             Main.projFrames[Projectile.type] = 4;
-            // This is necessary for right-click targeting
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-
-            Main.projPet[Projectile.type] = false; // Denotes that this projectile is a pet or minion
-
-            ProjectileID.Sets.MinionSacrificable[Projectile.type] = true; // This is needed so your minion can properly spawn when summoned and replaced when other minions are summoned
-            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true; // Make the cultist resistant to this projectile, as it's resistant to all homing projectiles.
+            Main.projPet[Projectile.type] = false;
+            ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
-
-        // Set our defaults
         public sealed override void SetDefaults()
         {
             Projectile.width = 5;
             Projectile.height = 4;
-            Projectile.tileCollide = false; // Makes the minion go through tiles freely
-
-            // These below are needed for a minion weapon
-            Projectile.friendly = true; // Only controls if it deals damage to enemies on contact (more on that later)
-            Projectile.minion = true; // Declares this as a minion (has many effects)
-            Projectile.DamageType = DamageClass.Summon; // Declares the damage type (needed for it to deal damage)
-            Projectile.minionSlots = 0.1f; // Amount of slots this minion occupies from the total minion slots available to the player (more on that later)
-            Projectile.penetrate = -1; // Needed so the minion doesn't despawn on collision with enemies or tiles
+            Projectile.tileCollide = false;
+            Projectile.friendly = true;
+            Projectile.minion = true;
+            Projectile.DamageType = DamageClass.Summon;
+            Projectile.minionSlots = 0.1f;
+            Projectile.penetrate = -1;
         }
-
-        // Here you can decide if your minion breaks things like grass or pots
         public override bool? CanCutTiles()
         {
             return true;
         }
-
-        // This is mandatory if your minion deals contact damage (further related stuff in AI() in the Movement region)
         public override bool MinionContactDamage()
         {
             return true;
         }
-
-        // The AI of this minion is split into multiple methods to avoid bloat. This method just passes values between calls actual parts of the AI.
         public override void AI()
         {
             Player owner = Main.player[Projectile.owner];
@@ -78,8 +61,6 @@ namespace PurringTale.Content.Projectiles
             Movement(foundTarget, distanceFromTarget, targetCenter, distanceToIdlePosition, vectorToIdlePosition);
             Visuals();
         }
-
-        // This is the "active check", makes sure the minion is alive while the player is alive, and despawns if not
         private bool CheckActive(Player owner)
         {
             if (owner.dead || !owner.active)
@@ -100,26 +81,17 @@ namespace PurringTale.Content.Projectiles
         private void GeneralBehavior(Player owner, out Vector2 vectorToIdlePosition, out float distanceToIdlePosition)
         {
             Vector2 idlePosition = owner.Center;
-            idlePosition.Y -= 0f;// Go behind the player
-
-            // All of this code below this line is adapted from Spazmamini code (ID 388, aiStyle 66)
-            // Teleport to player if distance is too big
+            idlePosition.Y -= 0f;
             vectorToIdlePosition = idlePosition - Projectile.Center;
             distanceToIdlePosition = vectorToIdlePosition.Length();
 
             if (Main.myPlayer == owner.whoAmI && distanceToIdlePosition > 2000f)
             {
-                // Whenever you deal with non-regular events that change the behavior or position drastically, make sure to only run the code on the owner of the projectile,
-                // and then set netUpdate to true
                 Projectile.position = idlePosition;
                 Projectile.velocity *= 0.1f;
                 Projectile.netUpdate = true;
             }
-
-            // If your minion is flying, you want to do this independently of any conditions
             float overlapVelocity = 0.04f;
-
-            // Fix overlap with other minions
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile other = Main.projectile[i];
@@ -149,18 +121,13 @@ namespace PurringTale.Content.Projectiles
 
         private void SearchForTargets(Player owner, out bool foundTarget, out float distanceFromTarget, out Vector2 targetCenter)
         {
-            // Starting search distance
             distanceFromTarget = attackSight;
             targetCenter = Projectile.position;
             foundTarget = false;
-
-            // This code is required if your minion weapon has the targeting feature
             if (owner.HasMinionAttackTargetNPC)
             {
                 NPC npc = Main.npc[owner.MinionAttackTargetNPC];
                 float between = Vector2.Distance(npc.Center, Projectile.Center);
-
-                // Reasonable distance away so it doesn't target across multiple screens
                 if (between < 2000f)
                 {
                     distanceFromTarget = between;
@@ -171,7 +138,6 @@ namespace PurringTale.Content.Projectiles
 
             if (!foundTarget)
             {
-                // This code is required either way, used for finding a target
                 for (int i = 0; i < Main.maxNPCs; i++)
                 {
                     NPC npc = Main.npc[i];
@@ -182,8 +148,6 @@ namespace PurringTale.Content.Projectiles
                         bool closest = Vector2.Distance(Projectile.Center, targetCenter) > between;
                         bool inRange = between < distanceFromTarget;
                         bool lineOfSight = Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, npc.position, npc.width, npc.height);
-                        // Additional check for this specific minion behavior, otherwise it will stop attacking once it dashed through an enemy while flying though tiles afterwards
-                        // The number depends on various parameters seen in the movement code below. Test different ones out until it works alright
                         bool closeThroughWall = between < 100f;
 
                         if ((closest && inRange || !foundTarget) && (lineOfSight || closeThroughWall))
@@ -195,11 +159,6 @@ namespace PurringTale.Content.Projectiles
                     }
                 }
             }
-
-            // friendly needs to be set to true so the minion can deal contact damage
-            // friendly needs to be set to false so it doesn't damage things like target dummies while idling
-            // Both things depend on if it has a target or not, so it's just one assignment here
-            // You don't need this assignment if your minion is shooting things instead of dealing contact damage
             Projectile.friendly = foundTarget;
         }
 
@@ -207,10 +166,8 @@ namespace PurringTale.Content.Projectiles
         {
             if (foundTarget)
             {
-                // Minion has a target: attack (here, fly towards the enemy)
                 if (distanceFromTarget > deadzoneRange)
                 {
-                    // The immediate range around the target (so it doesn't latch onto it when close)
                     Vector2 direction = targetCenter - Projectile.Center;
                     direction.Normalize();
                     direction *= speed;
@@ -220,32 +177,25 @@ namespace PurringTale.Content.Projectiles
             }
             else
             {
-                // Minion doesn't have a target: return to player and idle
                 if (distanceToIdlePosition > attackSight)
                 {
-                    // Speed up the minion if it's away from the player
                     speed = farSpeed;
                     inertia = farInertia;
                 }
                 else
                 {
-                    // Slow down the minion if closer to the player
                     speed = farSpeed / 3;
                     inertia = farInertia / 1.25f;
                 }
 
                 if (distanceToIdlePosition > idleRange)
                 {
-                    // The immediate range around the player (when it passively floats about)
-
-                    // This is a simple movement formula using the two parameters and its desired direction to create a "homing" movement
                     vectorToIdlePosition.Normalize();
                     vectorToIdlePosition *= speed;
                     Projectile.velocity = (Projectile.velocity * (inertia - 1) + vectorToIdlePosition) / inertia;
                 }
                 else if (Projectile.velocity == Vector2.Zero)
                 {
-                    // If there is a case where it's not moving at all, give it a little "poke"
                     Projectile.velocity.X = -0.15f;
                     Projectile.velocity.Y = -0.05f;
                 }
@@ -254,10 +204,7 @@ namespace PurringTale.Content.Projectiles
 
         private void Visuals()
         {
-            // So it will lean slightly towards the direction it's moving
             Projectile.rotation = Projectile.velocity.X * 0.05f;
-
-            // This is a simple "loop through all frames from top to bottom" animation
             int frameSpeed = 8;
 
             Projectile.frameCounter++;

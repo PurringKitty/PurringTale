@@ -17,12 +17,13 @@ namespace PurringTale.Content.Items.Weapons
 
 		public override void SetDefaults()
 		{
-			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<OldGodSlayerWhipProjectile>(), 23, 2, 10);
+			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<OldGodSlayerWhipProjectile>(), 23, 2, 4);
 			Item.rare = ItemRarityID.Red;
+            Item.shootSpeed = 4;
             Item.value = Item.sellPrice(silver: 50);
             Item.channel = true;
-			Item.autoReuse = true;
-		}
+            Item.autoReuse = true;
+        }
 
 		public override bool MeleePrefix()
 		{

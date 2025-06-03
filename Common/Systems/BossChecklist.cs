@@ -74,6 +74,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Content.Items.Placeables.Furniture.THGBossRelic>(),
                 ModContent.ItemType<Content.Items.Placeables.Furniture.THGBossTrophy>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<Content.Items.Vanity.THCTopHat>()
             };
 
@@ -106,6 +107,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Envy>(),
                 ModContent.ItemType<EnvyousOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfEnvy>()
             };
@@ -130,6 +132,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Gluttony>(),
                 ModContent.ItemType<GluttonusOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfGluttony>()
             };
@@ -154,6 +157,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Greed>(),
                 ModContent.ItemType<GreedyOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfGreed>()
             };
@@ -178,6 +182,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Lust>(),
                 ModContent.ItemType<LusterOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfLust>()
             };
@@ -202,6 +207,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Pride>(),
                 ModContent.ItemType<PridefulOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfPride>()
             };
@@ -226,6 +232,7 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Sloth>(),
                 ModContent.ItemType<SlothyOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfSloth>()
             };
@@ -250,8 +257,32 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<Wrath>(),
                 ModContent.ItemType<WrathiorOre>(),
+                ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<WeakValhallaOre>(),
                 ModContent.ItemType<CoreOfWrath>()
+            };
+
+            bossChecklistMod.Call(
+                "LogBoss",
+                Mod,
+                internalName,
+                weight,
+                downed,
+                bossType,
+                new Dictionary<string, object>()
+                {
+                    ["spawnItems"] = ModContent.ItemType<BowlOfWrath>(),
+                }
+            );
+            internalName = "Rock";
+            weight = 50f;
+            downed = () => DownedBossSystem.downedRock;
+            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.ZeRock.ZeRock>();
+            collectibles = new List<int>()
+            {
+                ModContent.ItemType<WeaponRock>(),
+                ModContent.ItemType<VanityVoucher>(),
+                ModContent.ItemType<CoreOfValhalla>()
             };
 
             bossChecklistMod.Call(

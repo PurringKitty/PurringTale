@@ -56,7 +56,7 @@ namespace PurringTale.Content.Items.BossDrops;
     }
     public override Vector2? HoldoutOffset()
     {
-        Vector2 offset = new(-6, 2);
+        Vector2 offset = new(-10, 1);
         return offset;
 
     }

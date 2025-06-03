@@ -17,14 +17,13 @@ namespace PurringTale.Content.Items.Weapons
 
 		public override void SetDefaults()
 		{
-			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<LustWhipProjectile>(), 40, 2, 10);
-			Item.width = 28;
-			Item.height = 25;
+			Item.DefaultToWhip(projectileId: ModContent.ProjectileType<LustWhipProjectile>(), 40, 2, 5);
 			Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(copper: 50);
+            Item.shootSpeed = 4;
             Item.channel = true;
-			Item.autoReuse = true;
-		}
+            Item.autoReuse = true;
+        }
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();

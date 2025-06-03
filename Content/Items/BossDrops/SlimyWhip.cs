@@ -17,9 +17,10 @@ namespace PurringTale.Content.Items.BossDrops
 
 		public override void SetDefaults()
 		{
-			Item.DefaultToWhip(ModContent.ProjectileType<SlimyWhipProjectile>(), 15, 2, 10);
+			Item.DefaultToWhip(ModContent.ProjectileType<SlimyWhipProjectile>(), 15, 2, 4);
 			Item.rare = ItemRarityID.Blue;
-            Item.value = Item.sellPrice(gold: 5);
+			Item.shootSpeed = 4;
+            Item.value = Item.sellPrice(silver: 50);
             Item.channel = true;
 			Item.autoReuse = true;
 		}

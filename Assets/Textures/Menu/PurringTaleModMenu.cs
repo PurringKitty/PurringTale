@@ -5,7 +5,7 @@ using ReLogic.Content;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.ID;
-using PurringTale.Assets.Textures.Background;
+using PurringTale.Assets.Textures.Backgrounds;
 
 namespace PurringTale.Assets.Textures.Menu
 {

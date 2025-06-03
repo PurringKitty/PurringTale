@@ -26,7 +26,7 @@ namespace PurringTale.Content.Projectiles
 			Projectile.timeLeft = 400;
 			Projectile.ignoreWater = false;
 			Projectile.tileCollide = true;
-			Projectile.scale = 0.7f;
+			Projectile.scale = 0.4f;
 			Projectile.extraUpdates = 1;
 		}
 
@@ -42,7 +42,7 @@ namespace PurringTale.Content.Projectiles
         [System.Obsolete]
         public override void OnKill(int timeLeft)
         {
-			SoundEngine.PlaySound(SoundID.Dig.WithVolumeScale(0.5f).WithPitchOffset(0.8f), Projectile.position);
+			SoundEngine.PlaySound(SoundID.NPCDeath1.WithVolumeScale(0.5f).WithPitchOffset(0.8f), Projectile.position);
 			for (var i = 0; i < 6; i++)
             {
 				Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IceTorch, 0f, 0f, 0, default(Color), 1f);

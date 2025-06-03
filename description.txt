@@ -162,3 +162,17 @@ Updates!
 Update 2.1.9
 - Absolutly NOTHING workshop was being stupid so i had
 too force the next update... LE SIGH....
+
+Update 2.2.0
+- Last Update For Awhile
+- Added A Very Fun Joke Boss
+- Attempted Making Of A Subworld
+- Some New Fun Music
+- Title Screen BG Works Now
+- Finished Updated All The Armor Sprites
+- Bug Fixes
+- New Mod Icon
+
+This Is Purring Signing Off...
+
+For Now

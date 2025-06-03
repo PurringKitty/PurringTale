@@ -5,28 +5,28 @@ Items: {
 		Tooltip: Will Fall Apart... Don't Use This...
 	}
 
-	TopiumCap: {
-		SetBonus: Summoner
-		DisplayName: Topium Cap
-		Tooltip: Its Blue Now... But Still Goofy AF!
+	TopiumMask: {
+		SetBonus: Summoner Buff
+		DisplayName: Topium Mask
+		Tooltip: It Reminds Me Of Something...
 	}
 
 	TopiumHat: {
-		SetBonus: Ranged
+		SetBonus: Ranged Buff
 		DisplayName: Topium Hat
-		Tooltip: Its Blue Now!
+		Tooltip: Dapper
 	}
 
 	TopiumHelmet: {
-		SetBonus: Melee
+		SetBonus: Melee Buff
 		DisplayName: Topium Helmet
-		Tooltip: It's Blue Now!
+		Tooltip: Ah You Look Nice With This
 	}
 
 	TopiumHood: {
-		SetBonus: Mage
+		SetBonus: Magic Buff
 		DisplayName: Topium Hood
-		Tooltip: Its Blue Now!
+		Tooltip: Spooky... No Face...
 	}
 
 	WeakValhallaCap: {
@@ -111,10 +111,10 @@ Items: {
 	}
 
 	MauriceWings: {
-		DisplayName: V1 Wing Bits
+		DisplayName: Hidden Wings
 		Tooltip:
 			'''
-			Parts Of V1 Wings Made For Minos!
+			Minos... WHY!!!!!!
 			*Great For Impersonating Devs!*
 			'''
 	}
@@ -1378,33 +1378,73 @@ Items: {
 		Tooltip: ""
 	}
 
+	GlitchTorch: {
+		DisplayName: Glitch Torch
+		Tooltip: ""
+	}
+
+	GlitchBlock: {
+		DisplayName: Glitch Block
+		Tooltip: ""
+	}
+
+	CoreOfGlitch: {
+		DisplayName: Core Of Glitch
+		Tooltip: ""
+	}
+
+	GlitchSand: {
+		DisplayName: Glitch Sand
+		Tooltip: ""
+	}
+
+	GlitchSappling: {
+		DisplayName: Glitch Sappling
+		Tooltip: ""
+	}
+
+	GlitchStone: {
+		DisplayName: Glitch Stone
+		Tooltip: ""
+	}
+
 	BlobticWings: {
 		DisplayName: Blobtic Wings
-		Tooltip: ""
+		Tooltip: *Great For Impersonating Devs!*
 	}
 
 	BlobticBody: {
 		DisplayName: Blobtic Body
-		Tooltip: ""
+		Tooltip: *Great For Impersonating Devs!*
 	}
 
 	BlobticHead: {
 		DisplayName: Blobtic Head
-		Tooltip: ""
+		Tooltip: *Great For Impersonating Devs!*
 	}
 
 	BlobticLegs: {
 		DisplayName: Blobtic Legs
-		Tooltip: ""
+		Tooltip: *Great For Impersonating Devs!*
+	}
+
+	WeaponRock: {
+		DisplayName: Rock
+		Tooltip: Hehe Rock Go Brrr
+	}
+
+	TheRock: {
+		DisplayName: The Rock
+		Tooltip: Will Summon A VERY Fun Boss
 	}
 }
 
 Tiles: {
-	SnowblindMusicBoxTile.MapEntry: Music Box
-	THCMusicBoxTile.MapEntry: Music Box
-	EnvyMusicBoxTile.MapEntry: Music Box
-	SlothMusicBoxTile.MapEntry: Music Box
-	MenuThemeMusicBoxTile.MapEntry: Music Box
+	SnowblindMusicBoxTile.MapEntry: SNowblind Music Box
+	THCMusicBoxTile.MapEntry: THC Music Box
+	EnvyMusicBoxTile.MapEntry: Envy Music Box
+	SlothMusicBoxTile.MapEntry: Sloth Music Box
+	MenuThemeMusicBoxTile.MapEntry: Title Music Box
 	GluttonyMusicBoxTile.MapEntry: Gluttony Music Box Tile
 	GreedMusicBoxTile.MapEntry: Greed Music Box Tile
 	LustMusicBoxTile.MapEntry: Lust Music Box Tile
@@ -1414,21 +1454,61 @@ Tiles: {
 
 WorldGen: {
 	TopiumOrePassMessage: Topium Fulling The Mines...
-	WeakValhallaOrePassMessage: The Stuff Of Gods...
+	WeakValhallaOrePassMessage: Weak Ahh Ore...
+	GlitchBiomePassMessage: Building Glitch Biome...
+	WorldGenTutorialOresPassMessage: Ores Going Brrr...
 }
 
 NPCs: {
-	TopHatCatBoss.DisplayName: Rukuka, God Of Top Hats
-	TopHatCat.DisplayName: Top Hat God
-	EyeOfEnvyBody.DisplayName: Invidia, The Sin Of Envy
-	EyeOfGluttonyBody.DisplayName: Gula, The Sin Of Gluttony
-	EyeOfGreedBody.DisplayName: Avaritia, The Sin Of Greed
-	EyeOfLustBody.DisplayName: Luxuria, The Sin Of Lust
-	EyeOfPrideBody.DisplayName: Suberia, The Sin Of Pride
-	EyeOfSlothBody.DisplayName: Acedia, The Sin of Sloth
-	EyeOfWrathBody.DisplayName: Ira, The Sin Of Wrath
+	TopHatCatBoss: {
+		DisplayName: Rukuka, God Of Top Hats
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/StackOfTopiumBars] At Any Time.
+	}
+
+	EyeOfEnvyBody: {
+		DisplayName: Invidia, The Sin Of Envy
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfEnvy] At Night.
+	}
+
+	EyeOfGluttonyBody: {
+		DisplayName: Gula, The Sin Of Gluttony
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfGluttony] At Night.
+	}
+
+	EyeOfGreedBody: {
+		DisplayName: Avaritia, The Sin Of Greed
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfGreed] At Night.
+	}
+
+	EyeOfLustBody: {
+		DisplayName: Luxuria, The Sin Of Lust
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfLust] At Night.
+	}
+
+	EyeOfPrideBody: {
+		DisplayName: Suberia, The Sin Of Pride
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfPride] At Night.
+	}
+
+	EyeOfSlothBody: {
+		DisplayName: Acedia, The Sin of Sloth
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfSloth] At Night.
+	}
+
+	EyeOfWrathBody: {
+		DisplayName: Ira, The Sin Of Wrath
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfWrath] At Night.
+	}
+
+	ZeRock: {
+		DisplayName: Sus Rock
+		BossChecklistIntegration.SpawnInfo: USE [i:PurringTale/TheRock]
+	}
+
 	TopHatSlime.DisplayName: Top Hat Slime
+	TopHatCat.DisplayName: Top Hat God
 	ValHarpy.DisplayName: Valhalla Harpy
+	GlitchedPortal.DisplayName: Glitched Portal
 
 	EnvyNPC: {
 		DisplayName: The Sin Of Envy
@@ -1455,7 +1535,7 @@ NPCs: {
 			Princess_LovesNPC: I like {NPCName}.
 		}
 
-		Census.SpawnCondition: Conditions unknown
+		Census.SpawnCondition: Kill The Sin Of Envy And Hold The [i:PurringTale/Envy] Item!
 	}
 
 	TopHatSlimeGood: {
@@ -1471,7 +1551,7 @@ NPCs: {
 			LoveBiome: I Do Rather Love The {BiomeName}!
 			LikeBiome: Eh {BiomeName} Is Good I Guess.
 			DislikeBiome: I Don't Like The {BiomeName} All That Much...
-			HateBiome: Bro {BiomeName} Sucks @$$!
+			HateBiome: Bro {BiomeName} Sucks Ass!
 			LoveNPC: I Really Like {NPCName}!
 			LikeNPC: I Like {NPCName} I Don't Hate Them!
 			DislikeNPC: I Do Not Like {NPCName}
@@ -1481,30 +1561,50 @@ NPCs: {
 			Princess_LovesNPC: Heh {NPCName} The Slime Is So Cute!
 		}
 
-		Census.SpawnCondition: Conditions unknown
+		Census.SpawnCondition: Can Spawn Randomly After A Boss Is Killed!
 	}
 
 	GluttonyNPC: {
-		DisplayName: Gluttony N P C
+		DisplayName: The Sin Of Gluttony
 
 		TownNPCMood: {
-			Content: I am content.
-			NoHome: I hate not having a home.
-			FarFromHome: I am too far from home.
-			LoveSpace: I love having so much space.
-			DislikeCrowded: I dislike how crowded I am.
-			HateCrowded: I hate how crowded I am.
-			LoveBiome: I love {BiomeName}.
-			DislikeBiome: I dislike {BiomeName}.
-			HateBiome: I hate {BiomeName}.
-			LoveNPC: I love {NPCName}.
-			LikeNPC: I like {NPCName}.
-			DislikeNPC: I dislike {NPCName}.
-			HateNPC: I hate {NPCName}.
+			Content: This Is Fine.
+			NoHome: Yeah I Guess Sleeping On The Dirt Works Fine... NOT!
+			FarFromHome: Man I AM Pretty Far From Home...
+			LoveSpace: Ah So Much Space To Do Evil!
+			DislikeCrowded: A Little Crowded Isn't It?
+			HateCrowded: There Is WAY To Many People Here...
+			LikeBiome: The {BiomeName} Is A Nice Spot.
+			LoveBiome: I Really Like The {BiomeName} It's A Good Living Area!
+			DislikeBiome: I'm Not Rather Fond Of {BiomeName}...
+			HateBiome: UH The {BiomeName} Sucks Ass!
+			LoveNPC: Hey {NPCName} Is A Person I Do Rather LIKE!
+			LikeNPC: I Think {NPCName} Is Cool Person!
+			DislikeNPC: Not The Biggest Fan Of {NPCName}.
+			HateNPC: I Think {NPCName} Always Makes Fun Of Me...
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
 		}
+
+		Census.SpawnCondition: Kill The Sin Of Gluttony And Hold The [i:PurringTale/Gluttony] Item!
 	}
+
+	PortalToValhalla: {
+		DisplayName: Portal To Valhalla
+
+		TownNPCMood: {
+			Content: ...
+			NoHome: ...
+			FarFromHome: ...
+			LoveSpace: ...
+			DislikeCrowded: ...
+			HateCrowded: ...
+			LikeNPC_Princess: ...
+			Princess_LovesNPC: ...
+		}
+	}
+
+	Death.DisplayName: Death
 }
 
 Buffs: {
@@ -1658,4 +1758,14 @@ Projectiles: {
 	BeeBlasterProj.DisplayName: Bee Blaster Proj
 	BeeMinionProj.DisplayName: Bee Minion Proj
 	FedoraCatPetProjectile.DisplayName: Fedora Cat Pet Projectile
+	ExampleSandBallFallingProjectile.DisplayName: Example Sand Ball Falling Projectile
+	GlitchSandballProje.DisplayName: Glitch Sandball Proje
+	BeeWhipProje.DisplayName: Bee Whip Proje
+}
+
+Biomes: {
+	GlitchSurfaceBiome: {
+		TownNPCDialogueName: the Glitch Biome
+		DisplayName: Glitch Biome
+	}
 }

@@ -9,6 +9,8 @@ using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria;
 using Terraria.ModLoader;
+using System.Security.Permissions;
+using PurringTale.CatBoss;
 
 namespace PurringTale
 {
@@ -23,5 +25,8 @@ namespace PurringTale
                 Filters.Scene["Shockwave"] = new Filter(new ScreenShaderData(Shockwave, "Shockwave"), EffectPriority.VeryHigh);
             }
         }
+
+
+        }
     }
-}
+
