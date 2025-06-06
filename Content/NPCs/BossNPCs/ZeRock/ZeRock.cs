@@ -66,6 +66,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 new FlavorTextBestiaryInfoElement("...Why The Hell Are You Fighting A Rock?"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedRock, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeaponRock>()));

@@ -93,6 +93,12 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Envy Gets Weaker In Second Stage"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedEnvy, -1);
+        }
+
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfEnvyBossBag>()));

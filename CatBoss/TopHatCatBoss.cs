@@ -136,8 +136,6 @@ namespace PurringTale.CatBoss
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
             NPC.dontTakeDamage = true;
-            NPC.SetEventFlagCleared(ref DownedBossSystem.downedTopHat, -1);
-
             NPC.ScaleStats_UseStrengthMultiplier(0.6f);
 
             if (!Main.dedServ)
@@ -568,7 +566,9 @@ namespace PurringTale.CatBoss
 
             return b;
         }
-
-
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedEnvy, -1);
+        }
     }
 }

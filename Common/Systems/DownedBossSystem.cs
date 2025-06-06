@@ -8,7 +8,7 @@ namespace PurringTale.Common.Systems
 {
     // Acts as a container for "downed boss" flags.
     // Set a flag like this in your bosses OnKill hook:
-    ///NPC.SetEventFlagCleared(ref DownedBossSystem.downedMinionBoss, -1);
+    // NPC.SetEventFlagCleared(ref DownedBossSystem.downedMinionBoss, -1);
 
     // Saving and loading these flags requires TagCompounds, a guide exists on the wiki: https://github.com/tModLoader/tModLoader/wiki/Saving-and-loading-using-TagCompound
     public class DownedBossSystem : ModSystem

@@ -93,6 +93,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Pride
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Pride Gets Weaker In Second Stage"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedPride, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfPrideBossBag>()));

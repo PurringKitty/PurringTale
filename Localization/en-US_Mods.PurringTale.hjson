@@ -1437,6 +1437,111 @@ Items: {
 		DisplayName: The Rock
 		Tooltip: Will Summon A VERY Fun Boss
 	}
+
+	LightSpear: {
+		DisplayName: Spear of Light
+		Tooltip: A Spear Of Light
+	}
+
+	CultSpear: {
+		DisplayName: Spear of the Cult
+		Tooltip: It's So Big
+	}
+
+	CultWand: {
+		DisplayName: Wand of the Cult
+		Tooltip: Ah Yes Crystals
+	}
+
+	CultBow: {
+		DisplayName: Bow of the Cult
+		Tooltip: Yeah This Looks Like A Cultist Uses It
+	}
+
+	DukeSpear: {
+		DisplayName: Fishing Spear
+		Tooltip: CURSE YOU FISHRON!!!
+	}
+
+	MechBow: {
+		DisplayName: Mechanical Bow
+		Tooltip: A neat Bow I do say indeed
+	}
+
+	MoonBow: {
+		DisplayName: Eldritch Bow
+		Tooltip: What Horrors Has This Seen?
+	}
+
+	MoonSpear: {
+		DisplayName: Eldritch Spear
+		Tooltip: Hope This What Worth It...
+	}
+
+	PlantBow: {
+		DisplayName: Vine Bow
+		Tooltip: Not Very Sturdy...
+	}
+
+	PlantSpear: {
+		DisplayName: Bud Flower Spear
+		Tooltip: I Mean Sure It Works
+	}
+
+	LightSword: {
+		DisplayName: Sword of Light
+		Tooltip: A Sword mainly made of Light
+	}
+
+	PlantWand: {
+		DisplayName: Vile Plant Wand
+		Tooltip: Ouch kinda thorny
+	}
+
+	CultWhip: {
+		DisplayName: Whip of the Cult
+		Tooltip: How Else Does He Command Them?
+	}
+
+	DukeSword: {
+		DisplayName: Fish Poker
+		Tooltip: I HEREBY VOW YOU WILL RUE THIS DAY!
+	}
+
+	DukeWhip: {
+		DisplayName: Whip of the Drake
+		Tooltip: BEHOLD A TRUE DRAKE WHIP!
+	}
+
+	MechHammer: {
+		DisplayName: Mechanical Hammer
+		Tooltip: A Really Good Hammer
+	}
+
+	MechWhip: {
+		DisplayName: Mechanical Whip
+		Tooltip: Made of the bits of the Mech bosses
+	}
+
+	MoonWhip: {
+		DisplayName: Eldritch Whip
+		Tooltip: Big Leagues
+	}
+
+	PlantWhip: {
+		DisplayName: Grassy Whip
+		Tooltip: Smack Em With GRASS
+	}
+
+	QSlimeSword: {
+		DisplayName: Pink Slime Sword
+		Tooltip: Its Pink
+	}
+
+	QSlimeWhip: {
+		DisplayName: Pink Slime Whip
+		Tooltip: Its Pink
+	}
 }
 
 Tiles: {
@@ -1508,6 +1613,7 @@ NPCs: {
 	TopHatSlime.DisplayName: Top Hat Slime
 	TopHatCat.DisplayName: Top Hat God
 	ValHarpy.DisplayName: Valhalla Harpy
+	Death.DisplayName: Skeletal Horseman
 	GlitchedPortal.DisplayName: Glitched Portal
 
 	EnvyNPC: {
@@ -1604,7 +1710,116 @@ NPCs: {
 		}
 	}
 
-	Death.DisplayName: Death
+	GreedNPC: {
+		DisplayName: The Sin Of Greed
+
+		TownNPCMood: {
+			Content: It's Alright I Guess.
+			NoHome: HEY I Am TOO RICH To Be Homeless!
+			FarFromHome: It Appears I Wandered To Far...
+			LoveSpace: Ah All This Space To Myself!
+			DislikeCrowded: SO  MANY  PEOPLE!
+			HateCrowded: HEY WHY ARE THERE SO MANY PEOPLE LIVING HERE?
+			LikeBiome: Eh I Like {BiomeName}.
+			LoveNPC: I Love {NPCName} So Much He He He.
+			HateNPC: I REALLY HATE {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Kill The Sin Of Greed And Hold The [i:PurringTale/Greed] Item!
+	}
+
+	LustNPC: {
+		DisplayName: The Sin Of Lust
+
+		TownNPCMood: {
+			Content: This is a nice abode
+			NoHome: Hey can i cum live at your house.
+			FarFromHome: I am quite far arn't I...
+			LoveSpace: All this space is nice and all...
+			DislikeCrowded: Now I like orgys but this is a bit much...
+			HateCrowded: Ok this many people here has to be abuse...
+			LoveBiome: I love the {BiomeName}.
+			LoveNPC: I love {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Kill The Sin Of Lust And Hold The [i:PurringTale/Lust] Item!
+	}
+
+	PrideNPC: {
+		DisplayName: The Sin Of Pride
+
+		TownNPCMood: {
+			Content: I AM ALRIGHT!
+			NoHome: HEY FRIEND GOT A HOME I CAN LIVE IN?
+			FarFromHome: HA HA WHERE AM I?
+			LoveSpace: AHAHAHAHA SO MUCH ROOM FOR ME!
+			DislikeCrowded: THERE ARE SO MANY PEOPLE HERE!
+			HateCrowded: OKAY THIS IS WAY TOO MANY PEOPLE!
+			LoveBiome: AHAHA {BiomeName} IS GREAT!
+			LikeBiome: I GUESS {BiomeName} IS ALRIGHT!
+			DislikeBiome: I DO NOT LIKE {BiomeName}!
+			LoveNPC: I LOVE HANGING WITH {NPCName}!
+			LikeNPC: I LIKE {NPCName} QUITE A BIT!
+			DislikeNPC: I DO NOT LIKE {NPCName} ALL THAT MUCH!
+			HateNPC: I DESPISE {NPCName}!
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Kill The Sin Of Pride And Hold The [i:PurringTale/Pride] Item!
+	}
+
+	SlothNPC: {
+		DisplayName: The Sin Of Sloth
+
+		TownNPCMood: {
+			Content: I mean I guess it is alright...
+			NoHome: at least I have the ground to sleep on...
+			FarFromHome: uh where am I?
+			LoveSpace: such room all to myself...
+			DislikeCrowded: it is rather crowded...
+			HateCrowded: ugh to much people I can't get any sleep...
+			LoveBiome: I really prefer the {BiomeName}...
+			LikeBiome: the {BiomeName} is good enough...
+			DislikeBiome: I do not really like {BiomeName}...
+			LoveNPC: heh {NPCName} is pretty cool...
+			LikeNPC: uh {NPCName} is alright...
+			DislikeNPC: eh {NPCName} isn't my most favorite person...
+			HateNPC: I hate {NPCName}...
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Kill The Sin Of Sloth And Hold The [i:PurringTale/Sloth] Item!
+	}
+
+	WrathNPC: {
+		DisplayName: The Sin Of Wrath
+
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: ARGH WHY DO I NOT HAVE A HOUSE?
+			FarFromHome: ARGHHHHHHHHH WHERE AM I?
+			LoveSpace: Ah all this space is nice.
+			DislikeCrowded: Ugh why are there so many people here?
+			HateCrowded: ARGH THIS PLACE IS WAY TO CROWDED!
+			LoveBiome: I do rather love the {BiomeName}.
+			LikeBiome: I quite like the {BiomeName}.
+			DislikeBiome: I DO NOT LIKE THE {BiomeName}!
+			LoveNPC: I rather think {NPCName} is quite lovely!
+			LikeNPC: I do like {NPCName}.
+			DislikeNPC: Ugh I don't like {NPCName}.
+			HateNPC: ARGH I HATE {NPCName} SO MUCH!
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+
+		Census.SpawnCondition: Kill The Sin Of Wrath And Hold The [i:PurringTale/Wrath] Item!
+	}
 }
 
 Buffs: {
@@ -1761,6 +1976,18 @@ Projectiles: {
 	ExampleSandBallFallingProjectile.DisplayName: Example Sand Ball Falling Projectile
 	GlitchSandballProje.DisplayName: Glitch Sandball Proje
 	BeeWhipProje.DisplayName: Bee Whip Proje
+	LightSpearProj.DisplayName: Light Spear Proj
+	CultMagicProj.DisplayName: Cult Magic Proj
+	CultSpearProj.DisplayName: Cult Spear Proj
+	DukeSpearProj.DisplayName: Duke Spear Proj
+	MoonSpearProj.DisplayName: Moon Spear Proj
+	PlantSpearProj.DisplayName: Plant Spear Proj
+	CultWhipProj.DisplayName: Cult Whip Proj
+	DukeWhipProj.DisplayName: Duke Whip Proj
+	MechWhipProj.DisplayName: Mech Whip Proj
+	MoonWhipProj.DisplayName: Moon Whip Proj
+	PlantWhipProj.DisplayName: Plant Whip Proj
+	QSlimeWhipProj.DisplayName: Q Slime Whip Proj
 }
 
 Biomes: {

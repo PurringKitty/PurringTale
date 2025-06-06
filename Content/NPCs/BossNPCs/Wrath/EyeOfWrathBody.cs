@@ -96,6 +96,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Wrath
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Wrath, Crazy Attack No Defence"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedWrath, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfWrathBossBag>()));

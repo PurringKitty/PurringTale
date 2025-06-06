@@ -93,6 +93,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Greed
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Greed Gets Weaker In Second Stage"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedGreed, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGreedBossBag>()));

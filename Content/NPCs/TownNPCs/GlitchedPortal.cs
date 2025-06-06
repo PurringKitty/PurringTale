@@ -1,13 +1,15 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Terraria.ID;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using PurringTale.Content.Items.BossDrops;
+using PurringTale.Content.Subworlds;
 using SubworldLibrary;
-using Terraria.Utilities;
+using System.Linq;
+using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
-using PurringTale.Content.Subworlds;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.Utilities;
 
 
 namespace PurringTale.Content.NPCs.TownNPCs
@@ -28,7 +30,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPC.width = 122;
             NPC.height = 122;
             NPC.dontTakeDamage = true;
-            NPC.immortal = true;
+            NPC.immortal = false;
             NPC.noGravity = true;
             NPC.aiStyle = -1;
             NPC.lifeMax = 999;
@@ -107,14 +109,29 @@ namespace PurringTale.Content.NPCs.TownNPCs
         {
             if (firstButton)
             {
-                    Main.rand = new UnifiedRandom();
-                    SubworldSystem.Enter<GlitchDimension>();
-                }
-                if (SubworldSystem.IsActive<GlitchDimension> ())
-                    SubworldSystem.Exit();
+                Main.rand = new UnifiedRandom();
+                SubworldSystem.Enter<GlitchDimension>();
             }
+            if (SubworldSystem.IsActive<GlitchDimension>())
+                SubworldSystem.Exit();
         }
+    		public override bool CanTownNPCSpawn(int numTownNPCs)
+        {
+            for (int k = 0; k < Main.maxPlayers; k++)
+            {
+                Player player = Main.player[k];
+                if (!player.active)
+                {
+                    continue;
+                }
+                if (player.inventory.Any(item => item.type == ModContent.ItemType<Lust>()))
+                {
+                    return true;
+                }
+            }
 
-
+            return false;
+        }
     }
+}
 

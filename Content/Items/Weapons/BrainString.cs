@@ -21,18 +21,18 @@ namespace PurringTale.Content.Items.Weapons
             Item.DamageType = DamageClass.Ranged;
             Item.width = 40;
             Item.height = 40;
-            Item.useTime = 21;
-            Item.useAnimation = 21;
+            Item.useTime = 22;
+            Item.useAnimation = 22;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useTurn = false;
-            Item.knockBack = 4.5f;
+            Item.knockBack = 0.5f;
             Item.value = Item.sellPrice(silver: 5);
             Item.rare = ItemRarityID.Master;
             Item.UseSound = SoundID.Item5;
             Item.autoReuse = true;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.useAmmo = AmmoID.Arrow;
-            Item.shootSpeed = 1.50f;
+            Item.shootSpeed = 3f;
 		}
         public override Vector2? HoldoutOffset()
         {

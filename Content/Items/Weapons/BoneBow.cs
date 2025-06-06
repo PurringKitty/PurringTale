@@ -32,7 +32,7 @@ namespace PurringTale.Content.Items.Weapons
             Item.autoReuse = true;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.useAmmo = AmmoID.Arrow;
-            Item.shootSpeed = 2.50f;
+            Item.shootSpeed = 5f;
 		}
         public override Vector2? HoldoutOffset()
         {

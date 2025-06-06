@@ -21,7 +21,7 @@ namespace PurringTale.Common.Systems
             if (npc.type == NPCID.KingSlime)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimeK47>(), 7));
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GelBullet>(),2, 50, 150));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GelBullet>(), 2, 50, 150));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimySword>(), 9));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimyWhip>(), 6));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RedCrystalStaff>(), 8));
@@ -74,7 +74,6 @@ namespace PurringTale.Common.Systems
             if (npc.type == NPCID.Deerclops)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
             }
             if (npc.type == NPCID.WallofFlesh)
             {
@@ -84,74 +83,95 @@ namespace PurringTale.Common.Systems
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshBow>(), 7));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FleshStaff>(), 6));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-            } 
+            }
             if (npc.type == NPCID.QueenSlimeBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<QSlimeSword>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<QSlimeWhip>(), 6));
             }
             if (npc.type == NPCID.Spazmatism)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MechBow>(), 9));
             }
             if (npc.type == NPCID.Retinazer)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MechBow>(), 9));
             }
             if (npc.type == NPCID.TheDestroyer)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MechWhip>(), 9));
             }
             if (npc.type == NPCID.SkeletronPrime)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MechHammer>(), 9));
             }
             if (npc.type == NPCID.Plantera)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PlantBow>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PlantSpear>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PlantWhip>(), 7));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PlantWand>(), 6));
             }
             if (npc.type == NPCID.Golem)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GolemBlaster>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GolemSpear>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GolemWhip>(), 7));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GolemWand>(), 6));
             }
             if (npc.type == NPCID.CultistBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CultBow>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CultSpear>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CultWand>(), 7));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CultWhip>(), 6));
             }
             if (npc.type == NPCID.DukeFishron)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DukeSpear>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DukeSword>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DukeWhip>(), 7));
             }
             if (npc.type == NPCID.HallowBoss)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LightSpear>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LightSword>(), 8));
             }
             if (npc.type == NPCID.MoonLordCore)
             {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
-                //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BrainStem>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MoonBow>(), 9));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MoonSpear>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<MoonWhip>(), 7));
             }
-
+            if (npc.type == NPCID.QueenSlimeBoss)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfGlitch>(), 1, 10, 30));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<QSlimeSword>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<QSlimeWhip>(), 6));
+            }
         }
     }
 }

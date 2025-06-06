@@ -93,6 +93,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Gluttony
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Gluttony Gets Weaker In Second Stage"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedGluttony, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGluttonyBossBag>()));

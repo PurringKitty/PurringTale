@@ -97,7 +97,13 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
 			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Love)
 			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Like)
-			.SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Love);
+            .SetNPCAffection<GluttonyNPC>(AffectionLevel.Dislike)
+            .SetNPCAffection<GreedNPC>(AffectionLevel.Hate)
+            .SetNPCAffection<LustNPC>(AffectionLevel.Love)
+            .SetNPCAffection<PrideNPC>(AffectionLevel.Dislike)
+            .SetNPCAffection<SlothNPC>(AffectionLevel.Dislike)
+            .SetNPCAffection<WrathNPC>(AffectionLevel.Like)
+            .SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Love);
 		}
 
 		public override void SetDefaults()
@@ -107,7 +113,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.width = 18;
 			NPC.height = 40;
 			NPC.aiStyle = 7;
-			NPC.damage = 10000;
+			NPC.damage = 100;
 			NPC.defense = 20;
 			NPC.lifeMax = 200;
             NPC.HitSound = SoundID.NPCHit1;
@@ -196,7 +202,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			chat.Add(Language.GetTextValue("I Sell Some Of My Stuff"));
 			chat.Add(Language.GetTextValue("Hello..."));
 			chat.Add(Language.GetTextValue("I Am Always Envyous Of Everything I Try Not To Sometimes!"), 5.0);
-			chat.Add(Language.GetTextValue("..."), 5.0);
+			chat.Add(Language.GetTextValue("Hey King Slime's Crown Is Making Me So Envyous... Go Get It!"), 5.0);
 			chat.Add(Language.GetTextValue("My House Is Smaller Than The Others... I Think..."), 5.0);
 			chat.Add(Language.GetTextValue("I Am Envyous Of Your Two Eyes..."), 0.1);
 			chat.Add(Language.GetTextValue("All Of Us Got Turned Into Eyeballs..."), 0.1);

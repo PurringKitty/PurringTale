@@ -33,9 +33,6 @@ namespace PurringTale.Content.NPCs.HostileNPCs
         {
             return SpawnCondition.HardmodeJungle.Chance * 1f;
         }
-
-
-
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.FeatherfallPotion, Main.rand.Next(0, 2));

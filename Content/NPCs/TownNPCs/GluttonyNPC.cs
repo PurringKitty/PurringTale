@@ -94,8 +94,13 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Dislike)
 			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Dislike)
 			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Love)
-			.SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Hate)
-			.SetNPCAffection<EnvyNPC>(AffectionLevel.Dislike);
+			.SetNPCAffection<EnvyNPC>(AffectionLevel.Dislike)
+            .SetNPCAffection<GreedNPC>(AffectionLevel.Hate)
+            .SetNPCAffection<LustNPC>(AffectionLevel.Love)
+            .SetNPCAffection<PrideNPC>(AffectionLevel.Like)
+            .SetNPCAffection<SlothNPC>(AffectionLevel.Like)
+            .SetNPCAffection<WrathNPC>(AffectionLevel.Hate)
+            .SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Hate);
 		}
 
 		public override void SetDefaults()
@@ -105,7 +110,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.width = 18;
 			NPC.height = 40;
 			NPC.aiStyle = 7;
-			NPC.damage = 10000;
+			NPC.damage = 100;
 			NPC.defense = 20;
 			NPC.lifeMax = 200;
             NPC.HitSound = SoundID.NPCHit1;
@@ -193,7 +198,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			chat.Add(Language.GetTextValue("What Is A Dark Souls? "));
 			chat.Add(Language.GetTextValue("Got Any Food On You?"));
 			chat.Add(Language.GetTextValue("GOD I AM SO HUNGRY"));
-			chat.Add(Language.GetTextValue("I Am Bald Btw"), 5.0);
+			chat.Add(Language.GetTextValue("That Eye of Cthulhu Makes Me So Hungry... Go Kill It..."), 5.0);
 			chat.Add(Language.GetTextValue("I Have A Fast Matabolism So..."), 5.0);
 			chat.Add(Language.GetTextValue("Home Sweet Home..."), 5.0);
 			chat.Add(Language.GetTextValue("I Am Gonna Eat Another Person..."), 0.1);

@@ -94,6 +94,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
                 new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Sloth Gets Weaker In Second Stage"),
             });
         }
+
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedSloth, -1);
+        }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfSlothBossBag>()));
