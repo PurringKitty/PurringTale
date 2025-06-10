@@ -35,10 +35,9 @@ namespace PurringTale.Content.NPCs.HostileNPCs
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.FeatherfallPotion, Main.rand.Next(0, 2));
-            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.Feather, Main.rand.Next(5, 10));
+            npcLoot.Add(ItemDropRule.Common(ItemID.Feather, 1, 1, 5));
+            npcLoot.Add(ItemDropRule.Common(ItemID.GiantHarpyFeather, 15, 1, 1));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 0, 20));
         }
-
     }
 }

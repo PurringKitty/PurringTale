@@ -31,7 +31,7 @@ namespace PurringTale.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.DirtBlock, 25)
-                .AddTile(TileID.WorkBenches)
+                .AddTile<Tiles.Furniture.ValhallaWorkbench>()
                 .Register();
         }
     }

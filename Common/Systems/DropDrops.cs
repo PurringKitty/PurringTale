@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.GameContent.ItemDropRules;
+﻿using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using PurringTale.Content.Items.BossDrops;
-using PurringTale.Content.Items.Consumables;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Magic;
+using PurringTale.Content.Items.Weapons.Summoner;
+using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Accessories.Others;
+using PurringTale.Content.Items.Tools;
+using PurringTale.Content.Items.Consumables.Ammo;
 
 namespace PurringTale.Common.Systems
 {
@@ -24,7 +23,7 @@ namespace PurringTale.Common.Systems
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GelBullet>(), 2, 50, 150));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimySword>(), 9));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimyWhip>(), 6));
-                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RedCrystalStaff>(), 8));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimeStaff>(), 8));
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
                 npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<HeartOfSlime>()));
             }

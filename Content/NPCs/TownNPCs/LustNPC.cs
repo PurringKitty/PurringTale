@@ -1,13 +1,7 @@
 using PurringTale.Content.Dusts;
-using PurringTale.Content.Items;
-using PurringTale.Content.Items.Accessories;
-using PurringTale.Content.Items.Armor;
-using PurringTale.Content.Tiles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Linq;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -18,21 +12,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.GameContent.Personalities;
 using System.Collections.Generic;
-using ReLogic.Content;
-using Terraria.GameContent.UI;
-using Terraria.ModLoader.IO;
-using PurringTale.Common;
-using PurringTale.Content.Projectiles;
-using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.Items.Placeables;
-using PurringTale.Content.Items.Consumables;
-using PurringTale.Common.Systems;
-using PurringTale.Content.NPCs.BossNPCs.Envy;
-using Terraria.GameContent.Achievements;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.BossDrops;
 using PurringTale.CatBoss;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Items.Weapons.Summoner;
+using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Consumables.Bags;
+using PurringTale.Content.Items.Placeables.MusicBoxes;
 
 namespace PurringTale.Content.NPCs.TownNPCs
 {

@@ -1,4 +1,4 @@
-﻿using PurringTale.Content.Items.BossDrops;
+﻿using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables;
 using PurringTale.Content.Items.Weapons;
 using Terraria;

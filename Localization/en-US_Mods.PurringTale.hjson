@@ -473,7 +473,7 @@ Items: {
 		Tooltip: Lore Soon
 	}
 
-	RedCrystalStaff: {
+	SlimeStaff: {
 		DisplayName: Slime Crystal Staff
 		Tooltip: Shooting Red Crystals Is Fun!
 	}
@@ -1445,7 +1445,7 @@ Items: {
 
 	CultSpear: {
 		DisplayName: Spear of the Cult
-		Tooltip: It's So Big
+		Tooltip: Looks Sharp... I Guess
 	}
 
 	CultWand: {
@@ -1542,19 +1542,54 @@ Items: {
 		DisplayName: Pink Slime Whip
 		Tooltip: Its Pink
 	}
+
+	SealOfTheSevenSins: {
+		DisplayName: Seal Of The Seven Sins
+		Tooltip: True Power
+	}
+
+	ForgedBreastplate: {
+		DisplayName: Forged Breastplate
+		Tooltip: Powered With A Lava Core
+	}
+
+	ForgedHelmet: {
+		DisplayName: Forged Helmet
+		Tooltip: Be Careful With Lava So Close To The Face
+	}
+
+	ForgedLeggings: {
+		DisplayName: Forged Leggings
+		Tooltip: Hot To The Touch!
+	}
+
+	RustedBreastplate: {
+		DisplayName: Rusted Breastplate
+		Tooltip: ""
+	}
+
+	RustedHelmet: {
+		DisplayName: Rusted Helmet
+		Tooltip: ""
+	}
+
+	RustedLeggings: {
+		DisplayName: Rusted Leggings
+		Tooltip: ""
+	}
 }
 
 Tiles: {
-	SnowblindMusicBoxTile.MapEntry: SNowblind Music Box
+	SnowblindMusicBoxTile.MapEntry: Snowblind Music Box
 	THCMusicBoxTile.MapEntry: THC Music Box
 	EnvyMusicBoxTile.MapEntry: Envy Music Box
 	SlothMusicBoxTile.MapEntry: Sloth Music Box
 	MenuThemeMusicBoxTile.MapEntry: Title Music Box
-	GluttonyMusicBoxTile.MapEntry: Gluttony Music Box Tile
-	GreedMusicBoxTile.MapEntry: Greed Music Box Tile
-	LustMusicBoxTile.MapEntry: Lust Music Box Tile
-	PrideMusicBoxTile.MapEntry: Pride Music Box Tile
-	WrathMusicBoxTile.MapEntry: Wrath Music Box Tile
+	GluttonyMusicBoxTile.MapEntry: Gluttony Music Box
+	GreedMusicBoxTile.MapEntry: Greed Music Box
+	LustMusicBoxTile.MapEntry: Lust Music Box
+	PrideMusicBoxTile.MapEntry: Pride Music Box
+	WrathMusicBoxTile.MapEntry: Wrath Music Box
 }
 
 WorldGen: {
@@ -1613,7 +1648,7 @@ NPCs: {
 	TopHatSlime.DisplayName: Top Hat Slime
 	TopHatCat.DisplayName: Top Hat God
 	ValHarpy.DisplayName: Valhalla Harpy
-	Death.DisplayName: Skeletal Horseman
+	SkeletalHorseman.DisplayName: Skeletal Horseman
 	GlitchedPortal.DisplayName: Glitched Portal
 
 	EnvyNPC: {
@@ -1649,7 +1684,7 @@ NPCs: {
 
 		TownNPCMood: {
 			Content: It's Alright I Guess.
-			NoHome: Make Me Home Human Scum!
+			NoHome: Make Me A Home Human Scum!
 			FarFromHome: Get Me Home.
 			LoveSpace: So Much Space To Do Stuff!
 			DislikeCrowded: Too Many Other People...
@@ -1830,12 +1865,12 @@ Buffs: {
 
 	EnvyBuff: {
 		DisplayName: Envy
-		Description: Envyous Arn't Ya?
+		Description: Boosts Magic Damage By 25%
 	}
 
 	GluttonyBuff: {
 		DisplayName: Gluttony
-		Description: You Seem A Little Hungry There!
+		Description: Boosts Ranged Damage By 25%
 	}
 
 	GodSlayerMinionBuff: {
@@ -1845,12 +1880,12 @@ Buffs: {
 
 	GreedBuff: {
 		DisplayName: Greed
-		Description: I Can Tell You Want All The Money!
+		Description: Boosts All Damage By 25%
 	}
 
 	LustBuff: {
 		DisplayName: Lust
-		Description: Getting A Little FrEaKy In Here!
+		Description: Boosts Summon Damage By 25% & Increases Minions By 2
 	}
 
 	MothMinionBuff: {
@@ -1860,17 +1895,17 @@ Buffs: {
 
 	PrideBuff: {
 		DisplayName: Pride
-		Description: Not So High And Mighty Now Huh?
+		Description: Boosts Melee Damage By 25%
 	}
 
 	SlothBuff: {
 		DisplayName: Sloth
-		Description: Man I Am A Little Tired... Can We Do This Later?
+		Description: Boosts Magic Damage By 25%
 	}
 
 	WrathBuff: {
 		DisplayName: Wrath
-		Description: I AM ALWAYS MAD!
+		Description: Boosts Melee Damage By 25%
 	}
 
 	BootsPetBuff: {
@@ -1903,16 +1938,6 @@ Buffs: {
 		Description: A Dead Child From The Dungeon... So Sad...
 	}
 
-	ExampleWhipAdvancedDebuff: {
-		DisplayName: Example Whip Advanced Debuff
-		Description: Mods.PurringTale.Buffs.ExampleWhipAdvancedDebuff.Description
-	}
-
-	ExampleWhipDebuff: {
-		DisplayName: Example Whip Debuff
-		Description: Mods.PurringTale.Buffs.ExampleWhipDebuff.Description
-	}
-
 	BeeMinionBuff: {
 		DisplayName: BEES!!!
 		Description: ARGHHHHHHHHHHHH!!!!!!
@@ -1921,6 +1946,21 @@ Buffs: {
 	FedoraCatPetBuff: {
 		DisplayName: Fedora Cat
 		Description: A Gato Wearing A Nice White Fedora!
+	}
+
+	WhipTagDebuff: {
+		DisplayName: Whip Tag Debuff
+		Description: Tagged LOSER
+	}
+
+	WhipTaggDebuff: {
+		DisplayName: Whip Tagg Debuff
+		Description: OOF EXTRA FUCKING TAGGED!
+	}
+
+	SinsBuff: {
+		DisplayName: Seven Sins
+		Description: Doubles Damage, 100 More Health & Mana, Gives All Previous Sins Buffs
 	}
 }
 
@@ -1988,6 +2028,7 @@ Projectiles: {
 	MoonWhipProj.DisplayName: Moon Whip Proj
 	PlantWhipProj.DisplayName: Plant Whip Proj
 	QSlimeWhipProj.DisplayName: Q Slime Whip Proj
+	ValhallaStabberProjectile.DisplayName: Valhalla Stabber Projectile
 }
 
 Biomes: {

@@ -22,7 +22,7 @@ namespace PurringTale.Content.Biomes
 
 
 
-        public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeables.GlitchTorch>();
+        public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeables.Blocks.GlitchTorch>();
 
         public override string BackgroundPath => "PurringTale/Assets/Textures/Background/GlitchBiomeSurfaceMid0";
         public override string MapBackground => BackgroundPath;

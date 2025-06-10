@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using PurringTale.Content.Items.Placeables;
+using PurringTale.Content.Items.Placeables.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,7 +10,7 @@ namespace PurringTale.Content.Items.Tools
     {
         public override void SetDefaults()
         {
-            Item.damage = 150;
+            Item.damage = 110;
             Item.DamageType = DamageClass.Melee;
             Item.width = 35;
             Item.height = 35;

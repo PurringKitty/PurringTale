@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using PurringTale.Content.Items.BossDrops;
+using PurringTale.Content.Items.Accessories.Emblems;
 using PurringTale.Content.Subworlds;
 using SubworldLibrary;
 using System.Linq;

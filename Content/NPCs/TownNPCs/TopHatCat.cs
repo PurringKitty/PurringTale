@@ -1,12 +1,12 @@
 ﻿using PurringTale.Content.Dusts;
-using PurringTale.Content.Items;
 using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.Tools;
-using PurringTale.Content.Items.Weapons;
-using PurringTale.Content.Projectiles;
+using PurringTale.Content.Items.Weapons.Magic;
+using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Summoner;
+using PurringTale.Content.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -20,40 +20,24 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
-using Terraria.Audio;
-using Terraria.GameContent.Personalities;
-using ReLogic.Content;
-using Terraria.GameContent.UI;
-using PurringTale.Content.Items.BossDrops;
 using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.Items.Accessories;
-using PurringTale.Content.Items.Placeables;
-using PurringTale.Content.Pets.Boots;
-using PurringTale.Content.Pets.UFOWolf;
-using Terraria.ModLoader.Utilities;
-using PurringTale.Content.Items.Consumables;
 using System.IO;
 using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Accessories.Wings;
+using PurringTale.Content.Items.Accessories.Boots;
+using PurringTale.Content.Items.Accessories.Necklaces;
+using PurringTale.Content.Items.Consumables.Summons;
+using PurringTale.Content.Items.Placeables.Ores;
 
 namespace PurringTale.Content.NPCs.TownNPCs
 {
     [AutoloadHead]
     class TopHatCat : ModNPC
     {
-        // Time of day for traveller to leave (6PM)
         public const double despawnTime = 48600.0;
-
-        // the time of day the traveler will spawn (double.MaxValue for no spawn)
-        // saved and loaded with the world in TravelingMerchantSystem
         public static double spawnTime = double.MaxValue;
-
-        // A static instance of the declarative shop, defining all the items which can be brought. Used to create a new inventory when the NPC spawns
         public static ExampleTravelingMerchantShop Shop;
-
-        // The list of items in the traveler's shop. Saved with the world and set when the traveler spawns
         public readonly List<Item> shopItems = new();
-
-
         private static int ShimmerHeadIndex;
         private static Profiles.StackedNPCProfile NPCProfile;
 
@@ -61,8 +45,6 @@ namespace PurringTale.Content.NPCs.TownNPCs
         {
             if ((!Main.dayTime || Main.time >= despawnTime) && !IsNpcOnscreen(NPC.Center)) // If it's past the despawn time and the NPC isn't onscreen
             {
-                // Here we despawn the NPC and send a message stating that the NPC has despawned
-                // LegacyMisc.35 is {0) has departed!
                 if (Main.netMode == NetmodeID.SinglePlayer) Main.NewText(Language.GetTextValue("LegacyMisc.35", NPC.FullName), 50, 125, 255);
                 else ChatHelper.BroadcastChatMessage(NetworkText.FromKey("LegacyMisc.35", NPC.GetFullNetName()), new Color(50, 125, 255));
                 NPC.active = false;
@@ -78,32 +60,81 @@ namespace PurringTale.Content.NPCs.TownNPCs
         {
             Shop = new ExampleTravelingMerchantShop(NPC.type);
 
-            // Always bring an ExampleItem
-
-
-            // Bring 2 Tools
-            Shop.AddPool("Tools", slots: 2)
-                .Add<WeakValhallaAxe>()
-                .Add<WeakValhallaPick>()
+            Shop.AddPool("Tools", slots: 1)
+                .Add<WeakValhallaAxe>(Condition.DownedKingSlime)
+                .Add<WeakValhallaPick>(Condition.DownedKingSlime)
                 .Add<DirtAxe>()
-                .Add<DirtPickaxe>();
+                .Add<DirtPickaxe>()
+                .Add<MechHammer>(Condition.DownedMechBossAny);
 
-            // Bring 2 Weapons
-            Shop.AddPool("Weapons", slots: 4)
+            Shop.AddPool("Weapons", slots: 2)
                 .Add<DirtSword>()
                 .Add<WeakValhallaStabber>()
-                .Add<ImposterTongue>()
-                .Add<EyeDrop>()
+                .Add<ImposterTongue>(Condition.DownedDeerclops)
+                .Add<SlimySword>(Condition.DownedKingSlime)
+                .Add<SlimeK47>(Condition.DownedKingSlime)
+                .Add<SlimeStaff>(Condition.DownedKingSlime)
+                .Add<SlimyWhip>(Condition.DownedKingSlime)
+                .Add<EyeDrop>(Condition.DownedEyeOfCthulhu)
+                .Add<EyeShot>(Condition.DownedEyeOfCthulhu)
+                .Add<EyeStaff>(Condition.DownedEyeOfCthulhu)
+                .Add<EyeWhip>(Condition.DownedEyeOfCthulhu)
+                .Add<EyeWand>(Condition.DownedEyeOfCthulhu)
+                .Add<BrainStem>(Condition.DownedBrainOfCthulhu)
+                .Add<BrainString>(Condition.DownedBrainOfCthulhu)
+                .Add<BrainStaff>(Condition.DownedBrainOfCthulhu)
+                .Add<BrainWand>(Condition.DownedBrainOfCthulhu)
+                .Add<BrainWhip>(Condition.DownedBrainOfCthulhu)
+                .Add<EaterSword>(Condition.DownedEaterOfWorlds)
+                .Add<EaterBlaster>(Condition.DownedEaterOfWorlds)
+                .Add<EaterWand>(Condition.DownedEaterOfWorlds)
+                .Add<EaterWhip>(Condition.DownedEaterOfWorlds)
+                .Add<FleshSword>(Condition.DownedDeerclops)
+                .Add<FleshBow>(Condition.DownedDeerclops)
+                .Add<FleshStaff>(Condition.DownedDeerclops)
+                .Add<FleshWand>(Condition.DownedDeerclops)
+                .Add<DukeSword>(Condition.DownedDukeFishron)
+                .Add<DukeSpear>(Condition.DownedDukeFishron)
+                .Add<DukeWhip>(Condition.DownedDukeFishron)
+                .Add<LightSword>(Condition.DownedEmpressOfLight)
+                .Add<LightSpear>(Condition.DownedEmpressOfLight)
+                .Add<QSlimeSword>(Condition.DownedQueenSlime)
+                .Add<QSlimeWhip>(Condition.DownedQueenSlime)
+                .Add<PlantBow>(Condition.DownedPlantera)
+                .Add<PlantSpear>(Condition.DownedPlantera)
+                .Add<PlantWand>(Condition.DownedPlantera)
+                .Add<PlantWhip>(Condition.DownedPlantera)
+                .Add<MechBow>(Condition.DownedMechBossAny)
+                .Add<MechWhip>(Condition.DownedMechBossAny)
+                .Add<GolemBlaster>(Condition.DownedGolem)
+                .Add<GolemSpear>(Condition.DownedGolem)
+                .Add<GolemWand>(Condition.DownedGolem)
+                .Add<GolemWhip>(Condition.DownedGolem)
+                .Add<CultBow>(Condition.DownedCultist)
+                .Add<CultSpear>(Condition.DownedCultist)
+                .Add<CultWand>(Condition.DownedCultist)
+                .Add<CultWhip>(Condition.DownedCultist)
+                .Add<BoneBow>(Condition.DownedSkeletron)
+                .Add<BoneSpear>(Condition.DownedSkeletron)
+                .Add<BoneStaff>(Condition.DownedSkeletron)
+                .Add<BoneWand>(Condition.DownedSkeletron)
+                .Add<BeeBlaster>(Condition.DownedQueenBee)
+                .Add<BeeStaff>(Condition.DownedQueenBee)
+                .Add<BeeWhip>(Condition.DownedQueenBee)
+                .Add<MoonBow>(Condition.DownedMoonLord)
+                .Add<MoonSpear>(Condition.DownedMoonLord)
+                .Add<MoonWhip>(Condition.DownedMoonLord)
                 .Add<RustedDancersWhip>(Condition.Hardmode)
                 .Add<BrokenStarShootingStaff>(Condition.Hardmode)
                 .Add<BrokenDestroyerLaserCannon>(Condition.Hardmode)
                 .Add<RuinedGodSlayerSummoningBook>(Condition.Hardmode)
                 .Add<BrokenSerratedGreatsword>(Condition.Hardmode);
 
-
-            // Bring 2 Accessories
-            Shop.AddPool("Accessories", slots: 4)
+            Shop.AddPool("Accessories", slots: 1)
                 .Add<BlueFlameWings>()
+                .Add<GrubbbWings>()
+                .Add<OviaWings>()
+                .Add<BlobticWings>()
                 .Add<DOLWings>()
                 .Add<EndSlayerWings>()
                 .Add<GasterBlasterW>()
@@ -118,9 +149,9 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<PastaWings>()
                 .Add<THCWings>()
                 .Add<TreadBoots>(Condition.Hardmode)
-                .Add<ForgedWings>(Condition.InExpertMode, Condition.Hardmode);
+                .Add<ForgedWings>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedMoonLord);
 
-            Shop.AddPool("Armor", slots: 6)
+            Shop.AddPool("Armor", slots: 2)
                 .Add<DirtHelmet>()
                 .Add<DirtBreastplate>()
                 .Add<DirtLeggings>()
@@ -130,12 +161,29 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<WolfHelm>()
                 .Add<WolfGear>()
                 .Add<WolfBoots>()
+                .Add<RustedHelmet>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
+                .Add<RustedBreastplate>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
+                .Add<RustedLeggings>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
+                .Add<WeakValhallaHelmet>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<WeakValhallaHood>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<WeakValhallaHat>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<WeakValhallaCap>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<WeakValhallaBreastplate>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<WeakValhallaLeggings>(Condition.InExpertMode, Condition.Hardmode);
+
+            Shop.AddPool("Vanity", slots: 3)
                 .Add<DOLHelmet>()
                 .Add<DOLBreastplate>()
                 .Add<DOLLeggings>()
                 .Add<EndSlayerHead>()
                 .Add<EndSlayerBreastplate>()
                 .Add<EndSlayerLeggings>()
+                .Add<BlobticHead>()
+                .Add<BlobticBody>()
+                .Add<BlobticLegs>()
+                .Add<GrubbbHead>()
+                .Add<GrubbbBody>()
+                .Add<GrubbbLegs>()
                 .Add<MothHead>()
                 .Add<MothBody>()
                 .Add<MothLegs>()
@@ -162,29 +210,10 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<OviaSweater>()
                 .Add<THCTopHat>()
                 .Add<THCTie>()
-                .Add<THCTail>()
-                .Add<WeakValhallaHelmet>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaHood>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaHat>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaCap>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaBreastplate>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaLeggings>(Condition.InExpertMode, Condition.Hardmode);
+                .Add<THCTail>();
 
-            Shop.AddPool("Lore", slots: 1)
-                .Add<OldBook1>()
-                .Add<OldBook2>()
-                .Add<OldBook3>()
-                .Add<OldBook4>();
-
-            Shop.AddPool("Summons", slots: 3)
-                .Add<BowlOfEnvy>()
-                .Add<BowlOfGluttony>()
-                .Add<BowlOfGreed>()
-                .Add<BowlOfLust>(Condition.InMasterMode, Condition.Hardmode)
-                .Add<BowlOfPride>(Condition.InMasterMode, Condition.Hardmode)
-                .Add<BowlOfSloth>(Condition.InMasterMode, Condition.Hardmode)
-                .Add<BowlOfWrath>(Condition.InMasterMode, Condition.Hardmode)
-                .Add<ClumpOfTopiumOre>()
+            Shop.AddPool("HIMSELF", slots: 2)
+                .Add<ClumpOfTopiumOre>(Condition.InMasterMode, Condition.Hardmode)
                 .Add<StackOfTopiumBars>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedMoonLord);
 
 
@@ -387,7 +416,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 }
 
                 // Player has to have either an ExampleItem or an ExampleBlock in order for the NPC to spawn
-                if (player.inventory.Any(item => item.type == ModContent.ItemType<TopiumOre>() || item.type == ModContent.ItemType<Items.BossDrops.MoonlightGreatSword>()))
+                if (player.inventory.Any(item => item.type == ModContent.ItemType<TopiumOre>() || item.type == ModContent.ItemType<MoonlightGreatSword>()))
                 {
                     return true;
                 }

@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using PurringTale.Content;
-using PurringTale.Content.Items.Placeables;
+using PurringTale.Content.Items.Placeables.Blocks;
 
 namespace PurringTale.Content.Items.MobLoot;
 
@@ -28,7 +28,7 @@ public class CoreOfGlitch: ModItem
     public override void AddRecipes()
     {
        Recipe gc = CreateRecipe(2);
-        gc.AddIngredient(ModContent.ItemType<Items.Placeables.GlitchBlock>());
+        gc.AddIngredient(ModContent.ItemType<GlitchBlock>());
         gc.AddTile(TileID.WorkBenches);
         gc.Register();
     }

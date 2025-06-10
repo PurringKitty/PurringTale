@@ -95,28 +95,12 @@ namespace PurringTale.CatBoss
                 Vector2 drawPos2 = Projectile.Center - Main.screenPosition;
                 float scale = (float)Math.Exp((timer - 20)/5);
                 Texture2D tex2 = ModContent.Request<Texture2D>("PurringTale/CatBoss/Assets/GlowRing").Value;
-
-                //Main.spriteBatch.Draw(tex2, drawPos, tex2.source(), lightColor, 0, tex2.center(), scale, SpriteEffects.None, 0);
             }
             return false;
         }
         private float bruh(float i)
         {
             return (float)(1 / (1 + Math.Pow((i - 10) / 2, 2))) + 0.0395f;
-        }
-    }
-    public class bombdrop : GlobalItem
-    {
-        public override void OnCreated(Item item, ItemCreationContext context)
-        {
-            if (item.type == ItemID.StickyBomb)
-            {
-                if (context is RecipeItemCreationContext)
-                {
-                    Projectile.NewProjectile(item.GetSource_FromThis(), Main.LocalPlayer.Center, Vector2.Zero, ProjectileID.StickyBomb, 999999, 999, -1);
-                    item.TurnToAir();
-                }
-            }
         }
     }
 }

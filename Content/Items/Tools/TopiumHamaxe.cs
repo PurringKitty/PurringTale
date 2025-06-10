@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using PurringTale.Content.Items.Placeables;
+using PurringTale.Content.Items.Placeables.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

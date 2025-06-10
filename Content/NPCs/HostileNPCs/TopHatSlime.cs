@@ -219,7 +219,7 @@ namespace PurringTale.Content.NPCs.HostileNPCs
                 if (victimHitbox.Intersects(extraDamageHitbox))
                 {
                     damageMultiplier *= 2f;
-                    Main.NewText("Squished By A Rar Monster!");
+                    Main.NewText("Haha Dead");
                 }
             }
             return true;
@@ -235,9 +235,9 @@ namespace PurringTale.Content.NPCs.HostileNPCs
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.Gel, Main.rand.Next(0, 10));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<THCTopHat>(), 1, 0, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 0, 10));
+            npcLoot.Add(ItemDropRule.Common(ItemID.Gel, 1, 1, 20));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<THCTopHat>(), 5, 0, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 1, 10));
         }
 
     }

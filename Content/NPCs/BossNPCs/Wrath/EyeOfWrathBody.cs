@@ -10,11 +10,10 @@ using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.Items.Consumables;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Furniture;
 using PurringTale.Common.Systems;
-using PurringTale.Content.Items.BossDrops;
+using PurringTale.Content.Items.Consumables.Bags;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Wrath
 {

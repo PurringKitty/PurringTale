@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
 using Terraria;
-using PurringTale.Content.Items.Consumables;
+using PurringTale.Content.Items.Consumables.Bags;
 
 namespace PurringTale.Common.Players
 {

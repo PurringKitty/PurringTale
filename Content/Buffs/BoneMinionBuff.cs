@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using PurringTale.Content;
 using PurringTale.Content.Items.Weapons;
-using PurringTale.Content.Projectiles;
+using PurringTale.Content.Projectiles.MinionProjectiles;
 
 namespace PurringTale.Content.Buffs
 {

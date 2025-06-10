@@ -11,14 +11,7 @@ namespace PurringTale.Content.Items.Armor
     [AutoloadEquip(EquipType.Head)]
     public class DirtHelmet : ModItem
     {
-        public static LocalizedText SetBonusText { get; private set; }
-        public static readonly int AdditiveBonus = 10;
-
-        public override void SetStaticDefaults()
-        {
-            SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveBonus);
-        }
-
+        public static readonly int Dirt = 10;
         public override void SetDefaults()
         {
             Item.width = 22;
@@ -35,16 +28,15 @@ namespace PurringTale.Content.Items.Armor
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = SetBonusText.Value;
-            player.statLifeMax2 += AdditiveBonus;
-            player.statManaMax2 += AdditiveBonus;
+            player.statLifeMax2 += Dirt;
+            player.statManaMax2 += Dirt;
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
                 .AddIngredient(ItemID.DirtBlock, 15)
-                .AddTile(TileID.WorkBenches)
+                .AddTile<Tiles.Furniture.ValhallaWorkbench>()
                 .Register();
         }
     }

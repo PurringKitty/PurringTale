@@ -1,4 +1,4 @@
-﻿using PurringTale.Content.Items.Consumables;
+﻿using PurringTale.Content.Items.Consumables.StatItems;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;

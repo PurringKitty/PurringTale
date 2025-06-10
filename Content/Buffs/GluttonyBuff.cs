@@ -12,6 +12,10 @@ namespace PurringTale.Content.Buffs
 {
     public class GluttonyBuff : ModBuff
     {
-
+        public override void SetStaticDefaults()
+        {
+            Main.buffNoSave[Type] = true;
+            Main.buffNoTimeDisplay[Type] = true;
+        }
     }
 }

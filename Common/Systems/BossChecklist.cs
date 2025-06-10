@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using PurringTale.Common.Systems;
-using PurringTale.Content.Items.BossDrops;
-using PurringTale.Content.Items.Consumables;
+using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Consumables.Summons;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables;
+using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Weapons.Melee;
 using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
@@ -37,7 +37,7 @@ namespace PurringTale.Common.Systems
 
             int bossType = ModContent.NPCType<CatBoss.TopHatCatBoss>();
 
-            int spawnItem = ModContent.ItemType<Content.Items.Consumables.StackOfTopiumBars>();
+            int spawnItem = ModContent.ItemType<StackOfTopiumBars>();
 
             List<int> collectibles = new List<int>()
             {

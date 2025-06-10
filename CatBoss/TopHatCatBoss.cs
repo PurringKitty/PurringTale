@@ -1,27 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters;
-using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Mono.Cecil;
 using PurringTale.Common.Systems;
-using PurringTale.Content.Items.BossDrops;
-using PurringTale.Content.Items.Consumables;
+using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Furniture;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.GameContent.Events;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.Graphics.CameraModifiers;
-using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static tModPorter.ProgressUpdate;
 
 namespace PurringTale.CatBoss
 {
@@ -96,7 +87,7 @@ namespace PurringTale.CatBoss
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
-                CustomTexturePath = "PurringTale/CatBoss/TopHatCatBoss",
+                CustomTexturePath = "PurringTale/CatBoss/TopHatCatBoss_Beastiaray",
                 PortraitScale = 0.6f, /* Portrait refers to the full picture when clicking on the icon in the bestiary*/
                 PortraitPositionYOverride = 0f,
             };
@@ -470,91 +461,6 @@ namespace PurringTale.CatBoss
                 Vector2 dpos = NPC.oldPos[(int)i] - screenPos + new Vector2(t.Width * scale / 4, NPC.height * scale / 2);
                 spriteBatch.Draw(t, dpos, source, Color.Purple * (1 - percent), NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             }
-            /*if (NPC.target >= 0)
-            {
-                Texture2D texture = ModContent.Request<Texture2D>("TopHatCatBoss/CatBoss/Assets/Blindness").Value;
-                Vector2 pos = Main.player[NPC.target].Center - Main.screenPosition - texture.Size()/2;
-                spriteBatch.Draw(texture, pos, Color.Black * 0.4f);
-            }*/
-            switch (AIState)
-            {
-                /*case ActionState.Choose:
-                    float opacity(int i)
-                    {
-                        return 1;
-                        if (timer < 120)
-                            return 1;
-                        return ((AttackType)(i - 1) == AtkType) ? 1 : 0;
-                    }
-                    Vector2 offset(int i)
-                    {
-                        return i switch
-                        {
-                            1 => Vector2.Zero,
-                            2 => new Vector2(-30, -15),
-                            4 => Vector2.Zero,
-                            5 => Vector2.UnitX * -5,
-                            _ => Vector2.Zero,
-                        };
-                        ;
-                    }
-                    float scale(int i)
-                    {
-                        switch (i) { case 1: return 0.75f; case 2: return 0.6f; case 4: return 0.4666f; case 5: return 0.5f; default: return 1; };
-                    }
-                    float rotation(int i)
-                    {
-                        switch (i) { case 1: return MathHelper.Pi / 2; case 2: return 3 * MathHelper.Pi / 4; default: return 0; }
-                    }
-                    if (timer > 0)
-                    {
-                        Texture2D texture = ModContent.Request<Texture2D>($"TopHatCatBoss/CatBoss/Assets/{1}").Value; //update path when merging :)
-                        Vector2 pos = NPC.Center - screenPos + new Vector2(-85, -50) + Vector2.UnitX * (0) * 50 + offset(1);
-                        spriteBatch.Draw(texture, pos, texture.source(), Color.White * opacity(1), rotation(1), texture.center(), scale(1), SpriteEffects.None, 0);
-                    }
-                    if (timer >= 20)
-                    {
-                        Texture2D texture = ModContent.Request<Texture2D>($"TopHatCatBoss/CatBoss/Assets/{2}").Value; //update path when merging :)
-                        Vector2 pos = NPC.Center - screenPos + new Vector2(-85, -50) + Vector2.UnitX * (2 - 1) * 50 + offset(2);
-                        spriteBatch.Draw(texture, pos, texture.source(), Color.White * opacity(2), rotation(2), texture.center(), scale(2), SpriteEffects.None, 0);
-                    }
-                    if (timer >= 40)
-                    {
-                        Texture2D texture = ModContent.Request<Texture2D>($"TopHatCatBoss/CatBoss/Assets/{3}").Value; //update path when merging :)
-                        Vector2 pos = NPC.Center - screenPos + new Vector2(-85, -50) + Vector2.UnitX * (3 - 1) * 50 + offset(3);
-                        spriteBatch.Draw(texture, pos, texture.source(), Color.White * opacity(3), rotation(3), texture.center(), scale(3), SpriteEffects.None, 0);
-                    }
-                    if (timer >= 60)
-                    {
-                        Texture2D texture = ModContent.Request<Texture2D>($"TopHatCatBoss/CatBoss/Assets/{4}").Value; //update path when merging :)
-                        Vector2 pos = NPC.Center - screenPos + new Vector2(-85, -50) + Vector2.UnitX * (4 - 1) * 50 + offset(4);
-                        spriteBatch.Draw(texture, pos, texture.source(), Color.White * opacity(4), rotation(4), texture.center(), scale(4), SpriteEffects.None, 0);
-                    }
-                    if (timer >= 80)
-                    {
-                        Texture2D texture = ModContent.Request<Texture2D>($"TopHatCatBoss/CatBoss/Assets/{5}").Value; //update path when merging :)
-                        Vector2 pos = NPC.Center - screenPos + new Vector2(-85, -50) + Vector2.UnitX * (5 - 1) * 50 + offset(5);
-                        spriteBatch.Draw(texture, pos, texture.source(), Color.White * opacity(5), rotation(5), texture.center(), scale(5), SpriteEffects.None, 0);
-                    }
-                    break;*/
-                case ActionState.Death:
-                    Main.spriteBatch.End();
-                    Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-
-                    /*var deathShader = GameShaders.Misc["ExampleMod:DeathAnimation"];
-
-                    // Reset back to default value.
-                    deathShader.UseOpacity(1f);
-                    // We use npc.ai[3] as a counter since the real death.
-                    if (timer > 30f)
-                    {
-                        // Our shader uses the Opacity register to drive the effect. See ExampleEffectDeath.fx to see how the Opacity parameter factors into the shader math. 
-                        deathShader.UseOpacity(1f - (timer - 30f) / 150f);
-                    }
-                    Call Apply to apply the shader to the SpriteBatch. Only 1 shader can be active at a time
-                    deathShader.Apply(null);.*/
-                    return true;
-            }
             return true;
         }
         private BossClone createClone(Vector2 pos, int attackStyle, Vector2 center = new Vector2())
@@ -568,7 +474,7 @@ namespace PurringTale.CatBoss
         }
         public override void OnKill()
         {
-            NPC.SetEventFlagCleared(ref DownedBossSystem.downedEnvy, -1);
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedTopHat, -1);
         }
     }
 }

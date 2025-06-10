@@ -1,0 +1,47 @@
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria;
+using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace PurringTale.Content.Projectiles.MagicProjectiles
+{
+	public class CultMagicProj : ModProjectile
+	{
+		public override void SetDefaults() 
+		{
+			Projectile.DamageType = DamageClass.Magic;
+			Projectile.width = 16;
+			Projectile.height = 10;
+			Projectile.aiStyle = 1;
+			Projectile.friendly = true;
+			Projectile.hostile = false;
+			Projectile.penetrate = 1;
+			Projectile.timeLeft = 400;
+			Projectile.ignoreWater = true;
+			Projectile.tileCollide = true;
+			Projectile.scale = 1f;
+			Projectile.extraUpdates = 1;
+		}
+
+
+
+        public override void AI()
+        {
+			Projectile.aiStyle = 0;
+			Lighting.AddLight(Projectile.position, 0.2f, 0.2f, 0.6f);
+			Lighting.Brightness(5, 5);
+		}
+
+		[System.Obsolete]
+        public override void OnKill(int timeLeft)
+        {
+			SoundEngine.PlaySound(SoundID.Dig.WithVolumeScale(0.5f).WithPitchOffset(0.8f), Projectile.position);
+			for (var i = 0; i < 6; i++)
+            {
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.BlueCrystalShard, 0f, 0f, 0, default, 1f);
+            }
+        }
+	}
+}
