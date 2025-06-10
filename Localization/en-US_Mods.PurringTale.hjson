@@ -1855,6 +1855,8 @@ NPCs: {
 
 		Census.SpawnCondition: Kill The Sin Of Wrath And Hold The [i:PurringTale/Wrath] Item!
 	}
+
+	EnvyTest.DisplayName: Envy Test
 }
 
 Buffs: {
