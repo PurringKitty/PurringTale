@@ -226,9 +226,9 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfPrideBossBag>(Condition.DownedCultist)
-				.Add<CoreOfPride>(Condition.DownedCultist)
-				.Add<PrideMusicBox>(Condition.DownedCultist);
+				.Add(new Item(ItemID.GardenGnome) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add<EyeOfPrideBossBag>()
+				.Add<PrideMusicBox>();
 			npcShop.Register();
 		}
 

@@ -1,15 +1,5 @@
-﻿
-
-
-
-
-
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor

@@ -20,7 +20,7 @@ namespace PurringTale.Content.Items.Placeables.Blocks
 
         public override void SetDefaults()
         {
-            Item.DefaultToTorch(ModContent.TileType<Tiles.GlitchTorch>(), 0, false);
+            Item.DefaultToTorch(ModContent.TileType<Tiles.Blocks.GlitchTorch>(), 0, false);
             Item.value = 50;
             Item.rare = ItemRarityID.Green;
         }

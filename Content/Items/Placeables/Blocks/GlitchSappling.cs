@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using PurringTale.Content.Tiles.Blocks;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +14,7 @@ namespace PurringTale.Content.Items.Placeables.Blocks
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.GlitchSapling>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<GlitchSapling>());
             Item.width = 16;
             Item.height = 16;
             Item.rare = ItemRarityID.Green;

@@ -1,9 +1,6 @@
-﻿using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
+﻿using PurringTale.Content.Items.Placeables.Bars;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -30,7 +27,7 @@ namespace PurringTale.Content.Items.Armor
             player.GetDamage(DamageClass.Magic) += AdditiveMagicDamageBonus / 100f;
             player.statManaMax2 += MaxManaIncrease;
         }
-                    public override void AddRecipes()
+        public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Silk, 10);

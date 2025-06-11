@@ -35,7 +35,5 @@ public class Pride : ModItem
 
         player.AddBuff(BuffID.Warmth, 0);
 
-        player.AddBuff(ModContent.BuffType<PrideBuff>(), 0);
-
     }
 }

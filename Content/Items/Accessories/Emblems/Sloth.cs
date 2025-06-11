@@ -35,7 +35,6 @@ public class Sloth : ModItem
 
         player.AddBuff(BuffID.Featherfall, 0);
 
-        player.AddBuff(ModContent.BuffType<SlothBuff>(), 0);
 
     }
 }

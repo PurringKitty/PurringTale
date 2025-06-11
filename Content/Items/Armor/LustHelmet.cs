@@ -1,9 +1,6 @@
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Buffs;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -18,20 +15,18 @@ namespace PurringTale.Content.Items.Armor
             Item.height = 20;
             Item.value = Item.sellPrice(silver: 4);
             Item.rare = ItemRarityID.Pink;
-            Item.defense = 11;
+            Item.defense = 13;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ModContent.ItemType<LustBreastplate>() && legs.type == ModContent.ItemType<LustLeggings>();
         }
-        public override void AddRecipes()
+        public override void UpdateArmorSet(Player player)
         {
-            CreateRecipe()
-                .AddIngredient<LusterBar>(20)
-                .AddIngredient<CoreOfLust>(10)
-                .AddTile(TileID.Anvils)
-                .Register();
+            player.statManaMax2 += 20;
+            player.maxMinions += 1; 
+            player.AddBuff(ModContent.BuffType<LustBuff>(), 0);
         }
     }
 }

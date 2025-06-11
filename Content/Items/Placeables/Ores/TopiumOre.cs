@@ -1,3 +1,4 @@
+using PurringTale.Content.Tiles.Ores;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,7 +16,7 @@ public class TopiumOre : ModItem
         Item.maxStack = 9999;
         Item.consumable = true;
         Item.value = Item.sellPrice(silver: 50);
-        Item.createTile = ModContent.TileType<Tiles.TopiumOreTile>();
+        Item.createTile = ModContent.TileType<TopiumOreTile>();
         Item.useStyle = ItemUseStyleID.Swing;
         Item.useAnimation = 15;
         Item.useTime = 15;

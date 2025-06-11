@@ -36,7 +36,5 @@ public class Gluttony : ModItem
 
         player.AddBuff(BuffID.WellFed, 0);
 
-        player.AddBuff(ModContent.BuffType<GluttonyBuff>(), 0);
-
     }
 }

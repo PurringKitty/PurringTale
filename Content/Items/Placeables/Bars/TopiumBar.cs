@@ -1,8 +1,8 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PurringTale.Content.Tiles;
 using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Tiles.Bars;
 
 namespace PurringTale.Content.Items.Placeables.Bars;
 

@@ -1,9 +1,9 @@
-using PurringTale.Content.Tiles;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 using PurringTale.Content.Items.Vanity;
+using PurringTale.Content.Tiles.Blocks;
 
 namespace PurringTale.Content.Items.Banners
 {

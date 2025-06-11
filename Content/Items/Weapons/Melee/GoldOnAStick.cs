@@ -1,6 +1,4 @@
-﻿using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,17 +18,9 @@ public class GoldOnAStick : ModItem
         Item.DamageType = DamageClass.Generic;
         Item.damage = 35;
         Item.knockBack = 4.5f;
-        Item.crit = 5;
+        Item.crit = 2;
         Item.value = Item.sellPrice(copper: 50);
         Item.rare = ItemRarityID.Yellow;
         Item.UseSound = SoundID.Item1;
-    }
-    public override void AddRecipes()
-    {
-        CreateRecipe()
-        .AddIngredient<GreedyBar>(15)
-        .AddIngredient<CoreOfGreed>(15)
-        .AddTile<Tiles.Furniture.ValhallaWorkbench>()
-        .Register();
     }
 }

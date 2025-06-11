@@ -1,5 +1,4 @@
-using PurringTale.Content.Items.Placeables.Furniture;
-using PurringTale.Content.Tiles;
+using PurringTale.Content.Tiles.MusicBoxes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

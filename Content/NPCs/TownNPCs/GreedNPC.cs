@@ -227,12 +227,47 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-                .Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-                .Add(new Item(ItemID.PlatinumCoin) { shopCustomPrice = Item.buyPrice(platinum: 5) })
-                .Add<EyeOfGreedBossBag>(Condition.DownedSkeletron)
-				.Add<CoreOfGreed>(Condition.DownedSkeletron)
-				.Add<GreedMusicBox>(Condition.DownedSkeletron);
-			npcShop.Register();
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add<EyeOfGreedBossBag>()
+				.Add<GreedMusicBox>()
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) });
+
+            npcShop.Register();
 		}
 
 		public override void ModifyActiveShop(string shopName, Item[] items)

@@ -116,7 +116,7 @@ namespace PurringTale.CatBoss
 
             NPC.knockBackResist = 0f;
 
-            NPC.value = Item.buyPrice(gold: 25);
+            NPC.value = Item.buyPrice(platinum: 5);
             NPC.SpawnWithHigherTime(30);
 
             NPC.boss = true;

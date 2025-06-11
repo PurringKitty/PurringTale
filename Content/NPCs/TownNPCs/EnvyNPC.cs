@@ -226,9 +226,13 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfEnvyBossBag>(Condition.DownedKingSlime)
-				.Add<CoreOfEnvy>(Condition.DownedKingSlime)
-				.Add<EnvyMusicBox>(Condition.DownedKingSlime);
+                .Add(new Item(ItemID.ManaCrystal) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.LesserManaPotion) { shopCustomPrice = Item.buyPrice(silver: 1) })
+                .Add(new Item(ItemID.ManaPotion) { shopCustomPrice = Item.buyPrice(silver: 50) }, Condition.Hardmode)
+                .Add(new Item(ItemID.GreaterManaPotion) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.DownedPlantera)
+                .Add(new Item(ItemID.SuperManaPotion) { shopCustomPrice = Item.buyPrice(gold: 10) }, Condition.DownedMoonLord)
+                .Add<EyeOfEnvyBossBag>()
+				.Add<EnvyMusicBox>();
 			npcShop.Register();
 		}
 
@@ -269,7 +273,6 @@ namespace PurringTale.Content.NPCs.TownNPCs
         {
             Main.GetItemDrawFrame(ModContent.ItemType<TheEnvyousEye>(), out item, out itemFrame);
             itemSize = 40;
-            // This adjustment draws the swing the way town npcs usually do.
             if (NPC.ai[1] > NPCID.Sets.AttackTime[NPC.type] * 0.66f)
             {
                 offset.Y = 12f;

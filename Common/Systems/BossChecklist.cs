@@ -1,10 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Accessories.Masks;
+using PurringTale.Content.Items.Accessories.Necklaces;
+using PurringTale.Content.Items.Armor;
+using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.Consumables.Summons;
 using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Placeables.Furniture;
 using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Tools;
+using PurringTale.Content.Items.Weapons.Magic;
 using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Ranged;
+using PurringTale.Content.Items.Weapons.Summoner;
 using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
@@ -41,10 +51,14 @@ namespace PurringTale.Common.Systems
 
             List<int> collectibles = new List<int>()
             {
-                ModContent.ItemType<Content.Items.Placeables.Furniture.THGBossRelic>(),
-                ModContent.ItemType<Content.Items.Placeables.Furniture.THGBossTrophy>(),
+                ModContent.ItemType<THGBossRelic>(),
+                ModContent.ItemType<THGBossTrophy>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<Content.Items.Vanity.THCTopHat>()
+                ModContent.ItemType<TopiumOre>(),
+                ModContent.ItemType<MoonlightGreatSword>(),
+                ModContent.ItemType<EldritchBlaster>(),
+                ModContent.ItemType<TopHatDemonEye>(),
+                ModContent.ItemType<TopHatDemonPendent>()
             };
                 
                 var customPortrait = (SpriteBatch sb, Rectangle rect, Color color) => {
@@ -73,10 +87,16 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Envy>(),
-                ModContent.ItemType<EnvyousOre>(),
+                ModContent.ItemType<EnvyHelmet>(),
+                ModContent.ItemType<EnvyBreastplate>(),
+                ModContent.ItemType<EnvyLeggings>(),
+                ModContent.ItemType<TheEnvyousEye>(),
+                ModContent.ItemType<BladeOfEnvy>(),
+                ModContent.ItemType<EnvyousBow>(),
+                ModContent.ItemType<WhipOfEnvy>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfEnvy>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -98,10 +118,15 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Gluttony>(),
-                ModContent.ItemType<GluttonusOre>(),
+                ModContent.ItemType<GluttonyHelmet>(),
+                ModContent.ItemType<GluttonyBreastplate>(),
+                ModContent.ItemType<GluttonyLeggings>(),
+                ModContent.ItemType<TheGluttonsGun>(),
+                ModContent.ItemType<GluttonsGreatsword>(),
+                ModContent.ItemType<WhipOfGluttony>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfGluttony>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -123,10 +148,14 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Greed>(),
-                ModContent.ItemType<GreedyOre>(),
+                ModContent.ItemType<GreedHelmet>(),
+                ModContent.ItemType<GreedBreastplate>(),
+                ModContent.ItemType<GreedLeggings>(),
+                ModContent.ItemType<GoldOnAStick>(),
+                ModContent.ItemType<WhipOfGreed>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfGreed>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -148,10 +177,14 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Lust>(),
-                ModContent.ItemType<LusterOre>(),
+                ModContent.ItemType<LustHelmet>(),
+                ModContent.ItemType<LustBreastplate>(),
+                ModContent.ItemType<LustLeggings>(),
+                ModContent.ItemType<WhipOfLust>(),
+                ModContent.ItemType<LanceOfLust>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfLust>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -173,10 +206,14 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Pride>(),
-                ModContent.ItemType<PridefulOre>(),
+                ModContent.ItemType<PrideHelmet>(),
+                ModContent.ItemType<PrideBreastplate>(),
+                ModContent.ItemType<PrideLeggings>(),
+                ModContent.ItemType<AxeOfPride>(),
+                ModContent.ItemType<WhipOfPride>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfPride>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -198,10 +235,15 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Sloth>(),
-                ModContent.ItemType<SlothyOre>(),
+                ModContent.ItemType<SlothHelmet>(),
+                ModContent.ItemType<SlothBreastplate>(),
+                ModContent.ItemType<SlothLeggings>(),
+                ModContent.ItemType<SpearOfSloth>(),
+                ModContent.ItemType<SlothfulLance>(),
+                ModContent.ItemType<WhipOfSloth>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfSloth>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(
@@ -223,10 +265,16 @@ namespace PurringTale.Common.Systems
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Wrath>(),
-                ModContent.ItemType<WrathiorOre>(),
+                ModContent.ItemType<WrathHelmet>(),
+                ModContent.ItemType<WrathBreastplate>(),
+                ModContent.ItemType<WrathLeggings>(),
+                ModContent.ItemType<SinsBane>(),
+                ModContent.ItemType<WhipOfWrath>(),
+                ModContent.ItemType<SinsBossRelic>(),
+                ModContent.ItemType<SinsBossTrophy>(),
                 ModContent.ItemType<VanityVoucher>(),
-                ModContent.ItemType<WeakValhallaOre>(),
-                ModContent.ItemType<CoreOfWrath>()
+                ModContent.ItemType<CoreOfValhalla>(),
+                ModContent.ItemType<ValhallaOre>()
             };
 
             bossChecklistMod.Call(

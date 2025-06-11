@@ -14,6 +14,7 @@ using Terraria.GameContent.Personalities;
 using System.Collections.Generic;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.CatBoss;
+using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Weapons.Summoner;
 using PurringTale.Content.Items.Accessories.Emblems;
 using PurringTale.Content.Items.Consumables.Bags;
@@ -226,9 +227,11 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfLustBossBag>(Condition.DownedPlantera)
-				.Add<CoreOfLust>(Condition.DownedPlantera)
-				.Add<LustMusicBox>(Condition.DownedPlantera);
+                .Add(new Item(ItemID.GenderChangePotion) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.LifeCrystal) { shopCustomPrice = Item.buyPrice(gold: 10) })
+                .Add(new Item(ItemID.LifeFruit) { shopCustomPrice = Item.buyPrice(platinum: 1) }, Condition.DownedPlantera)
+                .Add<EyeOfLustBossBag>()
+                .Add<LustMusicBox>();
 			npcShop.Register();
 		}
 

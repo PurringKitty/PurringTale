@@ -29,7 +29,5 @@ public class Envy : ModItem
 
         player.AddBuff(BuffID.WaterWalking, 0);
 
-        player.AddBuff(ModContent.BuffType<EnvyBuff>(), 0);
-
     }
 }

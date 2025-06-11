@@ -29,7 +29,7 @@ namespace PurringTale.Content.Items.Accessories.Others
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.LunarBar,100);
             recipe.AddIngredient<TopiumBar>(99999);
-            recipe.AddIngredient<WeakValhallaBar>(99999);
+            recipe.AddIngredient<ValhallaBar>(99999);
             recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
             recipe.Register();
         }

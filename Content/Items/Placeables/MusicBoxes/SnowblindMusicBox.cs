@@ -1,4 +1,4 @@
-using PurringTale.Content.Tiles;
+using PurringTale.Content.Tiles.MusicBoxes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

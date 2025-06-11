@@ -1,9 +1,6 @@
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Buffs;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -17,7 +14,7 @@ namespace PurringTale.Content.Items.Armor
             Item.height = 20;
             Item.value = Item.sellPrice(silver: 6);
             Item.rare = ItemRarityID.LightPurple;
-            Item.defense = 19;
+            Item.defense = 17;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -27,16 +24,9 @@ namespace PurringTale.Content.Items.Armor
 
         public override void UpdateArmorSet(Player player)
         {
-            player.statManaMax2 += 140;
-        }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient<SlothyBar>(20)
-                .AddIngredient<CoreOfSloth>(10)
-                .AddTile(TileID.Anvils)
-                .Register();
+            player.statManaMax2 += 150;
+            player.statLifeMax2 -= 150;
+            player.AddBuff(ModContent.BuffType<SlothBuff>(), 0);
         }
     }
 }

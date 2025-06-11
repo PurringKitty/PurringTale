@@ -30,7 +30,7 @@ namespace PurringTale.Content.Items.Weapons.Magic;
             Recipe recipe = CreateRecipe();
 		recipe.AddIngredient(ItemID.CrystalBall);
             recipe.AddIngredient<TopiumBar>(2000);
-            recipe.AddIngredient<WeakValhallaBar>(2000);
+            recipe.AddIngredient<ValhallaBar>(2000);
             recipe.AddIngredient<CoreOfValhalla>(200);
             recipe.AddIngredient(ItemID.LunarBar, 1000);
             recipe.AddTile(TileID.LunarCraftingStation);

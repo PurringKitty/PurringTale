@@ -5,7 +5,7 @@ using Terraria.WorldBuilding;
 using Terraria.ID;
 using System.Collections.Generic;
 using Terraria.IO;
-using PurringTale.Content.Tiles;
+using PurringTale.Content.Tiles.Blocks;
 
 namespace PurringTale.Content.Subworlds
 {

@@ -34,7 +34,5 @@ public class Greed : ModItem
 
         player.AddBuff(BuffID.WeaponImbueGold, 0);
 
-        player.AddBuff(ModContent.BuffType<GreedBuff>(), 0);
-
     }
 }

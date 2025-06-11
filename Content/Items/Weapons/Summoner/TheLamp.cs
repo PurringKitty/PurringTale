@@ -55,7 +55,7 @@ public class TheLamp : ModItem
     public override void AddRecipes()
     {
         Recipe recipe = CreateRecipe();
-        recipe.AddIngredient<WeakValhallaBar>(5);
+        recipe.AddIngredient<ValhallaBar>(5);
         recipe.AddIngredient<CoreOfValhalla>(5);
         recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
         recipe.Register();

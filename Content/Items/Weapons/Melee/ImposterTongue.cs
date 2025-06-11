@@ -28,7 +28,7 @@ public class ImposterTongue : ModItem
     public override void AddRecipes()
     {
         CreateRecipe()
-            .AddIngredient<WeakValhallaBar>(10)
+            .AddIngredient<ValhallaBar>(10)
             .AddIngredient(ItemID.WallofFleshTrophy, 1)
             .AddTile(TileID.WorkBenches)
             .Register();

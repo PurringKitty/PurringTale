@@ -1,16 +1,19 @@
-﻿using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.NPCs.BossNPCs;
+﻿using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Armor;
+using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Weapons.Magic;
+using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Ranged;
+using PurringTale.Content.Items.Weapons.Summoner;
+using PurringTale.Content.NPCs.BossNPCs.Envy;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PurringTale.Content.NPCs.TownNPCs;
-using PurringTale.Content.Items.Accessories.Emblems;
-using PurringTale.Content.Items.Placeables.Ores;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	// Basic code for a boss treasure bag
 	public class EyeOfEnvyBossBag : ModItem
 	{
 		public override void SetStaticDefaults() {
@@ -34,9 +37,17 @@ namespace PurringTale.Content.Items.Consumables.Bags
 		}
 
 		public override void ModifyItemLoot(ItemLoot itemLoot) {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeakValhallaOre>(), 4, 1, 5));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnvyousOre>(), 1, 50, 200));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 10));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 2));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Envy>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnvyHelmet>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnvyBreastplate>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnvyLeggings>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheEnvyousEye>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BladeOfEnvy>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EnvyousBow>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfEnvy>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfEnvyBody>()));
         }
 	}
 }

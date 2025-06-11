@@ -2,8 +2,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
 
 namespace PurringTale.Content.Items.Weapons.Magic;
 
@@ -11,7 +9,7 @@ public class TheEnvyousEye : ModItem
 {
         public override void SetDefaults()
         {
-            Item.damage = 35;
+            Item.damage = 16;
             Item.DamageType = DamageClass.Magic;
             Item.width = 28;
             Item.height = 28;
@@ -27,17 +25,6 @@ public class TheEnvyousEye : ModItem
             Item.shoot = Mod.Find<ModProjectile>("EnvyEyeProj").Type;
             Item.mana = 5;
             Item.shootSpeed = 7f;
-        }
-
-
-
-        public override void AddRecipes()
-        {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient<EnvyousBar>(5);
-            recipe.AddIngredient<CoreOfEnvy>(5);
-            recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
-            recipe.Register();
         }
         public override Vector2? HoldoutOffset()
         {

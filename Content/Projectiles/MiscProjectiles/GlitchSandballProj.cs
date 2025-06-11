@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using PurringTale.Content.Tiles.Blocks;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,7 +22,7 @@ namespace PurringTale.Content.Projectiles.MiscProjectiles
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            ProjectileID.Sets.FallingBlockTileItem[Type] = new(ModContent.TileType<Tiles.GlitchSand>(), ModContent.ItemType<Items.Placeables.Blocks.GlitchSand>());
+            ProjectileID.Sets.FallingBlockTileItem[Type] = new(ModContent.TileType<GlitchSand>(), ModContent.ItemType<Items.Placeables.Blocks.GlitchSand>());
         }
 
         public override void SetDefaults()
@@ -35,7 +36,7 @@ namespace PurringTale.Content.Projectiles.MiscProjectiles
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            ProjectileID.Sets.FallingBlockTileItem[Type] = new(ModContent.TileType<Tiles.GlitchSand>());
+            ProjectileID.Sets.FallingBlockTileItem[Type] = new(ModContent.TileType<GlitchSand>());
         }
 
         public override void SetDefaults()

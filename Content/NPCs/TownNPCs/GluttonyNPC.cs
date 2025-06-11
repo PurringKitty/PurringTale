@@ -222,9 +222,30 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfGluttonyBossBag>(Condition.DownedEyeOfCthulhu)
-				.Add<CoreOfGluttony>(Condition.DownedEyeOfCthulhu)
-				.Add<GluttonyMusicBox>(Condition.DownedEyeOfCthulhu);
+                .Add(new Item(ItemID.CookingPot) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Bottle) { shopCustomPrice = Item.buyPrice(silver: 1) })
+                .Add(new Item(ItemID.Bowl) { shopCustomPrice = Item.buyPrice(silver: 1) })
+                .Add(new Item(ItemID.Apple) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Apricot) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Grapefruit) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Lemon) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Peach) { shopCustomPrice = Item.buyPrice(gold: 1) })
+                .Add(new Item(ItemID.Cherry) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InSnow)
+                .Add(new Item(ItemID.Plum) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InSnow)
+                .Add(new Item(ItemID.BlackCurrant) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InCorrupt)
+                .Add(new Item(ItemID.Elderberry) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InCorrupt)
+                .Add(new Item(ItemID.BloodOrange) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InCrimson)
+                .Add(new Item(ItemID.Rambutan) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InCrimson)
+                .Add(new Item(ItemID.Mango) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InJungle)
+                .Add(new Item(ItemID.Pineapple) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InJungle)
+                .Add(new Item(ItemID.Banana) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InBeach)
+                .Add(new Item(ItemID.Coconut) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InBeach)
+                .Add(new Item(ItemID.Dragonfruit) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InHallow)
+                .Add(new Item(ItemID.Starfruit) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InHallow)
+                .Add(new Item(ItemID.Pomegranate) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InUnderworld)
+                .Add(new Item(ItemID.SpicyPepper) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InUnderworld)
+                .Add<EyeOfGluttonyBossBag>()
+				.Add<GluttonyMusicBox>();
 			npcShop.Register();
 		}
 

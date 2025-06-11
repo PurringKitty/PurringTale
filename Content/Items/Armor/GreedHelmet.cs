@@ -1,9 +1,6 @@
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Buffs;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -17,21 +14,18 @@ namespace PurringTale.Content.Items.Armor
             Item.height = 20;
             Item.value = Item.sellPrice(silver: 3);
             Item.rare = ItemRarityID.Yellow;
-            Item.defense = 9;
+            Item.defense = 10;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ModContent.ItemType<GreedBreastplate>() && legs.type == ModContent.ItemType<GreedLeggings>();
         }
-
-        public override void AddRecipes()
+        public override void UpdateArmorSet(Player player)
         {
-            CreateRecipe()
-                .AddIngredient<GreedyBar>(20)
-                .AddIngredient<CoreOfGreed>(10)
-                .AddTile(TileID.Anvils)
-                .Register();
+            player.statLifeMax2 -= 20;
+            player.statManaMax2 -= 20;
+            player.AddBuff(ModContent.BuffType<GreedDeBuff>(), 0);
         }
     }
 }

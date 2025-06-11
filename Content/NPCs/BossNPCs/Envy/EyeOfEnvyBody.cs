@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria;
-using Terraria.ModLoader.Utilities;
 using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
-using PurringTale.Content.Items.Vanity;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Envy
 {
-
     [AutoloadBossHead]
     public class EyeOfEnvyBody : ModNPC
 
@@ -36,7 +28,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
                 index = slot;
             }
         }
-
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 6;
@@ -45,16 +36,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         }
-
         public bool SecondStage
         {
             get => NPC.ai[0] == 1f;
             set => NPC.ai[0] = value ? 1f : 2f;
         }
-
-
-
-
         public override void SetDefaults()
         {
             NPC.width = 110;
@@ -67,7 +53,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
             NPC.knockBackResist = 0f;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
-            NPC.value = Item.buyPrice(gold: 5);
+            NPC.value = Item.buyPrice(gold: 1, silver: 50);
             NPC.boss = true;
             NPC.npcSlots = 5f;
             NPC.aiStyle = 4;
@@ -77,34 +63,27 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
             AnimationType = NPCID.EyeofCthulhu;
             NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
-
             if (!Main.dedServ)
             {
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Envy");
             }
         }
-
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.NightTime,
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("The Eye Of The Sin Of Envy Gets Weaker In Second Stage"),
+                new FlavorTextBestiaryInfoElement("Ah yes the sin of Envy, not really a bad person once you get to know her! - Rukuka"),
             });
         }
-
         public override void OnKill()
         {
             NPC.SetEventFlagCleared(ref DownedBossSystem.downedEnvy, -1);
         }
-
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfEnvyBossBag>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 0, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfEnvy>(), 1, 5, 20));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
-
     }
 }

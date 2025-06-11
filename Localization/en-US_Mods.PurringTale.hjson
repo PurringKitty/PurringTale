@@ -1577,6 +1577,116 @@ Items: {
 		DisplayName: Rusted Leggings
 		Tooltip: ""
 	}
+
+	ValhallaBreastplate: {
+		DisplayName: Valhalla Breastplate
+		Tooltip: ""
+	}
+
+	ValhallaCap: {
+		DisplayName: Valhalla Cap
+		Tooltip: ""
+	}
+
+	ValhallaHat: {
+		DisplayName: Valhalla Hat
+		Tooltip: ""
+	}
+
+	ValhallaHelmet: {
+		DisplayName: Valhalla Helmet
+		Tooltip: ""
+	}
+
+	ValhallaHood: {
+		DisplayName: Valhalla Hood
+		Tooltip: ""
+	}
+
+	ValhallaLeggings: {
+		DisplayName: Valhalla Leggings
+		Tooltip: ""
+	}
+
+	ValhallaBar: {
+		DisplayName: Valhalla Bar
+		Tooltip: ""
+	}
+
+	ValhallaOre: {
+		DisplayName: Valhalla Ore
+		Tooltip: ""
+	}
+
+	ValhallaAxe: {
+		DisplayName: Valhalla Axe
+		Tooltip: ""
+	}
+
+	ValhallaPick: {
+		DisplayName: Valhalla Pick
+		Tooltip: ""
+	}
+
+	ValhallaStabber: {
+		DisplayName: Valhalla Stabber
+		Tooltip: ""
+	}
+
+	BladeOfEnvy: {
+		DisplayName: Blade Of Envy
+		Tooltip: ""
+	}
+
+	EnvyousBow: {
+		DisplayName: Envyous Bow
+		Tooltip: ""
+	}
+
+	WhipOfEnvy: {
+		DisplayName: Whip Of Envy
+		Tooltip: ""
+	}
+
+	GluttonsGreatsword: {
+		DisplayName: Gluttons Greatsword
+		Tooltip: ""
+	}
+
+	LanceOfLust: {
+		DisplayName: Lance Of Lust
+		Tooltip: ""
+	}
+
+	SlothfulLance: {
+		DisplayName: Slothful Lance
+		Tooltip: ""
+	}
+
+	WhipOfGluttony: {
+		DisplayName: Whip Of Gluttony
+		Tooltip: ""
+	}
+
+	WhipOfGreed: {
+		DisplayName: Whip Of Greed
+		Tooltip: ""
+	}
+
+	WhipOfPride: {
+		DisplayName: Whip Of Pride
+		Tooltip: ""
+	}
+
+	WhipOfSloth: {
+		DisplayName: Whip Of Sloth
+		Tooltip: ""
+	}
+
+	WhipOfWrath: {
+		DisplayName: Whip Of Wrath
+		Tooltip: ""
+	}
 }
 
 Tiles: {
@@ -1964,6 +2074,11 @@ Buffs: {
 		DisplayName: Seven Sins
 		Description: Doubles Damage, 100 More Health & Mana, Gives All Previous Sins Buffs
 	}
+
+	GreedDeBuff: {
+		DisplayName: Greed De Buff
+		Description: Mods.PurringTale.Buffs.GreedDeBuff.Description
+	}
 }
 
 Projectiles: {
@@ -2031,6 +2146,14 @@ Projectiles: {
 	PlantWhipProj.DisplayName: Plant Whip Proj
 	QSlimeWhipProj.DisplayName: Q Slime Whip Proj
 	ValhallaStabberProjectile.DisplayName: Valhalla Stabber Projectile
+	EnvyWhipProjectile.DisplayName: Envy Whip Projectile
+	LanceOfLustProjectile.DisplayName: Lance Of Lust Projectile
+	SlothfulLanceProjectile.DisplayName: Slothful Lance Projectile
+	GluttonyWhipProjectile.DisplayName: Gluttony Whip Projectile
+	GreedWhipProjectile.DisplayName: Greed Whip Projectile
+	PrideWhipProjectile.DisplayName: Pride Whip Projectile
+	SlothWhipProjectile.DisplayName: Sloth Whip Projectile
+	WrathWhipProjectile.DisplayName: Wrath Whip Projectile
 }
 
 Biomes: {

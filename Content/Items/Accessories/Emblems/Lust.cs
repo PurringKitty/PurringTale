@@ -30,8 +30,6 @@ public class Lust : ModItem
 
         player.AddBuff(BuffID.Lovestruck, 0);
 
-        player.AddBuff(ModContent.BuffType<LustBuff>(), 0);
-
         player.maxMinions += 2;
 
         player.whipRangeMultiplier += 2;

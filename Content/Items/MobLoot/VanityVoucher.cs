@@ -28,7 +28,7 @@ public class VanityVoucher : ModItem
     {
         Recipe recipe = CreateRecipe();
         recipe.AddIngredient<TopiumBar>(5);
-        recipe.AddIngredient<WeakValhallaBar>(5);
+        recipe.AddIngredient<ValhallaBar>(5);
         recipe.AddIngredient(ItemID.SoulofFlight, 5);
         recipe.AddTile(TileID.Anvils);
         recipe.Register();

@@ -1,7 +1,7 @@
 ﻿using System;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PurringTale.Content.Tiles;
+using PurringTale.Content.Tiles.Blocks;
 
 namespace PurringTale.Common.Systems
 {

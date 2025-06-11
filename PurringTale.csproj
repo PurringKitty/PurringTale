@@ -10,6 +10,7 @@
 	<ItemGroup>
 	  <None Remove="Content\Items\Accessories\Emblems\Lust.cs~RF858e8d.TMP" />
 	  <None Remove="Content\Items\Weapons\Melee\PlantSpear.cs~RF1b644ced.TMP" />
+	  <None Remove="Content\Items\Weapons\Summoner\WhipOfPride.cs~RF6e60c08.TMP" />
 	  <None Remove="Content\NPCs\BossNPCs\ZeRock\ZeRock_Head_Boss.png" />
 	  <None Remove="Content\Projectiles\BeeBlasterProj.png" />
 	  <None Remove="Content\Projectiles\EaterMinionProjBody.png" />
@@ -25,10 +26,7 @@
 	  <Folder Include="Common\Configs\" />
 	  <Folder Include="Content\Biomes\" />
 	  <Folder Include="Content\Items\Consumables\Food\" />
-	  <Folder Include="Content\Items\Weapons\Melee\" />
 	  <Folder Include="Content\Items\Weapons\Magic\" />
-	  <Folder Include="Content\Items\Weapons\Ranged\" />
-	  <Folder Include="Content\Items\Weapons\Summoner\" />
 	  <Folder Include="Content\Sounds\" />
 	</ItemGroup>
 	<ItemGroup>

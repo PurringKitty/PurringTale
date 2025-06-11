@@ -61,15 +61,15 @@ namespace PurringTale.Content.NPCs.TownNPCs
             Shop = new ExampleTravelingMerchantShop(NPC.type);
 
             Shop.AddPool("Tools", slots: 1)
-                .Add<WeakValhallaAxe>(Condition.DownedKingSlime)
-                .Add<WeakValhallaPick>(Condition.DownedKingSlime)
+                .Add<ValhallaAxe>(Condition.DownedKingSlime)
+                .Add<ValhallaPick>(Condition.DownedKingSlime)
                 .Add<DirtAxe>()
                 .Add<DirtPickaxe>()
                 .Add<MechHammer>(Condition.DownedMechBossAny);
 
             Shop.AddPool("Weapons", slots: 2)
                 .Add<DirtSword>()
-                .Add<WeakValhallaStabber>()
+                .Add<ValhallaStabber>()
                 .Add<ImposterTongue>(Condition.DownedDeerclops)
                 .Add<SlimySword>(Condition.DownedKingSlime)
                 .Add<SlimeK47>(Condition.DownedKingSlime)
@@ -164,12 +164,12 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<RustedHelmet>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
                 .Add<RustedBreastplate>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
                 .Add<RustedLeggings>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedPlantera)
-                .Add<WeakValhallaHelmet>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaHood>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaHat>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaCap>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaBreastplate>(Condition.InExpertMode, Condition.Hardmode)
-                .Add<WeakValhallaLeggings>(Condition.InExpertMode, Condition.Hardmode);
+                .Add<ValhallaHelmet>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<ValhallaHood>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<ValhallaHat>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<ValhallaCap>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<ValhallaBreastplate>(Condition.InExpertMode, Condition.Hardmode)
+                .Add<ValhallaLeggings>(Condition.InExpertMode, Condition.Hardmode);
 
             Shop.AddPool("Vanity", slots: 3)
                 .Add<DOLHelmet>()

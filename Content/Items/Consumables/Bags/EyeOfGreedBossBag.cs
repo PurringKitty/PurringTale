@@ -1,46 +1,53 @@
-﻿using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.NPCs.BossNPCs;
+﻿using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Armor;
+using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Summoner;
+using PurringTale.Content.NPCs.BossNPCs.Greed;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using PurringTale.Content.NPCs.TownNPCs;
-using PurringTale.Content.Items.Accessories.Emblems;
-using PurringTale.Content.Items.Placeables.Ores;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	// Basic code for a boss treasure bag
 	public class EyeOfGreedBossBag : ModItem
-	{
-		public override void SetStaticDefaults() {
-			// This set is one that every boss bag should have.
-			// It will create a glowing effect around the item when dropped in the world.
-			// It will also let our boss bag drop dev armor..
-			ItemID.Sets.BossBag[Type] = true;
-			ItemID.Sets.PreHardmodeLikeBossBag[Type] = true; // ..But this set ensures that dev armor will only be dropped on special world seeds, since that's the behavior of pre-hardmode boss bags.
-
-			Item.ResearchUnlockCount = 3;
-		}
-
-		public override void SetDefaults() {
-			Item.maxStack = Item.CommonMaxStack;
-			Item.consumable = true;
-			Item.width = 24;
-			Item.height = 24;
-            Item.value = 1000;
-            Item.rare = ItemRarityID.Purple;
-			Item.expert = true; // This makes sure that "Expert" displays in the tooltip and the item name color changes
-		}
-
-		public override bool CanRightClick() {
-			return true;
-		}
-
-		public override void ModifyItemLoot(ItemLoot itemLoot) {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeakValhallaOre>(), 4, 1, 15));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedyOre>(), 1, 50, 200));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Greed>(), 1, 1, 1));
+    {
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.BossBag[Type] = true;
+            ItemID.Sets.PreHardmodeLikeBossBag[Type] = true;
+            Item.ResearchUnlockCount = 3;
         }
-	}
+
+        public override void SetDefaults()
+        {
+            Item.maxStack = Item.CommonMaxStack;
+            Item.consumable = true;
+            Item.width = 24;
+            Item.height = 24;
+            Item.value = Item.sellPrice(gold: 1);
+            Item.rare = ItemRarityID.Purple;
+            Item.expert = true;
+        }
+
+        public override bool CanRightClick()
+        {
+            return true;
+        }
+
+        public override void ModifyItemLoot(ItemLoot itemLoot)
+        {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 20));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 2));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Greed>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedHelmet>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedBreastplate>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedLeggings>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoldOnAStick>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfGreed>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfGreedBody>()));
+        }
+    }
 }

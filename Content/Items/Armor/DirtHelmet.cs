@@ -1,9 +1,5 @@
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables;
-using PurringTale.Content.Items.Weapons;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -16,7 +12,7 @@ namespace PurringTale.Content.Items.Armor
         {
             Item.width = 22;
             Item.height = 20;
-            Item.value = Item.sellPrice(copper: 50);
+            Item.value = Item.sellPrice(copper: 5);
             Item.rare = ItemRarityID.Gray;
             Item.defense = 2;
         }

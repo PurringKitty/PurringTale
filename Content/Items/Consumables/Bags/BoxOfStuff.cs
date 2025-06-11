@@ -11,7 +11,6 @@ using PurringTale.Content.Items.Weapons.Melee;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	
 	public class BoxOfStuff : ModItem
 	{
 		public override void SetStaticDefaults() 
@@ -21,8 +20,8 @@ namespace PurringTale.Content.Items.Consumables.Bags
 		public override void SetDefaults() {
 			Item.maxStack = 1;
 			Item.consumable = true;
-			Item.width = 36;
-			Item.height = 44;
+			Item.width = 28;
+			Item.height = 22;
             Item.value = 0;
             Item.rare = ItemRarityID.Master;
 		}
@@ -42,5 +41,3 @@ namespace PurringTale.Content.Items.Consumables.Bags
         }
     }
 }
-
-

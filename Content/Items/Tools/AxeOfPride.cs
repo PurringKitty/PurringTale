@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using PurringTale.Content.Items.Placeables.Bars;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,7 +8,7 @@ namespace PurringTale.Content.Items.Tools
     {
         public override void SetDefaults()
         {
-            Item.damage = 110;
+            Item.damage = 80;
             Item.DamageType = DamageClass.Melee;
             Item.width = 35;
             Item.height = 35;
@@ -24,18 +22,6 @@ namespace PurringTale.Content.Items.Tools
             Item.autoReuse = true;
             Item.axe = 30;
             Item.useTurn = true;
-        }
-
-        public override void MeleeEffects(Player player, Rectangle hitbox)
-        {
-            //some dirt effect
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddIngredient<PridefulBar>(15)
-                .AddTile(TileID.Anvils)
-                .Register();
         }
     }
 }

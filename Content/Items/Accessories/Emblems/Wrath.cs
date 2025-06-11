@@ -37,7 +37,5 @@ public class Wrath : ModItem
 
         player.AddBuff(BuffID.Wrath, 0);
 
-        player.AddBuff(ModContent.BuffType<WrathBuff>(), 0);
-
     }
 }

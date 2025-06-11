@@ -1,9 +1,6 @@
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Buffs;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Armor
@@ -19,19 +16,15 @@ namespace PurringTale.Content.Items.Armor
             Item.rare = ItemRarityID.Purple;
             Item.defense = 15;
         }
-
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ModContent.ItemType<PrideBreastplate>() && legs.type == ModContent.ItemType<PrideLeggings>();
         }
-
-        public override void AddRecipes()
+        public override void UpdateArmorSet(Player player)
         {
-            CreateRecipe()
-                .AddIngredient<PridefulBar>(20)
-                .AddIngredient<CoreOfPride>(10)
-                .AddTile(TileID.Anvils)
-                .Register();
+            player.statLifeMax2 += 50;
+            player.autoReuseAllWeapons = true;
+            player.AddBuff(ModContent.BuffType<PrideBuff>(), 0);
         }
     }
 }

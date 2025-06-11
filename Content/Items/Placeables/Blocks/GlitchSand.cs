@@ -14,7 +14,7 @@ namespace PurringTale.Content.Items.Placeables.Blocks
 
         public override void SetDefaults()
         {
-            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.GlitchSand>());
+            Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.Blocks.GlitchSand>());
             Item.width = 16;
             Item.height = 16;
             Item.rare = ItemRarityID.Green;

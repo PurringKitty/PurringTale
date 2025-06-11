@@ -226,9 +226,8 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfSlothBossBag>(Condition.DownedDukeFishron)
-				.Add<CoreOfSloth>(Condition.DownedDukeFishron)
-				.Add<SlothMusicBox>(Condition.DownedDukeFishron);
+				.Add<EyeOfSlothBossBag>()
+				.Add<SlothMusicBox>();
 			npcShop.Register();
 		}
 

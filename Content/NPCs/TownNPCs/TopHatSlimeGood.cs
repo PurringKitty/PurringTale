@@ -240,13 +240,11 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			var npcShop = new NPCShop(Type, ShopName)
 				.Add<GelBullet>()
 				.Add(new Item(ItemID.Gel) { shopCustomPrice = Item.buyPrice(copper: 1) })
-				.Add(new Item(ItemID.SlimeCrown) { shopCustomPrice = Item.buyPrice(gold: 1) },Condition.DownedKingSlime)
-				.Add(new Item(ItemID.KingSlimeBossBag) { shopCustomPrice = Item.buyPrice(gold: 1) },Condition.DownedKingSlime)
 				.Add(new Item(ItemID.RecallPotion) { shopCustomPrice = Item.buyPrice(silver: 1) })
 				.Add(new Item(ItemID.WormholePotion) { shopCustomPrice = Item.buyPrice(silver: 1) })
-				.Add<WeakValhallaOre>(Condition.DownedKingSlime, Condition.InMasterMode)
-                .Add(new Item(ItemID.IronOre) { shopCustomPrice = Item.buyPrice(silver: 10) }, Condition.DownedKingSlime)
-                .Add(new Item(ItemID.LeadOre) { shopCustomPrice = Item.buyPrice(silver: 10) }, Condition.DownedKingSlime)
+				.Add<ValhallaOre>(Condition.DownedKingSlime, Condition.InMasterMode)
+                .Add(new Item(ItemID.IronOre) { shopCustomPrice = Item.buyPrice(silver: 10) })
+                .Add(new Item(ItemID.LeadOre) { shopCustomPrice = Item.buyPrice(silver: 10) })
                 .Add<TopiumOre>(Condition.DownedMoonLord, Condition.InMasterMode);
 			npcShop.Register();
 		}
