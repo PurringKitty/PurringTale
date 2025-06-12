@@ -4,6 +4,7 @@ using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
 using PurringTale.Content.NPCs.BossNPCs.Wrath;
 using Terraria;
@@ -48,6 +49,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WrathLeggings>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SinsBane>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfWrath>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WrathfulMachineGun>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfWrathBody>()));
         }
     }

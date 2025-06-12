@@ -266,7 +266,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
         public override void DrawTownAttackSwing(ref Texture2D item, ref Rectangle itemFrame, ref int itemSize, ref float scale, ref Vector2 offset)
         {
-            Main.GetItemDrawFrame(ModContent.ItemType<SpearOfSloth>(), out item, out itemFrame);
+            Main.GetItemDrawFrame(ModContent.ItemType<BookOfSloth>(), out item, out itemFrame);
             itemSize = 40;
             // This adjustment draws the swing the way town npcs usually do.
             if (NPC.ai[1] > NPCID.Sets.AttackTime[NPC.type] * 0.66f)

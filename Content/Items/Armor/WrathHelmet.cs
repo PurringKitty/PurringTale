@@ -24,8 +24,8 @@ namespace PurringTale.Content.Items.Armor
         public override void UpdateArmorSet(Player player)
         {
             player.autoJump = true;
-            player.statLifeMax2 += 200;
-            player.statManaMax2 -= 20000;
+            player.statLifeMax2 += 500;
+            player.statManaMax2 -= 2000000000;
             player.AddBuff(ModContent.BuffType<WrathBuff>(), 0);
         }
     }

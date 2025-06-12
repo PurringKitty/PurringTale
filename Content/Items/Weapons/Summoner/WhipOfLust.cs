@@ -13,7 +13,7 @@ public class WhipOfLust : ModItem
 
 	public override void SetDefaults()
 	{
-		Item.DefaultToWhip(projectileId: ModContent.ProjectileType<LustWhipProjectile>(), 40, 2, 5);
+		Item.DefaultToWhip(projectileId: ModContent.ProjectileType<LustWhipProjectile>(), 50, 2, 5);
 		Item.rare = ItemRarityID.Pink;
         Item.value = Item.sellPrice(copper: 50);
         Item.shootSpeed = 4;

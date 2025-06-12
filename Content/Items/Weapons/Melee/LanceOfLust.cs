@@ -9,7 +9,7 @@ public class LanceOfLust : ModItem
 {
     public override void SetDefaults()
     {
-        Item.damage = 40;
+        Item.damage = 50;
         Item.knockBack = 2f;
         Item.useStyle = ItemUseStyleID.Rapier;
         Item.useAnimation = 17;

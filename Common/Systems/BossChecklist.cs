@@ -153,6 +153,7 @@ namespace PurringTale.Common.Systems
                 ModContent.ItemType<GreedLeggings>(),
                 ModContent.ItemType<GoldOnAStick>(),
                 ModContent.ItemType<WhipOfGreed>(),
+                ModContent.ItemType<GemIncrustedRevolver>(),
                 ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<CoreOfValhalla>(),
                 ModContent.ItemType<ValhallaOre>()
@@ -182,6 +183,7 @@ namespace PurringTale.Common.Systems
                 ModContent.ItemType<LustLeggings>(),
                 ModContent.ItemType<WhipOfLust>(),
                 ModContent.ItemType<LanceOfLust>(),
+                ModContent.ItemType<LustBazooka>(),
                 ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<CoreOfValhalla>(),
                 ModContent.ItemType<ValhallaOre>()
@@ -211,6 +213,7 @@ namespace PurringTale.Common.Systems
                 ModContent.ItemType<PrideLeggings>(),
                 ModContent.ItemType<AxeOfPride>(),
                 ModContent.ItemType<WhipOfPride>(),
+                ModContent.ItemType<PridePistol>(),
                 ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<CoreOfValhalla>(),
                 ModContent.ItemType<ValhallaOre>()
@@ -238,9 +241,10 @@ namespace PurringTale.Common.Systems
                 ModContent.ItemType<SlothHelmet>(),
                 ModContent.ItemType<SlothBreastplate>(),
                 ModContent.ItemType<SlothLeggings>(),
-                ModContent.ItemType<SpearOfSloth>(),
+                ModContent.ItemType<BookOfSloth>(),
                 ModContent.ItemType<SlothfulLance>(),
                 ModContent.ItemType<WhipOfSloth>(),
+                ModContent.ItemType<SlothfulShotgun>(),
                 ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<CoreOfValhalla>(),
                 ModContent.ItemType<ValhallaOre>()
@@ -270,6 +274,7 @@ namespace PurringTale.Common.Systems
                 ModContent.ItemType<WrathLeggings>(),
                 ModContent.ItemType<SinsBane>(),
                 ModContent.ItemType<WhipOfWrath>(),
+                ModContent.ItemType<WrathfulMachineGun>(),
                 ModContent.ItemType<SinsBossRelic>(),
                 ModContent.ItemType<SinsBossTrophy>(),
                 ModContent.ItemType<VanityVoucher>(),

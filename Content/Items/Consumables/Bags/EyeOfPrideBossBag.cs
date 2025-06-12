@@ -3,6 +3,7 @@ using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Tools;
+using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
 using PurringTale.Content.NPCs.BossNPCs.Pride;
 using Terraria;
@@ -47,6 +48,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PrideLeggings>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AxeOfPride>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfPride>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PridePistol>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfPrideBody>()));
         }
     }

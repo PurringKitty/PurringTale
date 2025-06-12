@@ -26,7 +26,6 @@
 	  <Folder Include="Common\Configs\" />
 	  <Folder Include="Content\Biomes\" />
 	  <Folder Include="Content\Items\Consumables\Food\" />
-	  <Folder Include="Content\Items\Weapons\Magic\" />
 	  <Folder Include="Content\Sounds\" />
 	</ItemGroup>
 	<ItemGroup>

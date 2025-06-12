@@ -215,7 +215,7 @@ Items: {
 
 	Envy: {
 		DisplayName: Envy
-		Tooltip: I NEED What THEY Have!
+		Tooltip: Boosts Magic Damage By 25%
 	}
 
 	GluttonyBreastplate: {
@@ -235,7 +235,7 @@ Items: {
 
 	Gluttony: {
 		DisplayName: Gluttony
-		Tooltip: Food... Must Eat All!
+		Tooltip: Boosts Ranged Damage By 25%
 	}
 
 	GodSlayerBreastplate: {
@@ -270,7 +270,7 @@ Items: {
 
 	Greed: {
 		DisplayName: Greed
-		Tooltip: $$$$$$$
+		Tooltip: Boosts All Damage By 25%
 	}
 
 	LustBreastplate: {
@@ -290,7 +290,7 @@ Items: {
 
 	Lust: {
 		DisplayName: Lust
-		Tooltip: Go To Horny Jail!
+		Tooltip: Boosts Summon Damage By 25%
 	}
 
 	OldGodSlayerBreastplate: {
@@ -355,7 +355,7 @@ Items: {
 
 	Pride: {
 		DisplayName: Pride
-		Tooltip: Confidence, Boastfulness
+		Tooltip: Boosts Melee Damage By 25%
 	}
 
 	SlothBreastplate: {
@@ -375,7 +375,7 @@ Items: {
 
 	Sloth: {
 		DisplayName: Sloth
-		Tooltip: Sleep, Lazyness
+		Tooltip: Boosts Magic Damage By 25%
 	}
 
 	TopiumBreastplate: {
@@ -425,7 +425,7 @@ Items: {
 
 	Wrath: {
 		DisplayName: Wrath
-		Tooltip: Anger, Rage, Hatred
+		Tooltip: Boosts Melee Damage By 25%
 	}
 
 	TopHatSlimeBanner: {
@@ -1565,127 +1565,157 @@ Items: {
 
 	RustedBreastplate: {
 		DisplayName: Rusted Breastplate
-		Tooltip: ""
+		Tooltip: Wonder If This Can Be Used Later?
 	}
 
 	RustedHelmet: {
 		DisplayName: Rusted Helmet
-		Tooltip: ""
+		Tooltip: Wonder If This Can Be Used Later?
 	}
 
 	RustedLeggings: {
 		DisplayName: Rusted Leggings
-		Tooltip: ""
+		Tooltip: Wonder If This Can Be Used Later?
 	}
 
 	ValhallaBreastplate: {
 		DisplayName: Valhalla Breastplate
-		Tooltip: ""
+		Tooltip: Made With Bars Left By Gods.
 	}
 
 	ValhallaCap: {
 		DisplayName: Valhalla Cap
-		Tooltip: ""
+		Tooltip: Summoner Related
 	}
 
 	ValhallaHat: {
 		DisplayName: Valhalla Hat
-		Tooltip: ""
+		Tooltip: Ranger Related
 	}
 
 	ValhallaHelmet: {
 		DisplayName: Valhalla Helmet
-		Tooltip: ""
+		Tooltip: Melee Related
 	}
 
 	ValhallaHood: {
-		DisplayName: Valhalla Hood
-		Tooltip: ""
+		DisplayName: Valhalla Mage Hat
+		Tooltip: Mage Related
 	}
 
 	ValhallaLeggings: {
 		DisplayName: Valhalla Leggings
-		Tooltip: ""
+		Tooltip: I Mean Seems Good To Me!
 	}
 
 	ValhallaBar: {
 		DisplayName: Valhalla Bar
-		Tooltip: ""
+		Tooltip: Gods Like To Use This Stuff A Lot
 	}
 
 	ValhallaOre: {
 		DisplayName: Valhalla Ore
-		Tooltip: ""
+		Tooltip: Ore Left By Gods
 	}
 
 	ValhallaAxe: {
 		DisplayName: Valhalla Axe
-		Tooltip: ""
+		Tooltip: Axe Too Meet You... I Will See Myself Out...
 	}
 
 	ValhallaPick: {
-		DisplayName: Valhalla Pick
-		Tooltip: ""
+		DisplayName: Valhalla Pickaxe
+		Tooltip: Get Aload Of Pick Guy... God Damn It...
 	}
 
 	ValhallaStabber: {
 		DisplayName: Valhalla Stabber
-		Tooltip: ""
+		Tooltip: Stabbing Time
 	}
 
 	BladeOfEnvy: {
 		DisplayName: Blade Of Envy
-		Tooltip: ""
+		Tooltip: Always Watching...
 	}
 
 	EnvyousBow: {
 		DisplayName: Envyous Bow
-		Tooltip: ""
+		Tooltip: Careful Too Not Hurt The Eye!
 	}
 
 	WhipOfEnvy: {
 		DisplayName: Whip Of Envy
-		Tooltip: ""
+		Tooltip: Hehe Gross Its Got An Eye At The End...
 	}
 
 	GluttonsGreatsword: {
 		DisplayName: Gluttons Greatsword
-		Tooltip: ""
+		Tooltip: Perfect For Cooking On!
 	}
 
 	LanceOfLust: {
 		DisplayName: Lance Of Lust
-		Tooltip: ""
+		Tooltip: Long And Hard
 	}
 
 	SlothfulLance: {
-		DisplayName: Slothful Lance
-		Tooltip: ""
+		DisplayName: Slothful Spear
+		Tooltip: No It Can't Become A Floating Pillow?
 	}
 
 	WhipOfGluttony: {
 		DisplayName: Whip Of Gluttony
-		Tooltip: ""
+		Tooltip: Ball And Chain Perfect For Fishing!
 	}
 
 	WhipOfGreed: {
 		DisplayName: Whip Of Greed
-		Tooltip: ""
+		Tooltip: It Is GOLDEN With GEMS In It... Such Greed!
 	}
 
 	WhipOfPride: {
 		DisplayName: Whip Of Pride
-		Tooltip: ""
+		Tooltip: That Looks Like It'll Hurt
 	}
 
 	WhipOfSloth: {
 		DisplayName: Whip Of Sloth
-		Tooltip: ""
+		Tooltip: Is This Some Weird Noodle Pillow???
 	}
 
 	WhipOfWrath: {
 		DisplayName: Whip Of Wrath
-		Tooltip: ""
+		Tooltip: All Chain Baby!
+	}
+
+	BookOfSloth: {
+		DisplayName: Book Of Sloth
+		Tooltip: Go Go Magic Scyths!
+	}
+
+	GemIncrustedRevolver: {
+		DisplayName: Gem Incrusted Revolver
+		Tooltip: This Is Going To Far...
+	}
+
+	LustBazooka: {
+		DisplayName: Lust Bazooka
+		Tooltip: Kill Them With L O V E
+	}
+
+	PridePistol: {
+		DisplayName: Pride Pistol
+		Tooltip: Pew Pew Hehe
+	}
+
+	SlothfulShotgun: {
+		DisplayName: Slothful Gun
+		Tooltip: Welp If It Works... It Works...
+	}
+
+	WrathfulMachineGun: {
+		DisplayName: Wrathful Machine Gun
+		Tooltip: HAHAHAHAHAHA KILL THEM ALL! oops my bad sorry...
 	}
 }
 
@@ -1977,12 +2007,12 @@ Buffs: {
 
 	EnvyBuff: {
 		DisplayName: Envy
-		Description: Boosts Magic Damage By 25%
+		Description: Boosts Health And Mana By 20
 	}
 
 	GluttonyBuff: {
 		DisplayName: Gluttony
-		Description: Boosts Ranged Damage By 25%
+		Description: Boosts Health By 20 & Increases Def By 5
 	}
 
 	GodSlayerMinionBuff: {
@@ -1990,14 +2020,14 @@ Buffs: {
 		Description: He Is Just A Fella!
 	}
 
-	GreedBuff: {
+	GreedDeBuff: {
 		DisplayName: Greed
-		Description: Boosts All Damage By 25%
+		Description: Decreases Health And Mana By 30
 	}
 
 	LustBuff: {
 		DisplayName: Lust
-		Description: Boosts Summon Damage By 25% & Increases Minions By 2
+		Description: Boosts Health By 20 & Increases Minions By 1
 	}
 
 	MothMinionBuff: {
@@ -2007,17 +2037,17 @@ Buffs: {
 
 	PrideBuff: {
 		DisplayName: Pride
-		Description: Boosts Melee Damage By 25%
+		Description: Boosts Health By 50
 	}
 
 	SlothBuff: {
 		DisplayName: Sloth
-		Description: Boosts Magic Damage By 25%
+		Description: Boosts Health & Mana By 100
 	}
 
 	WrathBuff: {
 		DisplayName: Wrath
-		Description: Boosts Melee Damage By 25%
+		Description: Boosts Health By 500 BUT LOSS ALL MANA
 	}
 
 	BootsPetBuff: {
@@ -2073,11 +2103,6 @@ Buffs: {
 	SinsBuff: {
 		DisplayName: Seven Sins
 		Description: Doubles Damage, 100 More Health & Mana, Gives All Previous Sins Buffs
-	}
-
-	GreedDeBuff: {
-		DisplayName: Greed De Buff
-		Description: Mods.PurringTale.Buffs.GreedDeBuff.Description
 	}
 }
 

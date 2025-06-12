@@ -4,6 +4,7 @@ using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Weapons.Magic;
 using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
 using PurringTale.Content.NPCs.BossNPCs.Sloth;
 using Terraria;
@@ -46,9 +47,10 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothHelmet>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothBreastplate>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothLeggings>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SpearOfSloth>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BookOfSloth>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulLance>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfSloth>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulShotgun>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfSlothBody>()));
         }
     }

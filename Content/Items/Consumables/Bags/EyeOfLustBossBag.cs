@@ -3,6 +3,7 @@ using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
 using PurringTale.Content.NPCs.BossNPCs.Lust;
 using Terraria;
@@ -47,6 +48,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustLeggings>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfLust>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LanceOfLust>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustBazooka>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfLustBody>()));
         }
     }
