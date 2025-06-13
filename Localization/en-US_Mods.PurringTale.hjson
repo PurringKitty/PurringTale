@@ -56,7 +56,7 @@ Items: {
 	WrathHelmet: {
 		SetBonus: Mods.PurringTale.Items.WrathHelmet.SetBonus
 		DisplayName: Wrath Helmet
-		Tooltip: Your ARE Powerful!
+		Tooltip: You ARE Powerful!
 	}
 
 	Debugger: {
@@ -69,7 +69,7 @@ Items: {
 		Tooltip:
 			'''
 			A Buring Blue Flame Will Help You Fly!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -78,7 +78,7 @@ Items: {
 		Tooltip:
 			'''
 			Orange Juice Good :)
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -87,7 +87,7 @@ Items: {
 		Tooltip:
 			'''
 			You Are Innocent In Mind And Body
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -96,7 +96,7 @@ Items: {
 		Tooltip:
 			'''
 			Somehow These Are Wings!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -115,7 +115,7 @@ Items: {
 		Tooltip:
 			'''
 			Minos... WHY!!!!!!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -124,7 +124,7 @@ Items: {
 		Tooltip:
 			'''
 			Big Ol Moth Wings!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -138,7 +138,7 @@ Items: {
 		Tooltip:
 			'''
 			Volume 1, page 579, a page about flight
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -147,7 +147,7 @@ Items: {
 		Tooltip:
 			'''
 			Great... Wet Pasta To Go Around Your Neck...
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -156,7 +156,7 @@ Items: {
 		Tooltip:
 			'''
 			Somehow The Old Pasta Can Make You Fly!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -165,7 +165,7 @@ Items: {
 		Tooltip:
 			'''
 			Wings Of The God Of Top Hats!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -184,7 +184,7 @@ Items: {
 		Tooltip:
 			'''
 			A Cape Fashioned From A Wolf!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -205,7 +205,7 @@ Items: {
 
 	EnvyHelmet: {
 		DisplayName: Envy Helmet
-		Tooltip: A Bit Eye In the Middle!
+		Tooltip: A Bit Eye In The Middle!
 	}
 
 	EnvyLeggings: {
@@ -215,7 +215,7 @@ Items: {
 
 	Envy: {
 		DisplayName: Envy
-		Tooltip: Boosts Magic Damage By 25%
+		Tooltip: Increases Magic Damage By 25%
 	}
 
 	GluttonyBreastplate: {
@@ -235,7 +235,7 @@ Items: {
 
 	Gluttony: {
 		DisplayName: Gluttony
-		Tooltip: Boosts Ranged Damage By 25%
+		Tooltip: Increases Ranged Damage By 25%
 	}
 
 	GodSlayerBreastplate: {
@@ -270,7 +270,7 @@ Items: {
 
 	Greed: {
 		DisplayName: Greed
-		Tooltip: Boosts All Damage By 25%
+		Tooltip: Increases All Damage By 25%
 	}
 
 	LustBreastplate: {
@@ -290,7 +290,7 @@ Items: {
 
 	Lust: {
 		DisplayName: Lust
-		Tooltip: Boosts Summon Damage By 25%
+		Tooltip: Increases Summon Damage By 25%
 	}
 
 	OldGodSlayerBreastplate: {
@@ -310,32 +310,32 @@ Items: {
 
 	OverlordBoots: {
 		DisplayName: Overlord Boots
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	OverlordChestplate: {
 		DisplayName: Overlord Chestplate
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	OverlordVisage: {
 		DisplayName: Overlord Visage
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	PastasHood: {
 		DisplayName: Pastas Hood
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	PastasHoodie: {
 		DisplayName: Pastas Hoodie
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	PastasLeggings: {
 		DisplayName: Pastas Leggings
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	PrideBreastplate: {
@@ -355,7 +355,7 @@ Items: {
 
 	Pride: {
 		DisplayName: Pride
-		Tooltip: Boosts Melee Damage By 25%
+		Tooltip: Increases Melee Damage By 25%
 	}
 
 	SlothBreastplate: {
@@ -375,7 +375,7 @@ Items: {
 
 	Sloth: {
 		DisplayName: Sloth
-		Tooltip: Boosts Magic Damage By 25%
+		Tooltip: Increases Magic Damage By 25%
 	}
 
 	TopiumBreastplate: {
@@ -425,7 +425,7 @@ Items: {
 
 	Wrath: {
 		DisplayName: Wrath
-		Tooltip: Boosts Melee Damage By 25%
+		Tooltip: Increases Melee Damage By 25%
 	}
 
 	TopHatSlimeBanner: {
@@ -654,7 +654,7 @@ Items: {
 
 	EnvyousBar: {
 		DisplayName: Envyous Bar
-		Tooltip: Its Lookint At Your Soul!
+		Tooltip: Its Looking Into Your Soul!
 	}
 
 	EnvyousOre: {
@@ -734,7 +734,7 @@ Items: {
 
 	PridefulOre: {
 		DisplayName: Prideful Ore
-		Tooltip: You Can Feel The Pridefulness!
+		Tooltip: You Can Feel The Rainbow!
 	}
 
 	SlothyBar: {
@@ -831,7 +831,7 @@ Items: {
 		Tooltip:
 			'''
 			You Are Balenced Between Good And Evil
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -840,7 +840,7 @@ Items: {
 		Tooltip:
 			'''
 			You Are Pure Of Heart
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -849,68 +849,80 @@ Items: {
 		Tooltip:
 			'''
 			You Are Always Patient With Yourself And Other
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
 	EndSlayerBreastplate: {
 		DisplayName: Cubiq Breastplate
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	EndSlayerHead: {
 		DisplayName: Cubiq Head
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	EndSlayerLeggings: {
 		DisplayName: Cubiq Leggings
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MauriceBody: {
 		DisplayName: Prime Body
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip:
+			'''
+			THY END IS NOW!
+			Great For Impersonating Devs!
+			'''
 	}
 
 	MauriceHead: {
 		DisplayName: Prime Head
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip:
+			'''
+			DIE!
+			Great For Impersonating Devs!
+			'''
 	}
 
 	MauriceLegs: {
 		DisplayName: Prime Legs
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip:
+			'''
+			CRUSH!
+			Great For Impersonating Devs!
+			'''
 	}
 
 	MonoHead: {
 		DisplayName: Honey Bear Head
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MonoHoodie: {
 		DisplayName: Honey Bear Hoodie
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MonoLegs: {
 		DisplayName: Honey Bear Pants
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MothBody: {
 		DisplayName: Moth Body
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MothHead: {
 		DisplayName: Moth Head
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MothLegs: {
 		DisplayName: Moth Legs
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	MungusBody: {
@@ -933,7 +945,7 @@ Items: {
 		Tooltip:
 			'''
 			Red Eyes!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -942,7 +954,7 @@ Items: {
 		Tooltip:
 			'''
 			Pretty Comfortable!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -951,7 +963,7 @@ Items: {
 		Tooltip:
 			'''
 			Neato!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -975,7 +987,7 @@ Items: {
 		Tooltip:
 			'''
 			Slick Suit Pants Don't Ruin Them!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -984,7 +996,7 @@ Items: {
 		Tooltip:
 			'''
 			Has A Nice Tie Take Care Of It!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -993,7 +1005,7 @@ Items: {
 		Tooltip:
 			'''
 			A Nice Top Hat To Compliment The Black Tie!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -1172,7 +1184,7 @@ Items: {
 		Tooltip:
 			'''
 			Pink Wings!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -1181,7 +1193,7 @@ Items: {
 		Tooltip:
 			'''
 			So Many Colors!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -1190,7 +1202,7 @@ Items: {
 		Tooltip:
 			'''
 			Simple Dreams Of Making Great Music!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -1199,7 +1211,7 @@ Items: {
 		Tooltip:
 			'''
 			Black And White!
-			*Great For Impersonating Devs!*
+			'Great For Impersonating Devs!'
 			'''
 	}
 
@@ -1410,22 +1422,22 @@ Items: {
 
 	BlobticWings: {
 		DisplayName: Blobtic Wings
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	BlobticBody: {
 		DisplayName: Blobtic Body
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	BlobticHead: {
 		DisplayName: Blobtic Head
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	BlobticLegs: {
 		DisplayName: Blobtic Legs
-		Tooltip: *Great For Impersonating Devs!*
+		Tooltip: Great For Impersonating Devs!
 	}
 
 	WeaponRock: {
@@ -2007,12 +2019,12 @@ Buffs: {
 
 	EnvyBuff: {
 		DisplayName: Envy
-		Description: Boosts Health And Mana By 20
+		Description: Increases Health And Mana By 20
 	}
 
 	GluttonyBuff: {
 		DisplayName: Gluttony
-		Description: Boosts Health By 20 & Increases Def By 5
+		Description: Increases Health By 20 & Increases Def By 5
 	}
 
 	GodSlayerMinionBuff: {
@@ -2027,7 +2039,7 @@ Buffs: {
 
 	LustBuff: {
 		DisplayName: Lust
-		Description: Boosts Health By 20 & Increases Minions By 1
+		Description: Increases Health By 20 & Increases Minions By 1
 	}
 
 	MothMinionBuff: {
@@ -2037,17 +2049,17 @@ Buffs: {
 
 	PrideBuff: {
 		DisplayName: Pride
-		Description: Boosts Health By 50
+		Description: Increases Health By 50
 	}
 
 	SlothBuff: {
 		DisplayName: Sloth
-		Description: Boosts Health & Mana By 100
+		Description: Increases Health & Mana By 100
 	}
 
 	WrathBuff: {
 		DisplayName: Wrath
-		Description: Boosts Health By 500 BUT LOSS ALL MANA
+		Description: Increases Health By 500 BUT LOSS ALL MANA
 	}
 
 	BootsPetBuff: {
