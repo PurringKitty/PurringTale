@@ -304,7 +304,7 @@ Items: {
 
 	OldGodSlayerHelmet: {
 		DisplayName: Old Forged Helmet
-		Tooltip: Lost It's Glow...
+		Tooltip: Lost Its Glow...
 	}
 
 	OldGodSlayerLeggings: {
@@ -314,32 +314,32 @@ Items: {
 
 	OverlordBoots: {
 		DisplayName: Overlord Boots
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	OverlordChestplate: {
 		DisplayName: Overlord Chestplate
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!
 	}
 
 	OverlordVisage: {
 		DisplayName: Overlord Visage
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasHood: {
 		DisplayName: Pastas Hood
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasHoodie: {
 		DisplayName: Pastas Hoodie
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasLeggings: {
 		DisplayName: Pastas Leggings
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PrideBreastplate: {
