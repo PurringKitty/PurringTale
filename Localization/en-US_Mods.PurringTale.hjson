@@ -304,7 +304,7 @@ Items: {
 
 	OldGodSlayerHelmet: {
 		DisplayName: Old Forged Helmet
-		Tooltip: Lost It's Glow...
+		Tooltip: Lost Its Glow...
 	}
 
 	OldGodSlayerLeggings: {
@@ -314,32 +314,32 @@ Items: {
 
 	OverlordBoots: {
 		DisplayName: Overlord Boots
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	OverlordChestplate: {
 		DisplayName: Overlord Chestplate
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!
 	}
 
 	OverlordVisage: {
 		DisplayName: Overlord Visage
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasHood: {
 		DisplayName: Pastas Hood
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasHoodie: {
 		DisplayName: Pastas Hoodie
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PastasLeggings: {
 		DisplayName: Pastas Leggings
-		Tooltip: Great For Impersonating Devs!
+		Tooltip: 'Great For Impersonating Devs!'
 	}
 
 	PrideBreastplate: {
@@ -499,7 +499,7 @@ Items: {
 
 	TopHatDemonEye: {
 		DisplayName: Top Hat Demon Eye
-		Tooltip: the Eye Of A Top hat Demon
+		Tooltip: The Eye Of A Top Hat Demon
 	}
 
 	TopHatDemonPendent: {
@@ -553,7 +553,7 @@ Items: {
 
 	ClumpOfTopiumOre: {
 		DisplayName: Clump Of Topium Ore
-		Tooltip: Summons Top Hat God(NPC)
+		Tooltip: Summons Top Hat God (NPC)
 	}
 
 	CrystalOfValhalla: {
@@ -618,42 +618,42 @@ Items: {
 
 	CoreOfEnvy: {
 		DisplayName: Core Of Envy
-		Tooltip: ""
+		Tooltip: "You Want The Guide's Cap..."
 	}
 
 	CoreOfGluttony: {
 		DisplayName: Core Of Gluttony
-		Tooltip: ""
+		Tooltip: "You Feel A Hunger..."
 	}
 
 	CoreOfGreed: {
 		DisplayName: Core Of Greed
-		Tooltip: ""
+		Tooltip: "But Nothing Happened!"
 	}
 
 	CoreOfLust: {
 		DisplayName: Core Of Lust
-		Tooltip: ""
+		Tooltip: "The Desire..."
 	}
 
 	CoreOfPride: {
 		DisplayName: Core Of Pride
-		Tooltip: ""
+		Tooltip: "You Feel The Rainbow"
 	}
 
 	CoreOfSloth: {
 		DisplayName: Core Of Sloth
-		Tooltip: ""
+		Tooltip: "You Feel Tired"
 	}
 
 	CoreOfValhalla: {
 		DisplayName: Core Of Valhalla
-		Tooltip: ""
+		Tooltip: "Only In Death Does Duty End."
 	}
 
 	CoreOfWrath: {
 		DisplayName: Core Of Wrath
-		Tooltip: ""
+		Tooltip: "HATE HATE HATE..."
 	}
 
 	EnvyousBar: {
