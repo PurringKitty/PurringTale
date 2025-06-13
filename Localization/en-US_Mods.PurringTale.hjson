@@ -61,7 +61,11 @@ Items: {
 
 	Debugger: {
 		DisplayName: Debugger
-		Tooltip: You Should NOT Have This Fucking Cheater!
+		Tooltip:
+			'''
+			You Should NOT Have This Fucking Cheater!
+			'In Memory Of Moddingus'
+			'''
 	}
 
 	BlueFlameWings: {

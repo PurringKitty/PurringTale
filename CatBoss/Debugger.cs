@@ -37,7 +37,7 @@ namespace PurringTale.CatBoss
             Item.autoReuse = true;
 
             Item.DamageType = DamageClass.Melee;
-            Item.damage = 2000000000;
+            Item.damage = 200000000;
             Item.knockBack = 10000;
             Item.crit = 5000000;
 
@@ -48,11 +48,7 @@ namespace PurringTale.CatBoss
             Item.shoot = ModContent.ProjectileType<BossRocket>();
             Item.shootSpeed = 5;
         }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            player.AddBuff(ModContent.BuffType<Consumed>(), 300);
-            return false;
-        }
     }
 }
+
 
