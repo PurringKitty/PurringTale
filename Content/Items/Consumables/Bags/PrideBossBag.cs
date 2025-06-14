@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	public class EyeOfPrideBossBag : ModItem
+	public class PrideBossBag : ModItem
     {
         public override void SetStaticDefaults()
         {

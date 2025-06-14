@@ -12,20 +12,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
     [AutoloadBossHead]
     public class EyeOfSlothBody : ModNPC
     {
-        public static int secondStageHeadSlot = -1;
-        public override void Load()
-        {
-            string texture = BossHeadTexture + "_SecondStage";
-            secondStageHeadSlot = Mod.AddBossHeadTexture(texture, -1);
-        }
-        public override void BossHeadSlot(ref int index)
-        {
-            int slot = secondStageHeadSlot;
-            if (SecondStage && slot != -1)
-            {
-                index = slot;
-            }
-        }
+
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 6;
@@ -38,6 +25,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
         {
             get => NPC.ai[0] == 1f;
             set => NPC.ai[0] = value ? 1f : 2f;
+        }
+        public override void BossLoot(ref string name, ref int potionType)
+        {
+            name = "Acedia";
+            potionType = ItemID.SuperHealingPotion;
         }
         public override void SetDefaults()
         {
@@ -80,7 +72,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfSlothBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<SlothBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

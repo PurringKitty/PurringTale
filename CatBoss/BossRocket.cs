@@ -29,8 +29,9 @@ namespace PurringTale.CatBoss
     */
     public class BossRocket : ModProjectile
     {
-        /// ai[0] timer
-        /// ai[1] owner
+        
+        //ai[0] timer
+        //ai[1] owner
 
         public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.NebulaArcanum}";
 
@@ -45,7 +46,7 @@ namespace PurringTale.CatBoss
         {
             Projectile.width = 40;
             Projectile.height = 40;
-            //Projectile.hostile = true;
+            Projectile.hostile = true;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
         }
@@ -170,7 +171,7 @@ namespace PurringTale.CatBoss
                 Player target = Main.player[i];
                 if (target.WithinRange(Projectile.Center, 75))
                 {
-                    //target.Hurt(PlayerDeathReason.ByProjectile(target.whoAmI, Projectile.whoAmI), Projectile.damage, Projectile.Center.X > target.Center.X ? -1 : 1, false, false, -1, true, 0, 0, 8);
+                    target.Hurt(PlayerDeathReason.ByProjectile(target.whoAmI, Projectile.whoAmI), Projectile.damage, Projectile.Center.X > target.Center.X ? -1 : 1, false, false, -1, true, 0, 0, 8);
                 }
             }
         }

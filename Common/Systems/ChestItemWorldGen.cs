@@ -17,7 +17,7 @@ namespace PurringTale.Common.Systems
 	public class ChestItemWorldGen : ModSystem
 	{
 		public override void PostWorldGen() {
-			int[] itemsToPlaceInGoldChests = { ModContent.ItemType<PastaNeckless>(), ModContent.ItemType<UFOWolfPetItem>(), ModContent.ItemType<TreadBoots>(), ModContent.ItemType<BootsPetItem>(), ModContent.ItemType<VanityVoucher>(), ModContent.ItemType<THCMusicBox>(), ModContent.ItemType<SnowblindMusicBox>(), ModContent.ItemType<TheLamp>(), ModContent.ItemType<BrokenDestroyerLaserCannon>(), ModContent.ItemType<BrokenStarShootingStaff>(), ModContent.ItemType<BrokenSerratedGreatsword>(), ModContent.ItemType<RuinedGodSlayerSummoningBook>(), ModContent.ItemType<RustedDancersWhip>(), ModContent.ItemType<VanityVoucher>() };
+			int[] itemsToPlaceInGoldChests = { ModContent.ItemType<PastaNecklace>(), ModContent.ItemType<UFOWolfPetItem>(), ModContent.ItemType<TreadBoots>(), ModContent.ItemType<BootsPetItem>(), ModContent.ItemType<VanityVoucher>(), ModContent.ItemType<THCMusicBox>(), ModContent.ItemType<SnowblindMusicBox>(), ModContent.ItemType<TheLamp>(), ModContent.ItemType<BrokenDestroyerLaserCannon>(), ModContent.ItemType<BrokenStarShootingStaff>(), ModContent.ItemType<BrokenSerratedGreatsword>(), ModContent.ItemType<RuinedGodSlayerSummoningBook>(), ModContent.ItemType<RustedDancersWhip>(), ModContent.ItemType<VanityVoucher>() };
 			int itemsToPlaceInGoldChestsChoice = 6;
 			int itemsPlaced = 15;
 			int maxItems = 150;

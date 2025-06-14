@@ -23,8 +23,8 @@ namespace PurringTale.Content.Items.Accessories.Wings;
     {
         Item.width = 22;
         Item.height = 20;
-        Item.value = Item.sellPrice(gold: 1);
-        Item.rare = ItemRarityID.Expert;
+        Item.value = Item.sellPrice(gold: 2);
+        Item.rare = ItemRarityID.Quest;
         Item.accessory = true;
     }
 

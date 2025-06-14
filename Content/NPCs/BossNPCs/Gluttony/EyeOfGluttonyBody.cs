@@ -83,7 +83,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Gluttony
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGluttonyBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<GluttonyBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	public class EyeOfEnvyBossBag : ModItem
+	public class EnvyBossBag : ModItem
 	{
 		public override void SetStaticDefaults() {
 			ItemID.Sets.BossBag[Type] = true;

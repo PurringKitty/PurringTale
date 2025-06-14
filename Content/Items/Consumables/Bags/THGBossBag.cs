@@ -4,12 +4,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using PurringTale.Content.Pets.Boots;
 using PurringTale.CatBoss;
-using PurringTale.Content.Items.Misc;
+using PurringTale.Content.Items.Lore;
 using PurringTale.Content.Items.Weapons.Melee;
 using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Accessories.Masks;
 using PurringTale.Content.Items.Accessories.Necklaces;
 using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.MobLoot;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
@@ -37,15 +38,17 @@ namespace PurringTale.Content.Items.Consumables.Bags
 		}
 		public override void ModifyItemLoot(ItemLoot itemLoot) 
 		{
-			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopHatDemonEye>(), 8, 1, 1));
-			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopHatDemonPendent>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<MoonlightGreatSword>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EldritchBlaster>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook1>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook2>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook3>(), 8, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook4>(), 8, 1, 1));
+			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopHatDemonEye>(), 2, 1, 1));
+			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopHatDemonPendent>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<MoonlightGreatSword>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<EldritchBlaster>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook1>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook2>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook3>(), 2, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OldBook4>(), 2, 1, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopiumOre>(), 2, 1, 100));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 2, 1, 100));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 1, 1, 4));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<TopHatCatBoss>()));
         }
 	}

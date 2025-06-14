@@ -231,7 +231,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add(new Item(ItemID.ManaPotion) { shopCustomPrice = Item.buyPrice(silver: 50) }, Condition.Hardmode)
                 .Add(new Item(ItemID.GreaterManaPotion) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.DownedPlantera)
                 .Add(new Item(ItemID.SuperManaPotion) { shopCustomPrice = Item.buyPrice(gold: 10) }, Condition.DownedMoonLord)
-                .Add<EyeOfEnvyBossBag>()
+                .Add<EnvyBossBag>()
 				.Add<EnvyMusicBox>();
 			npcShop.Register();
 		}

@@ -82,7 +82,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Envy
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfEnvyBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EnvyBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

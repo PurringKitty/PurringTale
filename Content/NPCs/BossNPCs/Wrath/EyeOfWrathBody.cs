@@ -82,7 +82,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Wrath
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfWrathBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<WrathBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SinsBossTrophy>(), 4, 1, 1));
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<SinsBossRelic>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));

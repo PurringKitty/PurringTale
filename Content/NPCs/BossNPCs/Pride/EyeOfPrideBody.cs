@@ -80,7 +80,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Pride
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfPrideBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<PrideBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

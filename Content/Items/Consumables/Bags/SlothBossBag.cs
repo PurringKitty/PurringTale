@@ -2,10 +2,11 @@
 using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Weapons.Magic;
 using PurringTale.Content.Items.Weapons.Melee;
 using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
-using PurringTale.Content.NPCs.BossNPCs.Lust;
+using PurringTale.Content.NPCs.BossNPCs.Sloth;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -13,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	public class EyeOfLustBossBag : ModItem
+	public class SlothBossBag : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -40,16 +41,17 @@ namespace PurringTale.Content.Items.Consumables.Bags
 
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 25));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 35));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 2));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Lust>(), 1, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustHelmet>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustBreastplate>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustLeggings>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfLust>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LanceOfLust>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustBazooka>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfLustBody>()));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Sloth>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothHelmet>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothBreastplate>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothLeggings>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<BookOfSloth>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulLance>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfSloth>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulShotgun>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfSlothBody>()));
         }
     }
 }

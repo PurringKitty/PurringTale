@@ -13,7 +13,7 @@ namespace PurringTale.Content.Items.Accessories.Emblems;
 
 public class Pride : ModItem
 {
-    public static readonly int PrideBoost = 10;
+    public static readonly int PrideBoost = 5;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
@@ -24,8 +24,7 @@ public class Pride : ModItem
         Item.height = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(gold: 1);
-        Item.rare = ItemRarityID.Expert;
-        Item.expert = true;
+        Item.rare = ItemRarityID.Purple;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

@@ -3,9 +3,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using PurringTale.Content.Items.Placeables;
 
-namespace PurringTale.Content.Items.Misc;
+namespace PurringTale.Content.Items.Lore;
 
-public class OldBook4 : ModItem
+public class OldBook1 : ModItem
 {
 
 

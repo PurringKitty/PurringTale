@@ -6,28 +6,26 @@ namespace PurringTale.Content.Items.Accessories.Necklaces;
 
 [AutoloadEquip(EquipType.Neck)]
 
-public class PastaNeckless : ModItem
+public class PastaNecklace : ModItem
 {
+    public static readonly int PastaBoost = 5;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
     }
     public override void SetDefaults()
     {
-        Item.width = 24;
-        Item.height = 32;
+        Item.width = 16;
+        Item.height = 14;
         Item.accessory = true;
-        Item.sellPrice(gold: 2);
+        Item.value = Item.sellPrice(gold: 5);
         Item.rare = ItemRarityID.Green;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
-        player.GetCritChance(DamageClass.Ranged) += 0.20f;
-        player.GetAttackSpeed(DamageClass.Ranged) += 0.15f;
-        player.GetDamage(DamageClass.Ranged) += 0.5f;
-        player.GetArmorPenetration(DamageClass.Generic) += 0.5f;
-        player.statLifeMax2 += 50;
-        player.AddBuff(BuffID.Sunflower, 0);
+        player.GetAttackSpeed(DamageClass.Melee) += PastaBoost / 100f;
+        player.GetDamage(DamageClass.Melee) += PastaBoost / 100f;
+        player.sunflower = true;
     }
 }

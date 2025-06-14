@@ -231,7 +231,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
 				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
 				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add<EyeOfGreedBossBag>()
+				.Add<GreedBossBag>()
 				.Add<GreedMusicBox>()
 				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
 				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })

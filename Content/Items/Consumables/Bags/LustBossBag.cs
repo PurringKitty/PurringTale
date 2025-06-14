@@ -5,7 +5,7 @@ using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Weapons.Melee;
 using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Weapons.Summoner;
-using PurringTale.Content.NPCs.BossNPCs.Greed;
+using PurringTale.Content.NPCs.BossNPCs.Lust;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -13,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	public class EyeOfGreedBossBag : ModItem
+	public class LustBossBag : ModItem
     {
         public override void SetStaticDefaults()
         {
@@ -40,16 +40,16 @@ namespace PurringTale.Content.Items.Consumables.Bags
 
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 20));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ValhallaOre>(), 1, 1, 25));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 2));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Greed>(), 1, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedHelmet>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedBreastplate>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GreedLeggings>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoldOnAStick>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfGreed>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GemIncrustedRevolver>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfGreedBody>()));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Lust>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustHelmet>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustBreastplate>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustLeggings>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfLust>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LanceOfLust>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LustBazooka>(), 2, 0, 1));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfLustBody>()));
         }
     }
 }

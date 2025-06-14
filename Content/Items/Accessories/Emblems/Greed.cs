@@ -13,7 +13,7 @@ namespace PurringTale.Content.Items.Accessories.Emblems;
 
 public class Greed : ModItem
 {
-    public static readonly int GreedBoost = 25;
+    public static readonly int GreedBoost = 10;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
@@ -24,8 +24,7 @@ public class Greed : ModItem
         Item.height = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(silver: 10);
-        Item.rare = ItemRarityID.Expert;
-        Item.expert = true;
+        Item.rare = ItemRarityID.Yellow;
     }
     public override void UpdateAccessory(Player player, bool hideVisual)
     {

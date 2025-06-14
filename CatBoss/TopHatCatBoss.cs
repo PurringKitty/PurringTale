@@ -123,7 +123,7 @@ namespace PurringTale.CatBoss
             NPC.npcSlots = 10f;
             NPC.HitSound = SoundID.NPCHit8;
             NPC.noGravity = true;
-            NPC.noTileCollide = true;
+            NPC.noTileCollide = false;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
             NPC.dontTakeDamage = true;
@@ -138,7 +138,7 @@ namespace PurringTale.CatBoss
         {
             bestiaryEntry.Info.AddRange(new List<Terraria.GameContent.Bestiary.IBestiaryInfoElement> {
                 new Terraria.GameContent.Bestiary.MoonLordPortraitBackgroundProviderBestiaryInfoElement(), // Plain black background
-				new Terraria.GameContent.Bestiary.FlavorTextBestiaryInfoElement("The God Of Top Hats! Can Be A Jerk Sometimes...")
+				new Terraria.GameContent.Bestiary.FlavorTextBestiaryInfoElement("Oh Look It Is Myself! - Rukuka")
             });
 
         }
@@ -264,8 +264,7 @@ namespace PurringTale.CatBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<THGBossBag>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 0, 100));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 0, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 10, 100));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<THGBossTrophy>(), 4, 1, 1));
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<THGBossRelic>()));
         }

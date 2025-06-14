@@ -14,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
-	public class EyeOfWrathBossBag : ModItem
+	public class WrathBossBag : ModItem
     {
         public override void SetStaticDefaults()
         {

@@ -81,7 +81,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Greed
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGreedBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<GreedBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

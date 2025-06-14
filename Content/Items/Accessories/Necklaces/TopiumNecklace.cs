@@ -6,7 +6,7 @@ namespace PurringTale.Content.Items.Accessories.Necklaces;
 
 [AutoloadEquip(EquipType.Neck)]
 
-public class TopHatDemonPendent : ModItem
+public class TopiumNecklace : ModItem
 {
     public override void SetStaticDefaults()
     {
@@ -17,17 +17,16 @@ public class TopHatDemonPendent : ModItem
         Item.width = 16;
         Item.height = 14;
         Item.accessory = true;
-        Item.value = Item.sellPrice(gold: 75);
-        Item.rare = ItemRarityID.Master;
-        Item.master = true;
+        Item.value = Item.sellPrice(gold: 1);
+        Item.rare = ItemRarityID.Blue;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
 
-        player.statDefense += 20;
+        player.findTreasure = true;
 
-        player.lifeRegen = 10;
+        player.dangerSense = true;
 
     }
 }
