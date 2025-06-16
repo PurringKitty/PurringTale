@@ -3,9 +3,8 @@ using Terraria;
 
 namespace PurringTale.Assets.Textures.Backgrounds
 {
-    public class GlitchBackgroundStyle : ModSurfaceBackgroundStyle
+    public class GlitchBiomeBackgroundStyle : ModSurfaceBackgroundStyle
     {
-        // Use this to keep far Backgrounds like the mountains.
         public override void ModifyFarFades(float[] fades, float transitionSpeed)
         {
             for (int i = 0; i < fades.Length; i++)
@@ -46,13 +45,13 @@ namespace PurringTale.Assets.Textures.Backgrounds
             switch (SurfaceFrame)
             {
                 case 0:
-                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid0");
+                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid");
                 case 1:
-                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid1");
+                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid");
                 case 2:
-                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid2");
+                    return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid");
                 case 3:
-                    return BackgroundTextureLoader.GetBackgroundSlot("PurringTale/Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid3"); // You can use the full path version of GetBackgroundSlot too
+                    return BackgroundTextureLoader.GetBackgroundSlot("PurringTale/Assets/Textures/Backgrounds/GlitchBiomeSurfaceMid");
                 default:
                     return -1;
             }

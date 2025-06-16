@@ -20,7 +20,7 @@ using Terraria.Graphics.CameraModifiers;
 
 namespace PurringTale.CatBoss
 {
-	public class gss: ModProjectile
+	public class Gss: ModProjectile
 	{
         public override string Texture => "PurringTale/CatBoss/Assets/2";
 

@@ -1505,9 +1505,9 @@ NPCs: {
 		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfWrath] At Night.
 	}
 
-	ZeRock: {
-		DisplayName: Sus Rock
-		BossChecklistIntegration.SpawnInfo: USE [i:PurringTale/TheRock]
+	RockBoss: {
+		DisplayName: Rock
+		BossChecklistIntegration.SpawnInfo: USE [i:PurringTale/TheRock], Or it just might spawn randomly
 	}
 
 	TopHatSlime.DisplayName: Top Hat Slime
@@ -1833,12 +1833,12 @@ Buffs: {
 
 Projectiles: {
 	Bolt.DisplayName: Bolt
-	BossBullet.DisplayName: Cat Bullet
-	BossClone.DisplayName: Cat Clone
-	BossLaser.DisplayName: Cat Laser
-	BossRocket.DisplayName: Cat Rocket
+	BossBullet.DisplayName: Top Hat Spike
+	BossClone.DisplayName: The Clone
+	BossLaser.DisplayName: Top Hat Laser
+	BossRocket.DisplayName: Top Hat Rocket
 	DynamicRope.DisplayName: Dynamic Rope
-	gss.DisplayName: gss
+	Gss.DisplayName: Greatsword Slash
 	Slash.DisplayName: Slash
 	BootsPetProjectile.DisplayName: Boots
 	UFOWolfPetProjectile.DisplayName: UFO Wolf

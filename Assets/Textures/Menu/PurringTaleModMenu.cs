@@ -21,7 +21,7 @@ namespace PurringTale.Assets.Textures.Menu
 
         public override int Music => MusicLoader.GetMusicSlot(Mod, "Assets/Music/MainMenu");
 
-        public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<GlitchBackgroundStyle>();
+        public override ModSurfaceBackgroundStyle MenuBackgroundStyle => ModContent.GetInstance<MainMenuBackgroundStyle>();
 
         public override string DisplayName => "PurringTale";
 

@@ -77,7 +77,7 @@ namespace PurringTale.CatBoss
         public override void SetStaticDefaults()
         {
 
-            Main.npcFrameCount[Type] = 26;
+            Main.npcFrameCount[Type] = 2;
 
             NPCID.Sets.TrailCacheLength[NPC.type] = 10;
             NPCID.Sets.TrailingMode[NPC.type] = 3;
@@ -103,17 +103,16 @@ namespace PurringTale.CatBoss
         public override void SetDefaults()
         {
             NPC.width = 24;
-            NPC.height = 36;
-            NPC.scale = 1.5f;
+            NPC.height = 50;
 
-            NPC.damage = 15;
+            NPC.damage = 10;
 
-            NPC.lifeMax = 3000000;
-            NPC.defense = 10;
+            NPC.lifeMax = 2000000;
+            NPC.defense = 20;
 
             NPC.HitSound = SoundID.NPCHit1;
-            NPC.DeathSound = SoundID.NPCDeath1;
-
+            NPC.DeathSound = SoundID.AbigailCry;
+            
             NPC.knockBackResist = 0f;
 
             NPC.value = Item.buyPrice(platinum: 5);
@@ -282,7 +281,7 @@ namespace PurringTale.CatBoss
                             for (int i = 0; i < 12; i++)
                             {
                                 Vector2 pos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 12 * i + (timer / 60) / 3) * 30;
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 15, ModContent.ProjectileType<gss>(), 220, 5);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 15, ModContent.ProjectileType<Gss>(), 220, 5);
                             }
                         }
                         if (timer % 80 == 0 && timer < 220)
@@ -290,7 +289,7 @@ namespace PurringTale.CatBoss
                             for (int i = 0; i < 12; i++)
                             {
                                 Vector2 pos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 12 * i + (timer / 60) / 3 + 1) * 30;
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 20, ModContent.ProjectileType<gss>(), 220, 5);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 20, ModContent.ProjectileType<Gss>(), 220, 5);
                             }
                         }
                         if (timer == 220)

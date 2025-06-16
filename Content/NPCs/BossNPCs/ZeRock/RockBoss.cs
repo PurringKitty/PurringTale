@@ -6,12 +6,13 @@ using Terraria.GameContent.Bestiary;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Weapons.Melee;
+using Terraria.ModLoader.Utilities;
 
 namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 {
 
     [AutoloadBossHead]
-    public class ZeRock : ModNPC
+    public class RockBoss : ModNPC
 
     {
         public override void SetStaticDefaults()
@@ -29,11 +30,12 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
         }
         public override void SetDefaults()
         {
+            NPC.aiStyle = 1;
             NPC.width = 26;
             NPC.height = 18;
-            NPC.damage = 0;
-            NPC.defense = 5000000;
-            NPC.lifeMax = 5000000;
+            NPC.damage = 1;
+            NPC.defense = 1000;
+            NPC.lifeMax = 1000000;
             NPC.HitSound = SoundID.Dig;
             NPC.DeathSound = SoundID.ScaryScream;
             NPC.knockBackResist = 0f;
@@ -41,9 +43,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             NPC.noTileCollide = false;
             NPC.value = Item.buyPrice(platinum: 100);
             NPC.boss = true;
-            NPC.npcSlots = 5f;
-            NPC.aiStyle = -1;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
+            NPC.npcSlots = 50f;
 
             if (!Main.dedServ)
             {
@@ -55,19 +55,22 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
         {
             bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                new FlavorTextBestiaryInfoElement("...Why The Hell Are You Fighting A Rock?"),
+                new FlavorTextBestiaryInfoElement("...Why The Hell Are You Fighting A Rock? - Rukuka"),
             });
         }
-
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        {
+            return SpawnCondition.Overworld.Chance * 0.000001f;
+        }
         public override void OnKill()
         {
             NPC.SetEventFlagCleared(ref DownedBossSystem.downedRock, -1);
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeaponRock>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 0, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeaponRock>(), 15, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 5));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 100, 1000));
         }
 
     }

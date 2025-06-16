@@ -33,8 +33,6 @@ namespace PurringTale.Content.NPCs.HostileNPCs
             return SpawnCondition.OverworldNight.Chance * 0.1f;
         }
 
-
-
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 1, 20));

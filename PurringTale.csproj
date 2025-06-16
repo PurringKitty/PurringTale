@@ -11,7 +11,6 @@
 	  <None Remove="Content\Items\Accessories\Emblems\Lust.cs~RF858e8d.TMP" />
 	  <None Remove="Content\Items\Weapons\Melee\PlantSpear.cs~RF1b644ced.TMP" />
 	  <None Remove="Content\Items\Weapons\Summoner\WhipOfPride.cs~RF6e60c08.TMP" />
-	  <None Remove="Content\NPCs\BossNPCs\ZeRock\ZeRock_Head_Boss.png" />
 	  <None Remove="Content\Projectiles\BeeBlasterProj.png" />
 	  <None Remove="Content\Projectiles\EaterMinionProjBody.png" />
 	  <None Remove="Content\Projectiles\SlothSpearProj.png" />
