@@ -14,6 +14,7 @@
 	  <None Remove="Content\Projectiles\BeeBlasterProj.png" />
 	  <None Remove="Content\Projectiles\EaterMinionProjBody.png" />
 	  <None Remove="Content\Projectiles\SlothSpearProj.png" />
+	  <None Remove="Content\Tiles\Furniture\Crafters\ValhallaWorkbench.cs~RF15678e8a.TMP" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Include="Content\what is this\.vs\ProjectEvaluation\purringtail.metadata.v7.bin" />

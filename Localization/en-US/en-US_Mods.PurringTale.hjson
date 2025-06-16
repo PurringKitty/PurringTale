@@ -1036,7 +1036,7 @@ Items: {
 
 	THCMusicBox: {
 		Tooltip: ""
-		DisplayName: T H C Music Box
+		DisplayName: Rukuka Music Box
 	}
 
 	SnowblindMusicBox: {
@@ -1086,12 +1086,12 @@ Items: {
 
 	THGBossTrophy: {
 		Tooltip: ""
-		DisplayName: T H G Boss Trophy
+		DisplayName: Rukuka Boss Trophy
 	}
 
 	THGBossRelic: {
 		Tooltip: ""
-		DisplayName: T H G Boss Relic
+		DisplayName: Rukuka Boss Relic
 	}
 
 	SinsBossTrophy: {
@@ -1150,53 +1150,61 @@ Items: {
 	}
 
 	TheRock: {
-		Tooltip: ""
+		Tooltip: Summons a R O C K
 		DisplayName: The Rock
 	}
 
 	StackOfTopiumBars: {
-		Tooltip: ""
-		DisplayName: Stack Of Topium Bars
+		Tooltip:
+			'''
+			You... [c/B01014:broke] his [c/B01014:gift]...
+			Summons Rukuka, God of Top Hats (Boss)
+			'''
+		DisplayName: Broken Topium Necklace
 	}
 
 	ClumpOfTopiumOre: {
-		Tooltip: ""
-		DisplayName: Clump Of Topium Ore
+		Tooltip:
+			'''
+			He likes the jingle it makes.
+			Summons Rukuka (NPC)
+			'''
+		DisplayName: Top Hat Bell
 	}
 
 	BowlOfWrath: {
-		Tooltip: ""
-		DisplayName: Bowl Of Wrath
+		Tooltip: Summons Ira, The Sin Of Wrath
+		DisplayName: Soul Of Wrath
 	}
 
 	BowlOfSloth: {
-		Tooltip: ""
-		DisplayName: Bowl Of Sloth
+		Tooltip: Summons Acedia, The Sin Of Sloth
+		DisplayName: Soul Of Sloth
 	}
 
 	BowlOfPride: {
-		Tooltip: ""
-		DisplayName: Bowl Of Pride
+		Tooltip: Summons Suberia, The Sin Of Pride
+		DisplayName: Soul Of Pride
 	}
 
 	BowlOfLust: {
-		Tooltip: ""
-		DisplayName: Bowl Of Lust
+		Tooltip: Summons Luxuria, The Sin Of Lust
+		DisplayName: Soul Of Lust
 	}
 
 	BowlOfGreed: {
-		Tooltip: ""
-		DisplayName: Bowl Of Greed
+		Tooltip: Summons Avaritia, The Sin Of Greed
+		DisplayName: Soul Of Greed
 	}
 
 	BowlOfGluttony: {
-		Tooltip: ""
-		DisplayName: Bowl Of Gluttony
+		Tooltip: Summons Gula, The Sin Of Gluttony
+		DisplayName: Soul Of Gluttony
 	}
 
 	BowlOfEnvy: {
-		Tooltip: ""
-		DisplayName: Bowl Of Envy
+		Tooltip: Summons Invidia, The Sin Of Envy
+		DisplayName: Soul Of Envy
 	}
 
 	FruitOfValhalla: {
@@ -1211,42 +1219,42 @@ Items: {
 
 	THGBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Rakuka Boss Bag
+		DisplayName: Treasure Bag (Rukuka)
 	}
 
 	WrathBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Wrath Boss Bag
+		DisplayName: Treasure Bag (Ira)
 	}
 
 	SlothBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Sloth Boss Bag
+		DisplayName: Treasure Bag (Acedia)
 	}
 
 	PrideBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Pride Boss Bag
+		DisplayName: Treasure Bag (Suberia)
 	}
 
 	LustBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Lust Boss Bag
+		DisplayName: Treasure Bag (Luxuria)
 	}
 
 	GreedBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Greed Boss Bag
+		DisplayName: Treasure Bag (Avaritia)
 	}
 
 	GluttonyBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Gluttony Boss Bag
+		DisplayName: Treasure Bag (Gula)
 	}
 
 	EnvyBossBag: {
 		Tooltip: Right Click to open
-		DisplayName: Envy Boss Bag
+		DisplayName: Treasure Bag (Invidia)
 	}
 
 	BoxOfStuff: {
@@ -1441,6 +1449,46 @@ Items: {
 	TreadBoots: {
 		Tooltip: Run faster with these!
 		DisplayName: Tread Boots
+	}
+
+	AcediaBossRelic: {
+		DisplayName: Acedia Boss Relic
+		Tooltip: ""
+	}
+
+	AvaritiaBossRelic: {
+		DisplayName: Avaritia Boss Relic
+		Tooltip: ""
+	}
+
+	InvidiaBossRelic: {
+		DisplayName: Invidia Boss Relic
+		Tooltip: ""
+	}
+
+	RockBossRelic: {
+		DisplayName: Rock Boss Relic
+		Tooltip: ""
+	}
+
+	AcediaBossTrophy: {
+		DisplayName: Acedia Boss Trophy
+		Tooltip: ""
+	}
+
+	AvaritiaBossTrophy: {
+		DisplayName: Avaritia Boss Trophy
+		Tooltip: ""
+	}
+
+	InvidiaBossTrophy: {
+		DisplayName: Invidia Boss Trophy
+		Tooltip: ""
+	}
+
+	RockBossTrophy: {
+		DisplayName: Rock Boss Trophy
+		Tooltip: ""
 	}
 }
 

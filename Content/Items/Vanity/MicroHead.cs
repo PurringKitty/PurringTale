@@ -1,4 +1,5 @@
 ﻿using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +24,7 @@ namespace PurringTale.Content.Items.Vanity
         {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient<VanityVoucher>(1);
-            recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+            recipe.AddTile<ValhallaWorkbench>();
             recipe.Register();
         }
 	}

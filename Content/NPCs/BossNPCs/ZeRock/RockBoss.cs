@@ -1,11 +1,13 @@
-﻿using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent.Bestiary;
+﻿using PurringTale.Common.Systems;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Common.Systems;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 using PurringTale.Content.Items.Weapons.Melee;
+using Terraria;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 
 namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
@@ -60,7 +62,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return SpawnCondition.Overworld.Chance * 0.000001f;
+            return SpawnCondition.OverworldDay.Chance * 0.0001f;
         }
         public override void OnKill()
         {
@@ -68,8 +70,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RockBossTrophy>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<RockBossRelic>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeaponRock>(), 15, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 1, 5));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 4, 1, 5));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 100, 1000));
         }
 

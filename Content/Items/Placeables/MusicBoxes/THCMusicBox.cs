@@ -1,4 +1,5 @@
 using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using PurringTale.Content.Tiles.MusicBoxes;
 using Terraria;
 using Terraria.ID;
@@ -31,7 +32,7 @@ namespace PurringTale.Content.Items.Placeables.MusicBoxes
 			recipe.AddIngredient<Pride>(1);
 			recipe.AddIngredient<Sloth>(1);
 			recipe.AddIngredient<Wrath>(1);
-			recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+			recipe.AddTile<ValhallaWorkbench>();
             recipe.Register();
         }
         public override void SetDefaults() {

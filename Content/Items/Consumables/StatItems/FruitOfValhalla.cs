@@ -1,6 +1,6 @@
 ﻿using PurringTale.Common.Players;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Tiles.Furniture;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

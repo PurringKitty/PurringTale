@@ -62,7 +62,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Gluttony
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.EyeofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {

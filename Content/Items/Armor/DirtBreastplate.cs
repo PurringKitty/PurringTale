@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using PurringTale.Content.Tiles.Furniture.Crafters;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,7 +20,7 @@ namespace PurringTale.Content.Items.Armor
         {
             CreateRecipe()
                 .AddIngredient(ItemID.DirtBlock, 25)
-                .AddTile<Tiles.Furniture.ValhallaWorkbench>()
+                .AddTile<ValhallaWorkbench>()
                 .Register();
         }
     }

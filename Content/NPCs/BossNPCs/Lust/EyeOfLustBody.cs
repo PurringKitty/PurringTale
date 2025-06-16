@@ -59,7 +59,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Lust
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.BrainofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {

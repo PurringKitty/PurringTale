@@ -1,5 +1,6 @@
 ﻿using PurringTale.Common.Players;
 using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -51,7 +52,7 @@ namespace PurringTale.Content.Items.Consumables.StatItems
 		public override void AddRecipes() {
 			CreateRecipe()
 				.AddIngredient<CoreOfValhalla>(50)
-				.AddTile<Tiles.Furniture.ValhallaWorkbench>()
+				.AddTile<ValhallaWorkbench>()
 				.Register();
 		}
 	}

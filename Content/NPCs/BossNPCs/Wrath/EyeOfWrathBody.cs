@@ -4,9 +4,10 @@ using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Furniture;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Wrath
 {
@@ -61,7 +62,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Wrath
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.EyeofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {

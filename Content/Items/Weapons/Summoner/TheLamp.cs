@@ -7,6 +7,7 @@ using PurringTale.Content.Buffs;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Projectiles.MinionProjectiles;
 using PurringTale.Content.Items.Placeables.Bars;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 
 namespace PurringTale.Content.Items.Weapons.Summoner;
 
@@ -57,7 +58,7 @@ public class TheLamp : ModItem
         Recipe recipe = CreateRecipe();
         recipe.AddIngredient<ValhallaBar>(5);
         recipe.AddIngredient<CoreOfValhalla>(5);
-        recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+        recipe.AddTile<ValhallaWorkbench>();
         recipe.Register();
     }
 
