@@ -234,7 +234,7 @@ namespace PurringTale.Common.Systems
             internalName = "Sloth";
             weight = 13.65f;
             downed = () => DownedBossSystem.downedSloth;
-            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.Sloth.EyeOfSlothBody>();
+            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.Sloth.SlothBoss>();
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Sloth>(),

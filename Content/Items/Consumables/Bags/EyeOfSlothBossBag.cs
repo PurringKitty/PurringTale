@@ -51,7 +51,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulLance>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfSloth>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlothfulShotgun>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfSlothBody>()));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<SlothBoss>()));
         }
     }
 }

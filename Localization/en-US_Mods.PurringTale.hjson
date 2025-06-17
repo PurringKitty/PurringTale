@@ -2013,6 +2013,8 @@ NPCs: {
 	}
 
 	EnvyTest.DisplayName: Envy Test
+	SlothBoss.DisplayName: Sloth Boss
+	SlothHead.DisplayName: Sloth Head
 }
 
 Buffs: {
@@ -2146,6 +2148,7 @@ Projectiles: {
 	OldGodSlayerWhipProjectile.DisplayName: Old God Slayer Whip Projectile
 	SlimyWhipProjectile.DisplayName: Slimy Whip Projectile
 	SlothSpearProj.DisplayName: Sloth Spear Proj
+	SlothSpear.DisplayName: Sloth Spear
 	EaterMinionProj.DisplayName: Eater Minion Proj
 	EaterMinionProj1.DisplayName: Eater Minion Proj1
 	EaterMinionProj2.DisplayName: Eater Minion Proj2
@@ -2195,6 +2198,20 @@ Projectiles: {
 	PrideWhipProjectile.DisplayName: Pride Whip Projectile
 	SlothWhipProjectile.DisplayName: Sloth Whip Projectile
 	WrathWhipProjectile.DisplayName: Wrath Whip Projectile
+	SlothBeam.DisplayName: Sloth Beam
+	SlothOrb.DisplayName: Sloth Orb
+	SlothWave.DisplayName: Sloth Wave
+	SlothRift.DisplayName: Sloth Rift
+	SlothTimeZone.DisplayName: Sloth Time Zone
+	SlothBullet.DisplayName: Sloth Bullet
+	SlothLaser.DisplayName: Sloth Laser
+	SlothOrbiter.DisplayName: Sloth Orbiter
+	SlothDagger.DisplayName: Sloth Dagger
+	SlothWarningLine.DisplayName: Sloth Warning Line
+	SlothOrb3.DisplayName: Sloth Orb3
+	SlothShotgunPellet.DisplayName: Sloth Shotgun Pellet
+	SlothNebulaBlast.DisplayName: Sloth Nebula Blast
+	SlothSpear3.DisplayName: Sloth Spear3
 }
 
 Biomes: {
