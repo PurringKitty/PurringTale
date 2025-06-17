@@ -7,8 +7,10 @@ using PurringTale.Content.Items.Accessories.Necklaces;
 using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.Consumables.Summons;
+using PurringTale.Content.Items.Lore;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Furniture;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 using PurringTale.Content.Items.Placeables.Ores;
 using PurringTale.Content.Items.Tools;
 using PurringTale.Content.Items.Weapons.Magic;
@@ -53,6 +55,10 @@ namespace PurringTale.Common.Systems
             {
                 ModContent.ItemType<THGBossRelic>(),
                 ModContent.ItemType<THGBossTrophy>(),
+                ModContent.ItemType<OldBook1>(),
+                ModContent.ItemType<OldBook2>(),
+                ModContent.ItemType<OldBook3>(),
+                ModContent.ItemType<OldBook4>(),
                 ModContent.ItemType<VanityVoucher>(),
                 ModContent.ItemType<TopiumOre>(),
                 ModContent.ItemType<MoonlightGreatSword>(),
@@ -297,7 +303,7 @@ namespace PurringTale.Common.Systems
             internalName = "Rock";
             weight = 50f;
             downed = () => DownedBossSystem.downedRock;
-            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.ZeRock.ZeRock>();
+            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.ZeRock.RockBoss>();
             collectibles = new List<int>()
             {
                 ModContent.ItemType<WeaponRock>(),

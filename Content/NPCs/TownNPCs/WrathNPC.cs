@@ -220,7 +220,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add<EyeOfWrathBossBag>()
+				.Add<WrathBossBag>()
 				.Add<WrathMusicBox>();
 			npcShop.Register();
 		}

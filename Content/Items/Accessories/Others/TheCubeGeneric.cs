@@ -1,11 +1,7 @@
-﻿using PurringTale.Common.Players;
-using PurringTale.Content.DamageClasses;
-using PurringTale.Content.Items.Placeables.Bars;
-using PurringTale.Content.Items.Placeables.Furniture;
-using PurringTale.Content.Items.Weapons;
+﻿using PurringTale.Content.Items.Placeables.Bars;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.Accessories.Others
@@ -21,6 +17,7 @@ namespace PurringTale.Content.Items.Accessories.Others
             Item.height = 40;
             Item.value = Item.sellPrice(platinum: 50);
             Item.accessory = true;
+            Item.rare = ItemRarityID.Quest;
         }
 
 
@@ -30,17 +27,13 @@ namespace PurringTale.Content.Items.Accessories.Others
             recipe.AddIngredient(ItemID.LunarBar,100);
             recipe.AddIngredient<TopiumBar>(99999);
             recipe.AddIngredient<ValhallaBar>(99999);
-            recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+            recipe.AddTile<ValhallaWorkbench>();
             recipe.Register();
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage(DamageClass.Generic) += 1.75f;
-            player.GetCritChance(DamageClass.Generic) += 0.50f;
-            player.GetAttackSpeed(DamageClass.Generic) += 0.25f;
-            player.GetArmorPenetration(DamageClass.Generic) += 0.50f;
-            player.AddBuff(BuffID.Sharpened, 0);
+            player.maxMinions += 20;
             player.statManaMax2 += 200;
             player.statLifeMax2 += 200;
         }

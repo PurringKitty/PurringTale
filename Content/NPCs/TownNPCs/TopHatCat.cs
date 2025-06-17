@@ -145,7 +145,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<VanityVoucher>()
                 .Add<BottleOfOJ>()
                 .Add<MauriceWings>()
-                .Add<PastaNeckless>(Condition.Hardmode)
+                .Add<PastaNecklace>(Condition.Hardmode)
                 .Add<PastaWings>()
                 .Add<THCWings>()
                 .Add<TreadBoots>(Condition.Hardmode)

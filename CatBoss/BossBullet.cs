@@ -46,8 +46,8 @@ namespace PurringTale.CatBoss
         public override void SetDefaults()
         {
             Projectile.penetrate = 1;
-            Projectile.width = 10;
-            Projectile.height = 10;
+            Projectile.width = 13;
+            Projectile.height = 39;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;

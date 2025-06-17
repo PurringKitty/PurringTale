@@ -1,3 +1,4 @@
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using PurringTale.Content.Tiles.MusicBoxes;
 using Terraria;
 using Terraria.ID;
@@ -24,7 +25,7 @@ namespace PurringTale.Content.Items.Placeables.MusicBoxes
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.MusicBox, 1);
             recipe.AddIngredient(ItemID.SnowBlock, 10);
-			recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+			recipe.AddTile<ValhallaWorkbench>();
             recipe.Register();
         }
     

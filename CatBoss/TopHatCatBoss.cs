@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Furniture;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -77,7 +78,7 @@ namespace PurringTale.CatBoss
         public override void SetStaticDefaults()
         {
 
-            Main.npcFrameCount[Type] = 26;
+            Main.npcFrameCount[Type] = 2;
 
             NPCID.Sets.TrailCacheLength[NPC.type] = 10;
             NPCID.Sets.TrailingMode[NPC.type] = 3;
@@ -103,17 +104,16 @@ namespace PurringTale.CatBoss
         public override void SetDefaults()
         {
             NPC.width = 24;
-            NPC.height = 36;
-            NPC.scale = 1.5f;
+            NPC.height = 50;
 
-            NPC.damage = 15;
+            NPC.damage = 10;
 
-            NPC.lifeMax = 3000000;
-            NPC.defense = 10;
+            NPC.lifeMax = 2000000;
+            NPC.defense = 20;
 
             NPC.HitSound = SoundID.NPCHit1;
-            NPC.DeathSound = SoundID.NPCDeath1;
-
+            NPC.DeathSound = SoundID.AbigailCry;
+            
             NPC.knockBackResist = 0f;
 
             NPC.value = Item.buyPrice(platinum: 5);
@@ -123,7 +123,7 @@ namespace PurringTale.CatBoss
             NPC.npcSlots = 10f;
             NPC.HitSound = SoundID.NPCHit8;
             NPC.noGravity = true;
-            NPC.noTileCollide = true;
+            NPC.noTileCollide = false;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
             NPC.dontTakeDamage = true;
@@ -138,7 +138,7 @@ namespace PurringTale.CatBoss
         {
             bestiaryEntry.Info.AddRange(new List<Terraria.GameContent.Bestiary.IBestiaryInfoElement> {
                 new Terraria.GameContent.Bestiary.MoonLordPortraitBackgroundProviderBestiaryInfoElement(), // Plain black background
-				new Terraria.GameContent.Bestiary.FlavorTextBestiaryInfoElement("The God Of Top Hats! Can Be A Jerk Sometimes...")
+				new Terraria.GameContent.Bestiary.FlavorTextBestiaryInfoElement("Oh Look It Is Myself! - Rukuka")
             });
 
         }
@@ -264,8 +264,7 @@ namespace PurringTale.CatBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<THGBossBag>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 0, 100));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 5, 0, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 10, 100));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<THGBossTrophy>(), 4, 1, 1));
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<THGBossRelic>()));
         }
@@ -283,7 +282,7 @@ namespace PurringTale.CatBoss
                             for (int i = 0; i < 12; i++)
                             {
                                 Vector2 pos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 12 * i + (timer / 60) / 3) * 30;
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 15, ModContent.ProjectileType<gss>(), 220, 5);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 15, ModContent.ProjectileType<Gss>(), 220, 5);
                             }
                         }
                         if (timer % 80 == 0 && timer < 220)
@@ -291,7 +290,7 @@ namespace PurringTale.CatBoss
                             for (int i = 0; i < 12; i++)
                             {
                                 Vector2 pos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 12 * i + (timer / 60) / 3 + 1) * 30;
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 20, ModContent.ProjectileType<gss>(), 220, 5);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, NPC.Center.DirectionTo(pos) * 20, ModContent.ProjectileType<Gss>(), 220, 5);
                             }
                         }
                         if (timer == 220)

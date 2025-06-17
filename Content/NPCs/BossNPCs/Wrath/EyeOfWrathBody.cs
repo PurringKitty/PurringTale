@@ -4,9 +4,10 @@ using Terraria.ModLoader;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.Items.Placeables.Furniture;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Wrath
 {
@@ -61,7 +62,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Wrath
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.EyeofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {
@@ -82,7 +82,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Wrath
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfWrathBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<WrathBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SinsBossTrophy>(), 4, 1, 1));
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<SinsBossRelic>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));

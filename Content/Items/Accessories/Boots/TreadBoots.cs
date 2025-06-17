@@ -17,7 +17,7 @@ namespace PurringTale.Content.Items.Accessories.Boots
 			Item.width = 20;
 			Item.height = 20;
 			Item.value = Item.sellPrice(gold: 1);
-            Item.rare = ItemRarityID.Master;
+            Item.rare = ItemRarityID.Orange;
 			Item.accessory = true;
             Item.UseSound = SoundID.Item24;
         }
@@ -29,7 +29,6 @@ namespace PurringTale.Content.Items.Accessories.Boots
 			player.accRunSpeed += 0.55f;
 			player.waterWalk2 = true;
 			player.fireWalk = true;
-			player.DoBootsEffect(player.DoBootsEffect_PlaceFlowersOnTile);
         }
 	}
 }

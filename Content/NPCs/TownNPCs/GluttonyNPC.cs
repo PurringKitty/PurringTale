@@ -244,7 +244,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add(new Item(ItemID.Starfruit) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InHallow)
                 .Add(new Item(ItemID.Pomegranate) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InUnderworld)
                 .Add(new Item(ItemID.SpicyPepper) { shopCustomPrice = Item.buyPrice(gold: 1) }, Condition.InUnderworld)
-                .Add<EyeOfGluttonyBossBag>()
+                .Add<GluttonyBossBag>()
 				.Add<GluttonyMusicBox>();
 			npcShop.Register();
 		}

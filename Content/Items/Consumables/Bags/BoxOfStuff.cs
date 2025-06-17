@@ -8,6 +8,7 @@ using PurringTale.Content.Items.Armor;
 using PurringTale.Content.Items.Tools;
 using PurringTale.Content.Pets.FedoraCat;
 using PurringTale.Content.Items.Weapons.Melee;
+using PurringTale.Content.Items.Accessories.Necklaces;
 
 namespace PurringTale.Content.Items.Consumables.Bags
 {
@@ -23,7 +24,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
 			Item.width = 28;
 			Item.height = 22;
             Item.value = 0;
-            Item.rare = ItemRarityID.Master;
+            Item.rare = ItemRarityID.Quest;
 		}
 		public override bool CanRightClick() {
 			return true;
@@ -38,6 +39,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DirtSword>(), 1, 1, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DirtPickaxe>(), 1, 1, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DirtAxe>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TopiumNecklace>(), 1, 1, 1));
         }
     }
 }

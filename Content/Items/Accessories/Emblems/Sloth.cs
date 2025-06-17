@@ -13,7 +13,7 @@ namespace PurringTale.Content.Items.Accessories.Emblems;
 
 public class Sloth : ModItem
 {
-    public static readonly int SlothBoost = 25;
+    public static readonly int SlothBoost = 10;
     public override void SetStaticDefaults()
     {
         Item.ResearchUnlockCount = 1;
@@ -24,8 +24,7 @@ public class Sloth : ModItem
         Item.height = 26;
         Item.accessory = true;
         Item.value = Item.sellPrice(silver: 10);
-        Item.rare = ItemRarityID.Expert;
-        Item.expert = true;
+        Item.rare = ItemRarityID.LightPurple;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)

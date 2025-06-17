@@ -14,28 +14,20 @@ public class TopHatDemonPendent : ModItem
     }
     public override void SetDefaults()
     {
-        Item.width = 40;
-        Item.height = 40;
+        Item.width = 16;
+        Item.height = 14;
         Item.accessory = true;
-        Item.sellPrice(gold: 75);
+        Item.value = Item.sellPrice(gold: 75);
         Item.rare = ItemRarityID.Master;
-        Item.masterOnly = true;
+        Item.master = true;
     }
 
     public override void UpdateAccessory(Player player, bool hideVisual)
     {
 
-        player.AddBuff(BuffID.IceBarrier, 0);
+        player.statDefense += 20;
 
-        player.AddBuff(BuffID.Campfire, 0);
-
-        player.AddBuff(BuffID.HeartLamp, 0);
-
-        player.AddBuff(BuffID.WellFed3, 0);
-
-        player.AddBuff(BuffID.CatBast, 0);
-
-        player.AddBuff(BuffID.RapidHealing, 0);
+        player.lifeRegen = 10;
 
     }
 }

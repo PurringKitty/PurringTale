@@ -32,7 +32,7 @@ namespace PurringTale.Content.Items.Consumables.Summons
 		}
 
 		public override bool CanUseItem(Player player) {
-			return !NPC.AnyNPCs(ModContent.NPCType<ZeRock>());
+			return !NPC.AnyNPCs(ModContent.NPCType<RockBoss>());
 		}
 
 		public override bool? UseItem(Player player) {
@@ -41,7 +41,7 @@ namespace PurringTale.Content.Items.Consumables.Summons
 				// (explicitly excluded serverside here)
 				SoundEngine.PlaySound(SoundID.Lavafall, player.position);
 
-				int type = ModContent.NPCType<ZeRock>();
+				int type = ModContent.NPCType<RockBoss>();
 
 				if (Main.netMode != NetmodeID.MultiplayerClient) {
 					NPC.SpawnOnPlayer(player.whoAmI, type);

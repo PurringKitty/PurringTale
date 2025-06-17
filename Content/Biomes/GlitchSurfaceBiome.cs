@@ -16,7 +16,7 @@ namespace PurringTale.Content.Biomes
     public class GlitchSurfaceBiome : ModBiome
     {
         public override ModWaterStyle WaterStyle => ModContent.GetInstance<GlitchWaterStyle>(); 
-        public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<GlitchBackgroundStyle>();
+        public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<GlitchBiomeBackgroundStyle>();
         public override CaptureBiome.TileColorStyle TileColorStyle => CaptureBiome.TileColorStyle.Jungle;
 
 
@@ -24,7 +24,7 @@ namespace PurringTale.Content.Biomes
 
         public override int BiomeTorchItemType => ModContent.ItemType<Items.Placeables.Blocks.GlitchTorch>();
 
-        public override string BackgroundPath => "PurringTale/Assets/Textures/Background/GlitchBiomeSurfaceMid0";
+        public override string BackgroundPath => "PurringTale/Assets/Textures/Background/GlitchBiomeSurfaceMid";
         public override string MapBackground => BackgroundPath;
         public override Color? BackgroundColor => base.BackgroundColor;
         public override string BestiaryIcon => "Content/Biomes/GlitchBesitery";

@@ -230,7 +230,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add(new Item(ItemID.GenderChangePotion) { shopCustomPrice = Item.buyPrice(gold: 1) })
                 .Add(new Item(ItemID.LifeCrystal) { shopCustomPrice = Item.buyPrice(gold: 10) })
                 .Add(new Item(ItemID.LifeFruit) { shopCustomPrice = Item.buyPrice(platinum: 1) }, Condition.DownedPlantera)
-                .Add<EyeOfLustBossBag>()
+                .Add<LustBossBag>()
                 .Add<LustMusicBox>();
 			npcShop.Register();
 		}

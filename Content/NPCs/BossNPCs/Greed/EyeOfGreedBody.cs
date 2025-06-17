@@ -1,12 +1,14 @@
-﻿using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent.Bestiary;
-using PurringTale.Content.Items.Vanity;
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Common.Systems;
+﻿using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
+using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
+using PurringTale.Content.Items.Vanity;
+using Terraria;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Greed
 {
@@ -60,7 +62,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Greed
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.EyeofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {
@@ -81,7 +82,9 @@ namespace PurringTale.Content.NPCs.BossNPCs.Greed
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGreedBossBag>()));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AvaritiaBossTrophy>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<AvaritiaBossRelic>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<GreedBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }

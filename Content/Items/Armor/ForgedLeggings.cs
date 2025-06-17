@@ -1,4 +1,5 @@
 ﻿using PurringTale.Content.Items.Placeables.Bars;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,7 +23,7 @@ namespace PurringTale.Content.Items.Armor
             recipe.AddIngredient<RustedLeggings>(1);
             recipe.AddIngredient<TopiumBar>(9999);
             recipe.AddIngredient(ItemID.LunarBar, 100);
-            recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+            recipe.AddTile<ValhallaWorkbench>();
             recipe.Register();
         }
 	}

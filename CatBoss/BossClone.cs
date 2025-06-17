@@ -28,24 +28,23 @@ namespace PurringTale.CatBoss
 	public class BossClone : ModProjectile
     {
 
-        public override string Texture => "PurringTale/CatBoss/TopHatCatBoss";
+        public override string Texture => "PurringTale/CatBoss/TopHatShadow";
 
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 10;
             ProjectileID.Sets.TrailingMode[Type] = 3;
-            Main.projFrames[Type] = 26;
+            Main.projFrames[Type] = 2;
         }
         public override void SetDefaults()
         {
             Projectile.penetrate = -1;
-            Projectile.width = 24;
-            Projectile.height = 36;
+            Projectile.width = 54;
+            Projectile.height = 30;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.scale = 1.5f;
             Projectile.tileCollide = false;
             Projectile.Opacity = 0;
             Projectile.damage = 0;

@@ -1,14 +1,22 @@
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 using PurringTale.Content;
 using PurringTale.Content.Items.Placeables;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace PurringTale.Content.Items.MobLoot;
 
 public class CoreOfValhalla : ModItem
 {
-
+    public override void SetStaticDefaults()
+    {
+        Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 4));
+        ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        ItemID.Sets.ItemIconPulse[Item.type] = true;
+        ItemID.Sets.ItemNoGravity[Item.type] = true;
+        Item.ResearchUnlockCount = 25;
+    }
 
     public override void SetDefaults()
     {
@@ -24,6 +32,4 @@ public class CoreOfValhalla : ModItem
         Item.useTurn = true;
         Item.autoReuse = true;
     }
-
-
 }

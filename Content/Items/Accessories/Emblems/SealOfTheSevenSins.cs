@@ -4,6 +4,7 @@ using PurringTale.Content.DamageClasses;
 using PurringTale.Content.Items.Placeables;
 using PurringTale.Content.Items.Placeables.Bars;
 using PurringTale.Content.Items.Weapons;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -66,7 +67,7 @@ public class SealOfTheSevenSins : ModItem
         recipe.AddIngredient<Pride>(1);
         recipe.AddIngredient<Sloth>(1);
         recipe.AddIngredient<Wrath>(1);
-        recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+        recipe.AddTile<ValhallaWorkbench>();
         recipe.Register();
     }
 }

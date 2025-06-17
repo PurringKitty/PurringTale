@@ -2,6 +2,7 @@
 using PurringTale.Content.Items;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Pets.UFOWolf;
+using PurringTale.Content.Tiles.Furniture.Crafters;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -30,7 +31,7 @@ namespace PurringTale.Content.Pets.UFOWolf
 		{
 			Recipe recipe = CreateRecipe();
 			recipe.AddIngredient<VanityVoucher>(1);
-			recipe.AddTile<Tiles.Furniture.ValhallaWorkbench>();
+			recipe.AddTile<ValhallaWorkbench>();
 			recipe.Register();
 
 		}

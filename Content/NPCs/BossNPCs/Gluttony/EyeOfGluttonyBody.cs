@@ -62,7 +62,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.Gluttony
             NPC.DeathSound = SoundID.NPCDeath3;
             AIType = NPCID.EyeofCthulhu;
             AnimationType = NPCID.EyeofCthulhu;
-            NPC.BossBar = ModContent.GetInstance<BossBar>();
             NPC.TargetClosest();
             if (!Main.dedServ)
             {
@@ -83,7 +82,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Gluttony
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<EyeOfGluttonyBossBag>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<GluttonyBossBag>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
     }
