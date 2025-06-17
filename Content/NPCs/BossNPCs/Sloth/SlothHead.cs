@@ -1,16 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using PurringTale.Content.NPCs.BossNPCs.Sloth.Projectiles;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria.ID;
 using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria.Audio;
-using PurringTale.Content.NPCs.BossNPCs.Sloth.Projectiles;
-using System.IO;
+using Terraria.GameContent.Bestiary;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Sloth
 {
@@ -96,6 +97,22 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
             NPCID.Sets.TrailingMode[NPC.type] = 3;
             NPCID.Sets.BossBestiaryPriority.Add(Type);
             NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
+
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
+            {
+                CustomTexturePath = "PurringTale/Content/NPCs/BossNPCs/Sloth/SlothHead_Beastiary",
+                PortraitScale = 1f,
+                PortraitPositionYOverride = 0f,
+            };
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement> {
+                new MoonLordPortraitBackgroundProviderBestiaryInfoElement(),
+                new FlavorTextBestiaryInfoElement("Acedia's head will come off in as a last measure in a fight it is very fucking gross - Rukuka")
+            });
         }
 
         public override void SetDefaults()
@@ -105,7 +122,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
             NPC.damage = 70;
             NPC.lifeMax = 18000;
             NPC.defense = 25;
-            NPC.scale = 0.9f;
+            NPC.scale = 1.3f;
 
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath14;

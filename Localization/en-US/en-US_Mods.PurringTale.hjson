@@ -1543,9 +1543,11 @@ NPCs: {
 		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfPride] At Night.
 	}
 
-	EyeOfSlothBody: {
+	SlothHead.DisplayName: Acedia, The Sin of Sloth
+
+	SlothBoss: {
 		DisplayName: Acedia, The Sin of Sloth
-		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfSloth] At Night.
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfSloth] at any time anywhere.
 	}
 
 	EyeOfWrathBody: {
@@ -1768,10 +1770,6 @@ NPCs: {
 
 		Census.SpawnCondition: Kill The Sin Of Wrath And Hold The [i:PurringTale/Wrath] Item!
 	}
-
-	EnvyTest.DisplayName: Envy Test
-	SlothBoss.DisplayName: Sloth Boss
-	SlothHead.DisplayName: Sloth Head
 }
 
 Buffs: {

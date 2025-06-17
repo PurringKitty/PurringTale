@@ -1,23 +1,25 @@
-﻿using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.GameContent.Bestiary;
-using PurringTale.Content.Items.MobLoot;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Common.Systems;
 using PurringTale.Content.Items.Consumables.Bags;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.Audio;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using System.IO;
+using PurringTale.Content.Items.MobLoot;
+using PurringTale.Content.Items.Placeables.Furniture.Relics;
+using PurringTale.Content.Items.Placeables.Furniture.Trophies;
 using PurringTale.Content.Items.Vanity;
-using ReLogic.Content;
 using PurringTale.Content.NPCs.BossNPCs.Sloth.Projectiles;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
-using Terraria.DataStructures;
+using System.IO;
 using System.Linq;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace PurringTale.Content.NPCs.BossNPCs.Sloth
@@ -164,8 +166,8 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
-                CustomTexturePath = "PurringTale/Content/NPCs/BossNPCs/Sloth/SlothBoss_Bestiary",
-                PortraitScale = 0.4f,
+                CustomTexturePath = "PurringTale/Content/NPCs/BossNPCs/Sloth/SlothBoss_Beastiary",
+                PortraitScale = 1f,
                 PortraitPositionYOverride = 0f,
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
@@ -179,13 +181,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
             NPC.lifeMax = 18000;
             NPC.defense = 30;
             NPC.scale = 1.3f;
-
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath14;
             NPC.knockBackResist = 0f;
             NPC.value = Item.buyPrice(gold: 60);
             NPC.SpawnWithHigherTime(30);
-
             NPC.boss = true;
             NPC.npcSlots = 20f;
             NPC.noGravity = true;
@@ -202,7 +202,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
         {
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement> {
                 new MoonLordPortraitBackgroundProviderBestiaryInfoElement(),
-                new FlavorTextBestiaryInfoElement("A colossal entity of sloth and wrath, wielding devastating magical powers while remaining eternally stationary. Its mere presence warps reality around it.")
+                new FlavorTextBestiaryInfoElement("Acedia a colossal entity of sloth, wielding devastating magical powers while remaining eternally stationary. Its mere presence warps reality around it. - Rukuka")
             });
         }
 
@@ -1727,7 +1727,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 18, 30));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AcediaBossTrophy>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<AcediaBossRelic>()));
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<SlothBossBag>()));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 2, 10, 50));
         }
 
         public override void OnKill()
