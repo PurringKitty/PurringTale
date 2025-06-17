@@ -323,11 +323,11 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPC.damage = 10;
             NPC.defense = 15;
             NPC.lifeMax = 2500;
-            NPC.rarity = 4;
+            NPC.rarity = 3;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.knockBackResist = 0.5f;
-            AnimationType = NPCID.Stylist;
+            AnimationType = NPCID.Guide;
             TownNPCStayingHomeless = true;
         }
 

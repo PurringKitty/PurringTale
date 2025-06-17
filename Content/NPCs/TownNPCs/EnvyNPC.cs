@@ -12,9 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.GameContent.Personalities;
 using System.Collections.Generic;
-using PurringTale.Content.Items.MobLoot;
 using PurringTale.CatBoss;
-using PurringTale.Content.Items.Weapons.Magic;
 using PurringTale.Content.Items.Accessories.Emblems;
 using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.Placeables.MusicBoxes;
@@ -36,18 +34,22 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			Main.npcFrameCount[Type] = 26;
 
+
+			NPCProfile = new Profiles.StackedNPCProfile
+				(
+					new Profiles.DefaultNPCProfile(Texture, -1),
+					new Profiles.DefaultNPCProfile(Texture + "_Shimmer", -1)
+				);
+			Main.npcFrameCount[Type] = 26;
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 700;
+			NPCID.Sets.DangerDetectRange[Type] = 200;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
-            NPCID.Sets.AttackType[Type] = 3; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
-            NPCID.Sets.AttackTime[Type] = 12;
-            NPCID.Sets.AttackAverageChance[Type] = 1;
+            NPCID.Sets.AttackType[Type] = -1;
 
 			NPC.Happiness
 			.SetBiomeAffection<ForestBiome>(AffectionLevel.Dislike)
@@ -105,16 +107,15 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
 			NPC.shimmering = true;
-
 			AnimationType = NPCID.Guide;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
-				new FlavorTextBestiaryInfoElement("The Sin Of Envy But Y'know Smaller. Went Back To Normal After Getting Killed In Eye Form"),
+				new FlavorTextBestiaryInfoElement("Invidia in her Terrarian form, she is known to get rather jealous at times but she is a good god deep down! - Rukuka"),
 			});
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -137,8 +138,16 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			}
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
-				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "_Shimmer";
+				string variant = "";
+				if (NPC.IsShimmerVariant)
+					variant += "_Shimmer";
+				int headgore = Mod.Find<ModGore>($"EnvyNPC_Gore_Head").Type;
+				int armgore = Mod.Find<ModGore>($"EnvyNPC_Gore_Arm").Type;
+
+
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
 			}
 		}
 
@@ -251,40 +260,13 @@ namespace PurringTale.Content.NPCs.TownNPCs
 				}
 			}
 		}
-
-        public override void TownNPCAttackStrength(ref int damage, ref float knockback)
-        {
-            damage = 200;
-            knockback = 4f;
-        }
-
-        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
-        {
-            cooldown = 5;
-            randExtraCooldown = 8;
-        }
-
-        public override void TownNPCAttackSwing(ref int itemWidth, ref int itemHeight)
-        {
-            itemWidth = itemHeight = 40;
-        }
-
-        public override void DrawTownAttackSwing(ref Texture2D item, ref Rectangle itemFrame, ref int itemSize, ref float scale, ref Vector2 offset)
-        {
-            Main.GetItemDrawFrame(ModContent.ItemType<TheEnvyousEye>(), out item, out itemFrame);
-            itemSize = 40;
-            if (NPC.ai[1] > NPCID.Sets.AttackTime[NPC.type] * 0.66f)
-            {
-                offset.Y = 12f;
-            }
-        }
     
     public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{
 			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Envy>()));
 		}
 
-		public override bool CanGoToStatue(bool toKingStatue) => true;
+		public override bool CanGoToStatue(bool toQueenStatue) => true;
 	}
 }
 		

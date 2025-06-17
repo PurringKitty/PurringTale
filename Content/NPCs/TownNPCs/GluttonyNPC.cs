@@ -11,9 +11,7 @@ using Terraria.GameContent.ItemDropRules;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.Personalities;
 using System.Collections.Generic;
-using PurringTale.Content.Items.MobLoot;
 using PurringTale.CatBoss;
-using PurringTale.Content.Items.Weapons.Ranged;
 using PurringTale.Content.Items.Accessories.Emblems;
 using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.Placeables.MusicBoxes;
@@ -36,16 +34,14 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			NPCID.Sets.ExtraFramesCount[Type] = 8;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 1000;
+			NPCID.Sets.DangerDetectRange[Type] = 10;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
-			NPCID.Sets.AttackType[Type] = 1;
-            NPCID.Sets.AttackTime[Type] = 1;
-            NPCID.Sets.AttackAverageChance[Type] = 1;
+            NPCID.Sets.AttackType[Type] = -1;
 
-			NPC.Happiness
+            NPC.Happiness
 			.SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<SnowBiome>(AffectionLevel.Dislike)
 			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
@@ -101,16 +97,15 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
 			NPC.shimmering = true;
-
 			AnimationType = NPCID.Guide;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
-				new FlavorTextBestiaryInfoElement("The Sin Of Gluttony But Y'know Smaller. Went Back To Normal After Getting Killed In Eye Form"),
+				new FlavorTextBestiaryInfoElement("Gula in his Terrarian form, gave me some food once... then took some back because he was hungry. - Rukuka"),
 			});
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -134,7 +129,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "_Shimmer";
+				if (NPC.IsShimmerVariant) variant += "GluttonyNPC_Shimmer";
 			}
 		}
 
@@ -264,34 +259,6 @@ namespace PurringTale.Content.NPCs.TownNPCs
 				}
 			}
 		}
-
-        public override void TownNPCAttackStrength(ref int damage, ref float knockback)
-        {
-            damage = 200;
-            knockback = 4f;
-        }
-
-        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
-        {
-            cooldown = 5;
-            randExtraCooldown = 8;
-        }
-
-        public override void TownNPCAttackSwing(ref int itemWidth, ref int itemHeight)
-        {
-            itemWidth = itemHeight = 40;
-        }
-
-        public override void DrawTownAttackSwing(ref Texture2D item, ref Rectangle itemFrame, ref int itemSize, ref float scale, ref Vector2 offset)
-        {
-            Main.GetItemDrawFrame(ModContent.ItemType<TheGluttonsGun>(), out item, out itemFrame);
-            itemSize = 40;
-            // This adjustment draws the swing the way town npcs usually do.
-            if (NPC.ai[1] > NPCID.Sets.AttackTime[NPC.type] * 0.66f)
-            {
-                offset.Y = 12f;
-            }
-        }
     
     public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{

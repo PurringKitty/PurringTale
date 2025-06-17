@@ -45,11 +45,9 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
-            NPCID.Sets.AttackType[Type] = 3; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
-            NPCID.Sets.AttackTime[Type] = 12;
-            NPCID.Sets.AttackAverageChance[Type] = 1;
+            NPCID.Sets.AttackType[Type] = -1;
 
-			NPC.Happiness
+            NPC.Happiness
 			.SetBiomeAffection<ForestBiome>(AffectionLevel.Dislike)
 			.SetBiomeAffection<SnowBiome>(AffectionLevel.Like)
 			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
@@ -105,16 +103,15 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
 			NPC.shimmering = true;
-
 			AnimationType = NPCID.Guide;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
-				new FlavorTextBestiaryInfoElement("The Sin Of Sloth But Y'know Smaller. Went Back To Normal After Getting Killed In Eye Form"),
+				new FlavorTextBestiaryInfoElement("Acedia in his Terrarian form, I have seen his face once... it is NOT pretty... - Rukuka"),
 			});
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -138,7 +135,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "_Shimmer";
+				if (NPC.IsShimmerVariant) variant += "SlothNPC_Shimmer";
 			}
 		}
 
@@ -246,34 +243,6 @@ namespace PurringTale.Content.NPCs.TownNPCs
 				}
 			}
 		}
-
-        public override void TownNPCAttackStrength(ref int damage, ref float knockback)
-        {
-            damage = 200;
-            knockback = 4f;
-        }
-
-        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
-        {
-            cooldown = 5;
-            randExtraCooldown = 8;
-        }
-
-        public override void TownNPCAttackSwing(ref int itemWidth, ref int itemHeight)
-        {
-            itemWidth = itemHeight = 40;
-        }
-
-        public override void DrawTownAttackSwing(ref Texture2D item, ref Rectangle itemFrame, ref int itemSize, ref float scale, ref Vector2 offset)
-        {
-            Main.GetItemDrawFrame(ModContent.ItemType<BookOfSloth>(), out item, out itemFrame);
-            itemSize = 40;
-            // This adjustment draws the swing the way town npcs usually do.
-            if (NPC.ai[1] > NPCID.Sets.AttackTime[NPC.type] * 0.66f)
-            {
-                offset.Y = 12f;
-            }
-        }
     
     public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{

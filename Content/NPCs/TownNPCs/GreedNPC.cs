@@ -40,16 +40,14 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			NPCID.Sets.ExtraFramesCount[Type] = 8;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 700;
+			NPCID.Sets.DangerDetectRange[Type] = 10;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
-            NPCID.Sets.AttackType[Type] = 3; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
-            NPCID.Sets.AttackTime[Type] = 12;
-            NPCID.Sets.AttackAverageChance[Type] = 1;
+            NPCID.Sets.AttackType[Type] = -1;
 
-			NPC.Happiness
+            NPC.Happiness
 			.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
 			.SetBiomeAffection<SnowBiome>(AffectionLevel.Like)
 			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Like)
@@ -106,16 +104,15 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
 			NPC.shimmering = true;
-
 			AnimationType = NPCID.Guide;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
-				new FlavorTextBestiaryInfoElement("The Sin Of Greed But Y'know Smaller. Went Back To Normal After Getting Killed In Eye Form"),
+				new FlavorTextBestiaryInfoElement("Avaritia in his Terrarian form, likes money like A LOT too much even... freak... - Rukuka"),
 			});
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

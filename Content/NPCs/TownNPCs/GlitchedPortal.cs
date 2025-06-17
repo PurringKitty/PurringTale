@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Weapons.Melee;
 using PurringTale.Content.Subworlds;
 using SubworldLibrary;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPC.aiStyle = -1;
             NPC.lifeMax = 999;
             NPC.damage = 0;
+            NPC.rarity = 5;
             NPC.defense = 0;
             NPC.knockBackResist = 0;
             NPC.noTileCollide = true;
@@ -124,7 +126,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 {
                     continue;
                 }
-                if (player.inventory.Any(item => item.type == ModContent.ItemType<Lust>()))
+                if (player.inventory.Any(item => item.type == ModContent.ItemType<WeaponRock>()))
                 {
                     return true;
                 }
