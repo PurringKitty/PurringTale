@@ -1974,6 +1974,10 @@ Projectiles: {
 	SlothNebulaBlast.DisplayName: Sloth Nebula Blast
 	SlothSpear3.DisplayName: Sloth Spear3
 	ShockwaveSpike.DisplayName: Shockwave Spike
+	WhipHook.DisplayName: Whip Hook
+	RegularStar.DisplayName: Regular Star
+	HomingStar.DisplayName: Homing Star
+	WhipExtension.DisplayName: Whip Extension
 }
 
 Biomes: {

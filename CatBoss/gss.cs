@@ -22,7 +22,7 @@ namespace PurringTale.CatBoss
 {
 	public class Gss: ModProjectile
 	{
-        public override string Texture => "PurringTale/CatBoss/Assets/2";
+        public override string Texture => "PurringTale/CatBoss/Assets/Sword";
 
         public override void SetDefaults()
         {

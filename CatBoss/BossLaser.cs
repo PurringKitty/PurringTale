@@ -25,7 +25,7 @@ namespace PurringTale.CatBoss
         /// ai[0] timer
         /// ai[1] owner
         /// ai[2] draw offset;
-        public override string Texture => "PurringTale/CatBoss/Assets/2";
+        public override string Texture => "PurringTale/CatBoss/Assets/Sword";
 
         const float BEAMLEN = 1350;
         float warningTimer = 10;

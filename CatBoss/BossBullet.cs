@@ -24,71 +24,79 @@ namespace PurringTale.CatBoss
 {
     public class BossBullet : ModProjectile
     {
-
-        private Vector2 init;
-        public override void OnSpawn(IEntitySource source)
-        {
-            init = Projectile.Center;
-        }
-        public override void SendExtraAI(BinaryWriter writer)
-        {
-            writer.WriteVector2(init);
-        }
-        public override void ReceiveExtraAI(BinaryReader reader)
-        {
-            init = reader.ReadVector2();
-        }
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 20;
+            ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 3;
         }
+
         public override void SetDefaults()
         {
-            Projectile.penetrate = 1;
             Projectile.width = 13;
             Projectile.height = 39;
-            Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.friendly = false;
-            Projectile.timeLeft = 270;
-            Projectile.light = 1;
-            Projectile.scale = 1;
-            Projectile.tileCollide = false;
+            Projectile.penetrate = 1;
+            Projectile.timeLeft = 300;
+            Projectile.light = 0.5f;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
         }
-        private ref float timer => ref Projectile.ai[0];
-        private ref float delay => ref Projectile.ai[1];
 
-
-        public override bool PreAI()
-        {
-            if (++timer < delay)
-            {
-                Projectile.Center = init;
-                return false;
-            }
-            else
-                return true;
-        }
         public override void AI()
         {
-            if (Projectile.Center.Distance(init) >= 1500)
+            Projectile.rotation = Projectile.velocity.ToRotation();
+
+            if (Main.rand.NextBool(3))
             {
-                Projectile.Kill();
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke);
+                dust.velocity *= 0.3f;
+                dust.scale = 0.7f;
+                dust.noGravity = true;
             }
         }
-        public override bool ShouldUpdatePosition() => timer > delay;
 
         public override bool PreDraw(ref Color lightColor)
         {
-            float alpha = timer / (float)((delay - 120) + 1);
-            Vector2 pos = init - Main.screenPosition;
-            Rectangle dest = new Rectangle(((int)pos.X), ((int)pos.Y), ((int)(1500)), 2);
-            Texture2D t = TextureAssets.MagicPixel.Value;
-            Main.spriteBatch.Draw(t, dest, t.source(), Color.Red * alpha, Projectile.velocity.ToRotation(), t.center(), SpriteEffects.None, 0);
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            {
+                if (Projectile.oldPos[i] == Vector2.Zero) continue;
 
-            return timer > delay;
+                float alpha = (float)(Projectile.oldPos.Length - i) / Projectile.oldPos.Length * 0.5f;
+                Vector2 drawPos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+                Color trailColor = Color.Yellow * alpha;
+
+                Main.spriteBatch.Draw(TextureAssets.Projectile[Type].Value, drawPos, null, trailColor,
+                    Projectile.oldRot[i], TextureAssets.Projectile[Type].Value.Size() / 2f,
+                    Projectile.scale * (1f - i * 0.1f), SpriteEffects.None, 0f);
+            }
+
+            Vector2 mainDrawPos = Projectile.Center - Main.screenPosition;
+            Main.spriteBatch.Draw(TextureAssets.Projectile[Type].Value, mainDrawPos, null, lightColor,
+                Projectile.rotation, TextureAssets.Projectile[Type].Value.Size() / 2f,
+                Projectile.scale, SpriteEffects.None, 0f);
+
+            return false;
+        }
+
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            if (!target.HasBuff(ModContent.BuffType<Consumed>()))
+                target.AddBuff(ModContent.BuffType<Consumed>(), 180);
+            else
+                target.buffTime[target.FindBuffIndex(ModContent.BuffType<Consumed>())] = 180;
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 5 * i) * 2f;
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.Smoke, vel);
+                dust.noGravity = true;
+                dust.scale = 0.8f;
+            }
         }
     }
 }
