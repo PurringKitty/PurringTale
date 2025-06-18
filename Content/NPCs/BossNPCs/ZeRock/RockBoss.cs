@@ -131,8 +131,8 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             NPC.aiStyle = -1;
             NPC.width = 26;
             NPC.height = 18;
-            NPC.damage = 1;
-            NPC.defense = 1000;
+            NPC.damage = 35;
+            NPC.defense = 100;
             NPC.lifeMax = 1000000;
             NPC.HitSound = SoundID.Dig;
             NPC.DeathSound = SoundID.ScaryScream;
