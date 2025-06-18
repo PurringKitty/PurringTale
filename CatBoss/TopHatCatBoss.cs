@@ -140,7 +140,7 @@ namespace PurringTale.CatBoss
             NPC.width = 24;
             NPC.height = 50;
             NPC.damage = 10;
-            NPC.lifeMax = 500000;
+            NPC.lifeMax = 1000000;
             NPC.defense = 20;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.AbigailCry;
@@ -265,7 +265,7 @@ namespace PurringTale.CatBoss
             {
                 BossPhase.Phase1 => Color.Purple,
                 BossPhase.Phase2 => Color.Red,
-                BossPhase.Phase3 => Color.Black,
+                BossPhase.Phase3 => Color.Gray,
                 _ => Color.Purple
             };
         }

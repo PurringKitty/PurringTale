@@ -15,7 +15,7 @@ namespace PurringTale.CatBoss
 {
     public class RegularStar : ModProjectile
     {
-        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.FallingStar}";
+        public override string Texture => $"Terraria/Images/Projectile_{ProjectileID.StarVeilStar}";
 
         public override void SetStaticDefaults()
         {
