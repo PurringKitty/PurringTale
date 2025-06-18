@@ -131,15 +131,15 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             NPC.aiStyle = -1;
             NPC.width = 26;
             NPC.height = 18;
-            NPC.damage = 35;
-            NPC.defense = 100;
-            NPC.lifeMax = 1000000;
+            NPC.damage = 120;
+            NPC.defense = 0;
+            NPC.lifeMax = 35000;
             NPC.HitSound = SoundID.Dig;
             NPC.DeathSound = SoundID.ScaryScream;
             NPC.knockBackResist = 0f;
             NPC.noGravity = false;
             NPC.noTileCollide = false;
-            NPC.value = Item.buyPrice(platinum: 100);
+            NPC.value = Item.buyPrice(platinum: 1);
             NPC.boss = true;
             NPC.npcSlots = 50f;
             NPC.SpawnWithHigherTime(30);
@@ -784,7 +784,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<RockBossRelic>()));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<WeaponRock>(), 15, 1, 1));
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VanityVoucher>(), 4, 1, 5));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 100, 1000));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoreOfValhalla>(), 1, 10, 100));
         }
     }
 }

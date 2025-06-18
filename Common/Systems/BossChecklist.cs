@@ -301,7 +301,7 @@ namespace PurringTale.Common.Systems
                 }
             );
             internalName = "Rock";
-            weight = 50f;
+            weight = 18f;
             downed = () => DownedBossSystem.downedRock;
             bossType = ModContent.NPCType<Content.NPCs.BossNPCs.ZeRock.RockBoss>();
             collectibles = new List<int>()
