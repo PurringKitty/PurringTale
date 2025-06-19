@@ -67,6 +67,12 @@ namespace PurringTale.CatBoss
             writer.WriteVector2(off);
             writer.Write(hasStartedAttack);
             writer.Write(phase);
+
+            writer.Write(laserProjectileIds.Length);
+            for (int i = 0; i < laserProjectileIds.Length; i++)
+            {
+                writer.Write(laserProjectileIds[i]);
+            }
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -78,6 +84,12 @@ namespace PurringTale.CatBoss
             off = reader.ReadVector2();
             hasStartedAttack = reader.ReadBoolean();
             phase = reader.ReadInt32();
+
+            int laserCount = reader.ReadInt32();
+            for (int i = 0; i < laserCount && i < laserProjectileIds.Length; i++)
+            {
+                laserProjectileIds[i] = reader.ReadInt32();
+            }
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -171,6 +183,7 @@ namespace PurringTale.CatBoss
 
             Projectile.spriteDirection = Projectile.Center.DirectionTo(centerPoint).X > 0 ? 1 : -1;
         }
+
         private void BasicGunAttack()
         {
             if (timer < 60)
@@ -184,12 +197,15 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.95f;
                 if (timer % 25 == 0)
                 {
-                    Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
-                    for (int i = 0; i < 3; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Vector2 vel = shootDirection.RotatedBy(MathHelper.Lerp(-0.3f, 0.3f, i / 2f)) * 10f;
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
-                            ModContent.ProjectileType<BossBullet>(), 80, 3f);
+                        Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Vector2 vel = shootDirection.RotatedBy(MathHelper.Lerp(-0.3f, 0.3f, i / 2f)) * 10f;
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
+                                ModContent.ProjectileType<BossBullet>(), 80, 3f, -1);
+                        }
                     }
                     SoundEngine.PlaySound(SoundID.Item11, Projectile.position);
                 }
@@ -215,12 +231,15 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.92f;
                 if (timer % 18 == 0)
                 {
-                    Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
-                    for (int i = 0; i < 5; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Vector2 vel = shootDirection.RotatedBy(MathHelper.Lerp(-0.5f, 0.5f, i / 4f)) * 13f;
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
-                            ModContent.ProjectileType<BossBullet>(), 100, 4f);
+                        Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
+                        for (int i = 0; i < 5; i++)
+                        {
+                            Vector2 vel = shootDirection.RotatedBy(MathHelper.Lerp(-0.5f, 0.5f, i / 4f)) * 13f;
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
+                                ModContent.ProjectileType<BossBullet>(), 100, 4f, -1);
+                        }
                     }
                     SoundEngine.PlaySound(SoundID.Item40, Projectile.position);
                 }
@@ -246,12 +265,15 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.88f;
                 if (timer % 8 == 0)
                 {
-                    Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
-                    Vector2 randomSpread = shootDirection.RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f));
-                    Vector2 vel = randomSpread * Main.rand.NextFloat(12f, 18f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Vector2 shootDirection = Projectile.DirectionTo(centerPoint);
+                        Vector2 randomSpread = shootDirection.RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f));
+                        Vector2 vel = randomSpread * Main.rand.NextFloat(12f, 18f);
 
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
-                        ModContent.ProjectileType<BossBullet>(), 120, 5f);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
+                            ModContent.ProjectileType<BossBullet>(), 120, 5f, -1);
+                    }
 
                     if (timer % 16 == 0) SoundEngine.PlaySound(SoundID.Item11, Projectile.position);
                 }
@@ -263,6 +285,7 @@ namespace PurringTale.CatBoss
                 if (timer >= 200) Projectile.Kill();
             }
         }
+
         private void SingleLaserAttack()
         {
             if (timer < 30)
@@ -277,29 +300,37 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 40)
             {
-                Vector2 laserDirection = Projectile.DirectionTo(centerPoint);
-                laserProjectileIds[0] = Projectile.NewProjectile(
-                    Projectile.GetSource_FromAI(),
-                    Projectile.Center,
-                    laserDirection * 1f,
-                    ModContent.ProjectileType<BossLaser>(),
-                    100,
-                    5f,
-                    -1,
-                    0f,
-                    -1f,
-                    25f
-                );
-
-                if (laserProjectileIds[0] >= 0 && laserProjectileIds[0] < Main.maxProjectiles)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    var laser = Main.projectile[laserProjectileIds[0]];
-                    laser.timeLeft = 180;
-                    laser.hostile = true;
-                    laser.tileCollide = false;
+                    Vector2 laserDirection = Projectile.DirectionTo(centerPoint);
+                    laserProjectileIds[0] = Projectile.NewProjectile(
+                        Projectile.GetSource_FromAI(),
+                        Projectile.Center,
+                        laserDirection * 1f,
+                        ModContent.ProjectileType<BossLaser>(),
+                        100,
+                        5f,
+                        -1,
+                        0f,
+                        -1f,
+                        25f
+                    );
 
-                    laser.localAI[0] = Projectile.Center.X;
-                    laser.localAI[1] = Projectile.Center.Y;
+                    if (laserProjectileIds[0] >= 0 && laserProjectileIds[0] < Main.maxProjectiles)
+                    {
+                        var laser = Main.projectile[laserProjectileIds[0]];
+                        laser.timeLeft = 180;
+                        laser.hostile = true;
+                        laser.tileCollide = false;
+                        laser.localAI[0] = Projectile.Center.X;
+                        laser.localAI[1] = Projectile.Center.Y;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncProjectile, number: laserProjectileIds[0]);
+                        NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
+                    }
                 }
                 SoundEngine.PlaySound(SoundID.Item12, Projectile.position);
             }
@@ -337,33 +368,45 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 45)
             {
-                Vector2 baseDirection = Projectile.DirectionTo(centerPoint);
-
-                for (int i = 0; i < 2; i++)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Vector2 laserDirection = baseDirection.RotatedBy(MathHelper.Lerp(-0.3f, 0.3f, i));
-                    laserProjectileIds[i] = Projectile.NewProjectile(
-                        Projectile.GetSource_FromAI(),
-                        Projectile.Center,
-                        laserDirection * 1f,
-                        ModContent.ProjectileType<BossLaser>(),
-                        110,
-                        6f,
-                        -1,
-                        0f,
-                        -1f,
-                        25f
-                    );
+                    Vector2 baseDirection = Projectile.DirectionTo(centerPoint);
 
-                    if (laserProjectileIds[i] >= 0 && laserProjectileIds[i] < Main.maxProjectiles)
+                    for (int i = 0; i < 2; i++)
                     {
-                        var laser = Main.projectile[laserProjectileIds[i]];
-                        laser.timeLeft = 200;
-                        laser.hostile = true;
-                        laser.tileCollide = false;
+                        Vector2 laserDirection = baseDirection.RotatedBy(MathHelper.Lerp(-0.3f, 0.3f, i));
+                        laserProjectileIds[i] = Projectile.NewProjectile(
+                            Projectile.GetSource_FromAI(),
+                            Projectile.Center,
+                            laserDirection * 1f,
+                            ModContent.ProjectileType<BossLaser>(),
+                            110,
+                            6f,
+                            -1,
+                            0f,
+                            -1f,
+                            25f
+                        );
 
-                        laser.localAI[0] = Projectile.Center.X;
-                        laser.localAI[1] = Projectile.Center.Y;
+                        if (laserProjectileIds[i] >= 0 && laserProjectileIds[i] < Main.maxProjectiles)
+                        {
+                            var laser = Main.projectile[laserProjectileIds[i]];
+                            laser.timeLeft = 200;
+                            laser.hostile = true;
+                            laser.tileCollide = false;
+                            laser.localAI[0] = Projectile.Center.X;
+                            laser.localAI[1] = Projectile.Center.Y;
+                        }
+
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncProjectile, number: laserProjectileIds[i]);
+                        }
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
                     }
                 }
                 SoundEngine.PlaySound(SoundID.Item72, Projectile.position);
@@ -405,34 +448,46 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 40)
             {
-                float startAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
-
-                for (int i = 0; i < 4; i++)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    float angle = startAngle + (MathHelper.TwoPi / 4) * i;
-                    Vector2 laserDirection = Vector2.One.RotatedBy(angle);
-                    laserProjectileIds[i] = Projectile.NewProjectile(
-                        Projectile.GetSource_FromAI(),
-                        Projectile.Center,
-                        laserDirection * 1f,
-                        ModContent.ProjectileType<BossLaser>(),
-                        130,
-                        7f,
-                        -1,
-                        0f,
-                        -1f,
-                        25f
-                    );
+                    float startAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
 
-                    if (laserProjectileIds[i] >= 0 && laserProjectileIds[i] < Main.maxProjectiles)
+                    for (int i = 0; i < 4; i++)
                     {
-                        var laser = Main.projectile[laserProjectileIds[i]];
-                        laser.timeLeft = 240;
-                        laser.hostile = true;
-                        laser.tileCollide = false;
+                        float angle = startAngle + (MathHelper.TwoPi / 4) * i;
+                        Vector2 laserDirection = Vector2.One.RotatedBy(angle);
+                        laserProjectileIds[i] = Projectile.NewProjectile(
+                            Projectile.GetSource_FromAI(),
+                            Projectile.Center,
+                            laserDirection * 1f,
+                            ModContent.ProjectileType<BossLaser>(),
+                            130,
+                            7f,
+                            -1,
+                            0f,
+                            -1f,
+                            25f
+                        );
 
-                        laser.localAI[0] = Projectile.Center.X;
-                        laser.localAI[1] = Projectile.Center.Y;
+                        if (laserProjectileIds[i] >= 0 && laserProjectileIds[i] < Main.maxProjectiles)
+                        {
+                            var laser = Main.projectile[laserProjectileIds[i]];
+                            laser.timeLeft = 240;
+                            laser.hostile = true;
+                            laser.tileCollide = false;
+                            laser.localAI[0] = Projectile.Center.X;
+                            laser.localAI[1] = Projectile.Center.Y;
+                        }
+
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncProjectile, number: laserProjectileIds[i]);
+                        }
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
                     }
                 }
                 SoundEngine.PlaySound(SoundID.Item72, Projectile.position);
@@ -449,7 +504,7 @@ namespace PurringTale.CatBoss
                         Main.projectile[laserId].localAI[0] = Projectile.Center.X;
                         Main.projectile[laserId].localAI[1] = Projectile.Center.Y;
 
-                        if (timer > 80 && Main.projectile[laserId].ai[0] > 30)
+                        if (timer > 80 && Main.projectile[laserId].ai[0] > 30 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             Main.projectile[laserId].velocity = Main.projectile[laserId].velocity.RotatedBy(0.03f);
                         }
@@ -462,16 +517,6 @@ namespace PurringTale.CatBoss
                 Vector2 retreatDirection = -Projectile.DirectionTo(centerPoint);
                 Projectile.velocity = retreatDirection * 22f;
                 if (timer >= 320) Projectile.Kill();
-            }
-        }
-
-        private void UpdateLaserPosition(int laserIndex)
-        {
-            int laserId = laserProjectileIds[laserIndex];
-            if (laserId >= 0 && laserId < Main.maxProjectiles && Main.projectile[laserId].active)
-            {
-                Vector2 offset = Main.projectile[laserId].velocity.SafeNormalize(Vector2.UnitX) * 20f;
-                Main.projectile[laserId].Center = Projectile.Center + offset;
             }
         }
 
@@ -492,12 +537,15 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.98f;
                 if (timer % 20 == 0)
                 {
-                    for (int i = 0; i < 4; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        float angle = MathHelper.TwoPi / 4 * i + (timer * 0.1f);
-                        Vector2 starVel = Vector2.One.RotatedBy(angle) * 7f;
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
-                            ModContent.ProjectileType<RegularStar>(), 70, 3f);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            float angle = MathHelper.TwoPi / 4 * i + (timer * 0.1f);
+                            Vector2 starVel = Vector2.One.RotatedBy(angle) * 7f;
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
+                                ModContent.ProjectileType<RegularStar>(), 70, 3f, -1);
+                        }
                     }
                     SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
                 }
@@ -527,12 +575,15 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.96f;
                 if (timer % 15 == 0)
                 {
-                    for (int i = 0; i < 3; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        float angle = MathHelper.TwoPi / 3 * i + (timer * 0.12f);
-                        Vector2 starVel = Vector2.One.RotatedBy(angle) * 5f;
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
-                            ModContent.ProjectileType<HomingStar>(), 85, 4f);
+                        for (int i = 0; i < 3; i++)
+                        {
+                            float angle = MathHelper.TwoPi / 3 * i + (timer * 0.12f);
+                            Vector2 starVel = Vector2.One.RotatedBy(angle) * 5f;
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
+                                ModContent.ProjectileType<HomingStar>(), 85, 4f, -1);
+                        }
                     }
                     SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
                 }
@@ -562,15 +613,18 @@ namespace PurringTale.CatBoss
                 Projectile.velocity *= 0.94f;
                 if (timer % 8 == 0)
                 {
-                    int starCount = Main.rand.Next(2, 5);
-                    for (int i = 0; i < starCount; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        float angle = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                        Vector2 starVel = Vector2.One.RotatedBy(angle) * Main.rand.NextFloat(6f, 12f);
+                        int starCount = Main.rand.Next(2, 5);
+                        for (int i = 0; i < starCount; i++)
+                        {
+                            float angle = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                            Vector2 starVel = Vector2.One.RotatedBy(angle) * Main.rand.NextFloat(6f, 12f);
 
-                        int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
-                            starType, 100, 5f);
+                            int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
+                                starType, 100, 5f, -1);
+                        }
                     }
                     if (timer % 16 == 0) SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
                 }
@@ -582,6 +636,7 @@ namespace PurringTale.CatBoss
                 if (timer >= 200) Projectile.Kill();
             }
         }
+
         private void BasicRocketAttack()
         {
             if (timer < 50)
@@ -604,12 +659,15 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 80)
             {
-                for (int i = 0; i < 3; i++)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Vector2 direction = Projectile.DirectionTo(centerPoint).RotatedBy(MathHelper.Lerp(-0.4f, 0.4f, i / 2f));
-                    Vector2 velocity = direction * 8f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
-                        ModContent.ProjectileType<BossRocket>(), 90, 5f);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Vector2 direction = Projectile.DirectionTo(centerPoint).RotatedBy(MathHelper.Lerp(-0.4f, 0.4f, i / 2f));
+                        Vector2 velocity = direction * 8f;
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
+                            ModContent.ProjectileType<BossRocket>(), 90, 5f, -1);
+                    }
                 }
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
             }
@@ -643,12 +701,15 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 90)
             {
-                for (int i = 0; i < 6; i++)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    float angle = MathHelper.TwoPi / 6 * i;
-                    Vector2 velocity = Vector2.One.RotatedBy(angle) * 9f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
-                        ModContent.ProjectileType<BossRocket>(), 105, 6f);
+                    for (int i = 0; i < 6; i++)
+                    {
+                        float angle = MathHelper.TwoPi / 6 * i;
+                        Vector2 velocity = Vector2.One.RotatedBy(angle) * 9f;
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
+                            ModContent.ProjectileType<BossRocket>(), 105, 6f, -1);
+                    }
                 }
                 SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             }
@@ -685,11 +746,14 @@ namespace PurringTale.CatBoss
             {
                 if (timer % 5 == 0)
                 {
-                    Vector2 direction = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
-                    Vector2 velocity = direction * Main.rand.NextFloat(7f, 11f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Vector2 direction = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
+                        Vector2 velocity = direction * Main.rand.NextFloat(7f, 11f);
 
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
-                        ModContent.ProjectileType<BossRocket>(), 120, 7f);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, velocity,
+                            ModContent.ProjectileType<BossRocket>(), 120, 7f, -1);
+                    }
 
                     if (timer % 10 == 0) SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
                 }
@@ -701,6 +765,7 @@ namespace PurringTale.CatBoss
                 if (timer >= 180) Projectile.Kill();
             }
         }
+
         private void BasicWhipAttack()
         {
             if (timer < 60)
@@ -711,10 +776,13 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 60)
             {
-                Vector2 whipDirection = Projectile.DirectionTo(centerPoint);
-                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
-                    ModContent.ProjectileType<WhipExtension>(), 80, 4f, -1,
-                    Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Vector2 whipDirection = Projectile.DirectionTo(centerPoint);
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
+                        ModContent.ProjectileType<WhipExtension>(), 80, 4f, -1,
+                        Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                }
                 SoundEngine.PlaySound(SoundID.Item152, Projectile.position);
             }
             else if (timer >= 60 && timer < 180)
@@ -739,12 +807,15 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 50 || timer == 80)
             {
-                Vector2 whipDirection = Projectile.DirectionTo(centerPoint);
-                if (timer == 80) whipDirection = whipDirection.RotatedBy(0.5f);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Vector2 whipDirection = Projectile.DirectionTo(centerPoint);
+                    if (timer == 80) whipDirection = whipDirection.RotatedBy(0.5f);
 
-                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
-                    ModContent.ProjectileType<WhipExtension>(), 95, 5f, -1,
-                    Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
+                        ModContent.ProjectileType<WhipExtension>(), 95, 5f, -1,
+                        Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                }
                 SoundEngine.PlaySound(SoundID.Item152, Projectile.position);
             }
             else if (timer >= 50 && timer < 200)
@@ -773,12 +844,15 @@ namespace PurringTale.CatBoss
 
                 if (timer % 15 == 0)
                 {
-                    float angle = (timer - 40) * 0.15f;
-                    Vector2 whipDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Math.Sin(angle) * 0.8f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        float angle = (timer - 40) * 0.15f;
+                        Vector2 whipDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Math.Sin(angle) * 0.8f);
 
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
-                        ModContent.ProjectileType<WhipExtension>(), 110, 6f, -1,
-                        Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, whipDirection,
+                            ModContent.ProjectileType<WhipExtension>(), 110, 6f, -1,
+                            Projectile.whoAmI + Main.maxNPCs, targetPlayer.whoAmI, 0);
+                    }
                     SoundEngine.PlaySound(SoundID.Item152, Projectile.position);
                 }
             }
@@ -789,6 +863,7 @@ namespace PurringTale.CatBoss
                 if (timer >= 160) Projectile.Kill();
             }
         }
+
         private void LaserGunCombo()
         {
             if (timer < 30)
@@ -799,29 +874,37 @@ namespace PurringTale.CatBoss
             }
             else if (timer == 30)
             {
-                Vector2 laserDirection = Projectile.DirectionTo(centerPoint);
-                laserProjectileIds[0] = Projectile.NewProjectile(
-                    Projectile.GetSource_FromAI(),
-                    Projectile.Center,
-                    laserDirection * 1f,
-                    ModContent.ProjectileType<BossLaser>(),
-                    100,
-                    5f,
-                    -1,
-                    0f,
-                    -1f,
-                    20f
-                );
-
-                if (laserProjectileIds[0] >= 0 && laserProjectileIds[0] < Main.maxProjectiles)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    var laser = Main.projectile[laserProjectileIds[0]];
-                    laser.timeLeft = 150;
-                    laser.hostile = true;
-                    laser.tileCollide = false;
+                    Vector2 laserDirection = Projectile.DirectionTo(centerPoint);
+                    laserProjectileIds[0] = Projectile.NewProjectile(
+                        Projectile.GetSource_FromAI(),
+                        Projectile.Center,
+                        laserDirection * 1f,
+                        ModContent.ProjectileType<BossLaser>(),
+                        100,
+                        5f,
+                        -1,
+                        0f,
+                        -1f,
+                        20f
+                    );
 
-                    laser.localAI[0] = Projectile.Center.X;
-                    laser.localAI[1] = Projectile.Center.Y;
+                    if (laserProjectileIds[0] >= 0 && laserProjectileIds[0] < Main.maxProjectiles)
+                    {
+                        var laser = Main.projectile[laserProjectileIds[0]];
+                        laser.timeLeft = 150;
+                        laser.hostile = true;
+                        laser.tileCollide = false;
+                        laser.localAI[0] = Projectile.Center.X;
+                        laser.localAI[1] = Projectile.Center.Y;
+                    }
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncProjectile, number: laserProjectileIds[0]);
+                        NetMessage.SendData(MessageID.SyncProjectile, number: Projectile.whoAmI);
+                    }
                 }
                 SoundEngine.PlaySound(SoundID.Item72, Projectile.position);
             }
@@ -838,10 +921,13 @@ namespace PurringTale.CatBoss
 
                 if (timer % 12 == 0 && timer >= 70)
                 {
-                    Vector2 bulletDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
-                    Vector2 bulletVel = bulletDirection * 14f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, bulletVel,
-                        ModContent.ProjectileType<BossBullet>(), 85, 4f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Vector2 bulletDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
+                        Vector2 bulletVel = bulletDirection * 14f;
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, bulletVel,
+                            ModContent.ProjectileType<BossBullet>(), 85, 4f, -1);
+                    }
 
                     if (timer % 24 == 0) SoundEngine.PlaySound(SoundID.Item11, Projectile.position);
                 }
@@ -869,21 +955,27 @@ namespace PurringTale.CatBoss
 
                 if (timer % 20 == 0)
                 {
-                    for (int i = 0; i < 3; i++)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        float angle = MathHelper.TwoPi / 3 * i + (timer * 0.1f);
-                        Vector2 starVel = Vector2.One.RotatedBy(angle) * 8f;
-                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
-                            ModContent.ProjectileType<RegularStar>(), 90, 4f);
+                        for (int i = 0; i < 3; i++)
+                        {
+                            float angle = MathHelper.TwoPi / 3 * i + (timer * 0.1f);
+                            Vector2 starVel = Vector2.One.RotatedBy(angle) * 8f;
+                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
+                                ModContent.ProjectileType<RegularStar>(), 90, 4f, -1);
+                        }
                     }
                     SoundEngine.PlaySound(SoundID.Item9, Projectile.position);
                 }
                 else if (timer % 35 == 0)
                 {
-                    Vector2 rocketDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
-                    Vector2 rocketVel = rocketDirection * 9f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, rocketVel,
-                        ModContent.ProjectileType<BossRocket>(), 100, 5f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Vector2 rocketDirection = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
+                        Vector2 rocketVel = rocketDirection * 9f;
+                        Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, rocketVel,
+                            ModContent.ProjectileType<BossRocket>(), 100, 5f, -1);
+                    }
                     SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
                 }
             }
@@ -909,60 +1001,63 @@ namespace PurringTale.CatBoss
 
                 if (timer % 8 == 0)
                 {
-                    int attackType = Main.rand.Next(4);
-                    switch (attackType)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        case 0:
-                            Vector2 bulletDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
-                            Vector2 bulletVel = bulletDir * Main.rand.NextFloat(10f, 16f);
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, bulletVel,
-                                ModContent.ProjectileType<BossBullet>(), 100, 5f);
-                            break;
+                        int attackType = Main.rand.Next(4);
+                        switch (attackType)
+                        {
+                            case 0:
+                                Vector2 bulletDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
+                                Vector2 bulletVel = bulletDir * Main.rand.NextFloat(10f, 16f);
+                                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, bulletVel,
+                                    ModContent.ProjectileType<BossBullet>(), 100, 5f, -1);
+                                break;
 
-                        case 1:
-                            Vector2 starDir = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
-                            Vector2 starVel = starDir * Main.rand.NextFloat(6f, 12f);
-                            int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
-                                starType, 90, 4f);
-                            break;
+                            case 1:
+                                Vector2 starDir = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                                Vector2 starVel = starDir * Main.rand.NextFloat(6f, 12f);
+                                int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
+                                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, starVel,
+                                    starType, 90, 4f, -1);
+                                break;
 
-                        case 2:
-                            if (timer % 16 == 0)
-                            {
-                                Vector2 rocketDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f));
-                                Vector2 rocketVel = rocketDir * Main.rand.NextFloat(8f, 12f);
-                                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, rocketVel,
-                                    ModContent.ProjectileType<BossRocket>(), 110, 6f);
-                            }
-                            break;
-
-                        case 3:
-                            if (timer % 20 == 0)
-                            {
-                                Vector2 laserDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
-                                int chaosLaser = Projectile.NewProjectile(
-                                    Projectile.GetSource_FromAI(),
-                                    Projectile.Center,
-                                    laserDir * 12f,
-                                    ModContent.ProjectileType<BossLaser>(),
-                                    95,
-                                    4f,
-                                    -1,
-                                    0f,
-                                    -1f,
-                                    10f
-                                );
-
-                                if (chaosLaser >= 0 && chaosLaser < Main.maxProjectiles)
+                            case 2:
+                                if (timer % 16 == 0)
                                 {
-                                    var laser = Main.projectile[chaosLaser];
-                                    laser.localAI[0] = Projectile.Center.X;
-                                    laser.localAI[1] = Projectile.Center.Y;
-                                    laser.timeLeft = 60;
+                                    Vector2 rocketDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f));
+                                    Vector2 rocketVel = rocketDir * Main.rand.NextFloat(8f, 12f);
+                                    Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, rocketVel,
+                                        ModContent.ProjectileType<BossRocket>(), 110, 6f, -1);
                                 }
-                            }
-                            break;
+                                break;
+
+                            case 3:
+                                if (timer % 20 == 0)
+                                {
+                                    Vector2 laserDir = Projectile.DirectionTo(centerPoint).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
+                                    int chaosLaser = Projectile.NewProjectile(
+                                        Projectile.GetSource_FromAI(),
+                                        Projectile.Center,
+                                        laserDir * 12f,
+                                        ModContent.ProjectileType<BossLaser>(),
+                                        95,
+                                        4f,
+                                        -1,
+                                        0f,
+                                        -1f,
+                                        10f
+                                    );
+
+                                    if (chaosLaser >= 0 && chaosLaser < Main.maxProjectiles)
+                                    {
+                                        var laser = Main.projectile[chaosLaser];
+                                        laser.localAI[0] = Projectile.Center.X;
+                                        laser.localAI[1] = Projectile.Center.Y;
+                                        laser.timeLeft = 60;
+                                    }
+                                }
+                                break;
+                        }
                     }
 
                     if (timer % 16 == 0)
@@ -978,9 +1073,11 @@ namespace PurringTale.CatBoss
                 if (timer >= 200) Projectile.Kill();
             }
         }
-
         private void CleanupLasers()
         {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
             for (int i = 0; i < laserProjectileIds.Length; i++)
             {
                 int laserId = laserProjectileIds[i];

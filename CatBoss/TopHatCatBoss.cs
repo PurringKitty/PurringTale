@@ -261,6 +261,8 @@ namespace PurringTale.CatBoss
 
         private void TriggerDeathMode()
         {
+            if (deathModeTriggered) return;
+
             deathModeTriggered = true;
             inDeathMode = true;
             AIState = ActionState.DeathMode;
@@ -274,10 +276,12 @@ namespace PurringTale.CatBoss
             SoundEngine.PlaySound(SoundID.Roar, NPC.position);
             SoundEngine.PlaySound(SoundID.DD2_BetsyScream, NPC.position);
 
-            Main.NewText("THE TOP HAT GOD ENTERS A FINAL RAGE!", Color.Red);
-            Main.NewText("SURVIVE THE ONSLAUGHT!", Color.Orange);
-
-            ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 50f, 120);
+            if (!Main.dedServ)
+            {
+                Main.NewText("THE TOP HAT GOD ENTERS A FINAL RAGE!", Color.Red);
+                Main.NewText("SURVIVE THE ONSLAUGHT!", Color.Orange);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 50f, 120);
+            }
 
             for (int i = 0; i < 100; i++)
             {
@@ -289,12 +293,20 @@ namespace PurringTale.CatBoss
                 dust.color = Color.Red;
             }
 
-            for (int i = 0; i < Main.maxProjectiles; i++)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (Main.projectile[i].active && Main.projectile[i].hostile)
+                for (int i = 0; i < Main.maxProjectiles; i++)
                 {
-                    Main.projectile[i].Kill();
+                    if (Main.projectile[i].active && Main.projectile[i].hostile)
+                    {
+                        Main.projectile[i].Kill();
+                    }
                 }
+            }
+
+            if (Main.netMode == NetmodeID.Server)
+            {
+                NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
             }
         }
 
@@ -642,40 +654,50 @@ namespace PurringTale.CatBoss
                 int spawnTime = 60 + (c * spawnInterval);
                 if (timer == spawnTime)
                 {
-                    float angleStep = MathHelper.TwoPi / cloneCount;
-                    float cloneAngle = angleStep * c + (timer * 0.01f);
-                    Vector2 clonePos = target.Center + Vector2.One.RotatedBy(cloneAngle) * 300;
-
-                    int attackStyle = currentPhase switch
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        BossPhase.Phase1 => c % 3,
-                        BossPhase.Phase2 => c % 4,
-                        BossPhase.Phase3 => c % 6,
-                        _ => c % 3
-                    };
+                        float angleStep = MathHelper.TwoPi / cloneCount;
+                        float cloneAngle = angleStep * c + (timer * 0.01f);
+                        Vector2 clonePos = target.Center + Vector2.One.RotatedBy(cloneAngle) * 300;
 
-                    int cloneProjectileId = Projectile.NewProjectile(
-                        NPC.GetSource_FromAI(),
-                        clonePos,
-                        Vector2.Zero,
-                        ModContent.ProjectileType<BossClone>(),
-                        NPC.damage + damageBonus,
-                        0f,
-                        Main.myPlayer,
-                        attackStyle,
-                        0f,
-                        0f
-                    );
-
-                    if (cloneProjectileId >= 0 && cloneProjectileId < Main.maxProjectiles)
-                    {
-                        var cloneProjectile = Main.projectile[cloneProjectileId].ModProjectile as BossClone;
-                        if (cloneProjectile != null)
+                        int attackStyle = currentPhase switch
                         {
-                            cloneProjectile.SetPhase((int)currentPhase + 1);
+                            BossPhase.Phase1 => c % 3,
+                            BossPhase.Phase2 => c % 4,
+                            BossPhase.Phase3 => c % 6,
+                            _ => c % 3
+                        };
+
+                        int cloneProjectileId = Projectile.NewProjectile(
+                            NPC.GetSource_FromAI(),
+                            clonePos,
+                            Vector2.Zero,
+                            ModContent.ProjectileType<BossClone>(),
+                            NPC.damage + damageBonus,
+                            0f,
+                            -1,
+                            attackStyle,
+                            0f,
+                            0f
+                        );
+
+                        if (cloneProjectileId >= 0 && cloneProjectileId < Main.maxProjectiles)
+                        {
+                            var cloneProjectile = Main.projectile[cloneProjectileId].ModProjectile as BossClone;
+                            if (cloneProjectile != null)
+                            {
+                                cloneProjectile.SetPhase((int)currentPhase + 1);
+                            }
+
+                            activeClones.Add(cloneProjectileId);
+
+                            if (Main.netMode == NetmodeID.Server)
+                            {
+                                NetMessage.SendData(MessageID.SyncProjectile, number: cloneProjectileId);
+                                NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                            }
                         }
 
-                        activeClones.Add(cloneProjectileId);
                         SoundEngine.PlaySound(SoundID.Item8, clonePos);
 
                         Color effectColor = attackStyle switch
@@ -710,31 +732,41 @@ namespace PurringTale.CatBoss
 
                 Vector2 orbitPos = orbitCenter + Vector2.One.RotatedBy(orbitAngle) * orbitRadius;
                 Vector2 moveDirection = (orbitPos - NPC.Center).SafeNormalize(Vector2.Zero);
-
                 NPC.velocity = Vector2.Lerp(NPC.velocity, moveDirection * 4f, 0.1f);
 
                 if (timer % (int)(40 / phaseMultiplier) == 0)
                 {
-                    Vector2 shotDirection = NPC.DirectionTo(target.Center);
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, shotDirection * 8f,
-                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 3f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        Vector2 shotDirection = NPC.DirectionTo(target.Center);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, shotDirection * 8f,
+                            ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 3f, -1);
+                    }
                     SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                 }
             }
 
             if (timer >= 400 || (timer > 240 && activeClones.Count == 0))
             {
-                foreach (int cloneId in activeClones)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    if (cloneId >= 0 && cloneId < Main.maxProjectiles && Main.projectile[cloneId].active)
+                    foreach (int cloneId in activeClones)
                     {
-                        Main.projectile[cloneId].Kill();
+                        if (cloneId >= 0 && cloneId < Main.maxProjectiles && Main.projectile[cloneId].active)
+                        {
+                            Main.projectile[cloneId].Kill();
+                        }
                     }
                 }
                 activeClones.Clear();
 
                 timer = 0;
                 AIState = ActionState.Choose;
+
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
         }
 
@@ -857,31 +889,32 @@ namespace PurringTale.CatBoss
 
             if (timer % burstInterval == 0 && timer >= 80 && timer <= 200)
             {
-                int bulletCount = currentPhase switch
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    BossPhase.Phase1 => 3,
-                    BossPhase.Phase2 => 4,
-                    BossPhase.Phase3 => 5,
-                    _ => 3
-                };
-
-                for (int i = 0; i < bulletCount; i++)
-                {
-                    float spreadAngle = MathHelper.Lerp(-0.3f, 0.3f, i / (bulletCount - 1f));
-                    Vector2 aimDirection = NPC.DirectionTo(target.Center).RotatedBy(spreadAngle);
-
-                    float bulletSpeed = 12f + (currentPhase switch
+                    int bulletCount = currentPhase switch
                     {
-                        BossPhase.Phase1 => 0f,
-                        BossPhase.Phase2 => 2f,
-                        BossPhase.Phase3 => 4f,
-                        _ => 0f
-                    });
+                        BossPhase.Phase1 => 3,
+                        BossPhase.Phase2 => 4,
+                        BossPhase.Phase3 => 5,
+                        _ => 3
+                    };
 
-                    Vector2 velocity = aimDirection * bulletSpeed;
+                    for (int i = 0; i < bulletCount; i++)
+                    {
+                        float spreadAngle = MathHelper.Lerp(-0.3f, 0.3f, i / (bulletCount - 1f));
+                        Vector2 aimDirection = NPC.DirectionTo(target.Center).RotatedBy(spreadAngle);
+                        float bulletSpeed = 12f + (currentPhase switch
+                        {
+                            BossPhase.Phase1 => 0f,
+                            BossPhase.Phase2 => 2f,
+                            BossPhase.Phase3 => 4f,
+                            _ => 0f
+                        });
 
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 4f);
+                        Vector2 velocity = aimDirection * bulletSpeed;
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 4f, -1);
+                    }
                 }
                 SoundEngine.PlaySound(SoundID.Item40, NPC.position);
             }
@@ -2134,7 +2167,6 @@ namespace PurringTale.CatBoss
             if (NPC.life - modifiers.FinalDamage.Base <= 0 && !deathModeTriggered)
             {
                 int damageToTake = NPC.life - 1;
-
                 if (damageToTake > 0)
                 {
                     modifiers.FinalDamage.Base = damageToTake;
@@ -2143,8 +2175,12 @@ namespace PurringTale.CatBoss
                 {
                     modifiers.FinalDamage.Base = 0;
                 }
-
                 modifiers.DisableKnockback();
+
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             if (inDeathMode)

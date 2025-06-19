@@ -601,12 +601,14 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
 
         private void FireOrganizedBurst(Vector2 targetPosition, int projectileCount, float spread, float speed, Vector2? overrideDirection = null)
         {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
             Vector2 baseDirection = overrideDirection ?? NPC.DirectionTo(targetPosition);
 
             for (int i = 0; i < projectileCount; i++)
             {
                 float spreadAngle;
-
                 if (projectileCount == 1)
                 {
                     spreadAngle = 0f;
@@ -624,7 +626,8 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
                     shootDirection * projectileSpeed,
                     ModContent.ProjectileType<SlothDagger>(),
                     42,
-                    3f);
+                    3f,
+                    -1);
             }
         }
 
@@ -747,11 +750,16 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
                     SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                     AddScreenShakeToNearbyPlayers(4f, 25);
 
-                    NPC.localAI[0] = target.Center.X;
-                    NPC.localAI[1] = target.Center.Y;
+                    NPC.ai[0] = target.Center.X;
+                    NPC.ai[3] = target.Center.Y;
+
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                    }
                 }
 
-                Vector2 lockedTargetPos = new Vector2(NPC.localAI[0], NPC.localAI[1]);
+                Vector2 lockedTargetPos = new Vector2(NPC.ai[0], NPC.ai[3]);
 
                 if (timer % 8 == 0)
                 {
@@ -791,23 +799,26 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
             else if (timer >= 60 && timer < 240)
             {
                 int adjustedTimer = (int)(timer - 60);
-                Vector2 lockedTargetPos = new Vector2(NPC.localAI[0], NPC.localAI[1]);
+                Vector2 lockedTargetPos = new Vector2(NPC.ai[0], NPC.ai[3]);
 
                 if (adjustedTimer % 25 == 0)
                 {
                     int waveNumber = adjustedTimer / 25;
 
-                    switch (waveNumber % 3)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        case 0:
-                            ExecuteLinearBombardment(lockedTargetPos);
-                            break;
-                        case 1:
-                            ExecuteCircularBombardment(lockedTargetPos);
-                            break;
-                        case 2:
-                            ExecuteScatteredBombardment(lockedTargetPos);
-                            break;
+                        switch (waveNumber % 3)
+                        {
+                            case 0:
+                                ExecuteLinearBombardment(lockedTargetPos);
+                                break;
+                            case 1:
+                                ExecuteCircularBombardment(lockedTargetPos);
+                                break;
+                            case 2:
+                                ExecuteScatteredBombardment(lockedTargetPos);
+                                break;
+                        }
                     }
 
                     SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, NPC.Center);
@@ -835,18 +846,24 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
 
         private void ExecuteLinearBombardment(Vector2 targetPos)
         {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
             for (int i = 0; i < 8; i++)
             {
                 Vector2 position = targetPos + new Vector2((i - 3.5f) * 75, -650 - Main.rand.NextFloat(0f, 50f));
                 Vector2 velocity = Vector2.UnitY * Main.rand.NextFloat(15f, 18f);
 
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
-                    ModContent.ProjectileType<SlothSpear>(), 48, 5f);
+                    ModContent.ProjectileType<SlothSpear>(), 48, 5f, -1);
             }
         }
 
         private void ExecuteCircularBombardment(Vector2 targetPos)
         {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
             for (int i = 0; i < 6; i++)
             {
                 float angle = (MathHelper.TwoPi / 6) * i;
@@ -854,19 +871,22 @@ namespace PurringTale.Content.NPCs.BossNPCs.Sloth
                 Vector2 direction = (targetPos - position).SafeNormalize(Vector2.UnitY) * 16f;
 
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), position, direction,
-                    ModContent.ProjectileType<SlothSpear>(), 48, 5f);
+                    ModContent.ProjectileType<SlothSpear>(), 48, 5f, -1);
             }
         }
 
         private void ExecuteScatteredBombardment(Vector2 targetPos)
         {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                return;
+
             for (int i = 0; i < 5; i++)
             {
                 Vector2 position = targetPos + Main.rand.NextVector2Circular(120f, 60f) + Vector2.UnitY * -650;
                 Vector2 direction = (targetPos - position).SafeNormalize(Vector2.UnitY) * 17f;
 
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), position, direction,
-                    ModContent.ProjectileType<SlothSpear>(), 48, 5f);
+                    ModContent.ProjectileType<SlothSpear>(), 48, 5f, -1);
             }
         }
 

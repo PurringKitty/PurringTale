@@ -71,7 +71,6 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
         private ref float timer => ref NPC.ai[0];
         private ref float jumpTimer => ref NPC.ai[3];
-
         private ref float attackCounterRef => ref NPC.localAI[0];
         private int AttackCounter
         {
@@ -85,8 +84,12 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             get => hasLandedRef == 1f;
             set => hasLandedRef = value ? 1f : 0f;
         }
-
-        private bool isAwakened = false;
+        private bool isAwakened 
+        { 
+            get => NPC.localAI[2] == 1f;
+            set => NPC.localAI[2] = value ? 1f : 0f;
+        }
+        
         private float originalGravity = 0.4f;
         private float jumpHeight = 16f;
         private Vector2 targetPosition;
@@ -99,8 +102,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            isAwakened = reader.ReadBoolean();
+            bool newAwakened = reader.ReadBoolean();
             targetPosition = reader.ReadVector2();
+            
+            isAwakened = newAwakened;
         }
 
         public override void SetStaticDefaults()
@@ -177,7 +182,15 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 isAwakened = true;
                 timer = 0;
 
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f, 60);
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
+
+                if (!Main.dedServ)
+                {
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f, 60);
+                }
                 SoundEngine.PlaySound(SoundID.DD2_BetsyScream, NPC.Center);
 
                 for (int i = 0; i < 30; i++)
@@ -284,6 +297,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 jumpTimer = 0;
                 AttackCounter = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
         }
 
@@ -298,7 +316,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             {
                 HasLanded = true;
 
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 8f, 20);
+                if (!Main.dedServ)
+                {
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 8f, 20);
+                }
                 SoundEngine.PlaySound(SoundID.Item70, NPC.Center);
 
                 for (int i = 0; i < 10; i++)
@@ -321,34 +342,42 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
                 if (AttackCounter >= 3 && jumpTimer > 30)
                 {
-                    int attackChoice = Main.rand.Next(5);
-                    switch (attackChoice)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        case 0:
-                            AttackType = RockAttackType.BoulderRain;
-                            AIState = ActionState.BoulderAttack;
-                            break;
-                        case 1:
-                            AttackType = RockAttackType.SpikeSlam;
-                            AIState = ActionState.SpikeAttack;
-                            break;
-                        case 2:
-                            AttackType = RockAttackType.RollingRocks;
-                            AIState = ActionState.RollingAttack;
-                            break;
-                        case 3:
-                            AttackType = RockAttackType.ShardBurst;
-                            AIState = ActionState.ShardAttack;
-                            break;
-                        case 4:
-                            AttackType = RockAttackType.GroundPound;
-                            AIState = ActionState.PoundAttack;
-                            break;
+                        int attackChoice = Main.rand.Next(5);
+                        switch (attackChoice)
+                        {
+                            case 0:
+                                AttackType = RockAttackType.BoulderRain;
+                                AIState = ActionState.BoulderAttack;
+                                break;
+                            case 1:
+                                AttackType = RockAttackType.SpikeSlam;
+                                AIState = ActionState.SpikeAttack;
+                                break;
+                            case 2:
+                                AttackType = RockAttackType.RollingRocks;
+                                AIState = ActionState.RollingAttack;
+                                break;
+                            case 3:
+                                AttackType = RockAttackType.ShardBurst;
+                                AIState = ActionState.ShardAttack;
+                                break;
+                            case 4:
+                                AttackType = RockAttackType.GroundPound;
+                                AIState = ActionState.PoundAttack;
+                                break;
+                        }
+                        timer = 0;
+                        AttackCounter = 0;
+                        HasLanded = false;
+
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                        }
+                        return;
                     }
-                    timer = 0;
-                    AttackCounter = 0;
-                    HasLanded = false;
-                    return;
                 }
 
                 if (AttackCounter < 3 && jumpTimer > 60)
@@ -393,7 +422,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     Volume = 1.2f
                 }, NPC.Center);
 
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 8f, 60);
+                if (!Main.dedServ)
+                {
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 8f, 60);
+                }
 
                 for (int i = 0; i < 20; i++)
                 {
@@ -409,7 +441,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     Vector2 spawnPos = player.Center + new Vector2(Main.rand.NextFloat(-400f, 400f), -600f);
                     Vector2 velocity = Vector2.UnitY * Main.rand.NextFloat(8f, 12f);
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity,
-                        ModContent.ProjectileType<FallingBoulder>(), 35, 6f);
+                        ModContent.ProjectileType<FallingBoulder>(), 35, 6f, -1);
                 }
 
                 if (timer > 65 && timer < 95 && timer % 15 == 0)
@@ -421,7 +453,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                         Vector2 spawnPos = predictedPos + new Vector2(i * 120f, -650f);
                         Vector2 velocity = Vector2.UnitY * Main.rand.NextFloat(9f, 13f);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity,
-                            ModContent.ProjectileType<FallingBoulder>(), 35, 6f);
+                            ModContent.ProjectileType<FallingBoulder>(), 35, 6f, -1);
                     }
                 }
 
@@ -432,7 +464,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                         Vector2 spawnPos = player.Center + new Vector2(Main.rand.NextFloat(-500f, 500f), -700f);
                         Vector2 velocity = Vector2.UnitY * Main.rand.NextFloat(10f, 14f);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity,
-                            ModContent.ProjectileType<FallingBoulder>(), 40, 7f);
+                            ModContent.ProjectileType<FallingBoulder>(), 40, 7f, -1);
                     }
                 }
 
@@ -441,13 +473,13 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     Vector2 randomSpawn = player.Center + new Vector2(Main.rand.NextFloat(-600f, 600f), -800f);
                     Vector2 velocity = Vector2.UnitY * Main.rand.NextFloat(7f, 11f);
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), position: randomSpawn, velocity,
-                        ModContent.ProjectileType<FallingBoulder>(), 30, 5f);
+                        ModContent.ProjectileType<FallingBoulder>(), 30, 5f, -1);
                 }
             }
 
             if (timer > 30 && timer < 120)
             {
-                if (timer % 10 == 0)
+                if (timer % 10 == 0 && !Main.dedServ)
                 {
                     ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 5f, 15);
                 }
@@ -477,6 +509,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             NPC.velocity.Y += originalGravity;
@@ -514,7 +551,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 {
                     HasLanded = true;
 
-                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 25f, 40);
+                    if (!Main.dedServ)
+                    {
+                        ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 25f, 40);
+                    }
                     SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact, NPC.Center);
 
                     if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -535,6 +575,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             if (timer > 60)
@@ -561,12 +606,12 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     Vector2 leftSpawn = new Vector2(player.Center.X - 600f, player.Center.Y - 100f);
                     Vector2 leftVel = new Vector2(Main.rand.NextFloat(6f, 9f), 0f);
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), leftSpawn, leftVel,
-                        ModContent.ProjectileType<RollingBoulder>(), 25, 3f);
+                        ModContent.ProjectileType<RollingBoulder>(), 25, 3f, -1);
 
                     Vector2 rightSpawn = new Vector2(player.Center.X + 600f, player.Center.Y - 100f);
                     Vector2 rightVel = new Vector2(Main.rand.NextFloat(-9f, -6f), 0f);
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), rightSpawn, rightVel,
-                        ModContent.ProjectileType<RollingBoulder>(), 25, 3f);
+                        ModContent.ProjectileType<RollingBoulder>(), 25, 3f, -1);
                 }
             }
 
@@ -576,6 +621,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             NPC.velocity.Y += originalGravity;
@@ -592,7 +642,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
             if (timer == 45)
             {
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f, 30);
+                if (!Main.dedServ)
+                {
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f, 30);
+                }
 
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
@@ -601,7 +654,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                         float angle = (float)(i * Math.PI * 2 / 12);
                         Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * Main.rand.NextFloat(3f, 7f);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                            ModContent.ProjectileType<StoneShards>(), 20, 2f);
+                            ModContent.ProjectileType<StoneShards>(), 20, 2f, -1);
                     }
                 }
 
@@ -618,6 +671,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             NPC.velocity.Y += originalGravity;
@@ -646,7 +704,10 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
             if (timer == 45)
             {
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 35f, 60);
+                if (!Main.dedServ)
+                {
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 35f, 60);
+                }
                 SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode, NPC.Center);
 
                 if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -672,6 +733,11 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
+                
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
+                }
             }
 
             if (timer > 45)
