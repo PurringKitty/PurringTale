@@ -77,23 +77,58 @@ namespace PurringTale.CatBoss
             {
                 Projectile.scale += 0.05f;
             }
-            Vector2 ownerCenter;
-            if (Projectile.ai[1] < Main.maxNPCs)
-            {
-                ownerCenter = Main.npc[(int)Projectile.ai[1]].Center;
-            }
-            else
-            {
-                ownerCenter = Main.projectile[(int)(Projectile.ai[1] - Main.maxNPCs)].Center;
-            }
+
             if (Projectile.timeLeft < 6)
             {
                 Projectile.scale -= 0.2f;
             }
+
             timer++;
+
+            Vector2 ownerCenter;
+
+            if (Projectile.ai[1] == -1f)
+            {
+                ownerCenter = new Vector2(Projectile.localAI[0], Projectile.localAI[1]);
+            }
+            else if (Projectile.ai[1] >= 0 && Projectile.ai[1] < Main.maxNPCs)
+            {
+                int npcId = (int)Projectile.ai[1];
+                if (npcId >= 0 && npcId < Main.maxNPCs && Main.npc[npcId].active)
+                {
+                    ownerCenter = Main.npc[npcId].Center;
+                }
+                else
+                {
+                    Projectile.Kill();
+                    return;
+                }
+            }
+            else if (Projectile.ai[1] >= Main.maxNPCs)
+            {
+                int projId = (int)(Projectile.ai[1] - Main.maxNPCs);
+                if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active)
+                {
+                    ownerCenter = Main.projectile[projId].Center;
+                }
+                else
+                {
+                    Projectile.Kill();
+                    return;
+                }
+            }
+            else
+            {
+                Projectile.Kill();
+                return;
+            }
+
             Projectile.Center = ownerCenter;
+
             Projectile.alpha = (int)Math.Clamp(Projectile.alpha - timer * 3, 0, 255);
+
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
+
             base.AI();
         }
         public override bool PreDraw(ref Color lightColor)

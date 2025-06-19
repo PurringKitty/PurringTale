@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Common.Systems;
@@ -27,7 +28,10 @@ namespace PurringTale.CatBoss
         Whip,
         HomingStars,
         RegularStars,
-        Clones
+        Clones,
+        BulletRain,
+        Rockets,
+        Lasers
     }
 
     public enum BossPhase
@@ -48,6 +52,7 @@ namespace PurringTale.CatBoss
             Move,
             PhaseTransition,
             Death,
+            DeathMode
         }
 
         private uint Bussy
@@ -82,6 +87,12 @@ namespace PurringTale.CatBoss
         private int phase2HealthThreshold => NPC.lifeMax * 2 / 3;
         private int phase3HealthThreshold => NPC.lifeMax / 3;
 
+        private bool inDeathMode = false;
+        private bool deathModeTriggered = false;
+        private int deathModeAttackCounter = 0;
+        private float deathModeTimer = 0;
+        private List<int> deathModeProjectiles = new List<int>();
+
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.Write(ShaderTimer);
@@ -95,6 +106,10 @@ namespace PurringTale.CatBoss
             {
                 writer.Write(clone);
             }
+            writer.Write(inDeathMode);
+            writer.Write(deathModeTriggered);
+            writer.Write(deathModeAttackCounter);
+            writer.Write(deathModeTimer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -111,6 +126,10 @@ namespace PurringTale.CatBoss
             {
                 activeClones.Add(reader.ReadInt32());
             }
+            inDeathMode = reader.ReadBoolean();
+            deathModeTriggered = reader.ReadBoolean();
+            deathModeAttackCounter = reader.ReadInt32();
+            deathModeTimer = reader.ReadSingle();
         }
 
         public override void SetStaticDefaults()
@@ -157,6 +176,12 @@ namespace PurringTale.CatBoss
             NPC.dontTakeDamage = true;
             NPC.ScaleStats_UseStrengthMultiplier(0.6f);
 
+            inDeathMode = false;
+            deathModeTriggered = false;
+            deathModeAttackCounter = 0;
+            deathModeTimer = 0;
+            deathModeProjectiles = new List<int>();
+
             if (!Main.dedServ)
             {
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Prometheus");
@@ -190,8 +215,17 @@ namespace PurringTale.CatBoss
             NPC.spriteDirection = NPC.direction;
 
             activeClones.RemoveAll(cloneId => cloneId < 0 || cloneId >= Main.maxProjectiles || !Main.projectile[cloneId].active || Main.projectile[cloneId].type != ModContent.ProjectileType<BossClone>());
+            deathModeProjectiles.RemoveAll(projId => projId < 0 || projId >= Main.maxProjectiles || !Main.projectile[projId].active);
 
-            CheckPhaseTransition();
+            if (NPC.life <= 1 && !deathModeTriggered)
+            {
+                TriggerDeathMode();
+            }
+
+            if (!inDeathMode)
+            {
+                CheckPhaseTransition();
+            }
 
             if (AIState != oldState)
             {
@@ -210,7 +244,7 @@ namespace PurringTale.CatBoss
 
             Player player = Main.player[NPC.target];
 
-            if (player.dead)
+            if (player.dead && !inDeathMode)
             {
                 NPC.velocity.Y -= 0.04f;
                 NPC.EncourageDespawn(10);
@@ -221,7 +255,47 @@ namespace PurringTale.CatBoss
 
             ShaderTimer++;
             timer++;
+            if (inDeathMode) deathModeTimer++;
             oldState = AIState;
+        }
+
+        private void TriggerDeathMode()
+        {
+            deathModeTriggered = true;
+            inDeathMode = true;
+            AIState = ActionState.DeathMode;
+            timer = 0;
+            deathModeTimer = 0;
+            deathModeAttackCounter = 0;
+
+            NPC.dontTakeDamage = true;
+            NPC.life = 1;
+
+            SoundEngine.PlaySound(SoundID.Roar, NPC.position);
+            SoundEngine.PlaySound(SoundID.DD2_BetsyScream, NPC.position);
+
+            Main.NewText("THE TOP HAT GOD ENTERS A FINAL RAGE!", Color.Red);
+            Main.NewText("SURVIVE THE ONSLAUGHT!", Color.Orange);
+
+            ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 50f, 120);
+
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 pos = NPC.Center + Main.rand.NextVector2Circular(200, 200);
+                Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 100 * i) * Main.rand.NextFloat(5f, 20f);
+                Dust dust = Dust.NewDustPerfect(pos, DustID.Shadowflame, vel);
+                dust.noGravity = true;
+                dust.scale = Main.rand.NextFloat(2f, 4f);
+                dust.color = Color.Red;
+            }
+
+            for (int i = 0; i < Main.maxProjectiles; i++)
+            {
+                if (Main.projectile[i].active && Main.projectile[i].hostile)
+                {
+                    Main.projectile[i].Kill();
+                }
+            }
         }
 
         private void CheckPhaseTransition()
@@ -285,6 +359,9 @@ namespace PurringTale.CatBoss
                     break;
                 case ActionState.PhaseTransition:
                     PhaseTransition();
+                    break;
+                case ActionState.DeathMode:
+                    ExecuteDeathMode();
                     break;
                 default:
                     break;
@@ -410,10 +487,10 @@ namespace PurringTale.CatBoss
 
                 int maxAttacks = currentPhase switch
                 {
-                    BossPhase.Phase1 => 5,
-                    BossPhase.Phase2 => 6,
-                    BossPhase.Phase3 => 7,
-                    _ => 5
+                    BossPhase.Phase1 => 6,
+                    BossPhase.Phase2 => 8,
+                    BossPhase.Phase3 => 10,
+                    _ => 6
                 };
 
                 if (atkCounter > maxAttacks)
@@ -433,8 +510,11 @@ namespace PurringTale.CatBoss
                         0 => AttackType.HomingStars,
                         1 => AttackType.RegularStars,
                         2 => AttackType.Gun,
-                        3 => AttackType.Clones,
-                        4 => AttackType.Sword,
+                        3 => AttackType.Lasers,
+                        4 => AttackType.BulletRain,
+                        5 => AttackType.Clones,
+                        6 => AttackType.Sword,
+                        7 => AttackType.Rockets,
                         _ => AttackType.HomingStars
                     };
                     break;
@@ -444,10 +524,13 @@ namespace PurringTale.CatBoss
                     {
                         0 => AttackType.Gun,
                         1 => AttackType.HomingStars,
-                        2 => AttackType.Clones,
-                        3 => AttackType.Whip,
-                        4 => AttackType.Sword,
-                        5 => AttackType.RegularStars,
+                        2 => AttackType.Lasers,
+                        3 => AttackType.BulletRain,
+                        4 => AttackType.Clones,
+                        5 => AttackType.Rockets,
+                        6 => AttackType.Whip,
+                        7 => AttackType.Sword,
+                        8 => AttackType.RegularStars,
                         _ => AttackType.Gun
                     };
                     break;
@@ -455,14 +538,18 @@ namespace PurringTale.CatBoss
                 case BossPhase.Phase3:
                     AtkType = atkCounter switch
                     {
-                        0 => AttackType.Gun,
+                        0 => AttackType.Lasers,
                         1 => AttackType.Clones,
-                        2 => AttackType.Whip,
-                        3 => AttackType.HomingStars,
-                        4 => AttackType.Sword,
-                        5 => AttackType.Gun,
-                        6 => AttackType.RegularStars,
-                        _ => AttackType.Gun
+                        2 => AttackType.BulletRain,
+                        3 => AttackType.Whip,
+                        4 => AttackType.Rockets,
+                        5 => AttackType.Lasers,
+                        6 => AttackType.HomingStars,
+                        7 => AttackType.BulletRain,
+                        8 => AttackType.Rockets,
+                        9 => AttackType.Sword,
+                        10 => AttackType.RegularStars,
+                        _ => AttackType.Lasers
                     };
                     break;
             }
@@ -518,6 +605,15 @@ namespace PurringTale.CatBoss
                     case AttackType.Clones:
                         ExecuteCloneAttack(target, phaseMultiplier, damageBonus);
                         break;
+                    case AttackType.BulletRain:
+                        ExecuteBulletRainAttack(target, phaseMultiplier, damageBonus);
+                        break;
+                    case AttackType.Rockets:
+                        ExecuteRocketAttack(target, phaseMultiplier, damageBonus);
+                        break;
+                    case AttackType.Lasers:
+                        ExecuteLaserAttack(target, phaseMultiplier, damageBonus);
+                        break;
                 }
             }
         }
@@ -550,6 +646,14 @@ namespace PurringTale.CatBoss
                     float cloneAngle = angleStep * c + (timer * 0.01f);
                     Vector2 clonePos = target.Center + Vector2.One.RotatedBy(cloneAngle) * 300;
 
+                    int attackStyle = currentPhase switch
+                    {
+                        BossPhase.Phase1 => c % 3,
+                        BossPhase.Phase2 => c % 4,
+                        BossPhase.Phase3 => c % 6,
+                        _ => c % 3
+                    };
+
                     int cloneProjectileId = Projectile.NewProjectile(
                         NPC.GetSource_FromAI(),
                         clonePos,
@@ -558,15 +662,32 @@ namespace PurringTale.CatBoss
                         NPC.damage + damageBonus,
                         0f,
                         Main.myPlayer,
-                        c % 3,
+                        attackStyle,
                         0f,
                         0f
                     );
 
                     if (cloneProjectileId >= 0 && cloneProjectileId < Main.maxProjectiles)
                     {
+                        var cloneProjectile = Main.projectile[cloneProjectileId].ModProjectile as BossClone;
+                        if (cloneProjectile != null)
+                        {
+                            cloneProjectile.SetPhase((int)currentPhase + 1);
+                        }
+
                         activeClones.Add(cloneProjectileId);
                         SoundEngine.PlaySound(SoundID.Item8, clonePos);
+
+                        Color effectColor = attackStyle switch
+                        {
+                            0 => Color.Orange,
+                            1 => Color.Cyan,
+                            2 => Color.Yellow,
+                            3 => Color.Red,
+                            4 => Color.Purple,
+                            5 => Color.White,
+                            _ => GetPhaseColor()
+                        };
 
                         for (int i = 0; i < 20; i++)
                         {
@@ -574,7 +695,7 @@ namespace PurringTale.CatBoss
                             Dust dust = Dust.NewDustPerfect(clonePos, DustID.Shadowflame, vel);
                             dust.noGravity = true;
                             dust.scale = Main.rand.NextFloat(1f, 1.8f);
-                            dust.color = GetPhaseColor();
+                            dust.color = effectColor;
                         }
                     }
                 }
@@ -674,8 +795,17 @@ namespace PurringTale.CatBoss
                 SoundEngine.PlaySound(slashSound, NPC.position);
 
                 Vector2 slashDirection = -Vector2.UnitY;
+
+                int slashDamage = currentPhase switch
+                {
+                    BossPhase.Phase1 => 120 + damageBonus,
+                    BossPhase.Phase2 => 140 + damageBonus, 
+                    BossPhase.Phase3 => 160 + damageBonus,
+                    _ => 120 + damageBonus
+                };
+
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, slashDirection,
-                    ModContent.ProjectileType<Slash>(), 220 + damageBonus + (currentPhase == BossPhase.Phase3 ? 50 : 0), 15, -1,
+                    ModContent.ProjectileType<Slash>(), slashDamage, 15, -1,
                     NPC.whoAmI,
                     0f);
             }
@@ -1009,6 +1139,804 @@ namespace PurringTale.CatBoss
             }
         }
 
+        private void ExecuteBulletRainAttack(Player target, float phaseMultiplier, int damageBonus)
+        {
+            if (timer == 1)
+            {
+                holdingWeapon = true;
+                currentWeapon = "Gun";
+
+                Vector2 teleportPos = target.Center + new Vector2(Main.rand.Next(-400, 400), -300);
+                NPC.Center = teleportPos;
+                NPC.velocity = Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.Item11, NPC.position);
+            }
+
+            if (timer >= 30 && timer <= 120)
+            {
+                float moveSpeed = 3f + phaseMultiplier;
+                Vector2 moveDirection = NPC.DirectionTo(target.Center) * moveSpeed;
+                NPC.velocity = Vector2.Lerp(NPC.velocity, moveDirection, 0.1f);
+
+                int shootInterval = currentPhase switch
+                {
+                    BossPhase.Phase1 => 30,
+                    BossPhase.Phase2 => 20,
+                    BossPhase.Phase3 => 15,
+                    _ => 30
+                };
+
+                if (timer % shootInterval == 0)
+                {
+                    int bulletCount = currentPhase switch
+                    {
+                        BossPhase.Phase1 => 3,
+                        BossPhase.Phase2 => 4,
+                        BossPhase.Phase3 => 6,
+                        _ => 3
+                    };
+
+                    for (int i = 0; i < bulletCount; i++)
+                    {
+                        float spreadAngle = MathHelper.Lerp(-0.4f, 0.4f, i / (bulletCount - 1f));
+                        Vector2 aimDirection = NPC.DirectionTo(target.Center).RotatedBy(spreadAngle);
+                        float bulletSpeed = 12f + phaseMultiplier * 3f;
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, aimDirection * bulletSpeed,
+                            ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 4f);
+                    }
+                    SoundEngine.PlaySound(SoundID.Item40, NPC.position);
+                }
+            }
+
+            if (timer == 150)
+            {
+                NPC.velocity = Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.Item62, NPC.position);
+
+                string warningText = currentPhase switch
+                {
+                    BossPhase.Phase1 => "Bullets rain from above!",
+                    BossPhase.Phase2 => "Heavy bullet barrage incoming!",
+                    BossPhase.Phase3 => "Devastating bullet storm!",
+                    _ => "Bullets rain from above!"
+                };
+
+                Main.NewText(warningText, GetPhaseColor());
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f + phaseMultiplier * 5f, 30);
+            }
+
+            if (timer == 180)
+            {
+                int bulletColumns = currentPhase switch
+                {
+                    BossPhase.Phase1 => 8,
+                    BossPhase.Phase2 => 12,
+                    BossPhase.Phase3 => 16,
+                    _ => 8
+                };
+
+                for (int i = 0; i < bulletColumns; i++)
+                {
+                    Vector2 position = new Vector2(
+                        target.Center.X - 1200 + i * (2400f / bulletColumns),
+                        target.Center.Y - 800
+                    );
+
+                    float randomAngle = currentPhase switch
+                    {
+                        BossPhase.Phase1 => Main.rand.NextFloat(-0.1f, 0.1f),
+                        BossPhase.Phase2 => Main.rand.NextFloat(-0.2f, 0.2f),
+                        BossPhase.Phase3 => Main.rand.NextFloat(-0.3f, 0.3f),
+                        _ => Main.rand.NextFloat(-0.1f, 0.1f)
+                    };
+
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(randomAngle) * (20f + phaseMultiplier * 8f);
+                    float delay = i * (8f / phaseMultiplier);
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus, 4f, -1, 0, 120 + delay);
+                }
+            }
+
+            if (currentPhase == BossPhase.Phase2 && timer == 220)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Vector2 position = new Vector2(
+                        target.Center.X - 1000 + i * 200f,
+                        target.Center.Y - 900
+                    );
+
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.25f, 0.25f)) * 28f;
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus + 5, 4f, -1, 0, 90 + i * 6f);
+                }
+            }
+
+            if (currentPhase == BossPhase.Phase3 && timer == 220)
+            {
+                for (int i = 0; i < 14; i++)
+                {
+                    Vector2 position = new Vector2(
+                        target.Center.X - 1400 + i * 200f,
+                        target.Center.Y - 900
+                    );
+
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f)) * 32f;
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus + 10, 4f, -1, 0, 70 + i * 4f);
+                }
+            }
+
+            if (currentPhase == BossPhase.Phase3 && timer == 260)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    Vector2 position = new Vector2(
+                        target.Center.X - 1200 + i * 200f,
+                        target.Center.Y - 1000
+                    );
+
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f)) * 35f;
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + damageBonus + 15, 5f, -1, 0, 60 + i * 3f);
+                }
+            }
+
+            int endTime = currentPhase switch
+            {
+                BossPhase.Phase1 => 280,
+                BossPhase.Phase2 => 320,
+                BossPhase.Phase3 => 360,
+                _ => 280
+            };
+
+            if (timer >= endTime)
+            {
+                holdingWeapon = false;
+                currentWeapon = "";
+                timer = 0;
+                AIState = ActionState.Choose;
+            }
+        }
+
+        private void ExecuteRocketAttack(Player target, float phaseMultiplier, int damageBonus)
+        {
+            if (timer == 1)
+            {
+                holdingWeapon = true;
+                currentWeapon = "Gun";
+
+                Vector2 teleportPos = target.Center + ModdingusUtils.randomVector() * 200;
+                NPC.Center = teleportPos;
+                NPC.velocity = Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+            }
+
+            int chargeTime = currentPhase switch
+            {
+                BossPhase.Phase1 => 60,
+                BossPhase.Phase2 => 80,
+                BossPhase.Phase3 => 100,
+                _ => 60
+            };
+
+            if (timer >= 30 && timer <= 30 + chargeTime)
+            {
+                NPC.velocity *= 0.95f;
+
+                int particleFreq = currentPhase switch
+                {
+                    BossPhase.Phase1 => 8,
+                    BossPhase.Phase2 => 5,
+                    BossPhase.Phase3 => 3,
+                    _ => 8
+                };
+
+                if (timer % particleFreq == 0)
+                {
+                    int particleCount = currentPhase switch
+                    {
+                        BossPhase.Phase1 => 4,
+                        BossPhase.Phase2 => 6,
+                        BossPhase.Phase3 => 8,
+                        _ => 4
+                    };
+
+                    for (int i = 0; i < particleCount; i++)
+                    {
+                        Vector2 dustPos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / particleCount * i) * (30 + timer);
+                        Dust dust = Dust.NewDustPerfect(dustPos, DustID.Torch);
+                        dust.velocity = Vector2.Zero;
+                        dust.noGravity = true;
+                        dust.scale = 1f + phaseMultiplier * 0.5f;
+                        dust.color = Color.Lerp(Color.Orange, Color.Red, phaseMultiplier / 2f);
+                    }
+                }
+
+                if (timer % 10 == 0)
+                {
+                    float intensity = ((timer - 30f) / chargeTime) * (10f + phaseMultiplier * 5f);
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, intensity, 10);
+                }
+            }
+
+            if (timer == 30 + chargeTime + 10)
+            {
+                SoundEngine.PlaySound(SoundID.Item62, NPC.position);
+
+                string warningText = currentPhase switch
+                {
+                    BossPhase.Phase1 => "Incoming rockets!",
+                    BossPhase.Phase2 => "Massive rocket barrage!",
+                    BossPhase.Phase3 => "APOCALYPTIC ROCKET STORM!",
+                    _ => "Incoming rockets!"
+                };
+
+                Main.NewText(warningText, GetPhaseColor());
+
+                int rocketCount = currentPhase switch
+                {
+                    BossPhase.Phase1 => 6,
+                    BossPhase.Phase2 => 10,
+                    BossPhase.Phase3 => 16,
+                    _ => 6
+                };
+
+                for (int i = 0; i < rocketCount; i++)
+                {
+                    float angle = MathHelper.TwoPi / rocketCount * i;
+                    Vector2 direction = Vector2.One.RotatedBy(angle);
+                    float speed = currentPhase switch
+                    {
+                        BossPhase.Phase1 => 6f,
+                        BossPhase.Phase2 => 8f,
+                        BossPhase.Phase3 => 10f,
+                        _ => 6f
+                    };
+
+                    Vector2 velocity = direction * speed;
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<BossRocket>(), NPC.damage + damageBonus, 6f);
+                }
+
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 20f + phaseMultiplier * 10f, 40);
+            }
+
+            if (currentPhase == BossPhase.Phase2 && timer == 30 + chargeTime + 50)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    float spreadAngle = MathHelper.Lerp(-0.6f, 0.6f, i / 5f);
+                    Vector2 aimDirection = NPC.DirectionTo(target.Center).RotatedBy(spreadAngle);
+                    Vector2 velocity = aimDirection * 9f;
+
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<BossRocket>(), NPC.damage + damageBonus + 5, 8f);
+                }
+                SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+            }
+
+            if (currentPhase == BossPhase.Phase3)
+            {
+                if (timer == 30 + chargeTime + 40)
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        float angle = MathHelper.TwoPi / 12 * i + MathHelper.PiOver4;
+                        Vector2 direction = Vector2.One.RotatedBy(angle);
+                        Vector2 velocity = direction * 9f;
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<BossRocket>(), NPC.damage + damageBonus + 8, 8f);
+                    }
+                }
+
+                if (timer == 30 + chargeTime + 70)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        float spreadAngle = MathHelper.Lerp(-0.8f, 0.8f, i / 7f);
+                        Vector2 aimDirection = NPC.DirectionTo(target.Center).RotatedBy(spreadAngle);
+                        Vector2 velocity = aimDirection * 12f;
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                            ModContent.ProjectileType<BossRocket>(), NPC.damage + damageBonus + 12, 10f);
+                    }
+                    SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+                }
+            }
+
+            int endTime = currentPhase switch
+            {
+                BossPhase.Phase1 => 180,
+                BossPhase.Phase2 => 220,
+                BossPhase.Phase3 => 280,
+                _ => 180
+            };
+
+            if (timer >= endTime)
+            {
+                holdingWeapon = false;
+                currentWeapon = "";
+                timer = 0;
+                AIState = ActionState.Choose;
+            }
+        }
+
+        private int[] laserProjectileIds = new int[12];
+        private int initialLaserId = -1;
+
+        private void ExecuteLaserAttack(Player target, float phaseMultiplier, int damageBonus)
+        {
+            if (timer == 1)
+            {
+                holdingWeapon = true;
+                currentWeapon = "Staff";
+
+                Vector2 teleportPos = target.Center + new Vector2(0, -200);
+                NPC.Center = teleportPos;
+                NPC.velocity = Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.Item72, NPC.position);
+
+                for (int i = 0; i < laserProjectileIds.Length; i++)
+                {
+                    laserProjectileIds[i] = -1;
+                }
+                initialLaserId = -1;
+            }
+
+            if (timer >= 20 && timer <= 25)
+            {
+                Vector2 dashDirection = NPC.DirectionTo(target.Center);
+                NPC.velocity = dashDirection * 8f;
+            }
+
+            if (timer > 25 && timer <= 35)
+            {
+                NPC.velocity *= 0.8f;
+            }
+
+            if (timer == 40)
+            {
+                Vector2 laserDirection = NPC.velocity.SafeNormalize(Vector2.UnitX);
+                initialLaserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + damageBonus, 5f, -1, 0, NPC.whoAmI, 20);
+
+                if (initialLaserId >= 0 && initialLaserId < Main.maxProjectiles)
+                {
+                    Main.projectile[initialLaserId].timeLeft = 80;
+                }
+            }
+
+            if (timer == 95)
+            {
+                if (initialLaserId >= 0 && initialLaserId < Main.maxProjectiles && Main.projectile[initialLaserId].active)
+                {
+                    Main.projectile[initialLaserId].Kill();
+                }
+                initialLaserId = -1;
+            }
+
+            if (timer == 100)
+            {
+                NPC.Center = target.Center + new Vector2(0, -100);
+                NPC.velocity = -Vector2.UnitY * 2f;
+
+                Main.NewText("Laser barrage incoming!", Color.Cyan);
+
+                int laserCount = currentPhase switch
+                {
+                    BossPhase.Phase1 => 4,
+                    BossPhase.Phase2 => 6,
+                    BossPhase.Phase3 => 10,
+                    _ => 4
+                };
+
+                for (int i = 0; i < laserProjectileIds.Length; i++)
+                {
+                    if (laserProjectileIds[i] >= 0 && laserProjectileIds[i] < Main.maxProjectiles && Main.projectile[laserProjectileIds[i]].active)
+                    {
+                        Main.projectile[laserProjectileIds[i]].Kill();
+                    }
+                    laserProjectileIds[i] = -1;
+                }
+
+                for (int i = 0; i < Math.Min(laserCount, laserProjectileIds.Length); i++)
+                {
+                    float angle = (MathHelper.TwoPi / laserCount) * i;
+                    Vector2 laserDirection = Vector2.One.RotatedBy(angle);
+
+                    int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                        ModContent.ProjectileType<BossLaser>(), NPC.damage + damageBonus, 5f, -1, 0, NPC.whoAmI, 20);
+
+                    if (laserId >= 0 && laserId < Main.maxProjectiles)
+                    {
+                        laserProjectileIds[i] = laserId;
+                        Main.projectile[laserId].timeLeft = 200;
+                    }
+                }
+
+                SoundEngine.PlaySound(SoundID.Item72, NPC.position);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 20f, 60);
+            }
+
+            if (timer > 100 && timer <= 250)
+            {
+                float rotationSpeed = 0.02f * phaseMultiplier;
+
+                for (int i = 0; i < laserProjectileIds.Length; i++)
+                {
+                    int laserId = laserProjectileIds[i];
+                    if (laserId >= 0 && laserId < Main.maxProjectiles && Main.projectile[laserId].active)
+                    {
+                        Main.projectile[laserId].velocity = Main.projectile[laserId].velocity.RotatedBy(rotationSpeed);
+                    }
+                }
+
+                if (timer % 8 == 0)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Vector2 dustPos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 4 * i) * 30;
+                        Dust dust = Dust.NewDustPerfect(dustPos, DustID.Electric);
+                        dust.velocity = Vector2.Zero;
+                        dust.noGravity = true;
+                        dust.scale = 1.5f;
+                        dust.color = Color.Cyan;
+                    }
+                }
+            }
+
+            if (timer == 250)
+            {
+                for (int i = 0; i < laserProjectileIds.Length; i++)
+                {
+                    int laserId = laserProjectileIds[i];
+                    if (laserId >= 0 && laserId < Main.maxProjectiles && Main.projectile[laserId].active)
+                    {
+                        Main.projectile[laserId].Kill();
+                    }
+                    laserProjectileIds[i] = -1;
+                }
+            }
+
+            if (currentPhase != BossPhase.Phase1 && timer == 280)
+            {
+                Vector2 dashDirection = NPC.DirectionTo(target.Center);
+                NPC.velocity = dashDirection * 10f;
+
+                int finalLaserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, dashDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + damageBonus + 15, 8f, -1, 0, NPC.whoAmI, 20);
+
+                if (finalLaserId >= 0 && finalLaserId < Main.maxProjectiles)
+                {
+                    Main.projectile[finalLaserId].timeLeft = 100;
+                }
+            }
+
+            if (timer >= (int)(350 / Math.Max(phaseMultiplier, 1.2f)))
+            {
+                if (initialLaserId >= 0 && initialLaserId < Main.maxProjectiles && Main.projectile[initialLaserId].active)
+                {
+                    Main.projectile[initialLaserId].Kill();
+                }
+
+                for (int i = 0; i < laserProjectileIds.Length; i++)
+                {
+                    int laserId = laserProjectileIds[i];
+                    if (laserId >= 0 && laserId < Main.maxProjectiles && Main.projectile[laserId].active)
+                    {
+                        Main.projectile[laserId].Kill();
+                    }
+                    laserProjectileIds[i] = -1;
+                }
+
+                holdingWeapon = false;
+                currentWeapon = "";
+                timer = 0;
+                AIState = ActionState.Choose;
+            }
+        }
+
+        private void ExecuteDeathMode()
+        {
+            Player target = Main.player[NPC.target];
+
+            if (deathModeTimer >= 2700)
+            {
+                foreach (int projId in deathModeProjectiles)
+                {
+                    if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active)
+                    {
+                        Main.projectile[projId].Kill();
+                    }
+                }
+                deathModeProjectiles.Clear();
+
+                foreach (int cloneId in activeClones)
+                {
+                    if (cloneId >= 0 && cloneId < Main.maxProjectiles && Main.projectile[cloneId].active)
+                    {
+                        Main.projectile[cloneId].Kill();
+                    }
+                }
+                activeClones.Clear();
+
+                Main.NewText("The Top Hat God's rage subsides...", Color.Gray);
+
+                inDeathMode = false;
+                NPC.dontTakeDamage = false;
+                NPC.life = 0;
+                NPC.checkDead();
+                return;
+            }
+
+            NPC.life = 1;
+
+            if (timer % 5 == 0)
+            {
+                Vector2 dustPos = NPC.Center + Main.rand.NextVector2Circular(60, 60);
+                Dust dust = Dust.NewDustPerfect(dustPos, DustID.Shadowflame);
+                dust.velocity = Main.rand.NextVector2Circular(3, 3);
+                dust.noGravity = true;
+                dust.scale = 2f;
+                dust.color = Color.Lerp(Color.Red, Color.Black, Main.rand.NextFloat());
+            }
+
+            if (timer % 60 == 0)
+            {
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 20f, 30);
+            }
+
+            ExecuteDeathModeAttacks(target);
+        }
+
+        private void ExecuteDeathModeAttacks(Player target)
+        {
+            if (deathModeTimer < 900)
+            {
+                BulletHellPhase(target);
+            }
+            else if (deathModeTimer < 1800)
+            {
+                LaserChaosPhase(target);
+            }
+            else
+            {
+                FinalDesperationPhase(target);
+            }
+        }
+
+        private void BulletHellPhase(Player target)
+        {
+            if (timer % 120 == 0)
+            {
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(400, 400);
+                NPC.Center = teleportPos;
+                SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 20 * i) * 8f;
+                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Shadowflame, vel);
+                    dust.noGravity = true;
+                    dust.scale = 1.5f;
+                    dust.color = Color.Red;
+                }
+            }
+
+            if (timer % 5 == 0)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    float angle = MathHelper.TwoPi / 8 * i + (timer * 0.1f);
+                    Vector2 vel = Vector2.One.RotatedBy(angle) * 15f;
+
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 30, 6f);
+                    deathModeProjectiles.Add(projId);
+                }
+
+                if (timer % 20 == 0) SoundEngine.PlaySound(SoundID.Item11, NPC.position);
+            }
+
+            if (timer % 30 == 0)
+            {
+                Vector2 aimDirection = NPC.DirectionTo(target.Center);
+                for (int i = 0; i < 5; i++)
+                {
+                    Vector2 vel = aimDirection.RotatedBy(MathHelper.Lerp(-0.5f, 0.5f, i / 4f)) * 20f;
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 25, 5f);
+                    deathModeProjectiles.Add(projId);
+                }
+            }
+
+            if (timer % 60 == 0)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    Vector2 position = new Vector2(
+                        target.Center.X - 800 + i * 100f,
+                        target.Center.Y - 600
+                    );
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f)) * 25f;
+
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 20, 4f, -1, 0, 60 + i * 3f);
+                    deathModeProjectiles.Add(projId);
+                }
+            }
+        }
+
+        private void LaserChaosPhase(Player target)
+        {
+            if (timer % 180 == 0)
+            {
+                Vector2 teleportPos = target.Center + new Vector2(0, -250);
+                NPC.Center = teleportPos;
+                NPC.velocity = Vector2.Zero;
+                SoundEngine.PlaySound(SoundID.Item72, NPC.position);
+
+                for (int i = 0; i < 50; i++)
+                {
+                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 50 * i) * Main.rand.NextFloat(5f, 15f);
+                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Electric, vel);
+                    dust.noGravity = true;
+                    dust.scale = 2f;
+                    dust.color = Color.Cyan;
+                }
+            }
+
+            if (timer % 90 == 0)
+            {
+                float startAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                for (int i = 0; i < 6; i++)
+                {
+                    float angle = startAngle + (MathHelper.TwoPi / 6) * i;
+                    Vector2 laserDirection = Vector2.One.RotatedBy(angle);
+
+                    int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                        ModContent.ProjectileType<BossLaser>(), NPC.damage + 40, 8f, -1, 0, NPC.whoAmI, 25);
+
+                    if (laserId >= 0)
+                    {
+                        Main.projectile[laserId].timeLeft = 180;
+                        deathModeProjectiles.Add(laserId);
+                    }
+                }
+            }
+
+            if (timer > 90)
+            {
+                foreach (int projId in deathModeProjectiles.ToList())
+                {
+                    if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active && Main.projectile[projId].type == ModContent.ProjectileType<BossLaser>())
+                    {
+                        Main.projectile[projId].velocity = Main.projectile[projId].velocity.RotatedBy(0.04f);
+                    }
+                }
+            }
+
+            if (timer % 120 == 60)
+            {
+                Vector2 dashDirection = NPC.DirectionTo(target.Center);
+                NPC.velocity = dashDirection * 25f;
+
+                int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, dashDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + 35, 10f, -1, 0, NPC.whoAmI, 15);
+
+                if (laserId >= 0)
+                {
+                    Main.projectile[laserId].timeLeft = 60;
+                    deathModeProjectiles.Add(laserId);
+                }
+            }
+
+            if (timer % 120 > 60 && timer % 120 < 80)
+            {
+                NPC.velocity *= 0.9f;
+            }
+        }
+
+        private void FinalDesperationPhase(Player target)
+        {
+            if (timer % 60 == 0)
+            {
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(300, 300);
+                NPC.Center = teleportPos;
+                SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+            }
+
+            if (timer % 3 == 0)
+            {
+                Vector2 randomDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                Vector2 vel = randomDirection * Main.rand.NextFloat(12f, 25f);
+
+                int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                    ModContent.ProjectileType<BossBullet>(), NPC.damage + 35, 7f);
+                deathModeProjectiles.Add(projId);
+            }
+
+            if (timer % 20 == 0)
+            {
+                Vector2 laserDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+
+                int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + 45, 12f, -1, 0, NPC.whoAmI, 10);
+
+                if (laserId >= 0)
+                {
+                    Main.projectile[laserId].timeLeft = 80;
+                    deathModeProjectiles.Add(laserId);
+                }
+            }
+
+            if (timer % 40 == 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Vector2 rocketDirection = Vector2.One.RotatedBy(MathHelper.TwoPi / 4 * i + Main.rand.NextFloat(-0.2f, 0.2f));
+                    Vector2 vel = rocketDirection * 12f;
+
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        ModContent.ProjectileType<BossRocket>(), NPC.damage + 40, 8f);
+                    deathModeProjectiles.Add(projId);
+                }
+                SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+            }
+
+            if (timer % 15 == 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 starDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                    Vector2 vel = starDirection * Main.rand.NextFloat(8f, 16f);
+
+                    int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        starType, NPC.damage + 30, 6f);
+                    deathModeProjectiles.Add(projId);
+                }
+            }
+
+            if (timer % 180 == 0)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    float angle = MathHelper.TwoPi / 6 * i;
+                    Vector2 clonePos = target.Center + Vector2.One.RotatedBy(angle) * 400;
+
+                    int cloneId = Projectile.NewProjectile(NPC.GetSource_FromAI(), clonePos, Vector2.Zero,
+                        ModContent.ProjectileType<BossClone>(), NPC.damage + 50, 0f, Main.myPlayer, 5, 0f, 0f);
+
+                    if (cloneId >= 0)
+                    {
+                        var clone = Main.projectile[cloneId].ModProjectile as BossClone;
+                        if (clone != null)
+                        {
+                            clone.SetPhase(4);
+                        }
+                        deathModeProjectiles.Add(cloneId);
+                    }
+                }
+            }
+
+            int timeLeft = 2700 - (int)deathModeTimer;
+            if (timeLeft <= 300 && timeLeft % 60 == 0)
+            {
+                int secondsLeft = timeLeft / 60;
+                Main.NewText($"The rage fades in {secondsLeft}...", Color.Yellow);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 30f, 20);
+            }
+        }
+
         public override void FindFrame(int frameHeight)
         {
             if (AIState == ActionState.Spawn)
@@ -1029,18 +1957,34 @@ namespace PurringTale.CatBoss
             Rectangle source = new Rectangle(0, NPC.frame.Y, t.Width, NPC.frame.Height);
             Vector2 weaponOffset = Vector2.Zero;
 
-            Color trailColor = GetPhaseColor();
+            Color trailColor = inDeathMode ? Color.Red : GetPhaseColor();
+            Color mainColor = inDeathMode ? Color.Lerp(drawColor, Color.Red, 0.8f) : Color.Lerp(drawColor, GetPhaseColor(), 0.3f);
 
-            for (float i = 0; i < tl; i += (float)(tl / 3))
+            int trailSegments = inDeathMode ? 6 : 3;
+            for (float i = 0; i < tl; i += (float)(tl / trailSegments))
             {
                 float percent = i / tl;
                 Vector2 dpos = NPC.oldPos[(int)i] - screenPos + new Vector2(t.Width * scale / 4, NPC.height * scale / 2);
-                spriteBatch.Draw(t, dpos, source, trailColor * (1 - percent), NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                Color trailAlpha = trailColor * (1 - percent) * (inDeathMode ? 1.5f : 1f);
+                spriteBatch.Draw(t, dpos, source, trailAlpha, NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             }
 
             Vector2 mainDrawPos = NPC.Center - screenPos;
-            Color phaseDrawColor = Color.Lerp(drawColor, GetPhaseColor(), 0.3f);
-            spriteBatch.Draw(t, mainDrawPos, source, phaseDrawColor, NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+
+            if (inDeathMode)
+            {
+                float pulse = 1f + 0.3f * (float)Math.Sin(deathModeTimer * 0.2f);
+                scale *= pulse;
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 offset = Vector2.One.RotatedBy(deathModeTimer * 0.1f + i * MathHelper.TwoPi / 3) * (2f + i);
+                    Color glowColor = Color.Red * (0.5f - i * 0.1f);
+                    spriteBatch.Draw(t, mainDrawPos + offset, source, glowColor, NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                }
+            }
+
+            spriteBatch.Draw(t, mainDrawPos, source, mainColor, NPC.rotation, NPC.origin(), scale, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 
             if (holdingWeapon && !string.IsNullOrEmpty(currentWeapon))
             {
@@ -1183,6 +2127,56 @@ namespace PurringTale.CatBoss
             }
 
             return false;
+        }
+
+        public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
+        {
+            if (NPC.life - modifiers.FinalDamage.Base <= 0 && !deathModeTriggered)
+            {
+                int damageToTake = NPC.life - 1;
+
+                if (damageToTake > 0)
+                {
+                    modifiers.FinalDamage.Base = damageToTake;
+                }
+                else
+                {
+                    modifiers.FinalDamage.Base = 0;
+                }
+
+                modifiers.DisableKnockback();
+            }
+
+            if (inDeathMode)
+            {
+                modifiers.FinalDamage.Base = 0;
+                modifiers.DisableKnockback();
+            }
+        }
+
+        public override bool CheckDead()
+        {
+            if (NPC.life <= 1 && !deathModeTriggered)
+            {
+                NPC.life = 1;
+                return false;
+            }
+
+            if (inDeathMode && deathModeTimer < 2700)
+            {
+                NPC.life = 1;
+                return false;
+            }
+
+            return true;
+        }
+
+        public override void PostAI()
+        {
+            if (NPC.life <= 1 && !deathModeTriggered)
+            {
+                TriggerDeathMode();
+            }
         }
 
         public override void OnKill()
