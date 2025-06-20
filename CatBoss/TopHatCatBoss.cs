@@ -1681,7 +1681,7 @@ namespace PurringTale.CatBoss
         {
             Player target = Main.player[NPC.target];
 
-            if (deathModeTimer >= 1800)
+            if (deathModeTimer >= 2700)
             {
                 foreach (int projId in deathModeProjectiles)
                 {
@@ -1712,7 +1712,7 @@ namespace PurringTale.CatBoss
 
             NPC.life = 1;
 
-            if (timer % 8 == 0)
+            if (timer % 5 == 0)
             {
                 Vector2 dustPos = NPC.Center + Main.rand.NextVector2Circular(60, 60);
                 Dust dust = Dust.NewDustPerfect(dustPos, DustID.Shadowflame);
@@ -1722,9 +1722,9 @@ namespace PurringTale.CatBoss
                 dust.color = Color.Lerp(Color.Red, Color.Black, Main.rand.NextFloat());
             }
 
-            if (timer % 90 == 0)
+            if (timer % 60 == 0)
             {
-                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f, 25);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 20f, 30);
             }
 
             ExecuteDeathModeAttacks(target);
@@ -1732,11 +1732,11 @@ namespace PurringTale.CatBoss
 
         private void ExecuteDeathModeAttacks(Player target)
         {
-            if (deathModeTimer < 600)
+            if (deathModeTimer < 900)
             {
                 BulletHellPhase(target);
             }
-            else if (deathModeTimer < 1200)
+            else if (deathModeTimer < 1800)
             {
                 LaserChaosPhase(target);
             }
@@ -1748,15 +1748,15 @@ namespace PurringTale.CatBoss
 
         private void BulletHellPhase(Player target)
         {
-            if (timer % 180 == 0)
+            if (timer % 120 == 0)
             {
-                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(350, 350);
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(400, 400);
                 NPC.Center = teleportPos;
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
 
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 15 * i) * 6f;
+                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 20 * i) * 8f;
                     Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Shadowflame, vel);
                     dust.noGravity = true;
                     dust.scale = 1.5f;
@@ -1764,134 +1764,115 @@ namespace PurringTale.CatBoss
                 }
             }
 
-            if (timer % 8 == 0)
+            if (timer % 5 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                for (int i = 0; i < 8; i++)
                 {
-                    for (int i = 0; i < 6; i++)
-                    {
-                        float angle = MathHelper.TwoPi / 6 * i + (timer * 0.08f);
-                        Vector2 vel = Vector2.One.RotatedBy(angle) * 12f;
+                    float angle = MathHelper.TwoPi / 8 * i + (timer * 0.1f);
+                    Vector2 vel = Vector2.One.RotatedBy(angle) * 15f;
 
-                        int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
-                            ModContent.ProjectileType<BossBullet>(), NPC.damage + 20, 6f, -1);
-                        deathModeProjectiles.Add(projId);
-                    }
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 30, 6f);
+                    deathModeProjectiles.Add(projId);
                 }
 
-                if (timer % 24 == 0) SoundEngine.PlaySound(SoundID.Item11, NPC.position);
+                if (timer % 20 == 0) SoundEngine.PlaySound(SoundID.Item11, NPC.position);
             }
 
-            if (timer % 45 == 0)
+            if (timer % 30 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                Vector2 aimDirection = NPC.DirectionTo(target.Center);
+                for (int i = 0; i < 5; i++)
                 {
-                    Vector2 aimDirection = NPC.DirectionTo(target.Center);
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector2 vel = aimDirection.RotatedBy(MathHelper.Lerp(-0.3f, 0.3f, i / 2f)) * 16f;
-                        int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
-                            ModContent.ProjectileType<BossBullet>(), NPC.damage + 15, 5f, -1);
-                        deathModeProjectiles.Add(projId);
-                    }
+                    Vector2 vel = aimDirection.RotatedBy(MathHelper.Lerp(-0.5f, 0.5f, i / 4f)) * 20f;
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 25, 5f);
+                    deathModeProjectiles.Add(projId);
                 }
             }
 
-            if (timer % 90 == 0)
+            if (timer % 60 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                for (int i = 0; i < 15; i++)
                 {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Vector2 position = new Vector2(
-                            target.Center.X - 600 + i * 120f,
-                            target.Center.Y - 500
-                        );
-                        Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)) * 20f;
+                    Vector2 position = new Vector2(
+                        target.Center.X - 800 + i * 100f,
+                        target.Center.Y - 600
+                    );
+                    Vector2 velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f)) * 25f;
 
-                        int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
-                            ModContent.ProjectileType<BossBullet>(), NPC.damage + 15, 4f, -1, 0, 40 + i * 4f);
-                        deathModeProjectiles.Add(projId);
-                    }
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), position, velocity,
+                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 20, 4f, -1, 0, 60 + i * 3f);
+                    deathModeProjectiles.Add(projId);
                 }
             }
         }
 
         private void LaserChaosPhase(Player target)
         {
-            if (timer % 240 == 0)
+            if (timer % 180 == 0)
             {
-                Vector2 teleportPos = target.Center + new Vector2(0, -200);
+                Vector2 teleportPos = target.Center + new Vector2(0, -250);
                 NPC.Center = teleportPos;
                 NPC.velocity = Vector2.Zero;
                 SoundEngine.PlaySound(SoundID.Item72, NPC.position);
 
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 50; i++)
                 {
-                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 30 * i) * Main.rand.NextFloat(3f, 10f);
+                    Vector2 vel = Vector2.One.RotatedBy(MathHelper.TwoPi / 50 * i) * Main.rand.NextFloat(5f, 15f);
                     Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Electric, vel);
                     dust.noGravity = true;
-                    dust.scale = 1.8f;
+                    dust.scale = 2f;
                     dust.color = Color.Cyan;
                 }
             }
 
-            if (timer % 120 == 0)
+            if (timer % 90 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                float startAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                for (int i = 0; i < 6; i++)
                 {
-                    float startAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        float angle = startAngle + (MathHelper.TwoPi / 4) * i;
-                        Vector2 laserDirection = Vector2.One.RotatedBy(angle);
+                    float angle = startAngle + (MathHelper.TwoPi / 6) * i;
+                    Vector2 laserDirection = Vector2.One.RotatedBy(angle);
 
-                        int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
-                            ModContent.ProjectileType<BossLaser>(), NPC.damage + 25, 8f, -1, 0, NPC.whoAmI, 20);
-
-                        if (laserId >= 0)
-                        {
-                            Main.projectile[laserId].timeLeft = 150;
-                            deathModeProjectiles.Add(laserId);
-                        }
-                    }
-                }
-            }
-
-            if (timer > 120)
-            {
-                foreach (int projId in deathModeProjectiles.ToList())
-                {
-                    if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active &&
-                        Main.projectile[projId].type == ModContent.ProjectileType<BossLaser>())
-                    {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
-                        {
-                            Main.projectile[projId].velocity = Main.projectile[projId].velocity.RotatedBy(0.025f);
-                        }
-                    }
-                }
-            }
-
-            if (timer % 180 == 60)
-            {
-                Vector2 dashDirection = NPC.DirectionTo(target.Center);
-                NPC.velocity = dashDirection * 20f;
-
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, dashDirection,
-                        ModContent.ProjectileType<BossLaser>(), NPC.damage + 20, 10f, -1, 0, NPC.whoAmI, 12);
+                    int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                        ModContent.ProjectileType<BossLaser>(), NPC.damage + 40, 8f, -1, 0, NPC.whoAmI, 25);
 
                     if (laserId >= 0)
                     {
-                        Main.projectile[laserId].timeLeft = 50;
+                        Main.projectile[laserId].timeLeft = 180;
                         deathModeProjectiles.Add(laserId);
                     }
                 }
             }
 
-            if (timer % 180 > 60 && timer % 180 < 90)
+            if (timer > 90)
+            {
+                foreach (int projId in deathModeProjectiles.ToList())
+                {
+                    if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active && Main.projectile[projId].type == ModContent.ProjectileType<BossLaser>())
+                    {
+                        Main.projectile[projId].velocity = Main.projectile[projId].velocity.RotatedBy(0.04f);
+                    }
+                }
+            }
+
+            if (timer % 120 == 60)
+            {
+                Vector2 dashDirection = NPC.DirectionTo(target.Center);
+                NPC.velocity = dashDirection * 25f;
+
+                int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, dashDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + 35, 10f, -1, 0, NPC.whoAmI, 15);
+
+                if (laserId >= 0)
+                {
+                    Main.projectile[laserId].timeLeft = 60;
+                    deathModeProjectiles.Add(laserId);
+                }
+            }
+
+            if (timer % 120 > 60 && timer % 120 < 80)
             {
                 NPC.velocity *= 0.9f;
             }
@@ -1899,111 +1880,93 @@ namespace PurringTale.CatBoss
 
         private void FinalDesperationPhase(Player target)
         {
-            if (timer % 90 == 0)
+            if (timer % 60 == 0)
             {
-                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(250, 250);
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(300, 300);
                 NPC.Center = teleportPos;
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
             }
 
-            if (timer % 6 == 0)
+            if (timer % 3 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                Vector2 randomDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                Vector2 vel = randomDirection * Main.rand.NextFloat(12f, 25f);
+
+                int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                    ModContent.ProjectileType<BossBullet>(), NPC.damage + 35, 7f);
+                deathModeProjectiles.Add(projId);
+            }
+
+            if (timer % 20 == 0)
+            {
+                Vector2 laserDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+
+                int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
+                    ModContent.ProjectileType<BossLaser>(), NPC.damage + 45, 12f, -1, 0, NPC.whoAmI, 10);
+
+                if (laserId >= 0)
                 {
-                    Vector2 randomDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
-                    Vector2 vel = randomDirection * Main.rand.NextFloat(10f, 18f);
+                    Main.projectile[laserId].timeLeft = 80;
+                    deathModeProjectiles.Add(laserId);
+                }
+            }
+
+            if (timer % 40 == 0)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Vector2 rocketDirection = Vector2.One.RotatedBy(MathHelper.TwoPi / 4 * i + Main.rand.NextFloat(-0.2f, 0.2f));
+                    Vector2 vel = rocketDirection * 12f;
 
                     int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
-                        ModContent.ProjectileType<BossBullet>(), NPC.damage + 25, 7f, -1);
+                        ModContent.ProjectileType<BossRocket>(), NPC.damage + 40, 8f);
+                    deathModeProjectiles.Add(projId);
+                }
+                SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+            }
+
+            if (timer % 15 == 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 starDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                    Vector2 vel = starDirection * Main.rand.NextFloat(8f, 16f);
+
+                    int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
+                    int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
+                        starType, NPC.damage + 30, 6f);
                     deathModeProjectiles.Add(projId);
                 }
             }
 
-            if (timer % 30 == 0)
+            if (timer % 180 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                for (int i = 0; i < 6; i++)
                 {
-                    Vector2 laserDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
+                    float angle = MathHelper.TwoPi / 6 * i;
+                    Vector2 clonePos = target.Center + Vector2.One.RotatedBy(angle) * 400;
 
-                    int laserId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, laserDirection,
-                        ModContent.ProjectileType<BossLaser>(), NPC.damage + 30, 12f, -1, 0, NPC.whoAmI, 8);
+                    int cloneId = Projectile.NewProjectile(NPC.GetSource_FromAI(), clonePos, Vector2.Zero,
+                        ModContent.ProjectileType<BossClone>(), NPC.damage + 50, 0f, Main.myPlayer, 5, 0f, 0f);
 
-                    if (laserId >= 0)
+                    if (cloneId >= 0)
                     {
-                        Main.projectile[laserId].timeLeft = 60;
-                        deathModeProjectiles.Add(laserId);
-                    }
-                }
-            }
-
-            if (timer % 60 == 0)
-            {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector2 rocketDirection = Vector2.One.RotatedBy(MathHelper.TwoPi / 3 * i + Main.rand.NextFloat(-0.15f, 0.15f));
-                        Vector2 vel = rocketDirection * 10f;
-
-                        int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
-                            ModContent.ProjectileType<BossRocket>(), NPC.damage + 25, 8f, -1);
-                        deathModeProjectiles.Add(projId);
-                    }
-                    SoundEngine.PlaySound(SoundID.Item14, NPC.position);
-                }
-            }
-
-            if (timer % 25 == 0)
-            {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    for (int i = 0; i < 2; i++)
-                    {
-                        Vector2 starDirection = Vector2.One.RotatedBy(Main.rand.NextFloat(0, MathHelper.TwoPi));
-                        Vector2 vel = starDirection * Main.rand.NextFloat(6f, 12f);
-
-                        int starType = Main.rand.NextBool() ? ModContent.ProjectileType<RegularStar>() : ModContent.ProjectileType<HomingStar>();
-                        int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
-                            starType, NPC.damage + 20, 6f, -1);
-                        deathModeProjectiles.Add(projId);
-                    }
-                }
-            }
-
-            if (timer % 300 == 0)
-            {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        float angle = MathHelper.TwoPi / 3 * i;
-                        Vector2 clonePos = target.Center + Vector2.One.RotatedBy(angle) * 350;
-
-                        int cloneId = Projectile.NewProjectile(NPC.GetSource_FromAI(), clonePos, Vector2.Zero,
-                            ModContent.ProjectileType<BossClone>(), NPC.damage + 30, 0f, -1, 2, 0f, 0f);
-
-                        if (cloneId >= 0)
+                        var clone = Main.projectile[cloneId].ModProjectile as BossClone;
+                        if (clone != null)
                         {
-                            var clone = Main.projectile[cloneId].ModProjectile as BossClone;
-                            if (clone != null)
-                            {
-                                clone.SetPhase(2);
-                            }
-                            deathModeProjectiles.Add(cloneId);
+                            clone.SetPhase(4);
                         }
+                        deathModeProjectiles.Add(cloneId);
                     }
                 }
             }
 
-            int timeLeft = 1800 - (int)deathModeTimer;
+            int timeLeft = 2700 - (int)deathModeTimer;
             if (timeLeft <= 300 && timeLeft % 60 == 0)
             {
                 int secondsLeft = timeLeft / 60;
                 Main.NewText($"The rage fades in {secondsLeft}...", Color.Yellow);
-                if (!Main.dedServ)
-                {
-                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 20f, 15);
-                }
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 30f, 20);
             }
         }
 
