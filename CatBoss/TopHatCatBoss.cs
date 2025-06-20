@@ -739,7 +739,7 @@ namespace PurringTale.CatBoss
                         NPC.velocity = dashDirection * dashSpeed;
 
                         Vector2 strikeDirection = dashDirection;
-                        int strikeDamage = (NPC.damage + damageBonus + (s * 15)) * (int)phaseMultiplier;
+                        int strikeDamage = 220;
 
                         int slashId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, strikeDirection * 2f,
                             ModContent.ProjectileType<Slash>(), strikeDamage, 8f + (s * 2f), -1, NPC.whoAmI, 0f);
@@ -1147,7 +1147,7 @@ namespace PurringTale.CatBoss
                         Vector2 pos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / projectileCount * i + (timer / 60) / 3 + (wave * 0.5f)) * swordRange;
                         Vector2 direction = NPC.Center.DirectionTo(pos);
                         Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, direction * (swordSpeed * phaseMultiplier),
-                            ModContent.ProjectileType<Gss>(), 220 + damageBonus, 5);
+                            ModContent.ProjectileType<Gss>(), 220, 5);
                     }
                 }
             }
@@ -1163,7 +1163,7 @@ namespace PurringTale.CatBoss
                 int slashDamage = currentPhase switch
                 {
                     BossPhase.Phase1 => 120 + damageBonus,
-                    BossPhase.Phase2 => 140 + damageBonus, 
+                    BossPhase.Phase2 => 140 + damageBonus,
                     BossPhase.Phase3 => 160 + damageBonus,
                     _ => 120 + damageBonus
                 };
