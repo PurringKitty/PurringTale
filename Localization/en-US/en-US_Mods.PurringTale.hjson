@@ -1983,6 +1983,8 @@ Projectiles: {
 	RegularStar.DisplayName: Regular Star
 	HomingStar.DisplayName: Homing Star
 	WhipExtension.DisplayName: Whip Extension
+	BossMeteor.DisplayName: Boss Meteor
+	WarningArea.DisplayName: Warning Area
 }
 
 Biomes: {

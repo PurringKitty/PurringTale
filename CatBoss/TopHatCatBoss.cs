@@ -32,7 +32,9 @@ namespace PurringTale.CatBoss
         Clones,
         BulletRain,
         Rockets,
-        Lasers
+        Lasers,
+        TeleportStrike,
+        MeteorStorm
     }
 
     public enum BossPhase
@@ -502,9 +504,9 @@ namespace PurringTale.CatBoss
 
                 int maxAttacks = currentPhase switch
                 {
-                    BossPhase.Phase1 => 6,
-                    BossPhase.Phase2 => 8,
-                    BossPhase.Phase3 => 10,
+                    BossPhase.Phase1 => 8,
+                    BossPhase.Phase2 => 10,
+                    BossPhase.Phase3 => 12,
                     _ => 6
                 };
 
@@ -526,10 +528,11 @@ namespace PurringTale.CatBoss
                         1 => AttackType.RegularStars,
                         2 => AttackType.Gun,
                         3 => AttackType.Lasers,
-                        4 => AttackType.BulletRain,
-                        5 => AttackType.Clones,
-                        6 => AttackType.Sword,
-                        7 => AttackType.Rockets,
+                        4 => AttackType.TeleportStrike,
+                        5 => AttackType.BulletRain,
+                        6 => AttackType.Clones,
+                        7 => AttackType.Sword,
+                        8 => AttackType.Rockets,
                         _ => AttackType.HomingStars
                     };
                     break;
@@ -542,10 +545,12 @@ namespace PurringTale.CatBoss
                         2 => AttackType.Lasers,
                         3 => AttackType.BulletRain,
                         4 => AttackType.Clones,
-                        5 => AttackType.Rockets,
-                        6 => AttackType.Whip,
-                        7 => AttackType.Sword,
-                        8 => AttackType.RegularStars,
+                        5 => AttackType.TeleportStrike,
+                        6 => AttackType.MeteorStorm,
+                        7 => AttackType.Rockets,
+                        8 => AttackType.Whip,
+                        9 => AttackType.Sword,
+                        10 => AttackType.RegularStars,
                         _ => AttackType.Gun
                     };
                     break;
@@ -564,6 +569,8 @@ namespace PurringTale.CatBoss
                         8 => AttackType.Rockets,
                         9 => AttackType.Sword,
                         10 => AttackType.RegularStars,
+                        11 => AttackType.TeleportStrike,
+                        12 => AttackType.MeteorStorm,
                         _ => AttackType.Lasers
                     };
                     break;
@@ -629,7 +636,329 @@ namespace PurringTale.CatBoss
                     case AttackType.Lasers:
                         ExecuteLaserAttack(target, phaseMultiplier, damageBonus);
                         break;
+                    case AttackType.TeleportStrike:
+                        ExecuteTeleportStrike(target, phaseMultiplier, damageBonus);
+                        break;
+                    case AttackType.MeteorStorm:
+                        ExecuteMeteorStorm(target, phaseMultiplier, damageBonus);
+                        break;
                 }
+            }
+        }
+
+        private void ExecuteTeleportStrike(Player target, float phaseMultiplier, int damageBonus)
+        {
+            if (timer == 1)
+            {
+                holdingWeapon = false;
+                currentWeapon = "";
+
+                Main.NewText("The Top Hat God prepares to strike!", GetPhaseColor());
+                SoundEngine.PlaySound(SoundID.Roar, NPC.position);
+            }
+
+            if (timer >= 30 && timer <= 90)
+            {
+                if (timer == 30)
+                {
+                    Vector2 playerDirection = target.velocity.SafeNormalize(Vector2.Zero);
+                    if (playerDirection == Vector2.Zero)
+                        playerDirection = Vector2.UnitX * (Main.rand.NextBool() ? 1 : -1);
+
+                    Vector2 teleportPos = target.Center - playerDirection * 150f;
+                    NPC.localAI[0] = teleportPos.X;
+                    NPC.localAI[1] = teleportPos.Y;
+                }
+
+                if (timer % 5 == 0)
+                {
+                    Vector2 teleportPos = new Vector2(NPC.localAI[0], NPC.localAI[1]);
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Vector2 dustVel = Vector2.One.RotatedBy(MathHelper.TwoPi / 8 * i) * Main.rand.NextFloat(2f, 6f);
+                        Dust dust = Dust.NewDustPerfect(teleportPos, DustID.Shadowflame, dustVel);
+                        dust.noGravity = true;
+                        dust.scale = 1.5f + (timer - 30) / 60f;
+                        dust.color = Color.Lerp(GetPhaseColor(), Color.White, 0.5f);
+                    }
+                }
+
+                if (timer % 10 == 0)
+                {
+                    float intensity = ((timer - 30f) / 60f) * 15f;
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, intensity, 10);
+                }
+            }
+
+            if (timer == 90)
+            {
+                Vector2 teleportPos = new Vector2(NPC.localAI[0], NPC.localAI[1]);
+
+                for (int i = 0; i < 30; i++)
+                {
+                    Vector2 dustVel = Vector2.One.RotatedBy(MathHelper.TwoPi / 30 * i) * Main.rand.NextFloat(8f, 15f);
+                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Shadowflame, dustVel);
+                    dust.noGravity = true;
+                    dust.scale = 2f;
+                    dust.color = GetPhaseColor();
+                }
+
+                NPC.Center = teleportPos;
+                NPC.velocity = Vector2.Zero;
+
+                for (int i = 0; i < 30; i++)
+                {
+                    Vector2 dustVel = Vector2.One.RotatedBy(MathHelper.TwoPi / 30 * i) * Main.rand.NextFloat(8f, 15f);
+                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Shadowflame, dustVel);
+                    dust.noGravity = true;
+                    dust.scale = 2f;
+                    dust.color = GetPhaseColor();
+                }
+
+                SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 25f, 30);
+            }
+
+            if (timer >= 100 && timer <= 180)
+            {
+                int strikeCount = currentPhase switch
+                {
+                    BossPhase.Phase1 => 1,
+                    BossPhase.Phase2 => 2,
+                    BossPhase.Phase3 => 3,
+                    _ => 1
+                };
+
+                for (int s = 0; s < strikeCount; s++)
+                {
+                    int strikeTime = 100 + (s * 30);
+                    if (timer == strikeTime)
+                    {
+                        Vector2 dashDirection = NPC.DirectionTo(target.Center);
+                        float dashSpeed = 20f + (s * 3f) * phaseMultiplier;
+                        NPC.velocity = dashDirection * dashSpeed;
+
+                        Vector2 strikeDirection = dashDirection;
+                        int strikeDamage = (NPC.damage + damageBonus + (s * 15)) * (int)phaseMultiplier;
+
+                        int slashId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, strikeDirection * 2f,
+                            ModContent.ProjectileType<Slash>(), strikeDamage, 8f + (s * 2f), -1, NPC.whoAmI, 0f);
+
+                        if (slashId >= 0 && slashId < Main.maxProjectiles)
+                        {
+                            Main.projectile[slashId].scale = 1.0f;
+                        }
+
+                        SoundEngine.PlaySound(SoundID.Item1, NPC.position);
+                        ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 15f + (s * 5f), 20);
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Vector2 trailPos = NPC.Center + strikeDirection * i * 10f;
+                            Vector2 trailVel = strikeDirection.RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f)) * Main.rand.NextFloat(3f, 8f);
+                            Dust dust = Dust.NewDustPerfect(trailPos, DustID.Shadowflame, trailVel);
+                            dust.noGravity = true;
+                            dust.scale = 1.5f;
+                            dust.color = Color.Lerp(GetPhaseColor(), Color.White, 0.3f);
+                        }
+                    }
+
+                    if (timer == strikeTime + 15)
+                    {
+                        NPC.velocity *= 0.3f;
+                    }
+                }
+            }
+
+            if (timer == 200)
+            {
+                Vector2 retreatPos = target.Center + ModdingusUtils.randomCorner() * 400f;
+                NPC.Center = retreatPos;
+                NPC.velocity = Vector2.Zero;
+
+                SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 dustVel = Vector2.One.RotatedBy(MathHelper.TwoPi / 20 * i) * Main.rand.NextFloat(5f, 12f);
+                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustID.Shadowflame, dustVel);
+                    dust.noGravity = true;
+                    dust.scale = 1.8f;
+                    dust.color = GetPhaseColor();
+                }
+            }
+
+            if (timer >= 250)
+            {
+                holdingWeapon = false;
+                currentWeapon = "";
+                timer = 0;
+                AIState = ActionState.Choose;
+            }
+        }
+
+        private void ExecuteMeteorStorm(Player target, float phaseMultiplier, int damageBonus)
+        {
+            if (timer == 1)
+            {
+                holdingWeapon = true;
+                currentWeapon = "Staff";
+
+                Vector2 skyPos = target.Center + new Vector2(0, -600);
+                NPC.Center = skyPos;
+                NPC.velocity = Vector2.Zero;
+
+                SoundEngine.PlaySound(SoundID.Item72, NPC.position);
+                Main.NewText("Meteors rain from the heavens!", GetPhaseColor());
+            }
+
+            if (timer >= 30 && timer <= 120)
+            {
+                NPC.velocity = Vector2.Zero;
+
+                if (timer % 8 == 0)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        Vector2 dustPos = NPC.Center + Vector2.One.RotatedBy(MathHelper.TwoPi / 6 * i) * (40 + timer);
+                        Dust dust = Dust.NewDustPerfect(dustPos, DustID.Torch);
+                        dust.velocity = Vector2.Zero;
+                        dust.noGravity = true;
+                        dust.scale = 2f + (timer - 30) / 90f;
+                        dust.color = Color.Lerp(Color.Orange, Color.Red, (timer - 30) / 90f);
+                    }
+                }
+
+                if (timer % 15 == 0)
+                {
+                    float intensity = ((timer - 30f) / 90f) * 20f;
+                    ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, intensity, 15);
+                }
+            }
+
+            if (timer >= 120 && timer <= 420)
+            {
+                int meteorCount = currentPhase switch
+                {
+                    BossPhase.Phase1 => 1,
+                    BossPhase.Phase2 => 2,
+                    BossPhase.Phase3 => 3,
+                    _ => 1
+                };
+
+                int meteorInterval = currentPhase switch
+                {
+                    BossPhase.Phase1 => 40,
+                    BossPhase.Phase2 => 30,
+                    BossPhase.Phase3 => 20,
+                    _ => 40
+                };
+
+                if ((timer - 120) % meteorInterval == 0)
+                {
+                    for (int m = 0; m < meteorCount; m++)
+                    {
+                        Vector2 meteorStart = new Vector2(
+                            target.Center.X + Main.rand.Next(-600, 600),
+                            target.Center.Y - 800
+                        );
+
+                        Vector2 meteorVelocity = Vector2.UnitY * (15f + phaseMultiplier * 3f);
+
+                        int meteorDamage = NPC.damage + damageBonus + 20;
+
+                        int meteorId = Projectile.NewProjectile(NPC.GetSource_FromAI(), meteorStart, meteorVelocity,
+                            ModContent.ProjectileType<BossMeteor>(), meteorDamage, 8f);
+
+                        if (meteorId >= 0 && meteorId < Main.maxProjectiles)
+                        {
+                            Main.projectile[meteorId].scale = 1.5f + (phaseMultiplier * 0.5f);
+                        }
+
+                        Vector2 landingSpot = new Vector2(meteorStart.X, target.Center.Y + 50);
+
+                        int warningId = Projectile.NewProjectile(NPC.GetSource_FromAI(), landingSpot, Vector2.Zero,
+                            ModContent.ProjectileType<WarningArea>(), 0, 0f, -1,
+                            60f,
+                            100f
+                        );
+
+                        if (warningId >= 0 && warningId < Main.maxProjectiles)
+                        {
+                            Main.projectile[warningId].scale = 1.2f;
+                        }
+                    }
+
+                    SoundEngine.PlaySound(SoundID.Item14, NPC.position);
+                }
+
+                if (timer % 80 == 0)
+                {
+                    Vector2 newPos = target.Center + new Vector2(Main.rand.Next(-300, 300), -Main.rand.Next(500, 700));
+                    Vector2 moveDirection = (newPos - NPC.Center).SafeNormalize(Vector2.Zero);
+                    NPC.velocity = moveDirection * 6f;
+                }
+
+                if (timer % 80 == 40)
+                {
+                    NPC.velocity *= 0.1f;
+                }
+            }
+
+            if (timer == 450)
+            {
+                Main.NewText("MASSIVE METEORS INCOMING!", Color.Red);
+                SoundEngine.PlaySound(SoundID.Roar, NPC.position);
+                ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 35f, 80);
+
+                int finalMeteorCount = currentPhase switch
+                {
+                    BossPhase.Phase1 => 3,
+                    BossPhase.Phase2 => 5,
+                    BossPhase.Phase3 => 8,
+                    _ => 3
+                };
+
+                for (int i = 0; i < finalMeteorCount; i++)
+                {
+                    Vector2 meteorStart = new Vector2(
+                        target.Center.X + Main.rand.Next(-800, 800),
+                        target.Center.Y - 1000
+                    );
+
+                    Vector2 meteorVelocity = Vector2.UnitY * (25f + phaseMultiplier * 5f);
+
+                    int finalMeteorDamage = (NPC.damage + damageBonus + 35) * (int)(1.5f * phaseMultiplier);
+
+                    int meteorId = Projectile.NewProjectile(NPC.GetSource_FromAI(), meteorStart, meteorVelocity,
+                        ModContent.ProjectileType<BossMeteor>(), finalMeteorDamage, 12f);
+
+                    if (meteorId >= 0 && meteorId < Main.maxProjectiles)
+                    {
+                        Main.projectile[meteorId].scale = 2f + phaseMultiplier;
+                    }
+
+                    Vector2 landingSpot = new Vector2(meteorStart.X, target.Center.Y + 50);
+
+                    int finalWarningId = Projectile.NewProjectile(NPC.GetSource_FromAI(), landingSpot, Vector2.Zero,
+                        ModContent.ProjectileType<WarningArea>(), 0, 0f, -1,
+                        90f,
+                        150f
+                    );
+
+                    if (finalWarningId >= 0 && finalWarningId < Main.maxProjectiles)
+                    {
+                        Main.projectile[finalWarningId].scale = 1.8f;
+                    }
+                }
+            }
+
+            if (timer >= 520)
+            {
+                holdingWeapon = false;
+                currentWeapon = "";
+                timer = 0;
+                AIState = ActionState.Choose;
             }
         }
 
