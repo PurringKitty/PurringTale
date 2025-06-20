@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PurringTale.Common.Systems;
+using PurringTale.Content.Buffs;
 using PurringTale.Content.Items.Consumables.Bags;
 using PurringTale.Content.Items.MobLoot;
 using PurringTale.Content.Items.Placeables.Furniture.Relics;
@@ -282,6 +283,8 @@ namespace PurringTale.CatBoss
                 Main.NewText("SURVIVE THE ONSLAUGHT!", Color.Orange);
                 ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 50f, 120);
             }
+
+            ApplyDeathModeEffects();
 
             for (int i = 0; i < 100; i++)
             {
@@ -1677,12 +1680,41 @@ namespace PurringTale.CatBoss
             }
         }
 
+        private void ApplyDeathModeEffects()
+        {
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                Player player = Main.player[i];
+                if (player.active && !player.dead)
+                {
+                    int buffType = ModContent.BuffType<DeathModeRage>();
+
+                    int timeLeft = (int)(2700 - deathModeTimer);
+                    if (timeLeft > 0)
+                    {
+                        player.AddBuff(buffType, Math.Max(timeLeft, 60));
+                    }
+                }
+            }
+        }
+
         private void ExecuteDeathMode()
         {
             Player target = Main.player[NPC.target];
 
+            ApplyDeathModeEffects();
+
             if (deathModeTimer >= 2700)
             {
+                for (int i = 0; i < Main.maxPlayers; i++)
+                {
+                    Player player = Main.player[i];
+                    if (player.active)
+                    {
+                        player.ClearBuff(ModContent.BuffType<DeathModeRage>());
+                    }
+                }
+
                 foreach (int projId in deathModeProjectiles)
                 {
                     if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active)
@@ -1750,7 +1782,7 @@ namespace PurringTale.CatBoss
         {
             if (timer % 120 == 0)
             {
-                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(400, 400);
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(600, 600);
                 NPC.Center = teleportPos;
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
 
@@ -1812,7 +1844,7 @@ namespace PurringTale.CatBoss
         {
             if (timer % 180 == 0)
             {
-                Vector2 teleportPos = target.Center + new Vector2(0, -250);
+                Vector2 teleportPos = target.Center + new Vector2(300, 300);
                 NPC.Center = teleportPos;
                 NPC.velocity = Vector2.Zero;
                 SoundEngine.PlaySound(SoundID.Item72, NPC.position);
@@ -1880,11 +1912,23 @@ namespace PurringTale.CatBoss
 
         private void FinalDesperationPhase(Player target)
         {
-            if (timer % 60 == 0)
+            if (timer % 250 == 0)
             {
-                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(300, 300);
+                Vector2 teleportPos = target.Center + Main.rand.NextVector2Circular(600, 600);
                 NPC.Center = teleportPos;
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+            }
+
+            if (timer % 300 == 0)
+            {
+                deathModeProjectiles.RemoveAll(projId => {
+                    if (projId >= 0 && projId < Main.maxProjectiles && Main.projectile[projId].active)
+                    {
+                        if (Main.projectile[projId].timeLeft < 600)
+                            return false;
+                    }
+                    return true;
+                });
             }
 
             if (timer % 3 == 0)
@@ -1916,7 +1960,7 @@ namespace PurringTale.CatBoss
                 for (int i = 0; i < 4; i++)
                 {
                     Vector2 rocketDirection = Vector2.One.RotatedBy(MathHelper.TwoPi / 4 * i + Main.rand.NextFloat(-0.2f, 0.2f));
-                    Vector2 vel = rocketDirection * 12f;
+                    Vector2 vel = rocketDirection * 2.5f;
 
                     int projId = Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, vel,
                         ModContent.ProjectileType<BossRocket>(), NPC.damage + 40, 8f);
@@ -1944,7 +1988,7 @@ namespace PurringTale.CatBoss
                 for (int i = 0; i < 6; i++)
                 {
                     float angle = MathHelper.TwoPi / 6 * i;
-                    Vector2 clonePos = target.Center + Vector2.One.RotatedBy(angle) * 400;
+                    Vector2 clonePos = target.Center + Vector2.One.RotatedBy(angle) * 600;
 
                     int cloneId = Projectile.NewProjectile(NPC.GetSource_FromAI(), clonePos, Vector2.Zero,
                         ModContent.ProjectileType<BossClone>(), NPC.damage + 50, 0f, Main.myPlayer, 5, 0f, 0f);

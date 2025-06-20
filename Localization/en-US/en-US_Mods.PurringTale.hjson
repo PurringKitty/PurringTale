@@ -1877,6 +1877,11 @@ Buffs: {
 		DisplayName: Seven Sins
 		Description: Doubles Damage, 100 More Health & Mana
 	}
+
+	DeathModeRage: {
+		DisplayName: Death Mode Rage
+		Description: Mods.PurringTale.Buffs.DeathModeRage.Description
+	}
 }
 
 Projectiles: {
