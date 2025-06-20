@@ -1086,22 +1086,22 @@ Items: {
 
 	THGBossTrophy: {
 		Tooltip: ""
-		DisplayName: Rukuka Boss Trophy
+		DisplayName: Rukuka Trophy
 	}
 
 	THGBossRelic: {
 		Tooltip: ""
-		DisplayName: Rukuka Boss Relic
+		DisplayName: Rukuka Relic
 	}
 
 	SinsBossTrophy: {
 		Tooltip: ""
-		DisplayName: Sins Boss Trophy
+		DisplayName: Wrath Trophy
 	}
 
 	SinsBossRelic: {
 		Tooltip: ""
-		DisplayName: Sins Boss Relic
+		DisplayName: Wrath Relic
 	}
 
 	SansPainting: {
