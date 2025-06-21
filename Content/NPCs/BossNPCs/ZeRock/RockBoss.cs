@@ -399,11 +399,28 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     float distance = (float)Math.Sqrt(distanceX * distanceX + distanceY * distanceY);
 
                     float jumpMultiplier = 1f;
-                    bool playerAbove = player.Center.Y < NPC.Center.Y - 50f;
+                    bool playerAbove = player.Center.Y < NPC.Center.Y - 100f;
 
                     if (playerAbove)
                     {
-                        jumpMultiplier = 1.5f;
+                        float verticalDistance = NPC.Center.Y - player.Center.Y;
+
+                        if (verticalDistance <= 200f)
+                        {
+                            jumpMultiplier = 1.3f;
+                        }
+                        else if (verticalDistance <= 300f)
+                        {
+                            jumpMultiplier = 1.6f;
+                        }
+                        else if (verticalDistance <= 400f)
+                        {
+                            jumpMultiplier = 1.9f;
+                        }
+                        else
+                        {
+                            jumpMultiplier = 2.2f;
+                        }
                     }
 
                     if (distance > 100f)
@@ -419,6 +436,26 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
                     jumpTimer = 0;
                     SoundEngine.PlaySound(SoundID.Item1, NPC.Center);
+
+                    if (jumpMultiplier > 1.5f)
+                    {
+                        SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with
+                        {
+                            Pitch = -0.6f,
+                            Volume = 0.8f
+                        }, NPC.Center);
+
+                        if (!Main.dedServ)
+                        {
+                            ModContent.GetInstance<MCameraModifiers>().Shake(NPC.Center, 8f, 20);
+                        }
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Vector2 dustVel = Vector2.One.RotatedByRandom(MathHelper.TwoPi) * Main.rand.NextFloat(3f, 8f);
+                            Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Stone, dustVel.X, dustVel.Y, 100, Color.Orange, 1.5f);
+                        }
+                    }
                 }
             }
             else
