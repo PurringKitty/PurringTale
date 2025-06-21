@@ -84,12 +84,12 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             get => hasLandedRef == 1f;
             set => hasLandedRef = value ? 1f : 0f;
         }
-        private bool isAwakened 
-        { 
+        private bool isAwakened
+        {
             get => NPC.localAI[2] == 1f;
             set => NPC.localAI[2] = value ? 1f : 0f;
         }
-        
+
         private float originalGravity = 0.4f;
         private float jumpHeight = 16f;
         private Vector2 targetPosition;
@@ -104,7 +104,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
         {
             bool newAwakened = reader.ReadBoolean();
             targetPosition = reader.ReadVector2();
-            
+
             isAwakened = newAwakened;
         }
 
@@ -297,7 +297,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 jumpTimer = 0;
                 AttackCounter = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
@@ -307,6 +307,17 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
 
         private void JumpingState(Player player)
         {
+            bool playerBelow = player.Center.Y > NPC.Center.Y + 50f;
+
+            if (playerBelow && NPC.velocity.Y > 0f)
+            {
+                NPC.noTileCollide = true;
+            }
+            else
+            {
+                NPC.noTileCollide = false;
+            }
+
             if (NPC.velocity.Y > 0f)
             {
                 HasLanded = false;
@@ -315,6 +326,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
             if (NPC.velocity.Y == 0f && NPC.oldVelocity.Y > 0f && !HasLanded)
             {
                 HasLanded = true;
+                NPC.noTileCollide = false;
 
                 if (!Main.dedServ)
                 {
@@ -386,15 +398,23 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                     float distanceY = player.Center.Y - NPC.Center.Y;
                     float distance = (float)Math.Sqrt(distanceX * distanceX + distanceY * distanceY);
 
+                    float jumpMultiplier = 1f;
+                    bool playerAbove = player.Center.Y < NPC.Center.Y - 50f;
+
+                    if (playerAbove)
+                    {
+                        jumpMultiplier = 1.5f;
+                    }
+
                     if (distance > 100f)
                     {
                         NPC.velocity.X = distanceX / distance * 8f;
-                        NPC.velocity.Y = -jumpHeight;
+                        NPC.velocity.Y = -jumpHeight * jumpMultiplier;
                     }
                     else
                     {
                         NPC.velocity.X = -distanceX / distance * 6f;
-                        NPC.velocity.Y = -jumpHeight * 0.7f;
+                        NPC.velocity.Y = -jumpHeight * 0.7f * jumpMultiplier;
                     }
 
                     jumpTimer = 0;
@@ -509,7 +529,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
@@ -575,7 +595,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
@@ -621,7 +641,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
@@ -671,7 +691,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
@@ -733,7 +753,7 @@ namespace PurringTale.Content.NPCs.BossNPCs.ZeRock
                 timer = 0;
                 jumpTimer = 0;
                 HasLanded = false;
-                
+
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.SyncNPC, number: NPC.whoAmI);
