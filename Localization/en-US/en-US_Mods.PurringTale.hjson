@@ -1770,6 +1770,8 @@ NPCs: {
 
 		Census.SpawnCondition: Kill The Sin Of Wrath And Hold The [i:PurringTale/Wrath] Item!
 	}
+
+	GreedBoss.DisplayName: Greed Boss
 }
 
 Buffs: {
@@ -1985,6 +1987,12 @@ Projectiles: {
 	WhipExtension.DisplayName: Whip Extension
 	BossMeteor.DisplayName: Boss Meteor
 	WarningArea.DisplayName: Warning Area
+	ArmorPieceProjectile.DisplayName: Armor Piece Projectile
+	GoldCoinProjectile.DisplayName: Gold Coin Projectile
+	ThrownOreProjectile.DisplayName: Thrown Ore Projectile
+	ThrownWeaponProjectile.DisplayName: Thrown Weapon Projectile
+	GreedCoin.DisplayName: Greed Coin
+	GreedTreasure.DisplayName: Greed Treasure
 }
 
 Biomes: {

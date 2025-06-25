@@ -49,7 +49,7 @@ namespace PurringTale.Content.Items.Consumables.Bags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoldOnAStick>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<WhipOfGreed>(), 2, 0, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GemIncrustedRevolver>(), 2, 0, 1));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<EyeOfGreedBody>()));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<GreedBoss>()));
         }
     }
 }

@@ -150,7 +150,7 @@ namespace PurringTale.Common.Systems
             internalName = "Greed";
             weight = 4.9f;
             downed = () => DownedBossSystem.downedGreed;
-            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.Greed.EyeOfGreedBody>();
+            bossType = ModContent.NPCType<Content.NPCs.BossNPCs.Greed.GreedBoss>();
             collectibles = new List<int>()
             {
                 ModContent.ItemType<Greed>(),
