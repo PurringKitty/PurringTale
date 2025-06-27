@@ -148,6 +148,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<PastaNecklace>(Condition.Hardmode)
                 .Add<PastaWings>()
                 .Add<THCWings>()
+                .Add<MicroWings>()
                 .Add<TreadBoots>(Condition.Hardmode)
                 .Add<ForgedWings>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedMoonLord);
 
@@ -207,7 +208,10 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<MauriceLegs>()
                 .Add<OviaHead>()
                 .Add<OviaSweater>()
-                .Add<OviaSweater>()
+                .Add<OviaLeggings>()
+                .Add<MicroHead>()
+                .Add<MicroBody>()
+                .Add<MicroLegs>()
                 .Add<THCTopHat>()
                 .Add<THCTie>()
                 .Add<THCTail>();
