@@ -40,54 +40,27 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			NPCID.Sets.ExtraFramesCount[Type] = 8;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 10;
+			NPCID.Sets.DangerDetectRange[Type] = -1;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
             NPCID.Sets.AttackType[Type] = -1;
 
-            NPC.Happiness
-			.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<SnowBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<DesertBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<OceanBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<JungleBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<HallowBiome>(AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Dryad, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Angler, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Steampunker, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Princess, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Stylist, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Guide, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Hate)
+			NPC.Happiness
+			//(Loves)
+			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
+			.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Love)
 			.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Painter, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Golfer, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Pirate, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Clothier, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Wizard, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Hate)
-			.SetNPCAffection<EnvyNPC>(AffectionLevel.Hate)
-			.SetNPCAffection<GluttonyNPC>(AffectionLevel.Hate)
-			.SetNPCAffection<LustNPC>(AffectionLevel.Love)
-			.SetNPCAffection<PrideNPC>(AffectionLevel.Hate)
-			.SetNPCAffection<SlothNPC>(AffectionLevel.Hate)
-			.SetNPCAffection<WrathNPC>(AffectionLevel.Hate)
-			.SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Hate);
-
+			//(Likes)
+			.SetBiomeAffection<HallowBiome>(AffectionLevel.Like)
+			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Like)
+			//(Dislikes)
+			.SetBiomeAffection<ForestBiome>(AffectionLevel.Dislike)
+			.SetNPCAffection(NPCID.Guide, AffectionLevel.Dislike)
+			//(Hates)
+			.SetBiomeAffection<JungleBiome>(AffectionLevel.Hate)
+			.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Hate);
         }
 
 		public override void SetDefaults()
@@ -135,9 +108,17 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			}
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
-				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "_Shimmer";
-			}
+                string variant = "";
+                if (NPC.IsShimmerVariant)
+                    variant += "_Shimmer";
+                int headgore = Mod.Find<ModGore>($"GreedNPC_Gore_Head").Type;
+                int armgore = Mod.Find<ModGore>($"GreedNPC_Gore_Arm").Type;
+
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+            }
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)
@@ -224,45 +205,45 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		{
 
 			var npcShop = new NPCShop(Type, ShopName)
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
 				.Add<GreedBossBag>()
 				.Add<GreedMusicBox>()
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) })
-				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 1) });
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) })
+				.Add(new Item(ItemID.DirtBlock) { shopCustomPrice = Item.buyPrice(gold: 99) });
 
             npcShop.Register();
 		}

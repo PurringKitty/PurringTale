@@ -44,7 +44,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			Main.npcFrameCount[Type] = 26;
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 200;
+			NPCID.Sets.DangerDetectRange[Type] = -1;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
@@ -52,46 +52,19 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPCID.Sets.AttackType[Type] = -1;
 
 			NPC.Happiness
-			.SetBiomeAffection<ForestBiome>(AffectionLevel.Dislike)
-			.SetBiomeAffection<SnowBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<DesertBiome>(AffectionLevel.Dislike)
-			.SetBiomeAffection<OceanBiome>(AffectionLevel.Dislike)
+			//(Loves)
 			.SetBiomeAffection<JungleBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<HallowBiome>(AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Dryad, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Angler, AffectionLevel.Hate)
+			.SetNPCAffection<SlothNPC>(AffectionLevel.Love)
+			//(Likes)
+			.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
 			.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Steampunker, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Princess, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Hate)
+			//(Dislikes)
+			.SetBiomeAffection<HallowBiome>(AffectionLevel.Dislike)
 			.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Stylist, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Guide, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Painter, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Golfer, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Pirate, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Clothier, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Wizard, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Like)
-            .SetNPCAffection<GluttonyNPC>(AffectionLevel.Dislike)
-            .SetNPCAffection<GreedNPC>(AffectionLevel.Hate)
-            .SetNPCAffection<LustNPC>(AffectionLevel.Love)
-            .SetNPCAffection<PrideNPC>(AffectionLevel.Dislike)
-            .SetNPCAffection<SlothNPC>(AffectionLevel.Dislike)
-            .SetNPCAffection<WrathNPC>(AffectionLevel.Like)
-            .SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Love);
-		}
+			//(Hates)
+			.SetBiomeAffection<SnowBiome>(AffectionLevel.Hate)
+			.SetNPCAffection<GreedNPC>(AffectionLevel.Hate);
+        }
 
 		public override void SetDefaults()
 		{

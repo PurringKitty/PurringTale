@@ -1,8 +1,4 @@
-﻿using PurringTale.Content.Items.Placeables;
-using PurringTale.Content.NPCs;
-using PurringTale.Content.NPCs.BossNPCs.Envy;
-using PurringTale.Content.Items.MobLoot;
-using PurringTale.Content.NPCs.TownNPCs;
+﻿using PurringTale.Content.Items.MobLoot;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -11,7 +7,6 @@ using PurringTale.Content.NPCs.BossNPCs.ZeRock;
 
 namespace PurringTale.Content.Items.Consumables.Summons
 {
-    // This is the item used to summon a boss, in this case the modded Minion Boss from Example Mod. For vanilla boss summons, see comments in SetStaticDefaults
     public class TheRock : ModItem
 	{
 		public override void SetStaticDefaults() {
@@ -23,8 +18,8 @@ namespace PurringTale.Content.Items.Consumables.Summons
 			Item.width = 26;
 			Item.height = 18;
 			Item.maxStack = 1;
-			Item.value = 100;
-			Item.rare = ItemRarityID.Master;
+            Item.value = Item.sellPrice(gold: 1);
+            Item.rare = ItemRarityID.Master;
 			Item.useAnimation = 30;
 			Item.useTime = 30;
 			Item.useStyle = ItemUseStyleID.HoldUp;
@@ -36,9 +31,8 @@ namespace PurringTale.Content.Items.Consumables.Summons
 		}
 
 		public override bool? UseItem(Player player) {
-			if (player.whoAmI == Main.myPlayer) {
-				// If the player using the item is the client
-				// (explicitly excluded serverside here)
+			if (player.whoAmI == Main.myPlayer)
+			{
 				SoundEngine.PlaySound(SoundID.Lavafall, player.position);
 
 				int type = ModContent.NPCType<RockBoss>();
@@ -53,9 +47,10 @@ namespace PurringTale.Content.Items.Consumables.Summons
 
 			return true;
 		}
-		public override void AddRecipes() {
+		public override void AddRecipes() 
+		{
 			CreateRecipe()
-				.AddIngredient<CoreOfValhalla>(666666)
+				.AddIngredient<CoreOfValhalla>(666)
 				.AddTile(TileID.DemonAltar)
 				.Register();
 		}

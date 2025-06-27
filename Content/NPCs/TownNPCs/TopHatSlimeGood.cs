@@ -1,22 +1,24 @@
-using PurringTale.Content.Dusts;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using PurringTale.CatBoss;
+using PurringTale.Common.Systems;
+using PurringTale.Content.Dusts;
+using PurringTale.Content.Items.Accessories.Emblems;
+using PurringTale.Content.Items.Consumables.Ammo;
+using PurringTale.Content.Items.Consumables.Summons;
+using PurringTale.Content.Items.Placeables.Ores;
+using PurringTale.Content.Items.Vanity;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.GameContent.Personalities;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using Terraria.GameContent.Personalities;
-using System.Collections.Generic;
-using PurringTale.Content.Items.Vanity;
-using PurringTale.CatBoss;
-using PurringTale.Content.Items.Consumables.Ammo;
-using PurringTale.Content.Items.Consumables.Summons;
-using PurringTale.Content.Items.Placeables.Ores;
 
 namespace PurringTale.Content.NPCs.TownNPCs
 {
@@ -39,49 +41,26 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 700;
-			NPCID.Sets.AttackType[Type] = 0;
-			NPCID.Sets.AttackTime[Type] = 90;
-			NPCID.Sets.AttackAverageChance[Type] = 30;
+			NPCID.Sets.DangerDetectRange[Type] = -1;
+			NPCID.Sets.AttackType[Type] = -1;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 			NPC.Happiness
-			.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<SnowBiome>(AffectionLevel.Love)
+			//(Loves)
 			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<DesertBiome>(AffectionLevel.Hate)
-			.SetBiomeAffection<OceanBiome>(AffectionLevel.Like)
-			.SetBiomeAffection<JungleBiome>(AffectionLevel.Dislike)
-			.SetBiomeAffection<HallowBiome>(AffectionLevel.Hate)
 			.SetNPCAffection(NPCID.Dryad, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Angler, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Steampunker, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Princess, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Stylist, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Guide, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Painter, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Golfer, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Pirate, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Clothier, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Wizard, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Clothier, AffectionLevel.Hate)
+			//(Likes)
+			.SetBiomeAffection<OceanBiome>(AffectionLevel.Like)
+			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Like)
+			//(Dislikes)
+			.SetBiomeAffection<JungleBiome>(AffectionLevel.Dislike)
 			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Hate)
-            .SetNPCAffection<EnvyNPC>(AffectionLevel.Love);
+			//(Hates)
+			.SetBiomeAffection<UndergroundBiome>(AffectionLevel.Hate)
+			.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Hate);
 		}
 
 		public override void SetDefaults()
@@ -125,27 +104,18 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			for (int k = 0; k < num; k++)
 			{
-				Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<Sparkle>());
+				Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Slush);
 			}
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
-				string variant = "";
-				if (NPC.IsShimmerVariant) variant += "_Shimmer";
-				if (NPC.altTexture == 1) variant += "_Party";
-				int hatGore = NPC.GetPartyHatGore();
-				int headGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Head").Type;
-				int armGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Arm").Type;
-				int legGore = Mod.Find<ModGore>($"{Name}_Gore{variant}_Leg").Type;
-				if (hatGore > 0)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, hatGore);
-				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headGore, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armGore);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 34), NPC.velocity, legGore);
-			}
+                string variant = "";
+                if (NPC.IsShimmerVariant)
+                    variant += "_Shimmer";
+                int headgore = Mod.Find<ModGore>($"TopHatSlimeGood_Gore_Head").Type;
+
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+            }
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)
@@ -157,8 +127,8 @@ namespace PurringTale.Content.NPCs.TownNPCs
 				{
 					continue;
 				}
-				if (player.inventory.Any(item => item.type == ModContent.ItemType<THCTopHat>()))
-				{
+                if (player.inventory.Any(item => item.type == ModContent.ItemType<THCTopHat>()))
+                {
 					return true;
 				}
 			}

@@ -1515,7 +1515,7 @@ WorldGen: {
 NPCs: {
 	TopHatCatBoss: {
 		DisplayName: Rukuka, God Of Top Hats
-		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/StackOfTopiumBars] At Any Time.
+		BossChecklistIntegration.SpawnInfo: Use the [c/B01014:gift] ([i:PurringTale/TopiumNecklace]) he gave you at start of your journey at an [c/B01014:Alter] and make the [i:PurringTale/StackOfTopiumBars] too [c/B01014:summon him].
 	}
 
 	EyeOfEnvyBody: {
@@ -1528,9 +1528,9 @@ NPCs: {
 		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfGluttony] At Night.
 	}
 
-	EyeOfGreedBody: {
+	GreedBoss: {
 		DisplayName: Avaritia, The Sin Of Greed
-		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfGreed] At Night.
+		BossChecklistIntegration.SpawnInfo: Use A [i:PurringTale/BowlOfGreed].
 	}
 
 	EyeOfLustBody: {
@@ -1567,28 +1567,25 @@ NPCs: {
 	GlitchedPortal.DisplayName: Glitched Portal
 
 	EnvyNPC: {
-		DisplayName: The Sin Of Envy
+		DisplayName: Sin Of Envy
 
 		TownNPCMood: {
 			Content: I Am Fine...
 			NoHome: Can You Make Me A Home...
 			FarFromHome: I Am A Bit Far From Home...
-			LoveSpace: A Good Amount Of Space!
+			LoveSpace: I Like All The Room... It Is A Little Lonely...
 			DislikeCrowded: A Bit To Crowded For My Liking...
-			HateCrowded: WAY TO CROWDED!
-			LoveBiome: I Really Like The {BiomeName} Biome... It's So Nice...
-			LikeBiome: I Like The {BiomeName} Biome It's Alright in My Book...
-			DislikeBiome: I Am Not A Big Fan Of The {BiomeName}...
-			HateBiome: I Am Envyous Of Any NPC NOT IN THIS BIOME!
-			LoveNPC: I Guess {NPCName} Is A Chill Person...
+			HateCrowded: Hey Uhhh It Is A Bit Too Crowded... Please Uhh Do Somthing...
+			LoveBiome: "{BiomeName} Is A Lovely PLace To Live..."
+			LikeBiome: "{BiomeName}... It's Alright in My Book..."
+			DislikeBiome: I Am Not A Big Fan Of {BiomeName} To Be Honest... So Bright It Hurts My Eye...
+			HateBiome: i Don't Like Snow All That Much... Too Cold For Me...
+			LoveNPC: "{NPCName} Is The Only Sin I Get Along With The Most... They Are So Chill..."
 			LikeNPC: I Like how Nice {NPCName} Is To Me...
-			DislikeNPC: I Don't Really Get Along With {NPCName}...
-			HateNPC: I REALLY Do Not Like {NPCName}... Please Have Me Live Somewhere Else...
-			DislikeNPC_Princess: Eh {NPCName} Is Too High And Mighty...
-			Princess_LikesNPC: I Think {NPCName} Does Not Like Me.
-			LikeNPC_Princess: I like {NPCName}.
-			LoveNPC_TopHatSlimeGood: That Slime With The Top Hat... Is Nice To Me...
-			Princess_LovesNPC: I like {NPCName}.
+			DislikeNPC: I Don't Really Get Along With {NPCName} They Are So Noisy...
+			HateNPC: "{NPCName}... They Are The WORST Sin By Far..."
+			LikeNPC_Princess: Hehe {NPCName} Says She Likes My Eye...
+			Princess_LovesNPC: "{NPCName} has such a pretty eye!"
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Envy And Hold The [i:PurringTale/Envy] Item!
@@ -1604,42 +1601,41 @@ NPCs: {
 			LoveSpace: So Much Space To Do Stuff!
 			DislikeCrowded: Too Many Other People...
 			HateCrowded: The Amount Of People Here Is Really Stupid!
-			LoveBiome: I Do Rather Love The {BiomeName}!
+			LoveBiome: I Do Rather Love {BiomeName}!
 			LikeBiome: Eh {BiomeName} Is Good I Guess.
-			DislikeBiome: I Don't Like The {BiomeName} All That Much...
+			DislikeBiome: I Don't Like {BiomeName} All That Much...
 			HateBiome: Bro {BiomeName} Sucks Ass!
 			LoveNPC: I Really Like {NPCName}!
 			LikeNPC: I Like {NPCName} I Don't Hate Them!
 			DislikeNPC: I Do Not Like {NPCName}
 			HateNPC: I Know {NPCName} Has Tried To Kill Me!
 			LikeNPC_Princess: I Think {NPCName} Is Hot!
-			LoveNPC_EnvyNPC: the Sin Of Envy Is Pretty Awesome!
-			Princess_LovesNPC: Heh {NPCName} The Slime Is So Cute!
+			Princess_LovesNPC: Heh {NPCName} is so cute and round!
 		}
 
 		Census.SpawnCondition: Can Spawn Randomly After A Boss Is Killed!
 	}
 
 	GluttonyNPC: {
-		DisplayName: The Sin Of Gluttony
+		DisplayName: Sin Of Gluttony
 
 		TownNPCMood: {
 			Content: This Is Fine.
 			NoHome: Yeah I Guess Sleeping On The Dirt Works Fine... NOT!
 			FarFromHome: Man I AM Pretty Far From Home...
-			LoveSpace: Ah So Much Space To Do Evil!
+			LoveSpace: Ah So Much Space To Do Eat!
 			DislikeCrowded: A Little Crowded Isn't It?
 			HateCrowded: There Is WAY To Many People Here...
-			LikeBiome: The {BiomeName} Is A Nice Spot.
-			LoveBiome: I Really Like The {BiomeName} It's A Good Living Area!
-			DislikeBiome: I'm Not Rather Fond Of {BiomeName}...
-			HateBiome: UH The {BiomeName} Sucks Ass!
-			LoveNPC: Hey {NPCName} Is A Person I Do Rather LIKE!
-			LikeNPC: I Think {NPCName} Is Cool Person!
-			DislikeNPC: Not The Biggest Fan Of {NPCName}.
-			HateNPC: I Think {NPCName} Always Makes Fun Of Me...
-			LikeNPC_Princess: I like {NPCName}.
-			Princess_LovesNPC: I like {NPCName}.
+			LikeBiome: "{BiomeName} Might Be Cold But Its Great A Perserving Food!"
+			LoveBiome: "{BiomeName} Is The Best Place To Get Food In My Opinion!"
+			DislikeBiome: I'm Not Rather Fond Of {BiomeName} Because Sand In My Food Isn't Very Fun!
+			HateBiome: Eating In {BiomeName} Is A Bit Of A Pain, Because Of The Cave Bats!
+			LoveNPC: "{NPCName} Helps Me To Find Food So They Are Awesome In My Book!"
+			LikeNPC: "{NPCName} Is A Lover Of Greens Just Like Me!"
+			DislikeNPC: Man {NPCName} Like To Yell At Me A Lot And It Bugs Me...
+			HateNPC: "{NPCName} Always Makes Fun Of Me..."
+			LikeNPC_Princess: Man Who Knew That {NPCName} Was A Foodie Like Me!
+			Princess_LovesNPC: "{NPCName} shared some fruit he was selling how kind of him!"
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Gluttony And Hold The [i:PurringTale/Gluttony] Item!
@@ -1661,7 +1657,7 @@ NPCs: {
 	}
 
 	GreedNPC: {
-		DisplayName: The Sin Of Greed
+		DisplayName: Sin Of Greed
 
 		TownNPCMood: {
 			Content: It's Alright I Guess.
@@ -1670,18 +1666,23 @@ NPCs: {
 			LoveSpace: Ah All This Space To Myself!
 			DislikeCrowded: SO  MANY  PEOPLE!
 			HateCrowded: HEY WHY ARE THERE SO MANY PEOPLE LIVING HERE?
-			LikeBiome: Eh I Like {BiomeName}.
-			LoveNPC: I Love {NPCName} So Much He He He.
-			HateNPC: I REALLY HATE {NPCName}.
-			LikeNPC_Princess: I like {NPCName}.
-			Princess_LovesNPC: I like {NPCName}.
+			LikeBiome: "{BiomeName} Has These Crystals That Sell For A Pretty Penny!"
+			LoveNPC: "{NPCName} Gets Me SO Well, A Fellow Man Of Money!"
+			HateNPC: How Dare {NPCName} Collect Money For A Good Cause Like Helping Improve Stuff!
+			LoveBiome: I Love {BiomeName}, It Has So Many Things I Can Gain A Net Positive With!
+			DislikeBiome: I Do Not Like {BiomeName}, There Is Not Much I Can Sell From Here!
+			HateBiome: This Place SUCKS The Jungle Creatures Get In My Way ALL The Time!
+			LikeNPC: "{NPCName} Has Been Taking Your Money For Me Ehehehe!"
+			DislikeNPC: Why Would {NPCName} Help People Without Asking For Money In Return? What A Dummy!
+			LikeNPC_Princess: I Bet I Can Scam {NPCName} Out Of A Lot Gold...
+			Princess_LovesNPC: "{NPCName} is looking at me weirdly..."
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Greed And Hold The [i:PurringTale/Greed] Item!
 	}
 
 	LustNPC: {
-		DisplayName: The Sin Of Lust
+		DisplayName: Sin Of Lust
 
 		TownNPCMood: {
 			Content: This is a nice abode
@@ -1694,13 +1695,14 @@ NPCs: {
 			LoveNPC: I love {NPCName}.
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
+			HateNPC: I hate {NPCName}.
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Lust And Hold The [i:PurringTale/Lust] Item!
 	}
 
 	PrideNPC: {
-		DisplayName: The Sin Of Pride
+		DisplayName: Sin Of Pride
 
 		TownNPCMood: {
 			Content: I AM ALRIGHT!
@@ -1718,13 +1720,14 @@ NPCs: {
 			HateNPC: I DESPISE {NPCName}!
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
+			HateBiome: I hate {BiomeName}.
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Pride And Hold The [i:PurringTale/Pride] Item!
 	}
 
 	SlothNPC: {
-		DisplayName: The Sin Of Sloth
+		DisplayName: Sin Of Sloth
 
 		TownNPCMood: {
 			Content: I mean I guess it is alright...
@@ -1742,13 +1745,14 @@ NPCs: {
 			HateNPC: I hate {NPCName}...
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
+			HateBiome: I hate {BiomeName}.
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Sloth And Hold The [i:PurringTale/Sloth] Item!
 	}
 
 	WrathNPC: {
-		DisplayName: The Sin Of Wrath
+		DisplayName: Sin Of Wrath
 
 		TownNPCMood: {
 			Content: I am content.
@@ -1766,12 +1770,11 @@ NPCs: {
 			HateNPC: ARGH I HATE {NPCName} SO MUCH!
 			LikeNPC_Princess: I like {NPCName}.
 			Princess_LovesNPC: I like {NPCName}.
+			HateBiome: I hate {BiomeName}.
 		}
 
 		Census.SpawnCondition: Kill The Sin Of Wrath And Hold The [i:PurringTale/Wrath] Item!
 	}
-
-	GreedBoss.DisplayName: Greed Boss
 }
 
 Buffs: {

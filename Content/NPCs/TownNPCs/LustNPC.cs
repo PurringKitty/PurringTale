@@ -41,7 +41,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
 
 			NPCID.Sets.ExtraFramesCount[Type] = 8;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 100;
+			NPCID.Sets.DangerDetectRange[Type] = -1;
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
@@ -49,6 +49,7 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPCID.Sets.AttackType[Type] = -1;
 
             NPC.Happiness
+			//(Loves)
 			.SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<SnowBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
@@ -57,6 +58,8 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			.SetBiomeAffection<OceanBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<JungleBiome>(AffectionLevel.Love)
 			.SetBiomeAffection<HallowBiome>(AffectionLevel.Love)
+			.SetBiomeAffection<UndergroundBiome>(AffectionLevel.Love)
+			.SetBiomeAffection<MushroomBiome>(AffectionLevel.Love)
 			.SetNPCAffection(NPCID.Dryad, AffectionLevel.Love)
 			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Love)
 			.SetNPCAffection(NPCID.Angler, AffectionLevel.Love)
@@ -83,12 +86,14 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Love)
 			.SetNPCAffection<EnvyNPC>(AffectionLevel.Love)
 			.SetNPCAffection<GluttonyNPC>(AffectionLevel.Love)
-			.SetNPCAffection<GreedNPC>(AffectionLevel.Love)
 			.SetNPCAffection<PrideNPC>(AffectionLevel.Love)
 			.SetNPCAffection<SlothNPC>(AffectionLevel.Love)
 			.SetNPCAffection<WrathNPC>(AffectionLevel.Love)
-			.SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Love);
-		}
+			.SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Love)
+			//(Hates)
+			.SetNPCAffection<GreedNPC>(AffectionLevel.Hate);
+
+        }
 
 		public override void SetDefaults()
 		{
@@ -135,9 +140,17 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			}
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
-				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "LustNPC_Shimmer";
-			}
+                string variant = "";
+                if (NPC.IsShimmerVariant)
+                    variant += "_Shimmer";
+                int headgore = Mod.Find<ModGore>($"LustNPC_Gore_Head").Type;
+                int armgore = Mod.Find<ModGore>($"LustNPC_Gore_Arm").Type;
+
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+            }
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)

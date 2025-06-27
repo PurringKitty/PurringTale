@@ -31,57 +31,29 @@ namespace PurringTale.Content.NPCs.TownNPCs
 		public override void SetStaticDefaults()
 		{
 			Main.npcFrameCount[Type] = 25;
-
 			NPCID.Sets.ExtraFramesCount[Type] = 8;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
-			NPCID.Sets.DangerDetectRange[Type] = 10;
+			NPCID.Sets.DangerDetectRange[Type] = -1;
 			NPCID.Sets.HatOffsetY[Type] = 4;
-			NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
 			NPCID.Sets.MPAllowedEnemies[Type] = true;
-			NPCID.Sets.ShimmerTownTransform[Type] = true;
             NPCID.Sets.AttackType[Type] = -1;
+            NPCID.Sets.ShimmerTownTransform[NPC.type] = true;
+            NPCID.Sets.ShimmerTownTransform[Type] = true;
 
             NPC.Happiness
-			.SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<SnowBiome>(AffectionLevel.Dislike)
-			.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<DesertBiome>(AffectionLevel.Hate)
-			.SetBiomeAffection<OceanBiome>(AffectionLevel.Love)
-			.SetBiomeAffection<JungleBiome>(AffectionLevel.Hate)
-			.SetBiomeAffection<HallowBiome>(AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Dryad, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Nurse, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Angler, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Steampunker, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Princess, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Stylist, AffectionLevel.Hate)
-			.SetNPCAffection(NPCID.Guide, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Like)
-			.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Golfer, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Pirate, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Clothier, AffectionLevel.Love)
-			.SetNPCAffection(NPCID.Wizard, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Truffle, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Merchant, AffectionLevel.Dislike)
-			.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Love)
-			.SetNPCAffection<EnvyNPC>(AffectionLevel.Dislike)
-            .SetNPCAffection<GreedNPC>(AffectionLevel.Hate)
-            .SetNPCAffection<LustNPC>(AffectionLevel.Love)
-            .SetNPCAffection<PrideNPC>(AffectionLevel.Like)
-            .SetNPCAffection<SlothNPC>(AffectionLevel.Like)
-            .SetNPCAffection<WrathNPC>(AffectionLevel.Hate)
-            .SetNPCAffection<TopHatSlimeGood>(AffectionLevel.Hate);
-		}
+            //(Loves)
+            .SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
+            .SetNPCAffection(NPCID.Guide, AffectionLevel.Love)
+            //(Likes)
+            .SetBiomeAffection<SnowBiome>(AffectionLevel.Like)
+            .SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
+            //(Dislikes)
+            .SetBiomeAffection<DesertBiome>(AffectionLevel.Dislike)
+            .SetNPCAffection<WrathNPC>(AffectionLevel.Dislike)
+            //(Hates)
+            .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Hate)
+            .SetNPCAffection<GreedNPC>(AffectionLevel.Hate);
+        }
 
 		public override void SetDefaults()
 		{
@@ -128,9 +100,17 @@ namespace PurringTale.Content.NPCs.TownNPCs
 			}
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
-				string variant = "Shimmer";
-				if (NPC.IsShimmerVariant) variant += "GluttonyNPC_Shimmer";
-			}
+                string variant = "";
+                if (NPC.IsShimmerVariant)
+                    variant += "_Shimmer";
+                int headgore = Mod.Find<ModGore>($"GluttonyNPC_Gore_Head").Type;
+                int armgore = Mod.Find<ModGore>($"GluttonyNPC_Gore_Arm").Type;
+
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+            }
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)

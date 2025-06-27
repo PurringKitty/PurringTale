@@ -216,10 +216,8 @@ namespace PurringTale.Content.NPCs.TownNPCs
                 .Add<THCTie>()
                 .Add<THCTail>();
 
-            Shop.AddPool("HIMSELF", slots: 2)
-                .Add<ClumpOfTopiumOre>(Condition.InMasterMode, Condition.Hardmode)
-                .Add<StackOfTopiumBars>(Condition.InMasterMode, Condition.Hardmode, Condition.DownedMoonLord);
-
+            Shop.AddPool("HIMSELF", slots: 1)
+                .Add<ClumpOfTopiumOre>(Condition.InMasterMode, Condition.Hardmode);
 
             Shop.Register();
         }
@@ -305,10 +303,10 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPCID.Sets.DangerDetectRange[Type] = 60;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
             NPCID.Sets.AttackType[Type] = 3; // Swings a weapon. This NPC attacks in roughly the same manner as Stylist
-            NPCID.Sets.AttackTime[Type] = 12;
+            NPCID.Sets.AttackTime[Type] = 5;
             NPCID.Sets.AttackAverageChance[Type] = 1;
             NPCID.Sets.HatOffsetY[Type] = 4;
-            NPCID.Sets.ShimmerTownTransform[Type] = false;
+            NPCID.Sets.ShimmerTownTransform[Type] = true;
             NPCID.Sets.NoTownNPCHappiness[Type] = true; // Prevents the happiness button
 
             // Influences how the NPC looks in the Bestiary
@@ -324,13 +322,13 @@ namespace PurringTale.Content.NPCs.TownNPCs
             NPC.width = 18;
             NPC.height = 40;
             NPC.aiStyle = 7;
-            NPC.damage = 10;
-            NPC.defense = 15;
-            NPC.lifeMax = 2500;
-            NPC.rarity = 3;
+            NPC.damage = 200;
+            NPC.defense = 2000;
+            NPC.lifeMax = 2500000;
+            NPC.rarity = 4;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
-            NPC.knockBackResist = 0.5f;
+            NPC.knockBackResist = 0f;
             AnimationType = NPCID.Guide;
             TownNPCStayingHomeless = true;
         }
@@ -390,11 +388,19 @@ namespace PurringTale.Content.NPCs.TownNPCs
             {
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<Sparkle>());
             }
+            if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
+            {
+                string variant = "";
+                if (NPC.IsShimmerVariant)
+                    variant += "_Shimmer";
+                int headgore = Mod.Find<ModGore>($"TopHatCat_Gore_Head").Type;
+                int armgore = Mod.Find<ModGore>($"TopHatCat_Gore_Arm").Type;
 
-            // Create gore when the NPC is killed.
-#pragma warning disable CS0642 // Possible mistaken empty statement
-            if (Main.netMode != NetmodeID.Server && NPC.life <= 0) ;
-#pragma warning restore CS0642 // Possible mistaken empty statement
+
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, headgore, 1f);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, 20), NPC.velocity, armgore);
+            }
         }
         public override bool UsesPartyHat()
         {
